@@ -1,0 +1,21574 @@
+# Manual for the Seed7 programming language 
+
+## CONTENTS
+
+1.  [**INTRODUCTION**](#intro_file_start)
+    1.  [**What is Seed7?**](#intro_What_is_Seed7)
+    2.  [**Why a new programming
+        language?**](#intro_Why_a_new_programming_language)
+    3.  [**Features of Seed7**](#intro_Features_of_Seed7)
+    4.  [**How to read the
+        manual**](#intro_How_to_read_the_manual)
+2.  [**TUTORIAL**](#tutorial_file_start)
+    1.  [**Hello world**](#tutorial_Hello_world)
+    2.  [**Greeting**](#tutorial_Greeting)
+    3.  [**Assignment**](#tutorial_Assignment)
+    4.  [**Constants**](#tutorial_Constants)
+    5.  [**For loop and float
+        expressions**](#tutorial_For_loop_and_float_expressions)
+    6.  [**Arrays**](#tutorial_Arrays)
+    7.  [**Hashes**](#tutorial_Hashes)
+    8.  [**For loop and
+        containers**](#tutorial_For_loop_and_containers)
+    9.  [**Functions**](#tutorial_Functions)
+    10. [**Parameters**](#tutorial_Parameters)
+    11. [**Overloading**](#tutorial_Overloading)
+    12. [**Templates**](#tutorial_Templates)
+    13. [**Declare a statement**](#tutorial_Declare_a_statement)
+    14. [**Template declaring a
+        statement**](#tutorial_Template_declaring_a_statement)
+3.  [**DECLARATIONS**](#decls_file_start)
+    1.  [**Variable declarations**](#decls_Variable_declarations)
+    2.  [**Constant declarations**](#decls_Constant_declarations)
+        1.  [***Type declarations***](#decls_Type_declarations)
+        2.  [***Procedure
+            declarations***](#decls_Procedure_declarations)
+        3.  [***Function
+            declarations***](#decls_Function_declarations)
+        4.  [***Forward
+            declarations***](#decls_Forward_declarations)
+        5.  [***Interface
+            declarations***](#decls_Interface_declarations)
+        6.  [***Abstract data
+            types***](#decls_Abstract_data_types)
+        7.  [***Templates***](#decls_Templates)
+    3.  [**Initialization**](#decls_Initialization)
+        1.  [***How the initialization
+            works***](#decls_How_the_initialization_works)
+    4.  [**Syntax declarations**](#decls_Syntax_declarations)
+    5.  [**System declarations**](#decls_System_declarations)
+    6.  [**Pragmas**](#decls_Pragmas)
+4.  [**PREDEFINED STATEMENTS**](#stats_file_start)
+    1.  [**Assignment**](#stats_Assignment)
+    2.  [**Ignoring values**](#stats_Ignoring_values)
+    3.  [**while-statement**](#stats_while-statement)
+    4.  [**repeat-statement**](#stats_repeat-statement)
+    5.  [**for-statement**](#stats_for-statement)
+    6.  [**for-until-statement**](#stats_for-until-statement)
+    7.  [**for-step-statement**](#stats_for-step-statement)
+    8.  [**for-each-statement**](#stats_for-each-statement)
+    9.  [**for-each-key-statement**](#stats_for-each-key-statement)
+    10. [**for-key-statement**](#stats_for-key-statement)
+    11. [**if-statement**](#stats_if-statement)
+    12. [**case-statement**](#stats_case-statement)
+5.  [**PREDEFINED TYPES**](#types_file_start)
+    1.  [**boolean**](#types_boolean)
+    2.  [**integer**](#types_integer)
+    3.  [**bigInteger**](#types_bigInteger)
+    4.  [**rational**](#types_rational)
+    5.  [**bigRational**](#types_bigRational)
+    6.  [**float**](#types_float)
+    7.  [**complex**](#types_complex)
+    8.  [**char**](#types_char)
+    9.  [**string**](#types_string)
+    10. [**array**](#types_array)
+    11. [**hash**](#types_hash)
+    12. [**set**](#types_set)
+    13. [**struct**](#types_struct)
+    14. [**enumeration**](#types_enumeration)
+    15. [**bin64**](#types_bin64)
+    16. [**bin32**](#types_bin32)
+    17. [**bstring**](#types_bstring)
+    18. [**color**](#types_color)
+    19. [**time**](#types_time)
+    20. [**duration**](#types_duration)
+    21. [**file**](#types_file)
+    22. [**text**](#types_text)
+    23. [**fileSys**](#types_fileSys)
+    24. [**pollData**](#types_pollData)
+    25. [**listener**](#types_listener)
+    26. [**database**](#types_database)
+    27. [**sqlStatement**](#types_sqlStatement)
+    28. [**process**](#types_process)
+    29. [**category**](#types_category)
+    30. [**reference**](#types_reference)
+    31. [**ref_list**](#types_ref_list)
+    32. [**structElement**](#types_structElement)
+    33. [**program**](#types_program)
+    34. [**parseError**](#types_parseError)
+    35. [**ptr**](#types_ptr)
+    36. [**func**](#types_func)
+    37. [**varfunc**](#types_varfunc)
+    38. [**void**](#types_void)
+    39. [**proc**](#types_proc)
+    40. [**creator**](#types_creator)
+    41. [**destroyer**](#types_destroyer)
+    42. [**type**](#types_type)
+    43. [**object**](#types_object)
+    44. [**expr**](#types_expr)
+6.  [**PARAMETERS**](#params_file_start)
+    1.  [**\'val\' parameter**](#params_val_parameter)
+    2.  [**\'ref\' parameter**](#params_ref_parameter)
+    3.  [**\'in\' parameter**](#params_in_parameter)
+    4.  [**\'in var\' parameter**](#params_in_var_parameter)
+    5.  [**\'inout\' parameter**](#params_inout_parameter)
+    6.  [**Call-by-name
+        parameter**](#params_call_by_name_parameter)
+    7.  [**Symbol parameter**](#params_Symbol_parameter)
+    8.  [**\'attr\' parameter**](#params_attr_parameter)
+7.  [**OBJECT ORIENTATION**](#objects_file_start)
+    1.  [**Interface and
+        implementation**](#objects_interface_and_implementation)
+    2.  [**Dynamic dispatch**](#objects_dynamic_dispatch)
+    3.  [**Inheritance**](#objects_inheritance)
+    4.  [**Class methods**](#objects_class_methods)
+    5.  [**Multiple dispatch**](#objects_multiple_dispatch)
+    6.  [**Replacing pointers with interface
+        types**](#objects_replacing_pointers)
+8.  [**FILE INPUT AND OUTPUT**](#file_file_start)
+    1.  [**Conversion to strings and
+        back**](#file_Conversion_to_strings_and_back)
+    2.  [**Basic input and output
+        operations**](#file_Basic_input_and_output_operations)
+    3.  [**Input and output with
+        conversion**](#file_Input_and_output_with_conversion)
+    4.  [**Simple read and write
+        statements**](#file_Simple_read_and_write_statements)
+    5.  [**Standard input and output
+        files**](#file_Standard_input_and_output_files)
+    6.  [**Access to operating system
+        files**](#file_Access_to_operating_system_files)
+    7.  [**Keyboard file**](#file_Keyboard_file)
+    8.  [**Files with line
+        structure**](#file_Files_with_line_structure)
+    9.  [**Sockets**](#file_Sockets)
+    10. [**Transport Layer
+        Security**](#file_Transport_layer_security)
+    11. [**User defined file
+        types**](#file_User_defined_file_types)
+    12. [**Scanning a file**](#file_Scanning_a_file)
+9.  [**STRUCTURED SYNTAX DEFINITION**](#syntax_file_start)
+    1.  [**The Extended Backus-Naur
+        Form**](#syntax_The_Extended_Backus-Naur_Form)
+    2.  [**The Seed7 Structured Syntax
+        Description**](#syntax_The_Seed7_Structured_Syntax_Description)
+    3.  [**The syntax of a
+        statement**](#syntax_The_syntax_of_a_statement)
+    4.  [**Priority and
+        associativity**](#syntax_Priority_and_associativity)
+    5.  [**The syntax of
+        operators**](#syntax_The_syntax_of_operators)
+    6.  [**Syntax of predefined
+        statements**](#syntax_Syntax_of_predefined_statements)
+    7.  [**Advanced syntax
+        definitions**](#syntax_Advanced_syntax_definitions)
+    8.  [**Comparison of EBNF and
+        S7SSD**](#syntax_Comparison_of_EBNF_and_S7SSD)
+10. [**TOKENS**](#tokens_file_start)
+    1.  [**White space**](#tokens_White_space)
+        1.  [***Spaces***](#tokens_Spaces)
+        2.  [***Comments***](#tokens_Comments)
+        3.  [***Line comments***](#tokens_Line_comments)
+    2.  [**Identifiers**](#tokens_Identifiers)
+        1.  [***Name identifiers***](#tokens_Name_identifiers)
+        2.  [***Special
+            identifiers***](#tokens_Special_identifiers)
+        3.  [***Brackets***](#tokens_Brackets)
+    3.  [**Literals**](#tokens_Literals)
+        1.  [***Integer literals***](#tokens_Integer_literals)
+        2.  [***BigInteger
+            literals***](#tokens_BigInteger_literals)
+        3.  [***Float literals***](#tokens_Float_literals)
+        4.  [***String literals***](#tokens_String_literals)
+        5.  [***Character
+            literals***](#tokens_Character_literals)
+    4.  [**Unicode characters**](#tokens_Unicode_characters)
+11. [**EXPRESSIONS**](#expr_file_start)
+    1.  [**Parentheses**](#expr_EXPRESSION_Parentheses)
+    2.  [**Call expressions**](#expr_Call_expressions)
+    3.  [**Dot expressions**](#expr_Dot_expressions)
+12. [**OPERATING SYSTEM ACCESS**](#os_file_start)
+    1.  [**Standard path
+        representation**](#os_Standard_path_representation)
+    2.  [**File properties**](#os_File_properties)
+        1.  [***fileType***](#os_fileType)
+        2.  [***fileSize***](#os_fileSize)
+        3.  [***getFileMode***](#os_getFileMode)
+        4.  [***setFileMode***](#os_setFileMode)
+        5.  [***getATime***](#os_getATime)
+        6.  [***setATime***](#os_setATime)
+        7.  [***getCTime***](#os_getCTime)
+        8.  [***getMTime***](#os_getMTime)
+        9.  [***setMTime***](#os_setMTime)
+        10. [***getOwner***](#os_getOwner)
+        11. [***setOwner***](#os_setOwner)
+        12. [***getGroup***](#os_getGroup)
+        13. [***setGroup***](#os_setGroup)
+    3.  [**Symbolic links**](#os_Symbolic_links)
+        1.  [***readLink***](#os_readLink)
+        2.  [***finalPath***](#os_finalPath)
+        3.  [***makeLink***](#os_makeLink)
+        4.  [***Symbolic link
+            getFileMode***](#os_getFileMode_SYMLINK)
+        5.  [***Symbolic link getATime***](#os_getATime_SYMLINK)
+        6.  [***Symbolic link getMTime***](#os_getMTime_SYMLINK)
+        7.  [***Symbolic link setMTime***](#os_setMTime_SYMLINK)
+        8.  [***Symbolic link getOwner***](#os_getOwner_SYMLINK)
+        9.  [***Symbolic link setOwner***](#os_setOwner_SYMLINK)
+        10. [***Symbolic link getGroup***](#os_getGroup_SYMLINK)
+        11. [***Symbolic link setGroup***](#os_setGroup_SYMLINK)
+    4.  [**Directory functions**](#os_Directory_functions)
+        1.  [***readDir***](#os_readDir)
+        2.  [***openDir***](#os_openDir)
+        3.  [***getcwd***](#os_getcwd)
+        4.  [***chdir***](#os_chdir)
+        5.  [***makeDir***](#os_makeDir)
+        6.  [***homeDir***](#os_homeDir)
+    5.  [**Maintenance functions**](#os_Maintenance%20functions)
+        1.  [***removeFile***](#os_removeFile)
+        2.  [***removeTree***](#os_removeTree)
+        3.  [***copyFile***](#os_copyFile)
+        4.  [***cloneFile***](#os_cloneFile)
+        5.  [***moveFile***](#os_moveFile)
+    6.  [**Environment**](#os_Environment)
+        1.  ***[argv(PROGRAM)](#os_argv_PROGRAM)***
+        2.  ***[name(PROGRAM)](#os_name_PROGRAM)***
+        3.  ***[path(PROGRAM)](#os_path_PROGRAM)***
+        4.  ***[dir(PROGRAM)](#os_dir_PROGRAM)***
+        5.  ***[file(PROGRAM)](#os_file_PROGRAM)***
+        6.  ***[getenv](#os_getenv)***
+        7.  ***[setenv](#os_setenv)***
+        8.  ***[unsetenv](#os_unsetenv)***
+        9.  ***[environment](#os_environment)***
+13. [**DATABASE ABSTRACTION API**](#database_file_start)
+    1.  [**Opening a database
+        connection**](#database_Opening_a_database_connection)
+        1.  [***Opening an Oracle database
+            connection***](#database_Opening_an_Oracle_database_connection)
+        2.  [***Opening a Db2 database
+            connection***](#database_Opening_a_Db2_database_connection)
+        3.  [***Opening a SQL Server database
+            connection***](#database_Opening_a_SQL_Server_database_connection)
+        4.  [***Opening a SQLite database
+            connection***](#database_Opening_a_SQLite_database_connection)
+        5.  [***Opening an Informix database
+            connection***](#database_Opening_an_Informix_database_connection)
+        6.  [***Opening an ODBC database
+            connection***](#database_Opening_an_ODBC_database_connection)
+    2.  [**Other ways to open a database
+        connection**](#database_Other_ways_to_open_a_database_connection)
+    3.  [**Prepared statements**](#database_Prepared_statements)
+    4.  [**Bind values to
+        placeholders**](#database_Bind_values_to_placeholders)
+    5.  [**Execute a prepared
+        statement**](#database_Execute_a_prepared_statement)
+    6.  [**Fetch records from the result
+        set**](#database_Fetch_records_from_the_result_set)
+    7.  [**Get columns from fetched
+        records**](#database_Get_columns_from_fetched_records)
+14. [**GRAPHIC LIBRARY**](#graphic_file_start)
+    1.  [**Basics**](#graphic_Basics)
+15. [**PRIMITIVE ACTIONS**](#actions_file_start)
+    1.  [**Actions for the type ACTION**](#actions_ACTION)
+    2.  [**Actions for array types**](#actions_array)
+    3.  [**Actions for the type
+        bigInteger**](#actions_bigInteger)
+    4.  [**Actions for the types bin32 and
+        bin64**](#actions_binary)
+    5.  [**Actions for the type boolean**](#actions_boolean)
+    6.  [**Actions for byte strings**](#actions_bstring)
+    7.  [**Actions for the type char**](#actions_char)
+    8.  [**Actions for various directory, file and other
+        commands**](#actions_commands)
+    9.  [**Actions for text (console) screen
+        output**](#actions_console_output)
+    10. [**Actions for declarations**](#actions_declarations)
+    11. [**Actions to do graphic
+        output**](#actions_graphic_output)
+    12. [**Actions for enumeration types**](#actions_enumeration)
+    13. [**Actions for the type clib_file**](#actions_clib_file)
+    14. [**Actions for the type float**](#actions_float)
+    15. [**Actions to support the graphic
+        keyboard**](#actions_graphic_keyboard)
+    16. [**Actions for hash types**](#actions_hash)
+    17. [**Actions for the type integer**](#actions_integer)
+    18. [**Actions for interface types**](#actions_interface)
+    19. [**Actions to support the text (console) screen
+        keyboard**](#actions_console_keyboard)
+    20. [**Actions for the list type**](#actions_list)
+    21. [**Actions for the type process**](#actions_process)
+    22. [**Actions for the type pointList**](#actions_pointList)
+    23. [**Actions for the type pollData**](#actions_pollData)
+    24. [**Actions for proc operations and
+        statements**](#actions_proc)
+    25. [**Actions for the type program**](#actions_program)
+    26. [**Actions for the type reference**](#actions_reference)
+    27. [**Actions for the type ref_list**](#actions_ref_list)
+    28. [**Actions for struct types**](#actions_struct)
+    29. [**Actions for the type
+        structElement**](#actions_structElement)
+    30. [**Actions for set types**](#actions_set)
+    31. [**Actions for the type
+        PRIMITIVE_SOCKET**](#actions_PRIMITIVE_SOCKET)
+    32. [**Actions for the types database and
+        sqlStatement**](#actions_database)
+    33. [**Actions for the type string**](#actions_string)
+    34. [**Actions for the type time**](#actions_time)
+    35. [**Actions for the type type**](#actions_type)
+    36. [**Actions for the type utf8File**](#actions_utf8File)
+16. [**FOREIGN FUNCTION INTERFACE**](#ffi_file_start)
+    1.  [**C types used by the
+        implementation**](#ffi_C_types_used_by_the_implementation)
+    2.  [**System variables**](#ffi_System_variables)
+    3.  [**String conversions**](#ffi_String_conversions)
+    4.  [**Operating system string and path
+        conversions**](#ffi_Operating_system_string_and_path_conversions)
+    5.  [**Macros to access the action
+        parameters**](#ffi_Macros_to_access_the_action_parameters)
+    6.  [**Functions to create action
+        results**](#ffi_Functions_to_create_action_results)
+    7.  [**Memory management
+        macros**](#ffi_Memory_management_macros)
+    8.  [**Basic conversion
+        functions**](#ffi_Basic_conversion_functions)
+    9.  [**Error handling**](#ffi_Error_handling)
+17. [**ERRORS**](#errors_file_start)
+    1.  [**Parsing errors**](#errors_Parsing_errors)
+    2.  [**Compilation errors**](#errors_Compilation_errors)
+    3.  [**Exceptions**](#errors_Exceptions)
+        1.  [***MEMORY_ERROR***](#errors_MEMORY_ERROR)
+        2.  [***NUMERIC_ERROR***](#errors_NUMERIC_ERROR)
+        3.  [***OVERFLOW_ERROR***](#errors_OVERFLOW_ERROR)
+        4.  [***INDEX_ERROR***](#errors_INDEX_ERROR)
+        5.  [***RANGE_ERROR***](#errors_RANGE_ERROR)
+        6.  [***FILE_ERROR***](#errors_FILE_ERROR)
+        7.  [***DATABASE_ERROR***](#errors_DATABASE_ERROR)
+        8.  [***GRAPHIC_ERROR***](#errors_GRAPHIC_ERROR)
+        9.  [***ILLEGAL_ACTION***](#errors_ILLEGAL_ACTION)
+    4.  [**Handlers**](#errors_Handlers)
+    5.  [**Trace exceptions**](#errors_Trace_exceptions)
+    6.  [**Stack trace**](#errors_Stack_trace)
+    7.  [**Suppressing exception
+        checks**](#errors_Suppressing_exception_checks)
+    8.  [**Signals**](#errors_Signals)
+    9.  [**Other errors and
+        warnings**](#errors_Other_errors_and_warnings)
+
+## 1. INTRODUCTION
+
+### 1.1 What is Seed7?
+
+Seed7 is a general-purpose programming language. It is a higher level
+language compared to Ada, C++ and Java. In Seed7 new statements and
+operators can be defined easily. Functions with type results and type
+parameters are more elegant than the usual template or generics concept.
+Object orientation is used when it brings advantages and not in places
+when other solutions are more obvious. Although Seed7 contains several
+concepts of other programming languages it is generally not considered
+as a direct descendant of any other programming language.
+
+The programmer should concentrate on problem solving instead of
+administration or the fulfillment of some paradigm. Therefore Seed7
+allows programming in the \"problem space\" instead of bending
+everything into a small syntactic or semantic concept. The predefined
+constructs of Seed7 are defined in a way to be easy readable and
+understandable. This practical approach can be summarized as:
+
+ 
+**Programming should be fun**
+  
+Seed7 programs can be interpreted or compiled. Therefore Seed7 can be used for scripting and for \"real\" programs.
+
+### 1.2 Why a new programming language?
+
+Conventional programming languages have a firmly given syntactic
+structure. The form of the statements, operators, declarations,
+procedures and functions is fixed in the language definition and cannot
+be changed by the user. It is only possible to declare new procedures,
+functions and in some languages also new operators. However the syntax
+of procedure, function and operator calls cannot be changed. Although
+this rigid pattern is favorable for the portability of programs, the
+improvement of the programming language is almost impossible. Extensions
+are however desirable, in order to repair existing weaknesses, to
+introduce new more obvious constructs and to adapt the programming
+language to different application areas. E.g.: In the area of
+mathematics the readability of a program can be substantially increased
+by the introduction of matrix and vector operators. After declaring an
+inner product and an outer (or cross) product for vectors it is possible
+to write e.g.
+
+``` pascal
+v1: = v2 cross v3;   write(v1 * v2);
+```
+
+Programs which search for some data in a database can become more
+understandable by using a for statement to loop over the tables. A usage
+of such a for statement could be:
+
+``` pascal
+for person1, person2
+where person1.age = person2.age and
+     person1.mother = person2.mother and
+     person1 <> person2 do
+   writeln("Twins: " <& person1.name <& " and " <& person2.name);
+end for;
+```
+
+Such extensions make understanding, changing and debugging of a program
+easier.
+
+### 1.3 Features of Seed7
+
+Seed7 has the following features
+
+- User defined statements and operators.
+- Types are first class objects and therefore templates and generics can
+  be defined easily without special syntax.
+- Predefined constructs like arrays or for-loops are defined in the
+  language itself.
+- [Object orientation](#objects_file_start) is based on
+  interfaces, supports multiple dispatch and allows to connect methods
+  to objects.
+- [Static type checking] and no [automatic casts].
+- There is [exception handling](#errors_Exceptions)
+- There are checks for [array indices](#errors_INDEX_ERROR) and
+  [integer overflow].
+- [Overloading](#tutorial_Overloading) of
+  procedures/functions/operators/statements
+- Various predefined types like resizable [arrays](#types_array){.type},
+  [hashes](#types_hash){.type}, [bitsets](#types_set){.type},
+  [structs](#types_struct){.type}, etc.
+
+But a new programming language differs not only from existing ones by
+new features. The real advantage comes from omitting features which are
+outdated.
+
+Several concepts in use by other languages are not present
+
+- There is no Null.
+- There is no goto statement. Hidden gotos like [break- and
+  continue-statements] are also omitted.
+- There is no return statement. Instead a result variable can be defined
+  to which the result of a function can be assigned.
+- There are no [automatic type conversions]. When a subprogram
+  should be used for different types it must be overloaded.
+- There is no implicit fall-through for control flow as in the switch
+  statement of C.
+- There is no [undefined behavior].
+- There is no manual [memory management].
+- There is no [\"do what I mean\"] heuristic, where the compiler
+  tries to read the programmers mind.
+- There is no preprocessor to accommodate for language features that
+  should exist by default.
+- There are no [variable length parameter lists]. Instead it is
+  possible to use arrays as parameters.
+- There are no default parameters. But it is easy to define two
+  subprograms: One with and one without an additional parameter.
+- There is no special \"parameter\" called \"self\" or \"this\". In a
+  procedure the receiving object is defined as formal parameter with a
+  user-defined name.
+- There is no macro feature since this mechanism is too similar to the
+  subprogram feature. Instead subprograms can be used in a more flexible
+  way than in other languages.
+- There are no [reserved words].
+- There is no conceptual distinction between functions, operators,
+  procedures and statements.
+- The procedure calling mechanism is not based on a concept with an
+  object-message pair (An object receives a message). Instead a match is
+  done over a list of objects. This more general (and powerful)
+  mechanism is called multiple dispatch and it includes the simple
+  object-message mechanism as special case.
+
+There are several concepts which are also used by other languages:
+
+- [Block comments](#tokens_Comments) start with [(\* and end with
+  \*)](#tokens_Comments){.comment} and may be nested.
+- [Line comments](#tokens_Line_comments) start with [\# and are
+  terminated with the end of the line.](#tokens_Line_comments){.comment}
+
+There are several concepts which are new
+
+- Variables and constants must be initialized when they are defined.
+- Every expression has exactly one type. That means that overloaded
+  functions are resolved with their actual parameters and not with the
+  context of their call. (This is different to the overloading mechanism
+  used by ADA)
+- With a syntax declaration new operators and statements can be defined.
+- Not only predefined operator symbols can be overloaded. Additionally
+  it is possible to invent completely new operator symbols.
+
+Several restrictions of other languages are released
+
+- There is no limitation in the length of an identifier and all
+  characters of an identifier are significant.
+- Statements and parentheses can be nested without limitation in depth.
+- The number of parameters and local variables is not limited.
+- [Strings](#types_string) can contain any characters (also the
+  NUL character) This allows holding binary information in strings.
+- Although strings are not NUL terminated they have no size limitation.
+  (Except there is no more memory)
+- [String literals](#tokens_String_literals) can have any length.
+- There is no limitation in the length of a source line.
+- There is no level limitation for nesting includes.
+
+### 1.4 How to read the manual
+
+You can have several views of the Seed7 programming language. Dependent
+on the view you can concentrate on specific chapters.
+
+For example Seed7 can be used as conventional programming language. In
+this case you are interested in how the statements look like, which
+types are available, which operators are predefined, how to declare
+variables and procedures and other things like these. The statements and
+the predefined types are described in [chapter 4 (Predefined
+statements)](#stats_file_start) and [chapter 5 (Predefined
+types)](#types_file_start) and the declaration mechanism is
+described in [chapter 3 (Declarations)](#decls_file_start).
+
+But Seed7 is also an object oriented programming language. In this case
+you are interested in how to define new classes, how instances are
+generated, the method calling mechanism, the predefined class hierarchy
+and other things like these. The object orientation of Seed7 is
+described in [chapter 7 (Object
+orientation)](#objects_file_start). A good example for classes
+and instances is the file system which is described in [chapter 8 (The
+file system)](#file_file_start).
+
+And Seed7 is also an extensible programming language. In this case you
+are interested in how to declare new statements, how to define new
+operators, assigning a priority and an associativity to operators and
+other things like these. An overview about syntax declarations can be
+found in [Chapter 3.2 (Syntax
+declarations)](#decls_Syntax_declarations). A detailed
+description of the Seed7 syntax definitions can be found in [chapter 9
+(Structured syntax definition)](#syntax_file_start). [Chapter 4
+(Predefined statements)](#stats_file_start) contains various
+examples of syntax and semantic declarations. The basic parts of the
+syntax are described in [chapter 10 (Tokens)](#tokens_file_start)
+and [chapter 11 (Expressions)](#expr_file_start).
+
+## 2. TUTORIAL
+
+### 2.1 Hello world
+
+Below is the hello world program of Seed7:
+
+``` indent
+$ include "seed7_05.s7i";
+
+const proc: main is func
+  begin
+    writeln("hello world");
+  end func;
+```
+
+Save this program to the file hello.sd7 and start it in a console with:
+
+``` indent
+s7 hello
+```
+
+The Seed7 interpreter writes something like
+
+``` indent
+SEED7 INTERPRETER Version 5.1.790  Copyright (c) 1990-2023 Thomas Mertes
+hello world
+```
+
+You get information about the Seed7 interpreter and the output of the
+hello.sd7 program:
+
+``` indent
+hello world
+```
+
+The option [**`-q`**] can be used to suppress the information
+line of the Seed7 interpreter:
+
+``` indent
+s7 -q hello
+```
+
+The first line of the program
+
+``` indent
+$ include "seed7_05.s7i";
+```
+
+includes all definitions of the standard library. In contrast to other
+libraries the seed7_05.s7i library contains not only function
+declarations but also declarations of statements and operators.
+Additionally the seed7_05.s7i library defines the [`main`]{.func}
+function as entry point for a Seed7 program.
+
+In the example above [`main`]{.func} is declared as constant and
+[`proc`](#types_proc){.type} is the type of [`main`]{.func}. Declaring
+[`main`]{.func} with the type [`proc`](#types_proc){.type} makes a
+procedure out of it. The object [`main`]{.func} gets a
+
+``` indent
+func ... end func
+```
+
+construct as value. The `'`[`func`]{.keywd}`'` construct is similar to
+[`begin`]{.keywd}` ... `[`end`]{.keywd} in PASCAL and `{ ... }` in C.
+Inside the `'`[`func`]{.keywd}`'` is a [`writeln`]{.func} statement with
+the [`"hello world"`](#tokens_String_literals){.stri} string. The
+[`writeln`]{.func} statement is used to write a
+[`string`](#types_string){.type} followed by a newline character.
+
+### 2.2 Greeting
+
+The program below starts a little dialog:
+
+``` indent
+$ include "seed7_05.s7i";
+
+const proc: main is func
+  local
+    var string: name is "";
+  begin
+    write("What's your name? ");
+    readln(name);
+    writeln("Hi " <& name <& "!");
+  end func;
+```
+
+Save this program to the file greeting.sd7 and start it in a console
+with:
+
+``` indent
+s7 greeting
+```
+
+The program asks you for your name with:
+
+``` indent
+What's your name?
+```
+
+After you entered your name and pressed enter it will greet you. This
+program uses the variable `'name'` to store the name you entered.
+Variables must be defined. The place to to define and initialize all
+variables of a function is after the keyword [local]{.keywd}.
+
+``` indent
+var string: name is "";
+```
+
+This defines the [`string`](#types_string){.type} variable `'name'`.
+This definition assigns also the initial value
+[\"\"](#tokens_String_literals){.stri} to `'name'`. The value
+[\"\"](#tokens_String_literals){.stri} is the empty string (it contains
+no characters). In Seed7 variables must be defined and always get an
+initial value.
+
+The [`write`]{.func} statement is similar to [`writeln`]{.func}, but it
+does not write a newline character. The [`readln`]{.func} statement
+reads a line from the standard input file and assigns this line to the
+given variable. This function allows the usage of backspace to correct
+the input. By pressing enter the line is sent to the program. The final
+[`writeln`]{.func} statement contains the operator [`<&`]{.op} to
+concatenate strings. If necessary the [`<&`]{.op} operator converts
+values to [`string`](#types_string){.type}.
+
+The greeting program above has a problem. If someone refuses to type his
+name and just presses enter the program writes:
+
+``` indent
+Hi !
+```
+
+To avoid this we improve the program to check for special cases:
+
+``` indent
+$ include "seed7_05.s7i";
+
+const proc: main is func
+  local
+    var string: name is "";
+  begin
+    write("What's your name? ");
+    readln(name);
+    if name = "" then
+      writeln("Greetings to the person who pressed enter!");
+    elsif name = "name" then
+      writeln("Interesting, your name is name.");
+    else
+      writeln("Hi " <& name <& "!");
+    end if;
+  end func;
+```
+
+There can be zero or more [`elsif`]{.keywd} parts, and the
+[`else`]{.keywd} part is optional. As you can see the equality of
+strings is checked with [`=`]{.op_no_ul}. The conditions of an
+[if-statement](#stats_if-statement) decide what to do. By chance
+both conditions in the example above use the variable `name`. This
+special case opens the oportunity to use a
+[case-statement](#stats_case-statement) instead:
+
+``` indent
+$ include "seed7_05.s7i";
+
+const proc: main is func
+  local
+    var string: name is "";
+  begin
+    write("What's your name? ");
+    readln(name);
+    case name of
+      when {""}:
+        writeln("Greetings to the person who pressed enter!");
+      when {"name"}:
+        writeln("Interesting, your name is name.");
+      when {"Linus", "Torvalds"}:
+        writeln("Are you the inventor of Linux?");
+      otherwise:
+        writeln("Hi " <& name <& "!");
+    end case;
+  end func;
+```
+
+As it can be seen, the keyword
+[`when`](#stats_case-statement){.keywd_no_ul} is followed by a
+comma-separated list of values surrounded by braces. This is the set of
+values covered by this when-part. Depending on the value of \'name\' one
+when-part is executed. If no when-part fits the otherwise-part is
+executed.
+
+This is not the only way to improve the greeting program. Alternatively
+we can use a loop to insist on entering a name:
+
+``` indent
+$ include "seed7_05.s7i";
+
+const proc: main is func
+  local
+    var string: name is "";
+  begin
+    repeat
+      write("What's your name? ");
+      readln(name);
+    until name <> "";
+    writeln("Hi " <& name <& "!");
+  end func;
+```
+
+The [`repeat`]{.keywd}` ... `[`until`]{.keywd} loop repeats the
+statements between the two keywords until the condition
+`name `[`<>`]{.op}` `[`""`](#tokens_String_literals){.stri} is
+[`TRUE`]{.var}. Note that the statements in the
+[`repeat`](#stats_repeat-statement){.keywd} loop are executed at least
+once. A solution with a [`while`](#stats_while-statement){.keywd} loop
+is:
+
+``` indent
+$ include "seed7_05.s7i";
+
+const proc: main is func
+  local
+    var string: name is "";
+  begin
+    write("What's your name? ");
+    readln(name);
+    while name = "" do
+      write("Just pressing enter is not okay. What's your name? ");
+      readln(name);
+    end while;
+    writeln("Hi " <& name <& "!");
+  end func;
+```
+
+The [`while`](#stats_while-statement){.keywd} loop repeats the
+statements between the keywords [`do`]{.keywd} and [`end`]{.keywd} as
+long as the condition
+`name `[`=`]{.op}` `[`""`](#tokens_String_literals){.stri} is
+[`TRUE`]{.var}. Note that the statements in a
+[`while`](#stats_while-statement){.keywd} loop might not be executed at
+all. In the example above this happens if a non-empty name is entered
+after the question: What\'s your name?
+
+### 2.3 Assignment
+
+The following program writes the numbers from 1 to 10:
+
+``` indent
+$ include "seed7_05.s7i";
+
+const proc: main is func
+  local
+    var integer: count is 1;
+  begin
+    while count <= 10 do
+      writeln(count);
+      count := count + 1;
+    end while;
+  end func;
+```
+
+This program declares a local variable of the type
+[`integer`](#types_integer){.type}:
+
+``` indent
+    var integer: count is 1;
+```
+
+The variable `count` above is initialized with `1`. The value of a
+variable can be changed with an [assignment](#stats_Assignment)
+([`:=`]{.op}):
+
+``` indent
+    count := count + 1;
+```
+
+The expression at the right of the [`:=`]{.op} symbol is evaluated and
+assigned to the variable left of the [`:=`]{.op} symbol. In the case
+above the variable `count` is incremented by one. For this special case
+there is a shortcut that could be used instead of the assignment:
+
+``` indent
+    incr(count);
+```
+
+The output produced by this program is
+
+``` indent
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+```
+
+What changes are necessary to count down from 10 to 0 instead?
+
+### 2.4 Constants
+
+To write a Fahrenheit to Celsius conversion table we use the following
+program:
+
+``` indent
+(* Print a Fahrenheit-Celsius table
+   for Fahrenheit values between 0 and 300 *)
+
+$ include "seed7_05.s7i";
+
+const proc: main is func
+  local
+    const integer: upper is 300;
+    const integer: increment is 20;
+    var integer: fahr is 0;
+    var integer: celsius is 0;
+  begin
+    while fahr <= upper do
+      celsius := 5 * (fahr - 32) div 9;
+      writeln(fahr <& " " <& celsius);
+      fahr +:= increment;
+    end while;
+  end func;
+```
+
+Everything between [(\* and \*)](#tokens_Comments){.comment} is a
+[comment](#tokens_Comments), which is ignored. This program
+contains local constants and variables of the type
+[`integer`](#types_integer){.type}. Constant declarations are introduced
+with [`const`](#decls_Constant_declarations){.keywd_no_ul}:
+
+``` indent
+    const integer: upper is 300;
+    const integer: increment is 20;
+```
+
+Like variables constants must be initialized with a value that is
+specified after the keyword [`is`]{.keywd}. Constants like `upper`
+cannot be changed. All constants just keep the initialization value. An
+attempt to change a constant results in a [parsing
+error](#errors_Parsing_errors):
+
+``` indent
+*** tst352.sd7(14):58: Variable expected in {lower := 10 } found constant integer: lower
+    lower := 10;
+```
+
+Note that the error is reported before the program execution starts.
+
+The program contains a [while-statement](#stats_while-statement)
+and the expression to compute the `'celsius'` value. The variable
+`'fahr'` is incremented with the [`+:=`]{.op} operator. The statement:
+
+``` indent
+      fahr +:= increment;
+```
+
+is a shortcut for the statement:
+
+``` indent
+      fahr := fahr + increment;
+```
+
+The expression to compute the `'celsius'` value uses an integer division
+([`div`]{.op}). The output produced by this program is
+
+``` indent
+0 -17
+20 -6
+40 4
+60 15
+80 26
+100 37
+120 48
+140 60
+160 71
+180 82
+200 93
+220 104
+240 115
+260 126
+280 137
+300 148
+```
+
+### 2.5 For loop and float expressions
+
+An improved version of the program to write the Fahrenheit to Celsius
+conversion table is:
+
+``` indent
+# Print a Fahrenheit-Celsius table with floating point numbers.
+
+$ include "seed7_05.s7i";  # This must be included first.
+  include "float.s7i";     # Subsequent includes do not need a $.
+
+const proc: main is func
+  local
+    const integer: lower is 0;
+    const integer: upper is 300;
+    const integer: increment is 20;
+    var integer: fahr is 0;
+    var float: celsius is 0.0;
+  begin
+    for fahr range lower to upper step increment do
+      celsius := float(5 * (fahr - 32)) / 9.0;
+      writeln(fahr lpad 3 <& " " <& celsius digits 2 lpad 6);
+    end for;
+  end func;
+```
+
+Everything between [`#`](#tokens_Line_comments){.comment} the end of the
+line is a [line comment](#tokens_Line_comments), which is
+ignored. To use the type [`float`](#types_float){.type} it is necessary
+to include [`float.s7i`]{.lib}. The [`float`](#types_float){.type}
+variable `'celsius'` must be initialized with 0.0 (instead of 0). The
+[`for-loop`](#stats_for-statement) executes the loop body with
+different values of `fahr` (0, 20, 40 .. 280, 300). Omitting the
+[`step`]{.keywd} part corresponds to a step of 1:
+
+``` indent
+for fahr range lower to upper do
+  celsius := float(5 * (fahr - 32)) / 9.0;
+  writeln(fahr lpad 3 <& " " <& celsius digits 2 lpad 6);
+end for;
+```
+
+The keyword [`downto`]{.keywd} can be used to run the
+[`for-loop`](#stats_for-statement) backward:
+
+``` indent
+for fahr range upper downto lower do
+  celsius := float(5 * (fahr - 32)) / 9.0;
+  writeln(fahr lpad 3 <& " " <& celsius digits 2 lpad 6);
+end for;
+```
+
+Since Seed7 is strong typed [`integer`](#types_integer){.type} and
+[`float`](#types_float){.type} values cannot be mixed in expressions.
+Therefore the [`integer`](#types_integer){.type} expression
+`'5 * (fahr - 32)'` is converted to [`float`](#types_float){.type} with
+the function [`float`]{.func}. For the same reason a `'`[`/`]{.func}`'`
+division and the value `'9.0'` must be used. The [`<&`]{.op} operator is
+used to concatenate elements before writing. If the right operand of the
+[`<&`]{.op} operator has not the type [`string`](#types_string){.type}
+it is converted to a [`string`](#types_string){.type} using the `'str'`
+function. The [`lpad`]{.op} operator converts the value of `'fahr'` to a
+string and pads spaces to the left until the string has length 3. The
+[`digits`]{.op} operator converts the value of `'celsius'` to a string
+with 2 decimal digits. The resulting string is padded left up to a
+length of 6.
+
+### 2.6 Arrays
+
+Arrays allow a variable to contain several values. E.g.: An array can be
+used to store a mapping from a day number to a day name:
+
+``` indent
+$ include "seed7_05.s7i";
+
+const proc: main is func
+  local
+    var array string: weekdayName is 7 times "";
+    var integer: number is 0;
+  begin
+    weekdayName[1] := "monday";
+    weekdayName[2] := "tuesday";
+    weekdayName[3] := "wednesday";
+    weekdayName[4] := "thursday";
+    weekdayName[5] := "friday";
+    weekdayName[6] := "saturday";
+    weekdayName[7] := "sunday";
+    for number range 1 to 7 do
+      writeln(weekdayName[number]);
+    end for;
+  end func;
+```
+
+Since `weekdayName` is not changed after its values have been assigned,
+it can be declared as constant that is initialized with an array
+literal:
+
+``` indent
+$ include "seed7_05.s7i";
+
+const proc: main is func
+  local
+    const array string: weekdayName is [] ("monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday");
+    var integer: number is 0;
+  begin
+    for number range 1 to 7 do
+      writeln(weekdayName[number]);
+    end for;
+  end func;
+```
+
+The example above uses the array literal
+
+``` indent
+[] ("monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday")
+```
+
+This array literal has the type
+[`array`](#types_array){.type}` `[`string`](#types_string){.type} and it
+is indexed beginning from 1. A corresponding array literal indexed
+beginning from 0 would be:
+
+``` indent
+[0] ("monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday")
+```
+
+The [for-loop](#stats_for-statement) above uses the literal `7`
+as upper bound. The function [`length`]{.func} can be used instead:
+
+``` indent
+for number range 1 to length(weekdayName) do
+```
+
+This works as long as the array `weekdayName` is indexed beginning
+from 1. If this is not the case the functions [`minIdx`]{.func} and
+[`maxIdx`]{.func} can be used:
+
+``` indent
+for number range minIdx(weekdayName) to maxIdx(weekdayName) do
+```
+
+For this case there is a convenient
+[for-key-loop](#stats_for-key-statement):
+
+``` indent
+for key number range weekdayName do
+  writeln(weekdayName[number]);
+end for;
+```
+
+This [for-key-loop](#stats_for-key-statement) loops over the
+indices of the [`array`](#types_array){.type} `weekdayName` (from 1 to
+7). In the loop body the index is just used to access an element from
+the array. For this case there is a convenient
+[for-each-loop](#stats_for-each-statement):
+
+``` indent
+$ include "seed7_05.s7i";
+
+const proc: main is func
+  local
+    const array string: weekdayName is [] ("monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday");
+    var string: name is "";
+  begin
+    for name range weekdayName do
+      writeln(name);
+    end for;
+  end func;
+```
+
+A [for-each-loop](#stats_for-each-statement) iterates over the
+elements of an [`array`](#types_array){.type}. Sometimes the elements
+and a corresponding index are needed. This is supported by the
+[for-each-key-loop](#stats_for-each-key-statement):
+
+``` indent
+$ include "seed7_05.s7i";
+
+const proc: main is func
+  local
+    const array string: weekdayName is [] ("monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday");
+    var string: name is "";
+    var integer: index is 0;
+  begin
+    for name key index range weekdayName do
+      writeln("day " <& index <& ": " <& name);
+    end for;
+  end func;
+```
+
+Another example of a [`for-each-loop`](#stats_for-each-statement)
+is:
+
+``` indent
+$ include "seed7_05.s7i";
+
+const proc: main is func
+  local
+    var integer: number is 0;
+  begin
+    for number range [] (0, 1, 2, 3, 5, 8, 13, 20, 40, 100) do
+      write(number <& " ");
+    end for;
+    writeln;
+  end func;
+```
+
+The example above uses the array literal
+
+``` indent
+[] (0, 1, 2, 3, 5, 8, 13, 20, 40, 100)
+```
+
+This array literal has the type
+[`array`](#types_array){.type}` `[`integer`](#types_integer){.type}. The
+index type of an array is not restricted to integers. A type like
+[`char`](#types_char){.type}, that has a 1:1 mapping to
+[`integer`](#types_integer){.type}, can also be used as index:
+
+``` indent
+$ include "seed7_05.s7i";
+
+const proc: main is func
+  local
+    const array [char] string: digitName is
+        ['0'] ("zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine");
+    var integer: number is 0;
+    var char: ch is ' ';
+  begin
+    number := rand(1, 9999999);
+    write(number <& ": ");
+    for ch range str(number) do
+      write(digitName[ch] <& " ");
+    end for;
+    writeln;
+  end func;
+```
+
+The example above uses the array literal
+
+``` indent
+['0'] ("zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine")
+```
+
+This array literal has the type
+[`array`](#types_array){.type_no_ul}` [`[`char`](#types_char){.type_no_ul}`] `[`string`](#types_string){.type_no_ul}.
+The minimum index of this array is the character
+[`'0'`](#tokens_Character_literals){.stri}.
+
+### 2.7 Hashes
+
+A [`hash`](#types_hash){.type} is similar to an
+[`array`](#types_array){.type} with the difference that the index can be
+any type (not just one that can be converted to
+[`integer`](#types_integer){.type}). The type
+[`hash`](#types_hash){.type}` `[`[`]{.type}[`string`](#types_string){.type}[`]`]{.type}` `[`integer`](#types_integer){.type}
+defines a hash with a [`string`](#types_string){.type} as index and an
+[`integer`](#types_integer){.type} as value. This type can be used in a
+type declaration:
+
+``` indent
+const type: nameToDigitType is hash [string] integer;
+```
+
+A hash literal can be used to initialize hash constants or variables:
+
+``` indent
+const nameToDigitType: nameToDigit is [] (
+    ["zero" : 0], ["one" : 1], ["two"   : 2], ["three" : 3], ["four" : 4],
+    ["five" : 5], ["six" : 6], ["seven" : 7], ["eight" : 8], ["nine" : 9]);
+```
+
+Like with arrays an element in the hash can be accessed with
+
+``` indent
+nameToDigit[name]
+```
+
+The following example asks for digit names and writes the corresponding
+digit:
+
+``` indent
+$ include "seed7_05.s7i";
+
+const type: nameToDigitType is hash [string] integer;
+
+const proc: main is func
+  local
+    const nameToDigitType: nameToDigit is [] (
+        ["zero" : 0], ["one" : 1], ["two"   : 2], ["three" : 3], ["four" : 4],
+        ["five" : 5], ["six" : 6], ["seven" : 7], ["eight" : 8], ["nine" : 9]);
+    var string: name is "";
+  begin
+    write("Enter the name of a digit: ");
+    readln(name);
+    if name in nameToDigit then
+      writeln("The value of " <& name <& " is " <& nameToDigit[name]);
+    else
+      writeln("You entered " <& name <& ", which is not the name of a digit.");
+    end if;
+  end func;
+```
+
+In the example above
+
+``` indent
+name in nameToDigit
+```
+
+checks if the key `name` is in the hash table `nameToDigit`. This
+assures that getting the corresponding value with
+
+``` indent
+nameToDigit[name]
+```
+
+succeeds. For-each loops can be used with hash tables as well. The
+example below uses [`keyDescription`]{.var} which is defined as
+[`hash`](#types_hash){.type}` `[`[`]{.type}[`char`](#types_char){.type}[`]`]{.type}` `[`string`](#types_string){.type}
+in [`"`]{.lib}[`keydescr.s7i`]{.lib}[`"`]{.lib}. It contains descriptive
+texts for keyboard keys. A [`for-loop`] can loop over the values
+of a [`hash`](#types_hash){.type}:
+
+``` indent
+$ include "seed7_05.s7i";
+  include "keydescr.s7i";
+
+const> proc: main is func
+  local
+    var string: description is "";
+  begin
+    for description range keyDescription do
+      write(description <& " ");
+    end for;
+    writeln;
+  end func;
+```
+
+A [`for-loop`] can also loop over the keys (indices) and values
+of a [`hash`](#types_hash){.type}:
+
+``` indent
+$ include "seed7_05.s7i";
+  include "keydescr.s7i";
+
+const proc: main is func
+  local
+    var char: aChar is ' ';
+    var string: description is "";
+  begin
+    for description key aChar range keyDescription do
+      writeln("const char: " <& description <& " is " <& literal(aChar));
+    end for;
+  end func;
+```
+
+### 2.8 For loop and containers
+
+[`For-loops`] can also iterate over the elements of a
+[`set`](#types_set){.type}:
+
+``` indent
+$ include "seed7_05.s7i";
+
+const proc: main is func
+  local
+    var string: innerPlanet is "";
+  begin
+    for innerPlanet range {"Mercury", "Venus", "Earth", "Mars"} do
+      write(innerPlanet <& " ");
+    end for;
+    writeln;
+  end func;
+```
+
+In the example above
+`{`[`"Mercury"`](#tokens_String_literals){.stri}`, `[`"Venus"`](#tokens_String_literals){.stri}`, `[`"Earth"`](#tokens_String_literals){.stri}`, `[`"Mars"`](#tokens_String_literals){.stri}`}`
+is a set literal. The type of this literal is
+[`set`](#types_set){.type}` `[`of`](#types_set){.type}` `[`string`](#types_string){.type}.
+Other set literals are:
+
+``` indent
+{1, 2}
+{'a', 'e', 'i', 'o', 'u'}
+```
+
+[`For-loops`](#stats_for-each-statement) can iterate over the
+characters of a [`string`](#types_string){.type}:
+
+``` indent
+$ include "seed7_05.s7i";
+
+const proc: main is func
+  local
+    const set of char: vowels is {'a', 'e', 'i', 'o', 'u'};
+    var char: letter is ' ';
+  begin
+    for letter range "the quick brown fox jumps over the lazy dog" do
+      if letter not in vowels then
+        write(letter);
+      end if;
+    end for;
+    writeln;
+  end func;
+```
+
+A [`for-loop`] can loop over the keys (indices) and values of a
+[`array`](#types_array){.type}:
+
+``` indent
+$ include "seed7_05.s7i";
+
+const proc: main is func
+  local
+    var integer: number is 0;
+    var string: name is "";
+  begin
+    for name key number range [0] ("zero", "one", "two", "three", "four",
+                                   "five", "six", "seven", "eight", "nine") do
+      writeln(number <& ": " <& name);
+    end for;
+  end func;
+```
+
+All loops that iterate over a container can be combined with an
+[`until`]{.func} condition:
+
+``` indent
+$ include "seed7_05.s7i";
+
+const proc: main is func
+  local
+    var string: testText is "";
+    var char: ch is ' ';
+    var boolean: controlCharFound is FALSE;
+  begin
+    write("Enter text: ");
+    readln(testText);
+    for ch range testText until controlCharFound do
+      controlCharFound := ord(ch) < 32;
+    end for;
+    if controlCharFound then
+      writeln("The text contains control chars.");
+    end if;
+  end func;
+```
+
+[]{#tutorial_Functions}
+
+### 2.9 Functions
+
+The program below uses the function [`flipCoin`]{.func} to flip a coin
+until the result is heads:
+
+``` indent
+$ include "seed7_05.s7i";
+
+const func boolean: flipCoin is
+  return rand(FALSE, TRUE);
+
+const proc: main is func
+  local
+    var boolean: heads is FALSE;
+  begin
+    repeat
+      write("Press enter to flip the coin. ");
+      readln;
+      heads := flipCoin;
+      writeln(heads ? "heads" : "tails");
+    until heads;
+  end func;
+```
+
+In the example above, the function [`flipCoin`]{.func} is declared as
+constant. As [`const`]{.keywd} the code of [`flipCoin`]{.func} will not
+change during run-time. The type
+[`func`](#types_func){.type}` `[`boolean`](#types_boolean){.type}
+determines that the function returns a
+[`boolean`](#types_boolean){.type} value. The task of the function
+[`flipCoin`]{.func} is to return a random
+[`boolean`](#types_boolean){.type_no_ul} value. This is done with:
+
+``` indent
+return rand(FALSE, TRUE);
+```
+
+The actual random value is computed with the expression
+
+``` indent
+rand(FALSE, TRUE);
+```
+
+The statement
+
+``` indent
+heads := flipCoin;
+```
+
+assigns the result of [`flipCoin`]{.func} to `heads`. Afterwards `heads`
+is written with the [ternary operator] ([`?:`]{.op_no_ul}). If
+`heads` is [`TRUE`]{.var}, it writes
+[`"heads"`](#tokens_String_literals){.stri} otherwise
+[`"tails"`](#tokens_String_literals){.stri}.
+
+Note that [`return`]{.keywd_no_ul} is not a statement. Instead
+[`return`]{.keywd_no_ul} is a shortcut for a function declaration with a
+[result variable]:
+
+``` indent
+const func boolean: flipCoin is func
+  result
+    var boolean: coinState is FALSE;
+  begin
+    coinState := rand(FALSE, TRUE);
+  end func;
+```
+
+A [result variable] is a specific local variable used as function
+result.
+
+The declaration of [`flipCoin`]{.func} above contains the construct:
+
+``` indent
+func
+...
+end func
+```
+
+The function [`flipCoin`]{.func} gets the
+[`func`]{.keywd}` ... `[`end func`]{.keywd} construct as value. This
+construct can be used to initialize functions and procedures. Inside of
+the [`func`]{.keywd}` ... `[`end func`]{.keywd} construct the keywords
+[`result`]{.keywd_no_ul}, [`local`]{.keywd} and [`begin`]{.keywd} can be
+used:
+
+- The keyword [`result`]{.keywd_no_ul} introduces the declaration of the
+  [result variable]. When the function is finished, it will
+  return the current value of the result variable. If no
+  [assignment](#stats_Assignment) to the result variable is done
+  the [initialization value](#decls_Initialization) of the result
+  value is the function result.
+- The keyword [`local`]{.keywd} introduces constant and variable
+  declarations that are local to the function.
+- The keyword [`begin`]{.keywd} introduces a sequence of statements that
+  is executed when the function is called.
+
+As can be seen from declarations of [`main`]{.func} above, the
+[`result`]{.keywd_no_ul} and [`local`]{.keywd} parts are optional. If
+the function type is [`proc`](#types_proc){.type}, the
+[`result`]{.keywd_no_ul} part must be omitted. For all other functions
+the [`result`]{.keywd_no_ul} part is mandatory.
+
+The result of a function must be used
+([assigned](#stats_Assignment), written, used as parameter,
+etc.). It is not possible to silently ignore the function result by
+using it as statement. The attempt to use [`flipCoin`]{.func} as
+statement:
+
+``` indent
+const proc: main is func
+  begin
+    flipCoin;
+  end func;
+```
+
+results in a [parsing error](#errors_Parsing_errors):
+
+``` indent
+*** tst609.sd7(8):35: Procedure expected found "func boolean" expression
+    flipCoin;
+```
+
+[]{#tutorial_Parameters}
+
+### 2.10 Parameters
+
+Most parameters are not changed inside a function. Seed7 uses
+`'`[`in`](#params_in_parameter){.keywd_no_ul}`'` parameters to describe
+this situation:
+
+``` indent
+const func integer: negate (in integer: num1) is
+  return -num1;
+
+const func integer: fib (in integer: num1) is func
+  result
+    var integer: fib is 1;
+  begin
+    if num1 <> 1 and num1 <> 2 then
+      fib := fib(pred(num1)) + fib(num1 - 2);
+    end if;
+  end func;
+```
+
+The functions above use `'`[`in`](#params_in_parameter){.keywd_no_ul}`'`
+parameters named `'num1'`. An assignment to `'num1'` is not allowed. A
+formal `'`[`in`](#params_in_parameter){.keywd_no_ul}`'` parameter like
+`'num1'` behaves like a constant. Trying to change a formal
+`'`[`in`](#params_in_parameter){.keywd_no_ul}`'` parameter:
+
+``` indent
+const proc: wrong (in integer: num2) is func
+  begin
+    num2 := 0;
+  end func;
+```
+
+results in a [parsing error](#errors_Parsing_errors):
+
+``` indent
+*** tst77.sd7(5):53: Variable expected in {num2 := 0 } found parameter (in integer: num2)
+    num2 := 0;
+```
+
+When a function wants to change the value of the actual parameter it can
+use an `'`[`inout`](#params_inout_parameter){.keywd_no_ul}`'` parameter:
+
+``` indent
+const proc: reset (inout integer: num2) is func
+  begin
+    num2 := 0;
+  end func;
+```
+
+If you call this function with
+
+``` indent
+reset(number);
+```
+
+the variable `'number'` has the value 0 afterwards. Calling `'reset'`
+with a constant instead of a variable:
+
+``` indent
+reset(8);
+```
+
+results in a [parsing error](#errors_Parsing_errors):
+
+``` indent
+*** tst77.sd7(12):53: Variable expected in {8 reset } found constant integer: 8
+    reset(8);
+```
+
+Sometimes an `'`[`in`](#params_in_parameter){.keywd_no_ul}`'` parameter
+is needed, but you need to change the formal parameter in the function
+without affecting the actual parameter. In this case we use the
+`'`[`in var`](#params_in_var_parameter){.keywd_no_ul}`'` parameter:
+
+``` indent
+const func string: oct_str (in var integer: number) is func
+  result
+    var string: stri is "";
+  begin
+    if number >= 0 then
+      repeat
+        stri := str(number mod 8) & stri;
+        number := number mdiv 8;
+      until number = 0;
+    end if;
+  end func;
+```
+
+As you can see this works like a combination of an
+`'`[`in`](#params_in_parameter){.keywd_no_ul}`'` parameter with a local
+`'`[`var`](#decls_Variable_declarations){.keywd_no_ul}`'`.
+
+Conventionally there are two kinds of parameters: `'call by value'` and
+`'call by reference'`. When taking the access right (constant or
+variable) into account we get the following table:
+
+  parameter                                              call by   access right
+  ---------------------------------------------------- ----------- --------------
+  [`val`](#params_val_parameter){.keywd_no_ul}            value    const
+  [`ref`](#params_ref_parameter){.keywd_no_ul}          reference  const
+  [`in`](#params_in_parameter){.keywd_no_ul}            val / ref  const
+  [`in var`](#params_in_var_parameter){.keywd_no_ul}      value    var
+  [`inout`](#params_inout_parameter){.keywd_no_ul}      reference  var
+
+Additionally to the parameters we already know this table describes also
+`'`[`val`](#params_val_parameter){.keywd_no_ul}`'` and
+`'`[`ref`](#params_ref_parameter){.keywd_no_ul}`'` parameters which use
+\'call by value\' and \'call by reference\' and have a constant formal
+parameter. The `'`[`in`](#params_in_parameter){.keywd_no_ul}`'`
+parameter is called by `'val / ref'` in this table which is easily
+explained:
+
+An `'`[`in`](#params_in_parameter){.keywd_no_ul}`'` parameter is either
+a `'`[`val`](#params_val_parameter){.keywd_no_ul}`'` or a
+`'`[`ref`](#params_ref_parameter){.keywd_no_ul}`'` parameter depending
+on the type of the parameter.
+
+The parameter
+
+``` indent
+in integer: number
+```
+
+is a \'val\' parameter which could also be declared as
+
+``` indent
+val integer: number
+```
+
+while the parameter
+
+``` indent
+in string: stri
+```
+
+is a \'ref\' parameter which could also be declared as
+
+``` indent
+ref string: stri
+```
+
+The meaning of the `'`[`in`](#params_in_parameter){.keywd_no_ul}`'`
+parameter is predefined for most types. Usually types with small amounts
+of data use `'`[`val`](#params_val_parameter){.keywd_no_ul}`'` as
+`'`[`in`](#params_in_parameter){.keywd_no_ul}`'` parameter while types
+with bigger data amounts use
+`'`[`ref`](#params_ref_parameter){.keywd_no_ul}`'`. Most of the time it
+is not necessary to care if an
+`'`[`in`](#params_in_parameter){.keywd_no_ul}`'` parameter is really a
+`'`[`val`](#params_val_parameter){.keywd_no_ul}`'` or
+`'`[`ref`](#params_ref_parameter){.keywd_no_ul}`'` parameter.
+
+In rare cases a `'`[`ref`](#params_ref_parameter){.keywd_no_ul}`'`
+parameter would have undesired side effects with global variables or
+other `'`[`ref`](#params_ref_parameter){.keywd_no_ul}`'` parameters. In
+these cases an explicit
+`'`[`val`](#params_val_parameter){.keywd_no_ul}`'` parameter instead of
+an `'`[`in`](#params_in_parameter){.keywd_no_ul}`'` parameter makes
+sense.
+
+In all normal cases an `'`[`in`](#params_in_parameter){.keywd_no_ul}`'`
+parameter should be preferred over an explicit
+`'`[`val`](#params_val_parameter){.keywd_no_ul}`'` and
+`'`[`ref`](#params_ref_parameter){.keywd_no_ul}`'` parameter.
+
+[]{#tutorial_Overloading}
+
+### 2.11 Overloading
+
+Functions are not only identified by identifiers but also via the types
+of their parameters. So several versions of a function can be defined:
+
+``` indent
+$ include "seed7_05.s7i";
+  include "float.s7i";
+  include "bigint.s7i";
+  include "bigrat.s7i";
+
+const func float:       tenPercent (in float: amount)      is return amount / 10.0;
+const func float:       tenPercent (in integer: amount)    is return float(amount) / 10.0;
+const func bigRational: tenPercent (in bigInteger: amount) is return amount / 10_;
+
+const proc: main is func
+  begin
+    writeln(tenPercent(123));
+    writeln(tenPercent(123.0));
+    writeln(tenPercent(123_));
+  end func;
+```
+
+The example above defines the function `tenPercent` for the types
+[`float`](#types_float){.type}, [`integer`](#types_integer){.type} and
+[`bigInteger`](#types_bigInteger){.type}. Two of these functions return
+a [`float`](#types_float){.type} and one returns a
+[`bigRational`](#types_bigRational){.type}. This reuse of the same
+function name is called overloading. The literals `123`, `123.0` and
+`123_` have the types [`float`](#types_float){.type},
+[`integer`](#types_integer){.type} and
+[`bigInteger`](#types_bigInteger){.type} respectively. This allows an
+easy identification of the `tenPercent` function used. Note that
+[`writeln`]{.func} is also overloaded. Otherwise [`writeln`]{.func}
+would not be able to accept [`float`](#types_float){.type} and
+[`bigRational`](#types_bigRational){.type} arguments.
+
+Overloading does not consider the result of a function. The following
+example attempts to overload `addOne` with the same parameter type and a
+different result type:
+
+``` indent
+const func integer: addOne (in integer: num) is return num + 1;
+const func float:   addOne (in integer: num) is return float(num) + 1.0;
+```
+
+[Return type overloading] is not supported. Therefore the attempt
+above results in the [compile-time
+error](#errors_Parsing_errors):
+
+``` indent
+*** tst344.sd7(5):34: Redeclaration of "addOne (val integer: num)"
+const func float:   addOne (in integer: num) is return float(num) + 1.0;
+------------------------------------------------------------------------^
+*** tst344.sd7(4):35: Previous declaration of "addOne (val integer: num)"
+const func integer: addOne (in integer: num) is return num + 1;
+```
+
+The absence of [return type overloading] improves readability,
+since:
+
+  -----------------------------------------------------------------------------------
+   The type of every expression (and sub expression) is independent of the context.
+  -----------------------------------------------------------------------------------
+
+You don\'t need to look where an expression is used. The expression
+alone gives you enough information to determine the type of the
+expression.
+
+Operators like [`+`]{.op} can be overloaded with:
+
+``` indent
+$ include "seed7_05.s7i";
+  include "float.s7i";
+
+const func float: (in integer: summand1) + (in float: summand2) is
+    return float(summand1) + summand2;
+
+const func float: (in float: summand1) + (in integer: summand2) is
+    return summand1 + float(summand2);
+
+const proc: main is func
+  begin
+    writeln(123 + 123.456);
+    writeln(123.456 + 123);
+  end func;
+```
+
+The definitions of the [`+`]{.op} operator above allow mixing of
+[`integer`](#types_integer){.type_no_ul} and
+[`float`](#types_float){.type_no_ul} arguments. The overloaded
+[`+`]{.op} operators above are taken from the [`mixarith.s7i`]{.lib}
+library.
+
+[]{#tutorial_Templates}
+
+### 2.12 Templates
+
+Templates allow the declaration of functions where the actual types are
+specified later. The function declarations are done inside a procedure
+that has a type as parameter. The library [integer.s7i]{.lib} defines
+the template `DECLARE_MIN_MAX` as:
+
+``` indent
+const proc: DECLARE_MIN_MAX (in type: aType) is func
+  begin
+
+    const func aType: min (in aType: value1, in aType: value2) is
+        return value1 < value2 ? value1 : value2;
+
+    const func aType: max (in aType: value1, in aType: value2) is
+        return value1 > value2 ? value1 : value2;
+
+  end func;
+```
+
+The template procedure `DECLARE_MIN_MAX` uses the type parameter
+[`aType`]{.type_no_ul} to declare the functions [`min`]{.func} and
+[`max`]{.func}. The template is instantiated for every actual type which
+needs [`min`]{.func} and [`max`]{.func}. E.g.:
+
+``` indent
+DECLARE_MIN_MAX(integer);     # Instantiated in the integer.s7i library
+DECLARE_MIN_MAX(bigInteger);  # Instantiated in the bigint.s7i library
+DECLARE_MIN_MAX(float);       # Instantiated in the float.s7i library
+```
+
+This allows for expressions like `min(2, 5)` or `min(PI, E)`.
+
+[]{#tutorial_Declare_a_statement}
+
+### 2.13 Declare a statement
+
+This example program writes its arguments
+
+``` indent
+$ include "seed7_05.s7i";       # Standard Seed7 library
+
+const proc: main is func
+  local
+    var string: stri is "";
+  begin
+    for stri range argv(PROGRAM) do
+      write(stri <& " ");
+    end for;
+    writeln;
+  end func;
+```
+
+The [`for-statement`](#stats_for-statement) iterates over
+[`argv`](#os_argv_PROGRAM){.func}`(PROGRAM)`. The function
+[`argv`](#os_argv_PROGRAM){.func}`(PROGRAM)` returns an
+[`array string`](#types_array){.type} (=[`array`](#types_array){.type}
+of [`string`](#types_string){.type} elements). The
+[`for-statement`](#stats_for-statement) is overloaded for various
+collection types. In the standard Seed7 library [`seed7_05.s7i`]{.lib}
+the [`for-statement`](#stats_for-statement) for
+[array](#types_array){.type}s is declared as follows:
+
+``` indent
+const proc: for (inout baseType: variable) range (in arrayType: arr_obj) do
+              (in proc: statements)
+            end for is func
+  local
+    var integer: number is 0;
+  begin
+    for number range 1 to length(arr_obj) do
+      variable := arr_obj[number];
+      statements;
+    end for;
+  end func;
+```
+
+The syntax of this [`for-statement`](#stats_for-statement) is
+declared as:
+
+``` indent
+$ syntax expr: .for.().range.().to.().do.().end.for is              -> 25;
+```
+
+Additionally everybody can overload the
+[`for-statement`](#stats_for-statement) also. Because of these
+powerful features Seed7 does not need iterators.
+
+[]{#tutorial_Template_declaring_a_statement}
+
+### 2.14 Template declaring a statement
+
+Templates are just normal functions with [type](#types_type){.type}s as
+parameters. The following template function declares
+[`for-statements`](#stats_for-statement):
+
+``` indent
+const proc: FOR_DECLS (in type: aType) is func
+  begin
+
+    const proc: for (inout aType: variable) range (in aType: low) to (in aType: high) do
+        (in proc: statements) end for is func
+      begin
+        variable := low;
+        if variable <= high then
+          statements;
+          while variable < high do
+            incr(variable);
+            statements;
+          end while;
+        end if;
+      end func;
+
+  end func;
+
+FOR_DECLS(char);
+FOR_DECLS(boolean);
+```
+
+The body of the \'FOR_DECLS\' function contains a declaration of the
+[`for-statement`](#stats_for-statement) for the type
+[`aType`]{.type}. Calling \'FOR_DECLS\' with
+[`char`](#types_char){.type} and [`boolean`](#types_boolean){.type} as
+parameter creates corresponding declarations of
+[`for-statements`](#stats_for-statement). The example above is a
+simplified part of the library [`forloop.s7i`]{.lib}.
+
+[]{#decls_file_start}
+
+[]{#decls_DECLARATIONS}
+
+## 3. DECLARATIONS
+
+A declaration specifies the identifier, type, and other aspects of
+language elements such as variables, constants and functions. In Seed7
+everything must be declared before it is used. All declarations are
+introduced with a specific keyword and follow a common pattern. The
+keyword is followed by a type (in example code [red]{.type} is used for
+types). In the table below [***`aType`***]{.type} is a placeholder for
+any [type](#types_file_start).
+
+  Declaration                                                                                                                                                                                                                 Comment
+  --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ----------------------------------------------------------------------------------
+  [`var`](#decls_Variable_declarations){.keywd_no_ul}` `[***`aType`***]{.type}`: name `[`is`]{.keywd}` ...`                                                                                                                   A [variable declaration](#decls_Variable_declarations)
+  [`const`](#decls_Constant_declarations){.keywd_no_ul}` `[***`aType`***]{.type}`: name `[`is`]{.keywd}` ...`                                                                                                                 A [constant declaration](#decls_Constant_declarations)
+  [`val`](#params_val_parameter){.keywd_no_ul}` `[***`aType`***]{.type}`: name`                                                                                                                                               Declaration of a [value-parameter](#params_val_parameter)
+  [`ref`](#params_ref_parameter){.keywd_no_ul}` `[***`aType`***]{.type}`: name`                                                                                                                                               Declaration of a [reference-parameter](#params_ref_parameter)
+  [`in`](#params_in_parameter){.keywd_no_ul}` `[***`aType`***]{.type}`: name`                                                                                                                                                 Declaration of an [in-parameter](#params_in_parameter)
+  [`in var`](#params_in_var_parameter){.keywd_no_ul}` `[***`aType`***]{.type}`: name`                                                                                                                                         Declaration of an [in-var-parameter](#params_in_var_parameter)
+  [`inout`](#params_inout_parameter){.keywd_no_ul}` `[***`aType`***]{.type}`: name`                                                                                                                                           Declaration of an [inout-parameter](#params_inout_parameter)
+  [`in`](#params_in_parameter){.keywd_no_ul}` `[`func`](#types_func){.type_no_ul}` `[***`aType`***]{.type}`: name`                                                                                                            Declaration of a [call-by-name parameter](#params_call_by_name_parameter)
+  [`const`](#decls_Type_declarations){.keywd_no_ul}` `[`type`](#types_type){.type_no_ul}`: name `[`is`]{.keywd}` ...`                                                                                                         A [type declaration](#decls_Type_declarations)
+  [`const`](#decls_Procedure_declarations){.keywd_no_ul}` `[`proc`](#types_proc){.type_no_ul}`: name `[`is`]{.keywd}` ...`                                                                                                    A [procedure declaration](#decls_Procedure_declarations)
+  [`const`](#decls_Function_declarations){.keywd_no_ul}` `[`func`](#types_func){.type_no_ul}` `[***`aType`***]{.type}`: name `[`is`]{.keywd}` ...`                                                                            A [function declaration](#decls_Function_declarations)
+  [`const`](#decls_Abstract_data_types){.keywd_no_ul}` `[`func`](#types_func){.type_no_ul}` `[`type`](#types_type){.type_no_ul}`: name `[`is`]{.keywd}` ...`                                                                  Declaration of an [abstract data type](#decls_Abstract_data_types)
+  [`const`](#decls_Templates){.keywd_no_ul}` `[`proc`](#types_proc){.type_no_ul}`: name (`[`in`](#params_in_parameter){.keywd_no_ul}` `[`type`](#types_type){.type_no_ul}`: `[***`aType`***]{.type}`) `[`is`]{.keywd}` ...`   Declaration of a [template](#decls_Templates)
+  [`syntax`](#decls_Syntax_declarations){.keywd_no_ul}` `[`expr`](#types_expr){.type_no_ul}`: pattern `[`is`]{.keywd}` ...`                                                                                                   A [syntax declaration](#decls_Syntax_declarations)
+
+[]{#decls_Variable_declarations}
+
+### 3.1 Variable declarations
+
+A variable is a named place for a value. The value of a variable can be
+changed with an [assignment](#stats_Assignment). Variables must
+be declared before they can be used. E.g.:
+
+``` indent
+var integer: number is 0;
+```
+
+This declares the [`integer`](#types_integer){.type} variable
+`'number'`. The variable is initialized with the value 0. Later the
+value of the variable can be changed with e.g.:
+
+``` indent
+number := 1;
+```
+
+Variables can only hold values of their type. An attempt to assign a
+value with the wrong type results in a compile error:
+
+``` indent
+*** tst545.sd7(7):57: Match for {number := "hello" } failed
+    number := "hello";
+```
+
+[]{#decls_Constant_declarations}
+
+### 3.2 Constant declarations
+
+A constant is a named value that cannot change during run-time.
+Constants must be declared before they can be used. E.g.:
+
+``` indent
+const integer: ONE is 1;
+```
+
+This declares the [`integer`](#types_integer){.type} constant `'ONE'`
+with the value 1. An attempt to change a constant results in an compile
+error:
+
+``` indent
+*** tst544.sd7(7):58: Variable expected in {ONE := 2 } found constant integer: ONE
+    ONE := 2;
+```
+
+[]{#decls_Type_declarations}
+
+#### 3.2.1 Type declarations
+
+Type declarations define a name for a type. Type declarations are done
+as constant declarations where the type of the declared constant is
+[`type`](#types_type){.type}. E.g.:
+
+``` indent
+const type: myChar is char;
+```
+
+Afterwards the new type can be used in other declarations. E.g.:
+
+``` indent
+var myChar: aChar is 'x';
+```
+
+[]{#decls_Procedure_declarations}
+
+#### 3.2.2 Procedure declarations
+
+The code of a procedure does not change at run-time. Thus procedures are
+declared with a constant declaration:
+
+``` indent
+const proc: helloWorld is func
+  begin
+    writeln("hello world");
+  end func;
+```
+
+Local declarations can be added to a procedure with the keyword
+[`local`]{.keywd}. E.g.:
+
+``` indent
+const proc: helloWorld is func
+  local
+    const string: greeting is "hello world";
+  begin
+    writeln(greeting);
+  end func;
+```
+
+A procedure with a parameter (`greeting`) is defined with:
+
+``` indent
+const proc: hello (in string: greeting) is func
+  begin
+    writeln(greeting);
+  end func;
+```
+
+Procedure and function parameters are explained in [chapter 6
+(PARAMETERS)](#params_file_start).
+
+[]{#decls_Function_declarations}
+
+#### 3.2.3 Function declarations
+
+Like with procedures the code of a function does not change at run-time.
+Thus functions are also declared with a constant declaration:
+
+``` indent
+const func boolean: flipCoin is
+  return rand(FALSE, TRUE);
+```
+
+Note that [`return`]{.keywd_no_ul} is not a statement. Instead
+[`return`]{.keywd_no_ul} is a shortcut for a function declaration with a
+[result variable]:
+
+``` indent
+const func boolean: flipCoin is func
+  result
+    var boolean: coinState is FALSE;
+  begin
+    coinState := rand(FALSE, TRUE);
+  end func;
+```
+
+A [result variable] is a specific local variable used as function
+result. If no [assignment](#stats_Assignment) to the result
+variable is done the [initialization
+value](#decls_Initialization) of the result value is the function
+result:
+
+``` indent
+const func integer: countDigits is func
+  result
+    var integer: count is 0;
+  begin
+    while getc(IN) in {'0' .. '9'} do
+      incr(count);
+    end while;
+  end func;
+```
+
+The keyword `local` allows the introduction of local declarations:
+
+``` indent
+const func string: alphabet is func
+  result
+    var string: abc is "";
+  local
+    var char: ch is ' ';
+  begin
+    for ch range 'a' to 'z' do
+      abc &:= ch;
+    end for;
+  end func;
+```
+
+A function with a parameter (`number`) is defined with:
+
+``` indent
+const func float: inverse (in float: number) is
+  return 1.0 / number;
+```
+
+Procedure and function parameters are explained in [chapter 6
+(PARAMETERS)](#params_file_start).
+
+[]{#decls_Forward_declarations}
+
+#### 3.2.4 Forward declarations
+
+In Seed7 everything must be declared before it is used.
+
+This keeps the code easier to follow and the compiler easier to
+implement.
+
+Forward declarations are required if something needs to be used before
+it can be declared fully:
+
+``` indent
+const func boolean: isOdd (in integer: number) is forward;
+
+const func boolean: isEven (in integer: number) is
+  return number = 0 ? TRUE : isOdd(pred(number));
+
+const func boolean: isOdd (in integer: number) is
+  return number = 0 ? FALSE : isEven(pred(number));
+```
+
+[]{#decls_Interface_declarations}
+
+#### 3.2.5 Interface declarations
+
+The [object orientation](#objects_file_start) of Seed7 is based
+on interface types and interface functions. E.g.:
+
+``` indent
+const type: file is sub object interface;                             # Declare interface type
+
+const proc: write (inout file: outFile, in string: stri) is DYNAMIC;  # Declare interface function
+```
+
+Actual types and functions implement these interfaces:
+
+``` indent
+const type: striFile is sub null_file struct                              # Implementation type
+    var string: content is "";
+    var integer: position is 1;
+  end struct;
+
+type_implements_interface(striFile, file);                                # Connect implementation type to interface type
+
+const proc: write (inout striFile: outStriFile, in string: stri) is func  # Implementation function
+  ...
+```
+
+Functions use interface types and implementation types to create new
+interface values:
+
+``` indent
+const func file: openStriFile (in string: content) is func
+  result
+    var file: newFile is STD_NULL;
+  local
+    var striFile: new_striFile is striFile.value;
+  begin
+    new_striFile.content := content;
+    newFile := toInterface(new_striFile);
+  end func;
+```
+
+The function `toInterface` transfers the ownership from `new_striFile`
+to `newFile`.
+
+[]{#decls_Abstract_data_types}
+
+#### 3.2.6 Abstract data types
+
+An abstract data type is a type that requires additional information.
+E.g.: The abstract data type [`array`](#types_array){.type} requires the
+type of the array elements as additional information. Predefined
+abstract data types are [`array`](#types_array){.type},
+[`subtype`]{.type}, [`struct`](#types_struct){.type},
+[`subrange`]{.type}, [`hash`](#types_hash){.type},
+[`set`](#types_set){.type}, [`interface`]{.type} and [`enum`]{.type}.
+The definition of the predefined abstract data type
+[`array`](#types_array){.type} in the library [array.s7i]{.lib} starts
+with:
+
+``` indent
+const func type: array (in type: baseType) is ...
+```
+
+The parameter [`baseType`]{.type} specifies the type of the
+[`array`](#types_array){.type} elements. The abstract data type
+[`array`](#types_array){.type} can be used in declarations:
+
+``` indent
+var array integer: numbers is [] (1);
+```
+
+Other abstract data types are declared similar to the declaration of
+[`array`](#types_array){.type}.
+
+User defined abstract data types are also possible.
+
+[]{#decls_Templates}
+
+#### 3.2.7 Templates
+
+Templates do declarations for a given type. Templates are executed at
+compile-time. The function `FOR_ENUM_DECLS` from the library
+[forloop.s7i]{.lib} defines a for-loop that loops over all values of a
+given enumeration type:
+
+``` indent
+const proc: FOR_ENUM_DECLS (in type: aType) is func
+  begin
+
+    const proc: for (inout aType: variable) range (attr aType) do
+        (in proc: statements) end for is func
+      begin
+        for variable range aType.first to aType.last do
+          statements;
+        end for;
+      end func;
+
+  end func;
+```
+
+The template `FOR_ENUM_DECLS` is invoked in the library
+[enumeration.s7i]{.lib} with:
+
+``` indent
+FOR_ENUM_DECLS(enumType);
+```
+
+[]{#decls_Initialization}
+
+### 3.3 Initialization
+
+Each object declared with a `'`[`const`]{.keywd}`'` or
+`'`[`var`](#decls_Variable_declarations){.keywd_no_ul}`'` declaration
+obtains an initial value. It is not possible to use
+`'`[`const`]{.keywd}`'` or
+`'`[`var`](#decls_Variable_declarations){.keywd_no_ul}`'` declarations
+without initial value. The type of the initial value must fit to the
+type of the variable or constant. A compile error is triggered if this
+is not the case:
+
+``` indent
+*** tst546.sd7(3):57: Match for {number ::= ' ' } failed
+var integer: number is ' ';
+---------------------------^
+*** tst546.sd7(3):42: Declaration of "number" failed
+var integer: number is ' ';
+```
+
+Expressions can be used as initial value. E.g.:
+
+``` indent
+var string: fileName is NAME & ".txt";
+```
+
+The expression is evaluated and the result is assigned to the new
+object. This is done at compile-time by the interpreter or compiler. The
+initialization expressions may contain any function (or operator) call.
+That way user defined functions can also be used to initialize a
+constant or variable:
+
+``` indent
+const boolean: maybe is flipCoin;
+```
+
+[]{#decls_How_the_initialization_works}
+
+#### 3.3.1 How the initialization works
+
+The initialization of variables and constants is done at compile-time.
+The initialization uses the [create operator](#types_creator) (
+[`::=`](#types_creator){.op_no_ul} ). Note that
+[`::=`](#types_creator){.op_no_ul} is used internally by the interpreter
+and compiler. Explicit calls of [`::=`](#types_creator){.op_no_ul} in
+user programs are not allowed. The [create
+operator](#types_creator) is similar to an [assignment
+statement](#stats_Assignment) (
+[`:=`](#stats_Assignment){.op_no_ul} ), but with two important
+differences:
+
+1.  Assignments can assume that the destination has a legal value.
+    [Create operators](#types_creator) assume that the
+    destination has an undefined value. A [create
+    operator](#types_creator) needs to do all the initializations
+    necessary.
+2.  Assignments can only be used to assign a value to a variable.
+    [Create operators](#types_creator) are not restricted to
+    variables. Interpreter and compiler use
+    [`::=`](#types_creator){.op_no_ul} to initialize constants.
+
+The lifetime of an object goes like this:
+
+1.  Memory is reserved for the new object (stack or heap memory make no
+    difference here).
+2.  The content of the new memory is undefined (It may contain garbage),
+    therefore a [create operator](#types_creator) (
+    [::=](#types_creator){.op_no_ul} ) is necessary instead of an
+    [assignment statement](#stats_Assignment) (
+    [:=](#stats_Assignment){.op_no_ul} ).
+3.  The [create operator](#types_creator) (
+    [::=](#types_creator){.op_no_ul} ) copies the right expression to
+    the left expression taking into account that the left expression is
+    undefined.
+4.  If the object is variable other values can be assigned using the
+    [assignment statement](#stats_Assignment) (
+    [:=](#stats_Assignment){.op_no_ul} ). The assignment can assume that
+    the destination contains a legal value.
+5.  Strings (and some other types) are just references to a memory area
+    where the data resides. These references are the sole owner of the
+    memory area. This allows that an assignment can reallocate the
+    memory area.
+6.  At the end of the lifetime of an object the [destroy
+    operation](#types_destroyer) is executed. For strings (and
+    some other types which are just references to a memory area) the
+    referenced memory is freed.
+7.  The memory of the object is freed.
+
+The first three steps are usually hidden in the declaration statement.
+The declaration statement executes
+
+``` indent
+ONE ::= 1
+```
+
+to assign `1` to the object `ONE`. The [destroy
+operation](#types_destroyer) is the opposite of the [create
+operator](#types_creator). It is automatically executed at the
+end of the lifetime of an object. The run-time library executes
+
+``` indent
+destroy(fileName)
+```
+
+to free the memory referred by the
+[`string`](#types_string){.type_no_ul} variable `fileName`. For simple
+types such as [`integer`](#types_integer){.type_no_ul} the [destroy
+operation](#types_destroyer) does nothing.
+
+The mechanism with create and destroy is also used for call-by-value
+parameters ([`val`](#params_val_parameter){.keywd_no_ul},
+[`in var`](#params_in_var_parameter){.keywd_no_ul} and
+[`in`](#params_in_parameter){.keywd_no_ul} if it uses call-by-value).
+When a function is called the call-by-value parameters are initialized
+with a [create operator](#types_creator):
+
+``` indent
+formalParameter ::= actualParameter
+```
+
+At the end of the function the [destroy
+operation](#types_destroyer) is executed:
+
+``` indent
+destroy(formalParameter)
+```
+
+For all predefined types the [create operator](#types_creator) (
+[`::=`](#types_creator){.op_no_ul} ) and the [destroy
+operation](#types_destroyer) are already defined. To allow the
+declaration of objects of a new user defined type the create and destroy
+operations for this type must be defined.
+
+[]{#decls_Syntax_declarations}
+
+### 3.4 Syntax declarations
+
+Syntax declarations are used to specify the syntax, priority and
+associativity of operators, statements, declarations and other
+constructs. A syntax declaration which defines the `'+'` operator is:
+
+``` indent
+$ syntax expr: .(). + .()   is ->  7;
+```
+
+Most syntax definitions can be found in the file [`syntax.s7i`]{.lib}. A
+detailed description of the syntax declarations can be found in [chapter
+9 (Structured syntax definition)](#syntax_file_start) There is
+also a hard coded syntax for function calls with a parenthesis enclosed
+parameter list where the parameters are separated by commas. The hard
+coded syntax is described in [chapter 11
+(Expressions)](#expr_file_start). Here we use a more complex
+syntax description:
+
+[]{#decls_System_declarations}
+
+### 3.5 System declarations
+
+With system declarations the analyzer and the interpreter are informed
+about which objects should be used for various system internal purposes.
+An example of a system declaration is
+
+``` indent
+$ system "integer" is integer;
+```
+
+This defines that the type of all integer literals is
+[`integer`](#types_integer){.type}. Additionally
+[`integer`](#types_integer){.type} is used as type for all integers
+generated by primitive actions. There are different objects which are
+defined by a system declaration
+
+- The types of literals and simple expressions for example:
+  [`string`](#types_string){.type} for strings and
+  [`integer`](#types_integer){.type} for integers
+- Which objects should be used as result values for primitive actions
+  for example:
+  [`TRUE`]{.var}, [`FALSE`]{.var} and [`empty`](#types_void){.var}
+- The EXCEPTIONS which are to be raised by primitive actions for
+  example:
+  [`NUMERIC_ERROR`](#errors_NUMERIC_ERROR){.exception} and
+  [`MEMORY_ERROR`](#errors_MEMORY_ERROR){.exception}
+- Which objects should be used for several implicit actions for example:
+  `:=` `::=` [`destroy`]{.func} [`write`]{.func} and [`flush`]{.func}
+
+The following system declarations exist
+
+``` indent
+$ system "expr" is expr;
+$ system "f_param" is f_param;
+$ system "integer" is integer;
+$ system "bigInteger" is bigInteger;
+$ system "char" is char;
+$ system "string" is string;
+$ system "proc" is proc;
+$ system "float" is float;
+
+$ system "true" is TRUE;
+$ system "false" is FALSE;
+$ system "empty" is empty;
+
+$ system "memory_error" is MEMORY_ERROR;
+$ system "numeric_error" is NUMERIC_ERROR;
+$ system "overflow_error" is OVERFLOW_ERROR;
+$ system "range_error" is RANGE_ERROR;
+$ system "index_error" is INDEX_ERROR;
+$ system "file_error" is FILE_ERROR;
+$ system "database_error" is DATABASE_ERROR;
+$ system "graphic_error" is GRAPHIC_ERROR;
+$ system "illegal_action" is ILLEGAL_ACTION;
+
+$ system "assign" is := ;
+$ system "create" is ::= ;
+$ system "destroy" is destroy;
+$ system "ord" is ord;
+$ system "in" is in;
+$ system "prot_outfile" is PROT_OUTFILE;
+$ system "flush" is flush;
+$ system "write" is write;
+$ system "writeln" is writeln;
+$ system "main" is main;
+```
+
+[]{#decls_Pragmas}
+
+### 3.6 Pragmas
+
+Pragmas specify how a program is processed. Like [system
+declarations](#decls_System_declarations) pragmas are introduced
+with a dollar sign (\$) followed by the name of the pragma. The
+following pragmas exist:
+
+  pragma                    parameter                                  comment
+  ------------------------- ------------------------------------------ ------------------------------------------------
+  `$ `[`library`]{.keywd}   [`string`](#types_string){.type}           Specify additional directory for \*.s7i files.
+  `$ `[`message`]{.keywd}   [`string`](#types_string){.type}           Writes a message during parsing.
+  `$ `[`info`]{.keywd}      [`on`]{.keywd} or [`off`]{.keywd}          Switch compilation info on or off.
+  `$ `[`trace`]{.keywd}     [`string`](#types_string){.type}           Sets compile-time tracing flags.
+  `$ `[`decls`]{.keywd}     \-                                         Traces the declarations.
+  `$ `[`names`]{.keywd}     [`unicode`]{.keywd} or [`ascii`]{.keywd}   Allows Unicode (or Ascii) identifiers.
+
+An unknown pragma results in a [parsing
+error](#errors_Parsing_errors):
+
+``` indent
+*** pragma.sd7(1):8: Illegal pragma "unknownPragma"
+$ unknownPragma
+---------------^
+```
+
+[The pragma [`message`]{.keywd} can be used to write a
+message]{#decls_pragma_message} during parsing. To write
+[`"hello world"`]{.stri} during parsing use:
+
+``` indent
+$ message "hello world";
+```
+
+[The pragma [`info`]{.keywd} can be used to change the verbosity
+level]{#decls_pragma_info} of the parsing phase. This overrules the
+[**`-v`**[`n`]{.keywd}] option of the [interpreter]. With
+
+``` indent
+$ info on;
+```
+
+the parser writes information about library names and the number of the
+line currently processed. With
+
+``` indent
+$ info off;
+```
+
+no such information is written.
+
+[The pragma [`trace`]{.keywd} can be used to turn interpreter
+tracing]{#decls_pragma_trace} on or off during the parsing of the
+program. This overrules the [**`-d`**[`x`]{.keywd}] option of the
+[interpreter]. The [`string`](#types_string){.type} parameter of
+the [`trace`]{.keywd} pragma allows a sequence of the characters
+[`+`]{.keywd}, [`-`]{.keywd}, [`a`]{.keywd}, [`c`]{.keywd},
+[`d`]{.keywd}, [`e`]{.keywd}, [`h`]{.keywd}, [`m`]{.keywd},
+[`u`]{.keywd}, [`s`]{.keywd} and [`*`]{.keywd}. These characters have
+the following meaning:
+
+- **+** Turn the following flags on (default)
+- **-** Turn the following flags off
+- **a** Trace primitive actions
+- **c** Do action check
+- **d** Trace dynamic calls
+- **e** Trace exceptions and handlers
+- **h** Trace heap size (in combination with \'a\')
+- **m** Trace matching of expressions
+- **u** Trace exec utility functions
+- **s** Trace signals
+- **\*** All flags
+
+[The pragma [`names`]{.keywd} can be used to allow
+Unicode]{#decls_pragma_names} in [name
+identifiers](#tokens_Name_identifiers):
+
+``` indent
+$ names unicode;
+```
+
+This allows variables with e.g. German umlauts or Cyrillic letters. This
+way beginners can use variable and function names from their native
+language.
+
+[]{#stats_file_start}
+
+[]{#stats_PREDEFINED_STATEMENTS}
+
+## 4. PREDEFINED STATEMENTS
+
+The library contains several predefined statements:
+[assignment](#stats_Assignment),
+[while-statement](#stats_while-statement),
+[repeat-statement](#stats_repeat-statement),
+[for-statement](#stats_for-statement),
+[if-statement](#stats_if-statement),
+[case-statement](#stats_case-statement) and procedure call.
+
+Syntax:
+
+:   
+
+    [statement]{#stats_ebnf_statement} ::=
+    :   [single_statement](#stats_ebnf_single_statement){.ebnf} \[ \';\'
+        \[ [statement](#stats_ebnf_statement){.ebnf} \] \] .
+
+    \
+    \
+    [single_statement]{#stats_ebnf_single_statement} ::=
+    :   [assignment_statement](#stats_ebnf_assignment_statement){.ebnf}
+        \| [while_statement](#stats_ebnf_while_statement){.ebnf} \|
+        [repeat_statement](#stats_ebnf_repeat_statement){.ebnf} \|\
+        [for_statement](#stats_ebnf_for_statement){.ebnf} \|
+        [for_step_statement](#stats_ebnf_for_step_statement){.ebnf} \|
+        [for_each_statement](#stats_ebnf_for_each_statement){.ebnf} \|\
+        [for_each_key_statement](#stats_ebnf_for_each_key_statement){.ebnf}
+        \| [for_key_statement](#stats_ebnf_for_key_statement){.ebnf} \|
+        [if_statement](#stats_ebnf_if_statement){.ebnf} \|\
+        [case_statement](#stats_ebnf_case_statement){.ebnf} \|
+        procedure_call \|
+        [empty_statement](#stats_ebnf_empty_statement){.ebnf} .
+
+    \
+    \
+    [empty_statement]{#stats_ebnf_empty_statement} ::=
+    :   \'noop\' .
+
+The execution of a [`noop`]{.keywd} statement (short for NO OPeration)
+has no effect. Some places in a program require a statement. If nothing
+needs to be done in such a place a [`noop`]{.keywd} can be used.
+
+Everywhere where one statement can be written a sequence of statements
+can also be used. The semicolon-operator concatenates two statements
+giving a new statement. The semicolon operator can also be used behind
+the last statement of a statement sequence. In this case the semicolon
+is just ignored.
+
+[Declaration]{#stats_semicolon_operator_declaration}:
+
+``` indent
+$ syntax expr: .(). ; .()   is <- 50;
+$ syntax expr: .(). ;       is <- 50 [1];
+
+const proc: (ref void: statement1) ; (ref void: statement2) is noop;
+```
+
+[]{#stats_Assignment}
+
+### 4.1 Assignment
+
+For example:
+
+``` indent
+minimum := maximum div 2;
+```
+
+Semantics:
+:   The expression at the right side of the assignment symbol is
+    evaluated and assigned to the variable at the left side.
+
+<!-- -->
+
+Syntax:
+
+:   
+
+    [assignment_statement]{#stats_ebnf_assignment_statement} ::=
+    :   designator \':=\' [expression](#expr_ebnf_expression){.ebnf} .
+
+The assignment statement is defined for every standard type.
+
+If an assignment for a new user defined type is needed it must be
+defined additionally.
+
+[Declaration]{#stats_assignment_statement_declaration}:
+
+``` indent
+$ syntax expr: .(). := .()   is <-> 20;
+
+const proc: (inout type: dest) := (ref type: source)                   is action "TYP_CPY";
+const proc: (inout proc: dest) := (ref proc: source)                   is action "PRC_CPY";
+const proc: (inout func aType: dest) := (ref func aType: source)       is action "PRC_CPY";
+const proc: (inout varfunc aType: dest) := (ref varfunc aType: source) is action "PRC_CPY";
+const proc: (inout ACTION: dest) := (in ACTION: source)                is action "ACT_CPY";
+const proc: (inout boolean: dest) := (in boolean: source)              is action "BLN_CPY";
+const proc: (inout integer: dest) := (in integer: source)              is action "INT_CPY";
+const proc: (inout bigInteger: dest) := (in bigInteger: source)        is action "BIG_CPY";
+const proc: (inout char: dest) := (in char: source)                    is action "CHR_CPY";
+const proc: (inout string: dest) := (in string: source)                is action "STR_CPY";
+const proc: (inout bin64: dest) := (in bin64: source)                  is action "INT_CPY";
+const proc: (inout bin32: dest) := (in bin32: source)                  is action "INT_CPY";
+const proc: (inout bstring: dest) := (in bstring: source)              is action "BST_CPY";
+const proc: (inout reference: dest) := (in reference: source)          is action "REF_CPY";
+const proc: (inout ref_list: dest) := (in ref_list: source)            is action "RFL_CPY";
+const proc: (inout ptrType: dest) := (in ptrType: source)              is action "REF_CPY";
+const proc: (inout varptrType: dest) := (in varptrType: source)        is action "REF_CPY";
+const proc: (inout arrayType: dest) := (in arrayType: source)          is action "ARR_CPY";
+const proc: (inout bitset: dest) := (in bitset: source)                is action "SET_CPY";
+const proc: (inout structType: dest) := (in structType: source)        is action "SCT_CPY";
+const proc: (inout enumType: dest) := (in enumType: source)            is action "ENU_CPY";
+const proc: (inout clib_file: dest) := (in clib_file: source)          is action "FIL_CPY";
+const proc: (inout process: dest) := (in process: source)              is action "PCS_CPY";
+const proc: (inout interfaceType: dest) := (ref interfaceType: source) is action "ITF_CPY";
+const proc: (inout interfaceType: dest) := (ref aType: source)         is action "ITF_CPY2";
+```
+
+[]{#stats_Ignoring_values}
+
+### 4.2 Ignoring values
+
+Unused expression results are not implicitely discarded. Writing:
+
+``` indent
+  begin
+    1 + 1;
+    writeln;
+  end func;
+```
+
+results in a [parsing error](#errors_Parsing_errors):
+
+``` indent
+*** tst316.sd7(5):57: Match for {INT_ADD({1 + 1 }) ; writeln } failed
+    1 + 1;
+```
+
+An unused expression result must be explicitly ignored. E.g.:
+
+``` indent
+ignore(getc(KEYBOARD));
+```
+
+This example waits for a character pressed on the [`KEYBOARD`]{.var} and
+then ignores that character. So all of the side effects of the
+expressions take place. It is just the result of the expression that is
+ignored.
+
+The need to explicitly ignore unused expression results removes another
+possible source of errors.
+
+[]{#stats_while-statement}
+
+### 4.3 while-statement
+
+For example:
+
+``` indent
+while maximum > minimum do
+  minimum := 2 * minimum + stepValue;
+  decr(stepValue);
+end while;
+```
+
+Semantics:
+:   First the condition between [`while`]{.keywd} and [`do`]{.keywd} is
+    evaluated. When this evaluation yields [`FALSE`]{.var}, the
+    while-statement is finished. When the evaluation yields
+    [`TRUE`]{.var}, the statement between [`do`]{.keywd} and
+    [`end`]{.keywd} is executed and the whole while-statement is
+    executed again.
+
+<!-- -->
+
+Syntax:
+
+:   
+
+    [while_statement]{#stats_ebnf_while_statement} ::=
+    :   \'[while]{.keywd}\' [expression](#expr_ebnf_expression){.ebnf}
+        \'[do]{.keywd}\'\
+          [statement](#stats_ebnf_statement){.ebnf}\
+        \'[end]{.keywd}\' \'[while]{.keywd}\' .
+
+The expression must be of type [`boolean`](#types_boolean){.type}.
+
+[Declaration]{#stats_while_statement_declaration}:
+
+``` indent
+$ syntax expr: .while.().do.().end.while   is -> 25;
+
+const proc: while (in func boolean: condition) do (in proc: statement) end while is action "PRC_WHILE";
+const proc: while (ref boolean: condition) do (in proc: statement) end while     is action "PRC_WHILE";
+```
+
+Alternate declaration:
+
+``` indent
+const proc: while (in func boolean: condition) do (in proc: statement) end while is func
+  begin
+    if condition then
+      statement;
+      while condition do
+        statement;
+      end while;
+    end if;
+  end func;
+```
+
+[]{#stats_repeat-statement}
+
+### 4.4 repeat-statement
+
+For example:
+
+``` indent
+repeat
+  incr(minimum);
+  maximum := maximum - stepValue;
+until 2 * minimum > maximum;
+```
+
+Semantics:
+:   The statement between [`repeat`]{.keywd} and [`until`]{.keywd} is
+    executed. Then the condition after [`until`]{.keywd} is evaluated.
+    When this evaluation yields [`TRUE`]{.var}, the repeat-statement is
+    finished. When the evaluation yields [`FALSE`]{.var} the
+    repeat-statement is executed again.
+
+<!-- -->
+
+Syntax:
+
+:   
+
+    [repeat_statement]{#stats_ebnf_repeat_statement} ::=
+    :   \'[repeat]{.keywd}\'\
+          [statement](#stats_ebnf_statement){.ebnf}\
+        \'[until]{.keywd}\' [expression](#expr_ebnf_expression){.ebnf} .
+
+The expression must be of type [`boolean`](#types_boolean){.type}.
+
+[Declaration]{#stats_repeat_statement_declaration}:
+
+``` indent
+$ syntax expr: .repeat.().until.()   is -> 25;
+
+const proc: repeat (in proc: statement) until (in func boolean: condition) is action "PRC_REPEAT";
+const proc: repeat (in proc: statement) until (ref boolean: condition)     is action "PRC_REPEAT";
+```
+
+Alternate declaration:
+
+``` indent
+const proc: repeat (in proc: statement) until (in func boolean: condition) is func
+  begin
+    statement;
+    if not condition then
+      repeat
+        statement;
+      until condition;
+    end if;
+  end func;
+```
+
+[]{#stats_for-statement}
+
+### 4.5 for-statement
+
+For example:
+
+``` indent
+for index range min_index to max_index do
+  sumValue +:= field[index];
+end for;
+```
+
+Semantics:
+
+:   
+
+    When the [`to`]{.keywd} symbol is used the for-statement is defined as follows:
+    :   First the lower limit and the upper limit which stand behind
+        [`range`]{.keywd} and [`to`]{.keywd} are evaluated. Then the
+        lower limit is assigned to the control variable which stands
+        behind [`for`]{.keywd}. If the value of the control variable is
+        less than or equal the upper limit the statements behind
+        [`do`]{.keywd} are executed. After that the control variable is
+        incremented and compared with the upper limit again. This
+        compare - execute - increment cycle is repeated until the
+        control variable is greater than the upper limit.
+
+    When the [`downto`]{.keywd} symbol is used the for-statement is defined as follows:
+    :   First the upper limit and the lower limit which stand behind
+        [`range`]{.keywd} and [`downto`]{.keywd} are evaluated. Then the
+        upper limit is assigned to the control variable which stands
+        behind [`for`]{.keywd}. If the value of the control variable is
+        greater than or equal the lower limit the statements behind
+        [`do`]{.keywd} are executed. After that the control variable is
+        decremented and compared with the lower limit again. This
+        compare - execute - increment cycle is repeated until the
+        control variable is less than the lower limit.
+
+<!-- -->
+
+Syntax:
+
+:   
+
+    [for_statement]{#stats_ebnf_for_statement} ::=
+    :   \'[for]{.keywd}\' [identifier](#tokens_ebnf_identifier){.ebnf}
+        \'[range]{.keywd}\' [expression](#expr_ebnf_expression){.ebnf}
+        \[ \'[to]{.keywd}\' \| \'[downto]{.keywd}\' \]
+        [expression](#expr_ebnf_expression){.ebnf} \'[do]{.keywd}\'\
+          [statement](#stats_ebnf_statement){.ebnf}\
+        \'[end]{.keywd}\' \'[for]{.keywd}\' .
+
+[Declaration]{#stats_for_statement_declaration}:
+
+``` indent
+$ syntax expr: .for.().range.().to.().do.().end.for       is -> 25;
+$ syntax expr: .for.().range.().downto.().do.().end.for   is -> 25;
+
+const proc: for (inout integer: aVar) range (in integer: lowerLimit) to (in integer: upperLimit) do
+              (in proc: statements)
+            end for                                                      is action "PRC_FOR_TO";
+const proc: for (inout integer: aVar) range (in integer: upperLimit) downto (in integer: lowerLimit) do
+              (in proc: statements)
+            end for                                                      is action "PRC_FOR_DOWNTO";
+```
+
+Declaration for non-integer types:
+
+``` indent
+const proc: FOR_DECLS (in type: aType) is func
+  begin
+    const proc: for (inout aType: variable) range
+        (in aType: lowerLimit) to (in aType: upperLimit) do
+        (in proc: statements) end for is func
+      local
+        var boolean: continue is FALSE;
+      begin
+        variable := lowerLimit;
+        continue := variable <= upperLimit;
+        while continue do
+          statements;
+          if variable < upperLimit then
+            incr(variable);
+          else
+            continue := FALSE;
+          end if;
+        end while;
+      end func;
+
+    const proc: for (inout aType: variable) range
+        (in aType: upperLimit) downto (in aType: lowerLimit) do
+        (in proc: statements) end for is func
+      local
+        var boolean: continue is FALSE;
+      begin
+        variable := upperLimit;
+        continue := variable >= lowerLimit;
+        while continue do
+          statements;
+          if variable > lowerLimit then
+            decr(variable);
+          else
+            continue := FALSE;
+          end if;
+        end while;
+      end func;
+
+  end func;
+
+FOR_DECLS(char);
+FOR_DECLS(boolean);
+FOR_DECLS(bigInteger);
+```
+
+[]{#stats_for-until-statement}
+
+### 4.6 for-until-statement
+
+For example:
+
+``` indent
+for column range 1 to length(maxRow) until selectedColumn <> 0 do
+  if maxRow[column] <> 0 then
+    incr(numColumns);
+  end if;
+  if numColumns = selectedNum then
+    selectedColumn := column;
+  end if;
+end for;
+```
+
+Semantics:
+
+:   
+
+    When the [`to`]{.keywd} symbol is used the for-until-statement is defined as follows:
+    :   First the lower limit and the upper limit which stand behind
+        [`range`]{.keywd} and [`to`]{.keywd} are evaluated. Then the
+        lower limit is assigned to the control variable which stands
+        behind [`for`]{.keywd}. If the value of the control variable is
+        less than or equal the upper limit the condition behind
+        [`until`]{.keywd} is checked. If the condition is
+        [`FALSE`]{.var} the statements behind [`do`]{.keywd} are
+        executed. After that the control variable is incremented and
+        compared with the upper limit again. This compare - check
+        condition - execute - increment cycle is repeated until the
+        control variable would become greater than the upper limit or
+        the condition is [`TRUE`]{.var}.
+
+    When the [`downto`]{.keywd} symbol is used the for-until-statement is defined as follows:
+    :   First the upper limit and the lower limit which stand behind
+        [`range`]{.keywd} and [`downto`]{.keywd} are evaluated. Then the
+        upper limit is assigned to the control variable which stands
+        behind [`for`]{.keywd}. If the value of the control variable is
+        greater than or equal the lower limit the condition behind
+        [`until`]{.keywd} is checked. If the condition is
+        [`FALSE`]{.var} the statements behind [`do`]{.keywd} are
+        executed. After that the control variable is decremented and
+        compared with the lower limit again. This compare - check
+        condition - execute - increment cycle is repeated until the
+        control variable would become less than the lower limit or the
+        condition is [`TRUE`]{.var}.
+
+    In all cases the control variable never gets a value outside of the
+    range lower limit .. upper limit.
+
+<!-- -->
+
+Syntax:
+
+:   
+
+    [for_until_statement]{#stats_ebnf_for_until_statement} ::=
+    :   \'[for]{.keywd}\' [identifier](#tokens_ebnf_identifier){.ebnf}
+        \'[range]{.keywd}\' [expression](#expr_ebnf_expression){.ebnf}
+        \[ \'[to]{.keywd}\' \| \'[downto]{.keywd}\' \]
+        [expression](#expr_ebnf_expression){.ebnf} \'[until]{.keywd}\'
+        [expression](#expr_ebnf_expression){.ebnf} \'[do]{.keywd}\'\
+          [statement](#stats_ebnf_statement){.ebnf}\
+        \'[end]{.keywd}\' \'[for]{.keywd}\' .
+
+[Declaration]{#stats_for_until_statement_declaration}:
+
+``` indent
+$ syntax expr: .for.().range.().to.().until.().do.().end.for       is -> 25;
+$ syntax expr: .for.().range.().downto.().until.().do.().end.for   is -> 25;
+
+const proc: FOR_UNTIL_DECLS (in type: aType) is func
+  begin
+
+    const proc: for (inout aType: variable) range (in aType: lowerLimit) to (in aType: upperLimit)
+        until (in func boolean: condition) do
+        (in proc: statements) end for is func
+      local
+        var boolean: continue is FALSE;
+      begin
+        variable := lowerLimit;
+        continue := variable <= upperLimit;
+        while continue and not condition do
+          statements;
+          if variable < upperLimit then
+            incr(variable);
+          else
+            continue := FALSE;
+          end if;
+        end while;
+      end func;
+
+    const proc: for (inout aType: variable) range (in aType: lowerLimit) downto (in aType: upperLimit)
+        until (in func boolean: condition) do
+        (in proc: statements) end for is func
+      local
+        var boolean: continue is FALSE;
+      begin
+        variable := upperLimit;
+        continue := variable >= lowerLimit;
+        while continue and not condition do
+          statements;
+          if variable > lowerLimit then
+            decr(variable);
+          else
+            continue := FALSE;
+          end if;
+        end while;
+      end func;
+
+  end func;
+
+FOR_UNTIL_DECLS(integer);
+FOR_UNTIL_DECLS(char);
+FOR_UNTIL_DECLS(boolean);
+FOR_UNTIL_DECLS(bigInteger);
+```
+
+[]{#stats_for-step-statement}
+
+### 4.7 for-step-statement
+
+For example:
+
+``` indent
+for evenNumber range 0 to 10 step 2 do
+  write(evenNumber);
+end for;
+```
+
+Semantics:
+
+:   
+
+    When the [`to`]{.keywd} symbol is used the for-statement is defined as follows:
+    :   First the lower limit and the upper limit which stand behind
+        [`range`]{.keywd} and [`to`]{.keywd} are evaluated. Then the
+        lower limit is assigned to the control variable which stands
+        behind [`for`]{.keywd}. If the value of the control variable is
+        less than or equal the upper limit the statements behind
+        [`do`]{.keywd} are executed. After that the control variable is
+        incremented by the value behind [`step`]{.keywd}. Then the
+        control variable is compared with the upper limit again. This
+        compare - execute - increment cycle is repeated until the
+        control variable is greater than the upper limit.
+
+    When the [`downto`]{.keywd} symbol is used the for-statement is defined as follows:
+    :   First the upper limit and the lower limit which stand behind
+        [`range`]{.keywd} and [`downto`]{.keywd} are evaluated. Then the
+        upper limit is assigned to the control variable which stands
+        behind [`for`]{.keywd}. If the value of the control variable is
+        greater than or equal the lower limit the statements behind
+        [`do`]{.keywd} are executed. After that the control variable is
+        decremented by the value behind [`step`]{.keywd}. Then the
+        control variable is compared with the lower limit again. This
+        compare - execute - increment cycle is repeated until the
+        control variable is less than the lower limit.
+
+<!-- -->
+
+Syntax:
+
+:   
+
+    [for_step_statement]{#stats_ebnf_for_step_statement} ::=
+    :   \'[for]{.keywd}\' [identifier](#tokens_ebnf_identifier){.ebnf}
+        \'[range]{.keywd}\' [expression](#expr_ebnf_expression){.ebnf}
+        \[ \'[to]{.keywd}\' \| \'[downto]{.keywd}\' \]
+        [expression](#expr_ebnf_expression){.ebnf} \'[step]{.keywd}\'
+        [expression](#expr_ebnf_expression){.ebnf} \'[do]{.keywd}\'\
+          [statement](#stats_ebnf_statement){.ebnf}\
+        \'[end]{.keywd}\' \'[for]{.keywd}\' .
+
+[Declaration]{#stats_for_step_statement_declaration}:
+
+``` indent
+$ syntax expr: .for.().range.().to.().step.().do.().end.for       is -> 25;
+$ syntax expr: .for.().range.().downto.().step.().do.().end.for   is -> 25;
+
+const proc: FOR_STEP_DECLS (in type: aType) is func
+  begin
+    if getobj((inout aType: variable) +:= (in integer: delta)) <> NIL then
+
+      const proc: for (inout aType: variable) range (in aType: lowerLimit) to (in aType: upperLimit)
+          step (in integer: incr_step) do
+          (in proc: statements) end for is func
+        begin
+          variable := lowerLimit;
+          while variable <= upperLimit do
+            statements;
+            variable +:= incr_step;
+          end while;
+        end func;
+
+    end if;
+    if getobj((inout aType: variable) -:= (in integer: delta)) <> NIL then
+
+      const proc: for (inout aType: variable) range (in aType: upperLimit) downto (in aType: lowerLimit)
+          step (in integer: decr_step) do
+          (in proc: statements) end for is func
+        begin
+          variable := upperLimit;
+          while variable >= lowerLimit do
+            statements;
+            variable -:= decr_step;
+          end while;
+        end func;
+
+    end if;
+  end func;
+
+FOR_STEP_DECLS(integer);
+FOR_STEP_DECLS(bigInteger);
+```
+
+[]{#stats_for-each-statement}
+
+### 4.8 for-each-statement
+
+A for-each-statement loops over the elements of a container
+([`array`](#types_array){.type}, [`hash`](#types_hash){.type},
+[`set`](#types_set){.type}, [`string`](#types_string){.type},
+[`bstring`](#types_bstring){.type},
+[`ref_list`](#types_ref_list){.type}). For example:
+
+``` indent
+for currObject range element_list do
+  writeln("element: " <& currObject);
+end for;
+```
+
+A for-each-statement can be combined with an [`until`]{.keywd}
+condition:
+
+``` indent
+for currObject range element_list until found do
+  if currObject = searched then
+    writeln("found: " <& currObject);
+    found := TRUE;
+  end if;
+end for;
+```
+
+Semantics:
+:   First the element list which stands behind [`range`]{.keywd} is
+    evaluated. If the element list is empty the for-each-statement is
+    finished. Otherwise the first element of the element list is
+    assigned to the control variable which stands behind
+    [`for`]{.keywd}. If there is an [`until`]{.keywd} part the condition
+    behind [`until`]{.keywd} is checked and if it evaluates to
+    [`TRUE`]{.var} the for-each-statement is finished. If the
+    for-each-statement is not finished the statements behind
+    [`do`]{.keywd} (loop body) are executed. If there is no next element
+    in the element list the for-each-statement is finished. Otherwise
+    the next element of the element list is assigned to the control
+    variable. This check for next element - assign element - check
+    possible until condition - execute loop body - cycle is repeated
+    until there is no next element in the element list.
+
+<!-- -->
+
+Syntax:
+
+:   
+
+    [for_each_statement]{#stats_ebnf_for_each_statement} ::=
+    :   \'[for]{.keywd}\' [identifier](#tokens_ebnf_identifier){.ebnf}
+        \'[range]{.keywd}\' [expression](#expr_ebnf_expression){.ebnf}
+        \[ \'[until]{.keywd}\'
+        [expression](#expr_ebnf_expression){.ebnf} \] \'[do]{.keywd}\'\
+          [statement](#stats_ebnf_statement){.ebnf}\
+        \'[end]{.keywd}\' \'[for]{.keywd}\' .
+
+[Declaration]{#stats_for_each_statement_declaration}:
+
+``` indent
+$ syntax expr: .for.().range.().do.().end.for   is -> 25;
+
+const proc: for (inout char: forVar) range (in string: stri) do
+              (in proc: statement)
+            end for is action "STR_FOR";
+
+const proc: for (inout reference: variable) range (in ref_list: aRefList) do
+              (in proc: statement)
+            end for is action "RFL_FOR";
+
+const proc: for (inout baseType: variable) range (in arrayType: arr_obj) do
+              (in proc: statements)
+            end for is func
+  local
+    var integer: number is 0;
+  begin
+    for number range minIdx(arr_obj) to maxIdx(arr_obj) do
+      variable := arr_obj[number];
+      statements;
+    end for;
+  end func;
+
+const proc: for (inout baseType: forVar) range (in hashType: aHashMap) do
+              (in proc: statements)
+            end for is func
+  begin
+    FOR_DATA(forVar, aHashMap, statements, hashType.dataCopy);
+  end func;
+
+const proc: for (inout baseType: variable) range (in setType: aSet) do
+              (in proc: statements)
+            end for is func
+  local
+    var baseType: upperBound is baseType.value;
+    var boolean: leave is FALSE;
+  begin
+    if aSet <> setType.EMPTY_SET then
+      variable := min(aSet);
+      upperBound := max(aSet);
+      repeat
+        statements;
+        if variable = upperBound then
+          leave := TRUE;
+        else
+          variable := next(aSet, variable);
+        end if;
+       until leave;
+    end if;
+  end func;
+
+const proc: for (inout char: forVar) range (in bstring: bstri) do
+              (in proc: statements)
+            end for is func
+  local
+    var integer: number is 0;
+  begin
+    for number range 1 to length(bstri) do
+      forVar := bstri[number];
+      statements;
+    end for;
+  end func;
+```
+
+[]{#stats_for-each-key-statement}
+
+### 4.9 for-each-key-statement
+
+A for-each-key-statement loops over the elements and keys (indices) of a
+container ([`array`](#types_array){.type}, [`hash`](#types_hash){.type},
+[`string`](#types_string){.type}). For example:
+
+``` indent
+for currObject key currIndex range element_list do
+  writeln("key: " <& currIndex <& ", element: " <& currObject);
+end for;
+```
+
+A for-each-key-statement can be combined with an [`until`]{.keywd}
+condition:
+
+``` indent
+for currObject key currIndex range element_list until found do
+  if currObject = searched then
+    writeln("found key: " <& currIndex <& ", element: " <& currObject);
+    found := TRUE;
+  end if;
+end for;
+```
+
+Semantics:
+:   First the element list which stands behind [`range`]{.keywd} is
+    evaluated. If the element list is empty the for-each-key-statement
+    is finished. Otherwise the first element of the element list is
+    assigned to the control variable which stands behind [`for`]{.keywd}
+    and the index (key) of the first element is assigned to the key
+    control variable which stands behind the keyword [`key`]{.keywd}. If
+    there is an [`until`]{.keywd} part the condition behind
+    [`until`]{.keywd} is checked and if it evaluates to [`TRUE`]{.var}
+    the for-each-statement is finished. If the for-each-statement is not
+    finished the statements behind [`do`]{.keywd} (loop body) are
+    executed. If there is no next element in the element list the
+    for-each-key-statement is finished. Otherwise the next element of
+    the element list is assigned to the control variable and the index
+    of the next element is assigned to the key control variable. This
+    check for next element - assign index and element - check possible
+    until condition - execute loop body - cycle is repeated until there
+    is no next element in the element list.
+
+<!-- -->
+
+Syntax:
+
+:   
+
+    [for_each_key_statement]{#stats_ebnf_for_each_key_statement} ::=
+    :   \'[for]{.keywd}\' [identifier](#tokens_ebnf_identifier){.ebnf}
+        \'[key]{.keywd}\' [identifier](#tokens_ebnf_identifier){.ebnf}
+        \'[range]{.keywd}\' [expression](#expr_ebnf_expression){.ebnf}
+        \[ \'[until]{.keywd}\'
+        [expression](#expr_ebnf_expression){.ebnf} \] \'[do]{.keywd}\'\
+          [statement](#stats_ebnf_statement){.ebnf}\
+        \'[end]{.keywd}\' \'[for]{.keywd}\' .
+
+[Declaration]{#stats_for_each_key_statement_declaration}:
+
+``` indent
+$ syntax expr: .for.().key.().range.().do.().end.for   is -> 25;
+
+const proc: for (inout char: forVar) key (inout integer: keyVar) range (in string: stri) do
+              (in proc: statement)
+            end for is action "STR_FOR_VAR_KEY";
+
+const proc: for (inout baseType: forVar) key (inout integer: keyVar) range (in arrayType: arr) do
+              (in proc: statement)
+            end for is func
+  begin
+    for keyVar range minIdx(arr) to maxIdx(arr) do
+      forVar := arr[keyVar];
+      statements;
+    end for;
+  end func;
+
+const proc: for (inout baseType: forVar) key (inout keyType: keyVar) range (in hashType: aHashMap) do
+              (in proc: statements)
+            end for is func
+  begin
+    FOR_DATA_KEY(forVar, keyVar, aHashMap, statements, hashType.dataCopy, hashType.keyCopy);
+  end func;
+```
+
+[]{#stats_for-key-statement}
+
+### 4.10 for-key-statement
+
+A for-key-statement loops over the keys (indices) of a container
+([`array`](#types_array){.type}, [`hash`](#types_hash){.type},
+[`string`](#types_string){.type}). For example:
+
+``` indent
+for key currIndex range element_list do
+  writeln("key: " <& currIndex);
+end for;
+```
+
+A for-key-statement can be combined with an [`until`]{.keywd} condition:
+
+``` indent
+for key currIndex range element_list until found do
+  if element_list[currIndex] = searched then
+    writeln("found key: " <& currIndex);
+    found := TRUE;
+  end if;
+end for;
+```
+
+Semantics:
+:   First the element list which stands behind [`range`]{.keywd} is
+    evaluated. If the element list is empty the for-key-statement is
+    finished. Otherwise the index (key) of the first element is assigned
+    to the key control variable which stands behind the keyword
+    [`key`]{.keywd}. If there is an [`until`]{.keywd} part the condition
+    behind [`until`]{.keywd} is checked and if it evaluates to
+    [`TRUE`]{.var} the for-each-statement is finished. If the
+    for-each-statement is not finished the statements behind
+    [`do`]{.keywd} (loop body) are executed. If there is no next element
+    in the element list the for-key-statement is finished. Otherwise the
+    index of the next element is assigned to the key control variable.
+    This check for next element - assign index - check possible until
+    condition - execute loop body - cycle is repeated until there is no
+    next element in the element list.
+
+<!-- -->
+
+Syntax:
+
+:   
+
+    [for_key_statement]{#stats_ebnf_for_key_statement} ::=
+    :   \'[for]{.keywd}\' \'[key]{.keywd}\'
+        [identifier](#tokens_ebnf_identifier){.ebnf} \'[range]{.keywd}\'
+        [expression](#expr_ebnf_expression){.ebnf} \[
+        \'[until]{.keywd}\' [expression](#expr_ebnf_expression){.ebnf}
+        \] \'[do]{.keywd}\'\
+          [statement](#stats_ebnf_statement){.ebnf}\
+        \'[end]{.keywd}\' \'[for]{.keywd}\' .
+
+[Declaration]{#stats_for_key_statement_declaration}:
+
+``` indent
+$ syntax expr: .for.key.().range.().do.().end.for   is -> 25;
+
+const proc: for key (inout integer: keyVar) range (in string: stri) do
+              (in proc: statement)
+            end for is action "STR_FOR_KEY";
+
+const proc: for key (inout integer: keyVar) range (in arrayType: arr) do
+              (in proc: statement)
+            end for is func
+  begin
+    for keyVar range minIdx(arr) to maxIdx(arr) do
+      statements;
+    end for;
+  end func;
+
+const proc: for key (inout keyType: keyVar) range (in hashType: aHashMap) do
+              (in proc: statements)
+            end for is func
+  begin
+    FOR_KEY(keyVar, aHashMap, statements, hashType.keyCopy);
+  end func;
+```
+
+[]{#stats_if-statement}
+
+### 4.11 if-statement
+
+For example:
+
+``` indent
+if sumValue < minimum then
+  factor := sumValue;
+  sumValue := minimum;
+elsif sumValue > maximum then
+  factor := -sumValue;
+  sumValue := maximum;
+else
+  factor := 0;
+end if;
+```
+
+Semantics:
+:   The expressions before [`then`]{.keywd} are evaluated in row. When
+    such an expression evaluates to [`TRUE`]{.var} the statements behind
+    [`then`]{.keywd} are executed and the if-statement is finished. If
+    all expressions before [`then`]{.keywd} evaluate to [`FALSE`]{.var}
+    and an else-part is present the statements behind [`else`]{.keywd}
+    are executed and the if-statement is finished. If all expressions
+    before [`then`]{.keywd} evaluate to [`FALSE`]{.var} and no else-part
+    is present the if-statement is finished.
+
+<!-- -->
+
+Syntax:
+
+:   
+
+    [if_statement]{#stats_ebnf_if_statement} ::=
+    :   \'[if]{.keywd}\' [expression](#expr_ebnf_expression){.ebnf}
+        \'[then]{.keywd}\'\
+          [statement](#stats_ebnf_statement){.ebnf}\
+        { \'[elsif]{.keywd}\' [expression](#expr_ebnf_expression){.ebnf}
+        \'[then]{.keywd}\'\
+          [statement](#stats_ebnf_statement){.ebnf} }\
+        \[ \'[else]{.keywd}\'\
+          [statement](#stats_ebnf_statement){.ebnf} \]\
+        \'[end]{.keywd}\' \'[if]{.keywd}\' .
+
+The expression must be of type [`boolean`](#types_boolean){.type}.
+
+[Declaration]{#stats_if_statement_declaration}:
+
+``` indent
+$ syntax expr: .if.().then.().end.if      is -> 25;
+$ syntax expr: .if.().then.().().end.if   is -> 25;
+
+$ syntax expr: .elsif.().then.()          is <- 60;
+$ syntax expr: .elsif.().then.().()       is <- 60;
+$ syntax expr: .else.()                   is <- 60;
+
+const type: ELSIF_RESULT is newtype;
+const proc: (ref ELSIF_RESULT: dest) ::= enumlit       is action "ENU_GENLIT";
+const ELSIF_RESULT: ELSIF_EMPTY is enumlit;
+const type: ELSIF_PROC                                 is func ELSIF_RESULT;
+const proc: (ref ELSIF_PROC: dest) ::= (ref ELSIF_RESULT: source) is action "ENU_CREATE";
+
+const proc:       if (in boolean: condition) then
+                    (in proc: statements)
+                  end if                               is action "PRC_IF";
+
+const proc:       if (in boolean: condition) then
+                    (in proc: statements)
+                  (in ELSIF_PROC: elsifPart)
+                  end if                               is action "PRC_IF_ELSIF";
+
+const ELSIF_PROC: elsif (in boolean: condition) then
+                    (in proc: statements)              is action "PRC_IF";
+
+const ELSIF_PROC: elsif (in boolean: condition) then
+                    (in proc: statements)
+                  (in ELSIF_PROC: elsifPart)           is action "PRC_IF_ELSIF";
+
+const ELSIF_PROC: else
+                    (in void: elsePart)                is ELSIF_EMPTY;
+```
+
+[]{#stats_case-statement}
+
+### 4.12 case-statement
+
+For example:
+
+``` indent
+case currChar of
+  when {'A' .. 'Z'} | {'a' .. 'z'}:
+    characterClass := LETTER;
+  when {'0' .. '9'}:
+    characterClass := DIGIT;
+  when {'!', '$', '%', '&', '*', '+', ',', '-', '.', '/',
+      ':', ';', '<', '=', '>', '?', '@', '\', '^', '`',
+      '|', '~'}:
+    characterClass := SPECIAL;
+  when {'(', ')', '[', ']', '{', '}'}:
+    characterClass := PAREN;
+  when {'"'}:  # Also possible '\"'
+    characterClass := APPOSTROPHE;
+  when {'''}:  # Also possible '\''
+    characterClass := QUOTE;
+  otherwise:
+    characterClass := ILLEGAL;
+end case;
+```
+
+Case statements work also for strings:
+
+``` indent
+case elementName of
+  when {"li"}:       alternateEndTags := {"<li"};
+  when {"dt", "dd"}: alternateEndTags := {"<dt", "<dd"};
+  when {"td", "th"}: alternateEndTags := {"<td", "<th", "<tr", "<thead", "<tbody", "<tfoot"};
+  when {"tr"}:       alternateEndTags := {"<tr", "<thead", "<tbody", "<tfoot"};
+  when {"thead", "tbody", "tfoot"}:
+                     alternateEndTags := {"<thead", "<tbody", "<tfoot"};
+end case;
+```
+
+Semantics:
+:   The expression between [`case`]{.keywd} and [`of`]{.keywd} is
+    evaluated. When the resulting value is element of a set behind a
+    [`when`]{.keywd} the statements behind the corresponding colon are
+    executed and the case-statement is finished. If the value is not
+    element of a set behind a [`when`]{.keywd} and an
+    [`otherwise`]{.keywd} part is present the statements behind the
+    colon of the [`otherwise`]{.keywd} are executed and the
+    case-statement is finished. If the value is not element of a set
+    behind a [`when`]{.keywd} and no [`otherwise`]{.keywd} part is
+    present the case-statement is finished.
+
+<!-- -->
+
+Syntax:
+
+:   
+
+    [case_statement]{#stats_ebnf_case_statement} ::=
+    :   \'[case]{.keywd}\' [expression](#expr_ebnf_expression){.ebnf}
+        \'[of]{.keywd}\'\
+          { \'[when]{.keywd}\'
+        [set_expression](#stats_ebnf_set_expression){.ebnf} \':\'\
+            [statement](#stats_ebnf_statement){.ebnf} }\
+          \[ \'[otherwise]{.keywd}\' \':\'\
+            [statement](#stats_ebnf_statement){.ebnf} \]\
+        \'[end]{.keywd}\' \'[case]{.keywd}\' .
+
+    \
+    \
+    [set_expression]{#stats_ebnf_set_expression} ::=
+    :   [expression](#expr_ebnf_expression){.ebnf} .
+
+[Declaration]{#stats_case_statement_declaration}:
+
+``` indent
+$ syntax expr: .case.().of.().end.case                    is -> 25;
+$ syntax expr: .case.().of.().otherwise. : .().end.case   is -> 25;
+$ syntax expr: .case.().of.otherwise. : .().end.case      is -> 25;
+$ syntax expr: .case.().of.end.case                       is -> 25;
+
+$ syntax expr: .when.(). : .().()   is <- 60;
+$ syntax expr: .when.(). : .()      is <- 60;
+
+const proc: CASE_DECLS (in type: aType) is func
+  local
+    var type: WHEN_RESULT is void;
+    var type: WHEN_PROC is void;
+    var type: SELECTOR_TYPE is void;
+  begin
+    WHEN_RESULT := newtype;
+    WHEN_PROC := (func WHEN_RESULT);
+    SELECTOR_TYPE := set of aType;
+    const proc: case (ref aType: decisionValue) of end case                     is noop;
+    const proc: case (ref aType: decisionValue) of
+                    otherwise : (ref proc: statements)
+                  end case                                                      is func
+      begin
+        statements;
+      end func;
+    if getobj(ord(ref aType: decisionValue)) <> NIL and
+        getobj(ord(ref aType: decisionValue, mayRaiseRangeError)) = NIL then
+      const proc: case (ref aType: decisionValue) of
+                    (ref WHEN_PROC: whenPart)
+                  end case                                                      is action "PRC_CASE";
+      const proc: case (ref aType: decisionValue) of
+                    (ref WHEN_PROC: whenPart)
+                    otherwise : (ref proc: statements)
+                  end case                                                      is action "PRC_CASE_DEF";
+    else
+      const proc: case (ref aType: decisionValue) of
+                    (ref WHEN_PROC: whenPart)
+                  end case                                                      is action "PRC_CASE_HASHSET";
+      const proc: case (ref aType: decisionValue) of
+                    (ref WHEN_PROC: whenPart)
+                    otherwise : (ref proc: statements)
+                  end case                                                      is action "PRC_CASE_HASHSET_DEF";
+    end if;
+    const proc: (ref WHEN_RESULT: dest) ::= enumlit                             is action "ENU_GENLIT";
+    const WHEN_RESULT: WHEN_EMPTY (attr aType) is enumlit;
+    const proc: (ref WHEN_PROC: dest) ::= (ref WHEN_RESULT: source)             is action "ENU_CREATE";
+    const WHEN_PROC: when (ref SELECTOR_TYPE: whenSet) : (ref proc: statement)  is WHEN_EMPTY(aType);
+    const WHEN_PROC: when (ref SELECTOR_TYPE: whenSet) : (ref proc: statement)
+                       (ref WHEN_PROC: whenPart)                                is WHEN_EMPTY(aType);
+  end func;
+
+CASE_DECLS(integer);
+CASE_DECLS(char);
+CASE_DECLS(boolean);
+CASE_DECLS(string);
+CASE_DECLS(bigInteger);
+```
+
+[]{#types_file_start}
+
+[]{#types_PREDEFINED_TYPES}
+
+## 5. PREDEFINED TYPES
+
+In the following sub-chapters the predefined types of the standard
+library are introduced. The operators have, if not stated otherwise, the
+type described in the sub-chapter as parameter type and result type. The
+relations have also the type described in the sub-chapter as parameter
+type and a result of type [`boolean`](#types_boolean){.type}. In the
+descriptions **`⇒`** is used to show an equivalent expression.
+
+[]{#types_boolean}
+
+### 5.1 boolean
+
+The type [`boolean`]{.type} consists of the two truth values
+[`TRUE`]{.var} and [`FALSE`]{.var}. The [`boolean`]{.type} functions are
+defined in the library [\"[boolean.s7i]{.lib}\"]{.stri}.
+
+``` tt
+    Constants:
+      boolean.value  Default value of boolean (FALSE)
+      boolean.first  Minimum value of boolean (FALSE)
+      boolean.last   Maximum value of boolean (TRUE)
+    Prefix operators:
+      not       Negation
+                  ( not TRUE ⇒ FALSE,
+                    not FALSE ⇒ TRUE )
+    Infix operators:
+      and       Logical and
+                  ( TRUE and TRUE ⇒ TRUE,
+                    A and B ⇒ FALSE else )
+      or        Inclusive logical or
+                  ( FALSE or FALSE ⇒ FALSE,
+                    A or B ⇒ TRUE else )
+      A ? B : C  Ternary operator condition ? thenValue : elseValue
+                  ( TRUE ? a : b ⇒ a,
+                    FALSE ? a : b ⇒ b )
+      boolean conv A   Conversion of integer to boolean
+                  ( Type of argument A: integer,
+                    boolean conv 0 ⇒ FALSE,
+                    boolean conv 1 ⇒ TRUE )
+      boolean parse A   Conversion of string to boolean
+                  ( Type of argument A: string,
+                    boolean parse "FALSE" ⇒ FALSE,
+                    boolean parse "TRUE" ⇒ TRUE,
+                    boolean parse "TRUE " ⇒ EXCEPTION RANGE_ERROR,
+                    boolean parse "ASDF" ⇒ EXCEPTION RANGE_ERROR )
+    Relations:
+      =, <>, <, <=, >, >=
+                  ( A relation B ⇒
+                    ord(A) relation ord(B) )
+    Functions:
+      ord(A)    Ordinal number
+                  ( Type of result: integer,
+                    ord(FALSE) ⇒ 0,
+                    ord(TRUE) ⇒ 1 )
+      integer(A) Ordinal number
+                  ( Type of result: integer,
+                    integer(FALSE) ⇒ 0,
+                    integer(TRUE) ⇒ 1 )
+      succ(A)   Successor
+                  ( succ(FALSE) ⇒ TRUE,
+                    succ(TRUE) ⇒ EXCEPTION RANGE_ERROR )
+      pred(A)   Predecessor
+                  ( pred(FALSE) ⇒ EXCEPTION RANGE_ERROR )
+                    pred(TRUE) ⇒ FALSE )
+      boolean(A) Convert an integer to a boolean value
+                  ( Type of argument A: integer,
+                    boolean(0) ⇒ FALSE,
+                    boolean(1) ⇒ TRUE,
+                    boolean(2) ⇒ EXCEPTION RANGE_ERROR,
+                    boolean(-1) ⇒ EXCEPTION RANGE_ERROR )
+      boolean(A) Conversion of string to boolean
+                  ( Type of argument A: string,
+                    boolean("FALSE") ⇒ FALSE,
+                    boolean("TRUE") ⇒ TRUE,
+                    boolean("TRUE ") ⇒ EXCEPTION RANGE_ERROR,
+                    boolean("true") ⇒ EXCEPTION RANGE_ERROR,
+                    boolean("ASDF") ⇒ EXCEPTION RANGE_ERROR )
+      str(A)    Conversion to string
+                  ( Type of result: string,
+                    str(FALSE) ⇒ "FALSE",
+                    str(TRUE) ⇒ "TRUE" )
+      literal(A) Convert a boolean value to a boolean literal.
+                  ( Type of result: string,
+                    literal(FALSE) ⇒ "FALSE",
+                    literal(TRUE) ⇒ "TRUE" )
+      rand(A, B) Random value in the range [A, B]
+                 The random values are uniform distributed.
+                  ( rand(A, B) returns a random value such that
+                    A <= rand(A, B) and rand(A, B) <= B holds.
+                    rand(A, A) ⇒ A,
+                    rand(TRUE, FALSE) ⇒ EXCEPTION RANGE_ERROR )
+      compare(A, B) Compare function
+                  ( Type of result: integer,
+                    compare(FALSE, TRUE) ⇒ -1,
+                    compare(TRUE, TRUE) ⇒ 0,
+                    compare(TRUE, FALSE) ⇒ 1 )
+      hashCode(A) Hash function
+                  ( Type of result: integer )
+    Statements:
+      incr(A)   Increment
+                  ( incr(A) ⇒ A:=succ(A) )
+      decr(A)   Decrement
+                  ( decr(A) ⇒ A:=pred(A) )
+      ignore(A) Ignore value
+```
+
+The logical operators [`and`]{.op} and [`or`]{.op} work strictly left to
+right. First they evaluate the left operand and then the right operand.
+If the result of the operation can be determined after evaluation of the
+left operand the right operand is not evaluated. This can be used to
+check for a boundary in a boolean expression. Naturally side effects of
+the right operand of the [`and`]{.op} and [`or`]{.op} operator only take
+place when the operand is executed.
+
+Table for the behavior of different boolean expressions:
+
++-------------------------+---------------------------------------------------+
+| Expression              | Result when the first operand evaluates to        |
++:=======================:+:=======================:+========================:+
+| [FALSE]{.var}           | [TRUE]{.var}            |                         |
++-------------------------+-------------------------+-------------------------+
+| [not]{.op} A            | [TRUE]{.var}            | [FALSE]{.var}           |
++-------------------------+-------------------------+-------------------------+
+| A [and]{.op} B          | [FALSE]{.var}           | B                       |
+| **respectively**\       |                         |                         |
+| [not]{.op}(([not]{.op}  |                         |                         |
+| A)[or]{.op}([not]{.op}  |                         |                         |
+| B))                     |                         |                         |
++-------------------------+-------------------------+-------------------------+
+| A [or]{.op} B           | B                       | [TRUE]{.var}            |
+| **respectively**\       |                         |                         |
+| [not]{.op}(([not]{.op}  |                         |                         |
+| A)[and]{.op}([not]{.op} |                         |                         |
+| B))                     |                         |                         |
++-------------------------+-------------------------+-------------------------+
+| A \> B                  | [FALSE]{.var}           | [not]{.op} B            |
+| **respectively**\       |                         |                         |
+| A [and]{.op}([not]{.op} |                         |                         |
+| B)                      |                         |                         |
++-------------------------+-------------------------+-------------------------+
+| A \>= B                 | [not]{.op} B            | [TRUE]{.var}            |
+| **respectively**\       |                         |                         |
+| A [or]{.op}([not]{.op}  |                         |                         |
+| B)                      |                         |                         |
++-------------------------+-------------------------+-------------------------+
+| A \< B                  | B                       | [FALSE]{.var}           |
+| **respectively**\       |                         |                         |
+| ([not]{.op}             |                         |                         |
+| A)[and]{.op} B          |                         |                         |
++-------------------------+-------------------------+-------------------------+
+| A \<= B                 | [TRUE]{.var}            | B                       |
+| **respectively**\       |                         |                         |
+| ([not]{.op} A)[or]{.op} |                         |                         |
+| B                       |                         |                         |
++-------------------------+-------------------------+-------------------------+
+| [not]{.op} (A           | [TRUE]{.var}            | [not]{.op} B            |
+| [and]{.op} B)           |                         |                         |
+| **respectively**\       |                         |                         |
+| ([not]{.op}             |                         |                         |
+| A)[or]{.op}([not]{.op}  |                         |                         |
+| B)                      |                         |                         |
++-------------------------+-------------------------+-------------------------+
+| [not]{.op} (A [or]{.op} | [not]{.op} B            | [FALSE]{.var}           |
+| B) **respectively**\    |                         |                         |
+| ([not]{.op}             |                         |                         |
+| A)[and]{.op}([not]{.op} |                         |                         |
+| B)                      |                         |                         |
++-------------------------+-------------------------+-------------------------+
+
+Optimizing boolean expressions:
+
+If the result of a boolean expression can be determined at compile time,
+the expression can be replaced by a constant. Additionally the following
+equations can be used:
+
+``` box
+    (A or  B) and (A or  C)  =  A or  (B and C)
+    (A and B) or  (A and C)  =  A and (B or  C)
+```
+
+[]{#types_integer}
+
+### 5.2 integer
+
+The type [`integer`]{.type} consists of signed 64-bit integer numbers.
+An integer [integer literal](#tokens_Integer_literals) is a
+sequence of digits which is taken to be decimal. The sequence of digits
+may be followed by the letter E or e an optional + sign and a decimal
+exponent. []{#types_based_integer}Based numbers can be specified when
+the sequence of digits is followed by the \# character and a sequence of
+extended digits. The decimal number in front of the \# character
+specifies the base of the number which follows the \# character. As base
+a number between 2 and 36 is allowed. As extended digits the letters A
+or a can be used for 10, B or b can be used for 11 and so on to Z or z
+which can be used as 35. Examples of [`integer`]{.type} literals are:
+
+``` box
+    0   2147483647   1E6   2e+9   16#c0   16#FFFF   8#177777   2#1010101010
+```
+
+If an [`integer`]{.type} operation
+[overflows](#errors_OVERFLOW_ERROR) it raises the exception
+[`OVERFLOW_ERROR`](#errors_OVERFLOW_ERROR){.exception}. The
+[`integer`]{.type} functions are defined in the library
+[\"[integer.s7i]{.lib}\"]{.stri}.
+
+``` tt
+    Constants:
+      integer.value  Default value of integer (0)
+      integer.first  Minimum value of integer (-9223372036854775808)
+      integer.last   Maximum value of integer (9223372036854775807)
+    Prefix operators:
+      +         Identity
+      -         Change sign
+      !         Factorial
+    Infix operators:
+      +         Addition
+      -         Subtraction
+      *         Multiplication
+      div       Integer division truncated towards zero
+                  ( A div B ⇒ trunc(float(A) / float(B)),
+                    A div 0 ⇒ EXCEPTION NUMERIC_ERROR )
+      rem       Reminder of integer division div
+                  ( A rem B ⇒ A - (A div B) * B,
+                    A rem 0 ⇒ EXCEPTION NUMERIC_ERROR )
+      mdiv      Integer division truncated towards negative infinity
+                  ( A mdiv B ⇒ round(floor(float(A) / float(B))),
+                    A mdiv 0 ⇒ EXCEPTION NUMERIC_ERROR )
+      mod       Reminder of integer division mdiv
+                  ( A mod B ⇒ A - (A mdiv B) * B,
+                    A mod 0 ⇒ EXCEPTION NUMERIC_ERROR )
+      **        Power
+                  ( A ** B is okay for B >= 0,
+                    A ** 0 ⇒ 1 for every A, even for A = 0,
+                    1 ** B ⇒ 1 for B >= 0,
+                    A ** B ⇒ -(-A) ** B for A <= 0 and B >= 0 and odd(B),
+                    A ** B ⇒ (-A) ** B for A <= 0 and B >= 0 and not odd(B),
+                    A ** -1 ⇒ EXCEPTION NUMERIC_ERROR )
+      A << B    Shift left
+                  ( A << B is okay for B >= 0 and B <= 63,
+                    A << B ⇒ EXCEPTION OVERFLOW_ERROR for B < 0 or B >= 64,
+                    A << B ⇒ A * 2 ** B,
+                    A << 0 ⇒ A )
+      A >> B    Arithmetic shift right
+                  ( A >> B is okay for B >= 0 and B <= 63,
+                    A >> B ⇒ EXCEPTION OVERFLOW_ERROR for B < 0 or B >= 64,
+                    A >> B ⇒ A mdiv 2 ** B  for B <= 62,
+                    A >> 0 ⇒ A,
+                    A >> B ⇒ C for A >= 0 holds: C >= 0,
+                    A >> B ⇒ C for A < 0 holds: C < 0,
+                    A >> B ⇒ 0 for A >= 0 and B > ord(log2(A)),
+                    A >> B ⇒ -1 for A < 0 and B > ord(log2(-A)),
+                    0 >> B ⇒ 0 )
+      !         Binomial coefficient
+                  ( n ! k ⇒ 0 for k < 0,
+                    n ! 0 ⇒ 1,
+                    n ! 1 ⇒ n,
+                    n ! k ⇒ 0 for n >= 0 and k > n,
+                    n ! k ⇒ !n div (!k * !(n - k)) for k >= 0 and k <= n,
+                    n ! k ⇒ (-1) ** k * (n + k - 1 ! k) for n < 0 and k >= 0 )
+      A ? B : C  Ternary operator condition ? thenValue : elseValue
+                  ( Type of argument A: boolean,
+                    TRUE ? a : b ⇒ a,
+                    FALSE ? a : b ⇒ b )
+      A radix B  Convert the integer A to a string. The conversion
+                 uses the numeral system with the base B.
+                  ( Type of result: string,
+                    48879 radix 16 ⇒ "beef",
+                    -48879 radix 16 ⇒ "-beef",
+                    123 radix 37 ⇒ EXCEPTION RANGE_ERROR )
+      A RADIX B  Convert the integer A to a string. The conversion
+                 uses the numeral system with the base B.
+                  ( Type of result: string,
+                    48879 RADIX 16 ⇒ "BEEF",
+                    -48879 RADIX 16 ⇒ "-BEEF",
+                    123 RADIX 37 ⇒ EXCEPTION RANGE_ERROR )
+      lpad      Left padding with spaces
+                  ( 123 lpad  8 ⇒ "     123",
+                    123 lpad  4 ⇒ " 123",
+                    123 lpad  3 ⇒ "123",
+                    123 lpad  2 ⇒ "123",
+                    123 lpad -8 ⇒ "123" )
+                    -12 lpad  4 ⇒ " -12",
+                    -12 lpad  3 ⇒ "-12",
+                    -12 lpad  2 ⇒ "-12" )
+      lpad0     Left padding with zeros
+                  ( 123 lpad0  8 ⇒ "00000123",
+                    123 lpad0  4 ⇒ "0123",
+                    123 lpad0  3 ⇒ "123",
+                    123 lpad0  2 ⇒ "123",
+                    123 lpad0 -8 ⇒ "123",
+                    -12 lpad0  4 ⇒ "-012",
+                    -12 lpad0  3 ⇒ "-12",
+                    -12 lpad0  2 ⇒ "-12" )
+      rpad      Right padding with spaces
+                  ( 123 rpad  8 ⇒ "123     ",
+                    123 rpad  4 ⇒ "123 ",
+                    123 rpad  3 ⇒ "123",
+                    123 rpad  2 ⇒ "123",
+                    123 rpad -8 ⇒ "123" )
+                    -12 rpad  4 ⇒ "-12 ",
+                    -12 rpad  3 ⇒ "-12",
+                    -12 rpad  2 ⇒ "-12" )
+      sci       Conversion to a string in scientific notation
+                  ( Type of result: string,
+                    12345 sci 4 ⇒ "1.2345e+4",
+                    12345 sci 3 ⇒ "1.235e+4",
+                    12345 sci 2 ⇒ "1.23e+4",
+                    3141592 sci 0 ⇒ "3e+6",
+                    27182818 sci 0 ⇒ "3e+7",
+                    2**62 sci 6 ⇒ "4.611686e+18",
+                    -1 sci 3 ⇒ "-1.000e+0",
+                    -0 sci 2 ⇒ "0.00e+0" )
+      integer conv A   Identity
+                  ( integer conv A ⇒ A )
+      integer parse A   Conversion of string to integer
+                  ( Type of argument A: string,
+                    integer parse "123" ⇒ 123,
+                    integer parse "-123" ⇒ -123,
+                    integer parse "+5" ⇒ 5,
+                    integer parse " 1" ⇒ EXCEPTION RANGE_ERROR,
+                    integer parse "10 " ⇒ EXCEPTION RANGE_ERROR,
+                    integer parse "ASDF" ⇒ EXCEPTION RANGE_ERROR )
+    Relations:
+      =, <>, <, <=, >, >=
+    Functions:
+      ord(A)    Identity
+      succ(A)   Successor
+                  ( succ(A) ⇒ A+1,
+                    succ(integer.last) ⇒ EXCEPTION OVERFLOW_ERROR )
+      pred(A)   Predecessor
+                  ( pred(A) ⇒ A-1,
+                    pred(integer.first) ⇒ EXCEPTION OVERFLOW_ERROR )
+      abs(A)    Absolute value
+                  ( abs(A) ⇒ A for A >= 0,
+                  ( abs(A) ⇒ -A for A < 0,
+                  ( abs(integer.first) ⇒ EXCEPTION OVERFLOW_ERROR )
+      odd(A)    Odd value
+                  ( Type of result: boolean )
+      str(A)    Conversion to string
+                  ( Type of result: string,
+                    str(12345) ⇒ "12345" )
+      literal(A) Conversion to a literal
+                  ( Type of result: string,
+                    literal(A) ⇒ str(A) )
+      integer(A) Conversion of string to integer
+                  ( Type of argument A: string,
+                    integer("123") ⇒ 123,
+                    integer("-123") ⇒ -123,
+                    integer("+5") ⇒ 5,
+                    integer(" 1") ⇒ EXCEPTION RANGE_ERROR,
+                    integer("10 ") ⇒ EXCEPTION RANGE_ERROR,
+                    integer("ASDF") ⇒ EXCEPTION RANGE_ERROR )
+      integer(A, B) Convert numeric string, with specified radix, to an integer
+                  ( Type of argument A: string,
+                    integer("beef", 16) ⇒ 48879,
+                    integer("-177", 8) ⇒ -127,
+                    integer("10101010", 2) ⇒ 170,
+                    integer("Cafe", 16) ⇒ 51966,
+                    integer("0", 1) ⇒ EXCEPTION RANGE_ERROR,
+                    integer("qwertyuiop", 37) ⇒ EXCEPTION RANGE_ERROR )
+      bytes(A, S, E) Convert an integer into a string of bytes
+                  ( Type of argument S: signedness (UNSIGNED and SIGNED),
+                    Type of argument E: endianness (LE and BE),
+                    Type of result: string,
+                    bytes(1413829460, SIGNED, BE) ⇒ "TEST",
+                    bytes(1497451343, SIGNED, LE) ⇒ "OKAY" )
+      bytes(A, S, E, len) Convert an integer into a string of len bytes
+                  ( Type of argument S: signedness (UNSIGNED and SIGNED),
+                    Type of argument E: endianness (LE and BE),
+                    Type of result: string,
+                    bytes(1413829460, SIGNED, BE, 5) ⇒ "\0;TEST"
+                    bytes(1413829460, SIGNED, BE, 4) ⇒ "TEST"
+                    bytes(1413829460, SIGNED, BE, 3) ⇒ EXCEPTION RANGE_ERROR )
+      bytes2Int(A, S, E) Convert a string of bytes to an integer
+                  ( Type of argument A: string,
+                    Type of argument S: signedness (UNSIGNED and SIGNED),
+                    Type of argument E: endianness (LE and BE),
+                    bytes2Int("\210;\2;\150;I", UNSIGNED, LE) ⇒ 1234567890 )
+      sqrt(A)   Integer square root
+                  ( sqrt(A) is okay for A >= 0,
+                    sqrt(A) ⇒ trunc(sqrt(float(A))),
+                    sqrt(-1) ⇒ EXCEPTION NUMERIC_ERROR )
+      log10(A)  Truncated base 10 logarithm
+                  ( log10(A) is defined for A >= 0,
+                    log10(10 ** A) = A for A >= 0,
+                    log10(pred(10 ** A)) = pred(A) for A >= 0,
+                    log10(10) ⇒ 1,
+                    log10(1) ⇒ 0,
+                    log10(0) ⇒ -1,
+                    log10(-1) ⇒ EXCEPTION NUMERIC_ERROR )
+      log2(A)   Truncated base 2 logarithm
+                  ( log2(A) returns the position of the
+                    highest bit set. It is defined for A >= 0
+                    log2(2 ** A) = A for A >= 0,
+                    log2(pred(2 ** A)) = pred(A) for A >= 0,
+                    log2(2) ⇒ 1,
+                    log2(1) ⇒ 0,
+                    log2(0) ⇒ -1,
+                    log2(-1) ⇒ EXCEPTION NUMERIC_ERROR )
+      bitLength(A) Number of bits in the minimum two's-complement
+                   representation, excluding the sign bit.
+                  ( bitLength(A) ⇒ succ(log2(A)) for A >= 0,
+                    bitLength(A) ⇒ bitLength(pred(-A)) for A < 0,
+                    bitLength(0) ⇒ 0,
+                    bitLength(-1) ⇒ 0 )
+      lowestSetBit(A) Index of the lowest-order one bit
+                      For A <> 0 this is equal to the number of
+                      lowest-order zero bits.
+                  ( A >> B << B = A for A <> 0 and B = lowestSetBit(A),
+                    lowestSetBit(0) ⇒ -1,
+                    lowestSetBit(1) ⇒ 0,
+                    lowestSetBit(2) ⇒ 1 )
+      rand(A, B) Random number in the range [A, B]
+                 The random values are uniform distributed.
+                  ( rand(A, B) returns a random number such that
+                    A <= rand(A, B) and rand(A, B) <= B holds.
+                    rand(A, A) ⇒ A,
+                    rand(1, 0) ⇒ EXCEPTION RANGE_ERROR )
+      min(A, B) Minimum of two numbers.
+                  ( min(1, 2) ⇒ 1 )
+      max(A, B) Maximum of two numbers.
+                  ( max(1, 2) ⇒ 2 )
+      compare(A, B) Compare function
+                  ( compare(1, 2) ⇒ -1,
+                    compare(5, 5) ⇒ 0,
+                    compare(8, 7) ⇒ 1 )
+      hashCode(A) Hash function
+    Statements:
+      A +:= B   Increment A by B
+                  ( A +:= B ⇒ A := A + B )
+      A -:= B   Decrement A by B
+                  ( A -:= B ⇒ A := A - B )
+      A *:= B   Multiplying copy
+                  ( A *:= B ⇒ A := A * B )
+      A <<:= B  Shift left copy
+                  ( A <<:= B ⇒ A := A << B )
+      A >>:= B  Shift right copy
+                  ( A >>:= B ⇒ A := A >> B )
+      incr(A)   Increment with 1
+                  ( incr(A) ⇒ A +:= 1,
+                    incr(A) ⇒ EXCEPTION OVERFLOW_ERROR for A = integer.last )
+      decr(A)   Decrement with 1
+                  ( decr(A) ⇒ A -:= 1,
+                    decr(A) ⇒ EXCEPTION OVERFLOW_ERROR for A = integer.first )
+      ignore(A) Ignore value
+```
+
+[]{#types_div_rem_mdiv_mod_properties}For the operations [`div`]{.op}
+and [`rem`]{.op} holds for all A:
+
+``` box
+    (A div B) * B + A rem B = A           when B <> 0
+    -A div B = -(A div B)                 when B <> 0
+    -A rem B = -(A rem B)                 when B <> 0
+    A rem B >= 0 and A rem B < abs(B)     when B <> 0 and A >= 0
+    A rem B <= 0 and A rem B > -abs(B)    when B <> 0 and A <= 0
+```
+
+For the operations [`mdiv`]{.op} and [`mod`]{.op} holds for all A:
+
+``` box
+    (A mdiv B) * B + A mod B = A          when B <> 0
+    -A mdiv B = A mdiv -B                 when B <> 0
+    -A mod -B = -(A mod B)                when B <> 0
+    A mod B >= 0 and A mod B < B          when B > 0
+    A mod B <= 0 and A mod B > B          when B < 0
+```
+
+For the operation [`mdiv`]{.op} holds:
+
+``` box
+    A mdiv B = A div B - 1            when A and B have different
+                                      signs and A rem B <> 0 holds.
+    A mdiv B = A div B                when A and B have the same
+                                      sign or A rem B = 0 holds.
+    A mdiv B = (A - 1) div B - 1      when A > 0 and B < 0 holds.
+    A mdiv B = (A + 1) div B - 1      when A < 0 and B > 0 holds.
+    A mdiv 2 ** B = A >> B            when B >= 0 holds
+```
+
+For the operation [`mod`]{.op} holds:
+
+``` box
+    A mod B = A rem B + B      when A and B have different
+                               signs and A rem B <> 0 holds.
+    A mod B = A rem B          when A and B have the same
+                               sign or A rem B = 0 holds.
+```
+
+[]{#types_div_rem_mdiv_mod_tables}Tables for the behavior of
+[`div`]{.op}, [`rem`]{.op}, [`mdiv`]{.op} and [`mod`]{.op}:
+
+   A    B   A [div]{.op} B   A [rem]{.op} B   A [mdiv]{.op} B   A [mod]{.op} B
+  ---- --- ---------------- ---------------- ----------------- ----------------
+   5    3         1                2                 1                2
+   4    3         1                1                 1                1
+   3    3         1                0                 1                0
+   2    3         0                2                 0                2
+   1    3         0                1                 0                1
+   0    3         0                0                 0                0
+   -1   3         0                -1               -1                2
+   -2   3         0                -2               -1                1
+   -3   3         -1               0                -1                0
+   -4   3         -1               -1               -2                2
+   -5   3         -1               -2               -2                1
+
+   A    B    A [div]{.op} B   A [rem]{.op} B   A [mdiv]{.op} B   A [mod]{.op} B
+  ---- ---- ---------------- ---------------- ----------------- ----------------
+   5    -3         -1               2                -2                -1
+   4    -3         -1               1                -2                -2
+   3    -3         -1               0                -1                0
+   2    -3         0                2                -1                -1
+   1    -3         0                1                -1                -2
+   0    -3         0                0                 0                0
+   -1   -3         0                -1                0                -1
+   -2   -3         0                -2                0                -2
+   -3   -3         1                0                 1                0
+   -4   -3         1                -1                1                -1
+   -5   -3         1                -2                1                -2
+
+[]{#types_binomial_cofficient_table}Tables for the behavior of
+[`!`]{.op} (Binomial coefficient):
+
++----------------+------------------------------------------------------+
+| n ! k          | k                                                    |
++=======+========+====+====+====+===+===+===+====+====+=====+====+======+
+| -5    | -4     | -3 | -2 | -1 | 0 | 1 | 2 | 3  | 4  | 5   |    |      |
++-------+--------+----+----+----+---+---+---+----+----+-----+----+------+
+| **n** | **-5** | 0  | 0  | 0  | 0 | 0 | 1 | -5 | 15 | -35 | 70 | -126 |
+|       +--------+----+----+----+---+---+---+----+----+-----+----+------+
+|       | **-4** | 0  | 0  | 0  | 0 | 0 | 1 | -4 | 10 | -20 | 35 | -56  |
+|       +--------+----+----+----+---+---+---+----+----+-----+----+------+
+|       | **-3** | 0  | 0  | 0  | 0 | 0 | 1 | -3 | 6  | -10 | 15 | -21  |
+|       +--------+----+----+----+---+---+---+----+----+-----+----+------+
+|       | **-2** | 0  | 0  | 0  | 0 | 0 | 1 | -2 | 3  | -4  | 5  | -6   |
+|       +--------+----+----+----+---+---+---+----+----+-----+----+------+
+|       | **-1** | 0  | 0  | 0  | 0 | 0 | 1 | -1 | -1 | -1  | -1 | -1   |
+|       +--------+----+----+----+---+---+---+----+----+-----+----+------+
+|       | **0**  | 0  | 0  | 0  | 0 | 0 | 1 | 0  | 0  | 0   | 0  | 0    |
+|       +--------+----+----+----+---+---+---+----+----+-----+----+------+
+|       | **1**  | 0  | 0  | 0  | 0 | 0 | 1 | 1  | 0  | 0   | 0  | 0    |
+|       +--------+----+----+----+---+---+---+----+----+-----+----+------+
+|       | **2**  | 0  | 0  | 0  | 0 | 0 | 1 | 2  | 1  | 0   | 0  | 0    |
+|       +--------+----+----+----+---+---+---+----+----+-----+----+------+
+|       | **3**  | 0  | 0  | 0  | 0 | 0 | 1 | 3  | 3  | 1   | 0  | 0    |
+|       +--------+----+----+----+---+---+---+----+----+-----+----+------+
+|       | **4**  | 0  | 0  | 0  | 0 | 0 | 1 | 4  | 6  | 4   | 1  | 0    |
+|       +--------+----+----+----+---+---+---+----+----+-----+----+------+
+|       | **5**  | 0  | 0  | 0  | 0 | 0 | 1 | 5  | 10 | 10  | 5  | 1    |
++-------+--------+----+----+----+---+---+---+----+----+-----+----+------+
+
+For the [`sqrt`]{.func} function holds (when A \>= 0):
+
+``` box
+    sqrt(A) * sqrt(A) <= A and
+    (sqrt(A) + 1) * (sqrt(A) + 1) > A
+```
+
+[]{#types_bigInteger}
+
+### 5.3 bigInteger
+
+The type [`bigInteger`]{.type} describes signed integer numbers of
+unlimited size. A [bigInteger
+literal](#tokens_BigInteger_literals) is a sequence of digits
+followed by an underscore character (for example 1\_ ). Based numbers
+can be specified when the sequence of digits is followed by the \#
+character and a sequence of extended digits. The decimal number in front
+of the \# character specifies the base of the number which follows the
+\# character. As base a number between 2 and 36 is allowed. As extended
+digits the letters A or a can be used for 10, B or b can be used for 11
+and so on to Z or z which can be used as 35. Like decimal
+[`bigInteger`]{.type} literals the extended digits must be followed by
+an underscore character. Examples of [`bigInteger`]{.type} literals are:
+
+``` box
+    0_   18446744073709551616_ 16#deadbeefcafe_
+```
+
+Although [`bigInteger`]{.type} operations cannot overflow, it can happen
+that there is not enough memory to represent a [`bigInteger`]{.type}
+value. In this case the exception
+[`MEMORY_ERROR`](#errors_MEMORY_ERROR){.exception} is raised. The
+[`bigInteger`]{.type} functions are defined in the library
+[\"[bigint.s7i]{.lib}\"]{.stri}.
+
+``` tt
+    Constants:
+      bigInteger.value  Default value of bigInteger (0_)
+    Prefix operators:
+      +         Identity
+      -         Change sign
+      !         Factorial
+    Infix operators:
+      +         Addition
+      -         Subtraction
+      *         Multiplication
+      div       Integer division truncated towards zero
+                  ( A div B ⇒ trunc(A / B),
+                    A div 0_ ⇒ EXCEPTION NUMERIC_ERROR )
+      rem       Reminder of integer division div
+                  ( A rem B ⇒ A - (A div B) * B,
+                    A rem 0_ ⇒ EXCEPTION NUMERIC_ERROR )
+      mdiv      Integer division truncated towards negative infinity
+                  ( A mdiv B ⇒ floor(A / B),
+                    A mdiv 0_ ⇒ EXCEPTION NUMERIC_ERROR )
+      mod       Reminder of integer division mdiv
+                  ( A mod B ⇒ A - (A mdiv B) * B,
+                    A mod 0_ ⇒ EXCEPTION NUMERIC_ERROR )
+      A ** B    Power
+                  ( Type of argument B: integer,
+                    A ** B is okay for B >= 0,
+                    A ** 0 ⇒ 1_ for every A, even for A = 0_,
+                    1_ ** B ⇒ 1_ for B >= 0,
+                    A ** B ⇒ -(-A) ** B for A <= 0_ and B >= 0 and odd(B),
+                    A ** B ⇒ (-A) ** B for A <= 0_ and B >= 0 and not odd(B),
+                    A ** -1 ⇒ EXCEPTION NUMERIC_ERROR )
+      A << B    Shift left
+                  ( Type of argument B: integer,
+                    A << B ⇒ A * 2_ ** B  for B >= 0,
+                    A << B ⇒ A >> -B for B < 0,
+                    A << 0 ⇒ A,
+                    0_ << B ⇒ 0_ for every B )
+      A >> B    Arithmetic shift right
+                  ( Type of argument B: integer,
+                    A >> B ⇒ A mdiv 2_ ** B for B >= 0,
+                    A >> B ⇒ A << -B for B < 0,
+                    A >> 0 ⇒ A,
+                    A >> B ⇒ C for A >= 0_ holds: C >= 0_,
+                    A >> B ⇒ C for A < 0_ holds: C < 0_,
+                    A >> B ⇒ 0_ for A >= 0_ and B > ord(log2(A)),
+                    A >> B ⇒ -1_ for A < 0_ and B > ord(log2(-A)),
+                    0_ >> B ⇒ 0_ for every B )
+      !   Binomial coefficient
+                  ( n ! k ⇒ 0_ for k < 0_,
+                    n ! 0_ ⇒ 1_,
+                    n ! 1_ ⇒ n,
+                    n ! k ⇒ 0_ for n >= 0_ and k > n,
+                    n ! k ⇒ !n div (!k * !(n - k)) for k >= 0_ and k <= n,
+                    n ! k ⇒ (-1) ** k * (n + k - 1 ! k) for n < 0_ and k >= 0_ )
+      A ? B : C  Ternary operator condition ? thenValue : elseValue
+                  ( Type of argument A: boolean,
+                    TRUE ? a : b ⇒ a,
+                    FALSE ? a : b ⇒ b )
+      A radix B  Convert the bigInteger A to a string. The conversion
+                 uses the numeral system with the base B.
+                  ( Type of result: string,
+                    3735928559_ radix 16 ⇒ "deadbeef",
+                    -3735928559_ radix 16 ) ⇒ "-deadbeef",
+                    123_ radix 37 ⇒ EXCEPTION RANGE_ERROR )
+      A RADIX B  Convert the integer A to a string. The conversion
+                 uses the numeral system with the base B.
+                  ( Type of result: string,
+                    3735928559_ RADIX 16 ⇒ "DEADBEEF",
+                    -3735928559_ RADIX 16 ) ⇒ "-DEADBEEF",
+                    123_ RADIX 37 ⇒ EXCEPTION RANGE_ERROR )
+      sci       Conversion to a string in scientific notation
+                  ( Type of right operand: integer,
+                    Type of result: string,
+                    12345_ sci 4 ⇒ "1.2345e+4",
+                    12345_ sci 3 ⇒ "1.235e+4",
+                    12345_ sci 2 ⇒ "1.23e+4",
+                    3141592_ sci 0 ⇒ "3e+6",
+                    27182818_ sci 0 ⇒ "3e+7",
+                    2_**62 sci 6 ⇒ "4.611686e+18",
+                    -1_ sci 3 ⇒ "-1.000e+0",
+                    -0_ sci 2 ⇒ "0.00e+0" )
+      bigInteger conv A   Conversion of integer to bigInteger
+                  ( Type of argument A: integer,
+                    bigInteger conv 1 ⇒ 1_ )
+      bigInteger parse A   Conversion of string to integer
+                  ( Type of argument A: string,
+                    bigInteger parse "123" ⇒ 123_,
+                    bigInteger parse "-123" ⇒ -123_,
+                    bigInteger parse "+5" ⇒ 5_,
+                    bigInteger parse " 1" ⇒ EXCEPTION RANGE_ERROR,
+                    bigInteger parse "10 " ⇒ EXCEPTION RANGE_ERROR,
+                    bigInteger parse "ASDF" ⇒ EXCEPTION RANGE_ERROR )
+    Relations:
+      =, <>, <, <=, >, >=
+    Functions:
+      ord(A)    Ordinal number
+                  ( Type of result: integer )
+                    ord(99999999999999999999_) ⇒ EXCEPTION RANGE_ERROR )
+      integer(A)  Ordinal number
+                  ( Type of result: integer )
+                    integer(99999999999999999999_) ⇒ EXCEPTION RANGE_ERROR )
+      succ(A)   Successor
+                  ( succ(A) ⇒ A+1_ )
+      pred(A)   Predecessor
+                  ( pred(A) ⇒ A-1_ )
+      abs(A)    Absolute value
+      odd(A)    Odd value
+                  ( Type of result: boolean )
+      str(A)    Conversion to string
+                  ( Type of result: string,
+                    str(9876543210_) ⇒ "9876543210" )
+      literal(A) Convert a bigInteger number to a bigInteger literal.
+                  ( Type of result: string,
+                    literal(9876543210_) ⇒ "9876543210_" )
+      bigInteger(A) Convert an integer to a bigInteger
+                  ( Type of argument A: integer,
+                    bigInteger(1) ⇒ 1_ )
+      bigInteger(A) Convert a numeric string to a bigInteger
+                  ( Type of argument A: string,
+                    bigInteger("123") ⇒ 123_,
+                    bigInteger("-123") ⇒ -123_,
+                    bigInteger("+5") ⇒ 5_,
+                    bigInteger(" 1") ⇒ EXCEPTION RANGE_ERROR,
+                    bigInteger("10 ") ⇒ EXCEPTION RANGE_ERROR,
+                    bigInteger("ASDF") ⇒ EXCEPTION RANGE_ERROR )
+      bigInteger(A, B) Convert numeric string, with specified radix, to a bigInteger
+                  ( Type of argument A: string,
+                    Type of argument B: integer,
+                    bigInteger("deadbeef", 16) ⇒ 3735928559_,
+                    bigInteger("-77777777777", 8) ⇒ -8589934591_,
+                    bigInteger("10101010", 2) ⇒ 170_,
+                    bigInteger("Cafe", 16) ⇒ 51966_,
+                    bigInteger("0", 1) ⇒ EXCEPTION RANGE_ERROR,
+                    bigInteger("qwertyuiop", 37) ⇒ EXCEPTION RANGE_ERROR )
+      bytes(A, S, E) Convert a bigInteger into a string of bytes
+                  ( Type of argument S: signedness (UNSIGNED and SIGNED),
+                    Type of argument E: endianness (LE and BE),
+                    Type of result: string,
+                    bytes(1413829460_, SIGNED, BE) ⇒ "TEST",
+                    bytes(1497451343_, SIGNED, LE) ⇒ "OKAY" )
+      bytes(A, S, E, len) Convert a bigInteger into a string of len bytes
+                  ( Type of argument S: signedness (UNSIGNED and SIGNED),
+                    Type of argument E: endianness (LE and BE),
+                    Type of result: string,
+                    bytes(1413829460_, SIGNED, BE, 5) ⇒ "\0;TEST"
+                    bytes(1413829460_, SIGNED, BE, 4) ⇒ "TEST"
+                    bytes(1413829460_, SIGNED, BE, 3) ⇒ EXCEPTION RANGE_ERROR )
+      bytes2BigInt(A, S, E) Convert a string of bytes to a bigInteger
+                  ( Type of argument A: string,
+                    Type of argument S: signedness (UNSIGNED and SIGNED),
+                    Type of argument E: endianness (LE and BE),
+                    bytes2BigInt("\210;\2;\150;I", UNSIGNED, LE) ⇒ 1234567890_ )
+      sqrt(A)   Integer square root
+                  ( sqrt(A) is okay for A >= 0_
+                    sqrt(A) ⇒ trunc(sqrt(float(A))),
+                    sqrt(-1_) ⇒ EXCEPTION NUMERIC_ERROR )
+      modInverse(A, B) Compute the modular multiplicative inverse of A modulo B
+      modPow(A, B, C) Compute the modular exponentiation of A ** B
+      log10(A)  Truncated base 10 logarithm
+                  ( log10(A) is defined for A >= 0_
+                    log10(10_ ** A) = A for A >= 0_,
+                    log10(pred(10_ ** A)) = pred(A) for A >= 0_,
+                    log10(10_) ⇒ 1_,
+                    log10(1_) ⇒ 0_,
+                    log10(0_) ⇒ -1_,
+                    log10(-1_) ⇒ EXCEPTION NUMERIC_ERROR )
+      log2(A)   Truncated base 2 logarithm
+                  ( log2(A) returns the position of the
+                    highest bit set. It is defined for A >= 0
+                    log2(2_ ** A) = A for A >= 0,
+                    log2(pred(2_ ** A)) = pred(A) for A >= 0,
+                    log2(2_) ⇒ 1_,
+                    log2(1_) ⇒ 0_,
+                    log2(0_) ⇒ -1_,
+                    log2(-1_) ⇒ EXCEPTION NUMERIC_ERROR )
+      gcd(A, B) Greatest common divisor of A and B.
+                  ( gcd(A, B) = gcd(B, A),
+                    gcd(A, B) = gcd(-A, B),
+                    gcd(A, 0) = abs(A) )
+      bitLength(A) Number of bits in the minimum two's-complement
+                   representation, excluding the sign bit.
+                  ( Type of result: integer,
+                    bitLength(A) ⇒ ord(succ(log2(A))) for A >= 0_,
+                    bitLength(A) ⇒ bitLength(pred(-A)) for A < 0_,
+                    bitLength(0_) ⇒ 0,
+                    bitLength(-1_) ⇒ 0 )
+      lowestSetBit(A) Index of the lowest-order one bit
+                      For A <> 0_ this is equal to the number of
+                      lowest-order zero bits.
+                  ( Type of result: integer,
+                    A >> B << B = A for A <> 0_ and B = lowestSetBit(A),
+                    lowestSetBit(0_) ⇒ -1,
+                    lowestSetBit(1_) ⇒ 0,
+                    lowestSetBit(2_) ⇒ 1 )
+      rand(A, B) Random number in the range [A, B]
+                 The random values are uniform distributed.
+                  ( rand(A, B) returns a random number such that
+                    A <= rand(A, B) and rand(A, B) <= B holds.
+                    rand(A, A) ⇒ A,
+                    rand(1_, 0_) ⇒ EXCEPTION RANGE_ERROR )
+      min(A, B) Minimum of two numbers.
+                  ( min(1_, 2_) ⇒ 1_ )
+      max(A, B) Maximum of two numbers.
+                  ( max(1_, 2_) ⇒ 2_ )
+      compare(A, B) Compare function
+                  ( Type of result: integer,
+                    compare(1_, 2_) ⇒ -1,
+                    compare(5_, 5_) ⇒ 0,
+                    compare(8_, 7_) ⇒ 1 )
+      hashCode(A) Hash function
+                  ( Type of result: integer )
+    Statements:
+      A +:= B   Increment A by B
+                  ( A +:= B ⇒ A := A + B )
+      A -:= B   Decrement A by B
+                  ( A -:= B ⇒ A := A - B )
+      A *:= B   Multiplying copy
+                  ( A *:= B ⇒ A := A * B )
+      A <<:= B  Shift left copy
+                  ( A <<:= B ⇒ A := A << B )
+      A >>:= B  Shift right copy
+                  ( A >>:= B ⇒ A := A >> B )
+      incr(A)   Increment with 1
+                  ( incr(A) ⇒ A +:= 1_ )
+      decr(A)   Decrement with 1
+                  ( decr(A) ⇒ A -:= 1_ )
+      ignore(A) Ignore value
+```
+
+For the operations [`div`]{.op} and [`rem`]{.op} holds for all A:
+
+``` box
+    (A div B) * B + A rem B = A           when B <> 0_
+    -A div B = -(A div B)                 when B <> 0_
+    -A rem B = -(A rem B)                 when B <> 0_
+    A rem B >= 0_ and A rem B < abs(B)    when B <> 0_ and A >= 0_
+    A rem B <= 0_ and A rem B > -abs(B)   when B <> 0_ and A <= 0_
+```
+
+For the operations [`mdiv`]{.op} and [`mod`]{.op} holds for all A:
+
+``` box
+    (A mdiv B) * B + A mod B = A          when B <> 0_
+    -A mdiv B = A mdiv -B                 when B <> 0_
+    -A mod -B = -(A mod B)                when B <> 0_
+    A mod B >= 0_ and A mod B < B         when B > 0_
+    A mod B <= 0_ and A mod B > B         when B < 0_
+```
+
+For the operation [`mdiv`]{.op} holds:
+
+``` box
+    A mdiv B = A div B - 1_           when A and B have different
+                                      signs and A rem B <> 0_ holds.
+    A mdiv B = A div B                when A and B have the same
+                                      sign or A rem B = 0_ holds.
+    A mdiv B = (A - 1_) div B - 1_    when A > 0_ and B < 0_ holds.
+    A mdiv B = (A + 1_) div B - 1_    when A < 0_ and B > 0_ holds.
+    A mdiv 2_ ** B = A >> B           when B >= 0 holds
+```
+
+For the operation [`mod`]{.op} holds:
+
+``` box
+    A mod B = A rem B + B      when A and B have different
+                               signs and A rem B <> 0_ holds.
+    A mod B = A rem B          when A and B have the same
+                               sign or A rem B = 0_ holds.
+```
+
+Tables for the behavior of [`div`]{.op}, [`rem`]{.op}, [`mdiv`]{.op} and
+[`mod`]{.op}:
+
+    A      B    A [div]{.op} B   A [rem]{.op} B   A [mdiv]{.op} B   A [mod]{.op} B
+  ------ ----- ---------------- ---------------- ----------------- ----------------
+   5\_    3\_        1\_              2\_               1\_              2\_
+   4\_    3\_        1\_              1\_               1\_              1\_
+   3\_    3\_        1\_              0\_               1\_              0\_
+   2\_    3\_        0\_              2\_               0\_              2\_
+   1\_    3\_        0\_              1\_               0\_              1\_
+   0\_    3\_        0\_              0\_               0\_              0\_
+   -1\_   3\_        0\_              -1\_             -1\_              2\_
+   -2\_   3\_        0\_              -2\_             -1\_              1\_
+   -3\_   3\_        -1\_             0\_              -1\_              0\_
+   -4\_   3\_        -1\_             -1\_             -2\_              2\_
+   -5\_   3\_        -1\_             -2\_             -2\_              1\_
+
+    A      B     A [div]{.op} B   A [rem]{.op} B   A [mdiv]{.op} B   A [mod]{.op} B
+  ------ ------ ---------------- ---------------- ----------------- ----------------
+   5\_    -3\_        -1\_             2\_              -2\_              -1\_
+   4\_    -3\_        -1\_             1\_              -2\_              -2\_
+   3\_    -3\_        -1\_             0\_              -1\_              0\_
+   2\_    -3\_        0\_              2\_              -1\_              -1\_
+   1\_    -3\_        0\_              1\_              -1\_              -2\_
+   0\_    -3\_        0\_              0\_               0\_              0\_
+   -1\_   -3\_        0\_              -1\_              0\_              -1\_
+   -2\_   -3\_        0\_              -2\_              0\_              -2\_
+   -3\_   -3\_        1\_              0\_               1\_              0\_
+   -4\_   -3\_        1\_              -1\_              1\_              -1\_
+   -5\_   -3\_        1\_              -2\_              1\_              -2\_
+
+[]{#types_binomial_cofficient_table}Tables for the behavior of
+[`!`]{.op} (Binomial coefficient):
+
++------------------+----------------------------------------------------------------------------+
+| n ! k            | k                                                                          |
++=======+==========+======+======+======+=====+=====+=====+======+======+=======+======+========+
+| -5\_  | -4\_     | -3\_ | -2\_ | -1\_ | 0\_ | 1\_ | 2\_ | 3\_  | 4\_  | 5\_   |      |        |
++-------+----------+------+------+------+-----+-----+-----+------+------+-------+------+--------+
+| **n** | **-5\_** | 0\_  | 0\_  | 0\_  | 0\_ | 0\_ | 1\_ | -5\_ | 15\_ | -35\_ | 70\_ | -126\_ |
+|       +----------+------+------+------+-----+-----+-----+------+------+-------+------+--------+
+|       | **-4\_** | 0\_  | 0\_  | 0\_  | 0\_ | 0\_ | 1\_ | -4\_ | 10\_ | -20\_ | 35\_ | -56\_  |
+|       +----------+------+------+------+-----+-----+-----+------+------+-------+------+--------+
+|       | **-3\_** | 0\_  | 0\_  | 0\_  | 0\_ | 0\_ | 1\_ | -3\_ | 6\_  | -10\_ | 15\_ | -21\_  |
+|       +----------+------+------+------+-----+-----+-----+------+------+-------+------+--------+
+|       | **-2\_** | 0\_  | 0\_  | 0\_  | 0\_ | 0\_ | 1\_ | -2\_ | 3\_  | -4\_  | 5\_  | -6\_   |
+|       +----------+------+------+------+-----+-----+-----+------+------+-------+------+--------+
+|       | **-1\_** | 0\_  | 0\_  | 0\_  | 0\_ | 0\_ | 1\_ | -1\_ | -1\_ | -1\_  | -1\_ | -1\_   |
+|       +----------+------+------+------+-----+-----+-----+------+------+-------+------+--------+
+|       | **0\_**  | 0\_  | 0\_  | 0\_  | 0\_ | 0\_ | 1\_ | 0\_  | 0\_  | 0\_   | 0\_  | 0\_    |
+|       +----------+------+------+------+-----+-----+-----+------+------+-------+------+--------+
+|       | **1\_**  | 0\_  | 0\_  | 0\_  | 0\_ | 0\_ | 1\_ | 1\_  | 0\_  | 0\_   | 0\_  | 0\_    |
+|       +----------+------+------+------+-----+-----+-----+------+------+-------+------+--------+
+|       | **2\_**  | 0\_  | 0\_  | 0\_  | 0\_ | 0\_ | 1\_ | 2\_  | 1\_  | 0\_   | 0\_  | 0\_    |
+|       +----------+------+------+------+-----+-----+-----+------+------+-------+------+--------+
+|       | **3\_**  | 0\_  | 0\_  | 0\_  | 0\_ | 0\_ | 1\_ | 3\_  | 3\_  | 1\_   | 0\_  | 0\_    |
+|       +----------+------+------+------+-----+-----+-----+------+------+-------+------+--------+
+|       | **4\_**  | 0\_  | 0\_  | 0\_  | 0\_ | 0\_ | 1\_ | 4\_  | 6\_  | 4\_   | 1\_  | 0\_    |
+|       +----------+------+------+------+-----+-----+-----+------+------+-------+------+--------+
+|       | **5\_**  | 0\_  | 0\_  | 0\_  | 0\_ | 0\_ | 1\_ | 5\_  | 10\_ | 10\_  | 5\_  | 1\_    |
++-------+----------+------+------+------+-----+-----+-----+------+------+-------+------+--------+
+
+For the [`sqrt`]{.func} function holds (when A \>= 0\_):
+
+``` box
+    sqrt(A) * sqrt(A) <= A and
+    (sqrt(A) + 1_) * (sqrt(A) + 1_) > A
+```
+
+[]{#types_rational}
+
+### 5.4 rational
+
+The type [`rational`]{.type} consists of rational numbers represented
+with an [`integer`](#types_integer){.type} numerator and an
+[`integer`](#types_integer){.type} denominator. The values of the type
+[`rational`]{.type} are finite and periodical decimal numbers. Rational
+literals do not exist. If a [` rational`]{.type} operation
+[overflows](#errors_OVERFLOW_ERROR) it raises the exception
+[`OVERFLOW_ERROR`](#errors_OVERFLOW_ERROR){.exception}. In
+[`integer`](#types_integer){.type} computations an overflow can only
+happen with very huge positive or negative numbers. In
+[`rational`]{.type} computations an overflow can happen with small
+numbers. Because of widening big denominators can be produced easily.
+E.g.: `1/1777 + 1/1999 = 3776/3552223` . The [`rational`]{.type}
+functions are defined in the library [\"[rational.s7i]{.lib}\"]{.stri}.
+
+``` tt
+    Elements:
+      var integer: numerator is 0;
+      var integer: denominator is 1;
+    Constants:
+      rational.value  Default value of rational (0/1)
+    Prefix operators:
+      +         Identity
+      -         Change sign
+    Infix operators:
+      +         Addition
+      -         Subtraction
+      *         Multiplication
+      /         Division
+      /         Create rational from numerator and denominator
+                  ( Type of left operand: integer,
+                    Type of right operand: integer )
+      **        Power
+                  ( rational ** integer )
+      A ? B : C  Ternary operator condition ? thenValue : elseValue
+                  ( Type of argument A: boolean,
+                    TRUE ? a : b ⇒ a,
+                    FALSE ? a : b ⇒ b )
+      rational conv A   Conversion of integer to rational
+                  ( Type of argument A: integer,
+                    rational conv 1 ⇒ 1 / 1 )
+      digits    Conversion to string with specified precision
+                  ( Type of right operand: integer,
+                    Type of result: string,
+                    1/64 digits 7 ⇒ "0.0156250",
+                    1/64 digits 4 ⇒ "0.0156",
+                    1/64 digits 2 ⇒ "0.02",
+                    355/113 digits 6 ⇒ "3.141593",
+                    22/7 digits 0 ⇒ "3",
+                    -1/2 digits 1 ⇒ "-1",
+                    1/0 digits 5 ⇒ "Infinity",
+                    -1/0 digits 6 ⇒ "-Infinity",
+                    0/0 digits 7 ⇒ "NaN",
+                    -1/2048 digits 3 ⇒ "0.000" )
+      sci       Conversion to a string in scientific notation
+                  ( Type of right operand: integer,
+                    Type of result: string,
+                    1/64 sci 4 ⇒ "1.5625e-2",
+                    1/64 sci 3 ⇒ "1.563e-2",
+                    1/64 sci 2 ⇒ "1.56e-2",
+                    355/113 sci 6 ⇒ "3.141593e+0",
+                    22/7 sci 0 ⇒ "3e+0",
+                    -1/2 sci 1 ⇒ "-5.0e-1",
+                    1/0 sci 5 ⇒ "Infinity",
+                    -1/0 sci 6 ⇒ "-Infinity",
+                    0/0 sci 7 ⇒ "NaN",
+                    -1/2048 sci 3 ⇒ "-4.883e-4",
+                    -0/1 sci 2 ⇒ "0.00e+0" )
+      rational parse A   Conversion of string to rational
+                  ( Type of argument A: string,
+                    rational parse "3/5" ⇒ 3 / 5,
+                    rational parse "1.25" ⇒ 5 / 4,
+                    rational parse "0.(3)" ⇒ 1 / 3,
+                    rational parse "1.23(45)" ⇒ 679 / 550,
+                    rational parse "3.(142857)" ⇒ 22 / 7,
+                    rational parse "0.(846153)" ⇒ 11 / 13 )
+    Relations:
+      =, <>, <, <=, >, >=
+    Functions:
+      abs(A)    Absolute value
+      rat(A)    Conversion of integer to rational
+                  ( Type of argument A: integer,
+                    rat(1) ⇒ 1 / 1 )
+      rational(A)  Conversion of integer to rational
+                  ( Type of argument A: integer,
+                    rational(1) ⇒ 1 / 1 )
+      rational(A)  Conversion of string to rational
+                  ( Type of argument A: string,
+                    rational("3/5") ⇒ 3 / 5,
+                    rational("1.25") ⇒ 5 / 4,
+                    rational("0.(3)") ⇒ 1 / 3,
+                    rational("1.23(45)") ⇒ 679 / 550,
+                    rational("3.(142857)") ⇒ 22 / 7,
+                    rational("0.(846153)") ⇒ 11 / 13 )
+      floor(A)  Truncation towards negative infinity
+                  ( Type of result: integer,
+                    floor(9/5) ⇒  1, floor(1/1) ⇒  1,
+                    floor(-1/1) ⇒ -1, floor(-9/5) ⇒ -2 )
+      ceil(A)   Rounding up towards positive infinity
+                  ( Type of result: integer,
+                    ceil(6/5) ⇒  2, ceil(1/1) ⇒  1,
+                    ceil(-1/1) ⇒ -1, ceil(-6/5) ⇒ -1 )
+      trunc(A)  Truncation towards zero
+                  ( Type of result: integer,
+                    trunc(9/5) ⇒  1, trunc(1/1) ⇒  1,
+                    trunc(-1/1) ⇒ -1, trunc(-9/5) ⇒ -1 )
+      round(A)  Round towards zero
+                  ( Type of result: integer,
+                    round(1/2) ⇒ 1, round(-1/2) ⇒ -1,
+                    round(2/5) ⇒ 0, round(-2/5) ⇒ 0 )
+      round10(A, B)  Round with a decimal precision towards zero
+                  ( Type of B: integer,
+                    round10(1/4, 1) ⇒ 3/10, round10(-1/4, 1) ⇒ -3/10,
+                    round10(2/5, 0) ⇒ 0/1, round(-2/5, 0) ⇒ 0/1 )
+      str(A)    Convert to a string with a decimal representation
+                  ( Type of result: string,
+                    str(1/3) ⇒ "0.(3)" )
+      fraction(A)  Convert to a string with a fraction
+                  ( Type of result: string,
+                    fraction(rational("0.(3)")) ⇒ "1/3" )
+      min(A, B) Minimum of two numbers.
+                  ( min(2/5, 1/2) ⇒ 2/5 )
+      max(A, B) Maximum of two numbers.
+                  ( max(2/5, 1/2) ⇒ 1/2 )
+      compare(A, B) Compare function
+                  ( Type of result: integer,
+                    compare(19/10, 2/1) ⇒ -1,
+                    compare(26/5, 26/5) ⇒ 0,
+                    compare(8/1, 79/10) ⇒ 1 )
+      hashCode(A) Hash function
+                  ( Type of result: integer )
+    Statements:
+      A +:= B   Increment A by B
+                  ( A +:= B ⇒ A := A + B )
+      A -:= B   Decrement A by B
+                  ( A -:= B ⇒ A := A - B )
+      A *:= B   Multiplying copy
+                  ( A *:= B ⇒ A := A * B )
+      A /:= B   Dividing copy
+                  ( A /:= B ⇒ A := A / B )
+      ignore(A) Ignore value
+```
+
+All calculations with [`rational`]{.type} numbers are done exact.
+(Without any rounding)
+
+[]{#types_bigRational}
+
+### 5.5 bigRational
+
+The type [`bigRational`]{.type} consists of rational numbers represented
+with an [`bigInteger`](#types_bigInteger){.type} numerator and an
+[`bigInteger`](#types_bigInteger){.type} denominator. The values of the
+type [`bigRational`]{.type} are finite and periodical decimal numbers.
+BigRational literals do not exist. Although [`bigRational`]{.type}
+operations cannot overflow, it can happen that there is not enough
+memory to represent a [`bigRational`]{.type} value. In this case the
+exception [`MEMORY_ERROR`](#errors_MEMORY_ERROR){.exception} is raised.
+The [`bigRational`]{.type} functions are defined in the library
+[\"[bigrat.s7i]{.lib}\"]{.stri}.
+
+``` tt
+    Elements:
+      var bigInteger: numerator is 0_;
+      var bigInteger: denominator is 1_;
+    Constants:
+      bigRational.value  Default value of bigRational (0_/1_)
+    Prefix operators:
+      +         Identity
+      -         Change sign
+    Infix operators:
+      +         Addition
+      -         Subtraction
+      *         Multiplication
+      /         Division
+      /         Create bigRational from numerator and denominator
+                  ( Type of left argument: bigInteger,
+                    Type of right argument: bigInteger )
+      **        Power
+                  ( bigRational ** integer )
+      A ? B : C  Ternary operator condition ? thenValue : elseValue
+                  ( Type of argument A: boolean,
+                    TRUE ? a : b ⇒ a,
+                    FALSE ? a : b ⇒ b )
+      bigRational conv A   Conversion of integer to bigRational
+                  ( Type of argument A: integer,
+                    bigRational conv 1 ⇒ 1_ / 1_ )
+      bigRational conv A   Conversion of bigInteger to bigRational
+                  ( Type of argument A: bigInteger,
+                    bigRational conv 1_ ⇒ 1_ / 1_ )
+      digits    Conversion to string with specified precision
+                  ( Type of right operand: integer,
+                    Type of result: string,
+                    1_/64_ digits 7 ⇒ "0.0156250",
+                    1_/64_ digits 4 ⇒ "0.0156",
+                    1_/64_ digits 2 ⇒ "0.02",
+                    355_/113_ digits 6 ⇒ "3.141593",
+                    22_/7_ digits 0 ⇒ "3",
+                    -1_/2_ digits 1 ⇒ "-1",
+                    1_/0_ digits 5 ⇒ "Infinity",
+                    -1_/0_ digits 6 ⇒ "-Infinity",
+                    0_/0_ digits 7 ⇒ "NaN",
+                    -1_/2048_ digits 3 ⇒ "0.000" )
+      sci       Conversion to a string in scientific notation
+                  ( Type of right operand: integer,
+                    Type of result: string,
+                    1_/64_ sci 4 ⇒ "1.5625e-2",
+                    1_/64_ sci 3 ⇒ "1.563e-2",
+                    1_/64_ sci 2 ⇒ "1.56e-2",
+                    355_/113_ sci 6 ⇒ "3.141593e+0",
+                    22_/7_ sci 0 ⇒ "3e+0",
+                    -1_/2_ sci 1 ⇒ "-5.0e-1",
+                    1_/0_ sci 5 ⇒ "Infinity",
+                    -1_/0_ sci 6 ⇒ "-Infinity",
+                    0_/0_ sci 7 ⇒ "NaN",
+                    -1_/2048_ sci 3 ⇒ "-4.883e-4",
+                    -0_/1_ sci 2 ⇒ "0.00e+0" )
+      bigRational parse A   Conversion of string to bigRational
+                  ( Type of argument A: string,
+                    bigRational parse "3/5"⇒ 3_ / 5_,
+                    bigRational parse "1.25" ⇒ 5_ / 4_,
+                    bigRational parse "0.(3)" ⇒ 1_ / 3_,
+                    bigRational parse "1.23(45)" ⇒ 679_ / 550_,
+                    bigRational parse "3.(142857)" ⇒ 22_ / 7_,
+                    bigRational parse "0.(846153)" ⇒ 11_ / 13_ )
+    Relations:
+      =, <>, <, <=, >, >=
+    Functions:
+      abs(A)    Absolute value
+      rat(A)    Conversion of bigInteger to bigRational
+                  ( Type of argument A: bigInteger,
+                    rat(1_) ⇒ 1_ / 1_ )
+      bigRational(A)  Conversion of integer to bigRational
+                  ( Type of argument A: integer,
+                    bigRational(1) ⇒ 1_ / 1_ )
+      bigRational(A)  Conversion of bigInteger to bigRational
+                  ( Type of argument A: bigInteger,
+                    bigRational(1_) ⇒ 1_ / 1_ )
+      bigRational(A)  Conversion of string to bigRational
+                  ( Type of argument A: string,
+                    bigRational("3/5") ⇒ 3_ / 5_,
+                    bigRational("1.25") ⇒ 5_ / 4_,
+                    bigRational("0.(3)") ⇒ 1_ / 3_,
+                    bigRational("1.23(45)") ⇒ 679_ / 550_,
+                    bigRational("3.(142857)") ⇒ 22_ / 7_,
+                    bigRational("0.(846153)") ⇒ 11_ / 13_ )
+      floor(A)  Truncation towards negative infinity
+                  ( Type of result: bigInteger,
+                    floor(9_/5_) ⇒  1_, floor(1_/1_) ⇒  1_,
+                    floor(-1_/1_) ⇒ -1_, floor(-9_/5_) ⇒ -2_ )
+      ceil(A)   Rounding up towards positive infinity
+                  ( Type of result: bigInteger,
+                    ceil(6_/5_) ⇒  2_, ceil(1_/1_) ⇒  1_,
+                    ceil(-1_/1_) ⇒ -1_, ceil(-6_/5_) ⇒ -1_ )
+      trunc(A)  Truncation towards zero
+                  ( Type of result: bigInteger,
+                    trunc(9_/5_) ⇒  1_, trunc(1_/1_) ⇒  1_,
+                    trunc(-1_/1_) ⇒ -1_, trunc(-9_/5_) ⇒ -1_ )
+      round(A)  Round towards zero
+                  ( Type of result: bigInteger,
+                    round(1_/2_) ⇒ 1_, round(-1_/2_) ⇒ -1_,
+                    round(2_/5_) ⇒ 0_, round(-2_/5_) ⇒ 0_ )
+      round10(A, B)  Round with a decimal precision towards zero
+                  ( Type of B: integer,
+                    round10(1_/4_, 1) ⇒ 3_/10_, round10(-1_/4_, 1) ⇒ -3_/10_,
+                    round10(2_/5_, 0) ⇒ 0_/1_, round(-2_/5_, 0) ⇒ 0_/1_ )
+      str(A)    Convert to a string with a decimal representation
+                  ( Type of result: string,
+                    str(1_/3_) ⇒ "0.(3)" )
+      fraction(A)  Convert to a string with a fraction
+                  ( Type of result: string,
+                    fraction(bigRational("0.(3)")) ⇒ "1/3" )
+      min(A, B) Minimum of two numbers.
+                  ( min(2_/5_, 1_/2_) ⇒ 2_/5_ )
+      max(A, B) Maximum of two numbers.
+                  ( max(2_/5_, 1_/2_) ⇒ 1_/2_ )
+      compare(A, B) Compare function
+                  ( Type of result: integer,
+                    compare(19_/10_, 2_/1_) ⇒ -1,
+                    compare(26_/5_, 26_/5_) ⇒ 0,
+                    compare(8_/1_, 79_/10_) ⇒ 1 )
+      hashCode(A) Hash function
+                  ( Type of result: integer )
+    Statements:
+      A +:= B   Increment A by B
+                  ( A +:= B ⇒ A := A + B )
+      A -:= B   Decrement A by B
+                  ( A -:= B ⇒ A := A - B )
+      A *:= B   Multiplying copy
+                  ( A *:= B ⇒ A := A * B )
+      A /:= B   Dividing copy
+                  ( A /:= B ⇒ A := A / B )
+      ignore(A) Ignore value
+```
+
+All calculations with [`bigRational`]{.type} numbers are done exact.
+(Without any rounding)
+
+[]{#types_float}
+
+### 5.6 float
+
+The type [`float`]{.type} consists of double precision floating point
+numbers. [Float literals](#tokens_Float_literals) use base 10 and
+contain a decimal point. There must be at least one digit before and
+after the decimal point. An exponent part, which is introduced with E or
+e, is optional. The exponent can be signed, but the mantissa is not. A
+literal does not have a sign, + or - are unary operations. Examples of
+[`float`]{.type} literals are:
+
+``` box
+  3.14159265358979
+  1.0E-12
+  0.1234
+```
+
+The function [`str`]{.func} and the operators [`digits`]{.op} and
+[`parse`]{.op} create and accept float literals with sign. Basic
+[`float`]{.type} functions are defined in the library
+[\"[float.s7i]{.lib}\"]{.stri}. Trigonometric- and other mathematical
+functions are defined in the library [\"[math.s7i]{.lib}\"]{.stri}.
+
+``` tt
+    Constants:
+      float.value  Default value of float (0.0)
+      Infinity     Positive infinity
+      NaN          Not-a-Number
+      PI           Mathematical constant π
+      E            Euler's number
+    Prefix operators:
+      +         Identity
+      -         Change sign
+    Infix operators:
+      +         Addition
+      -         Subtraction
+      *         Multiplication
+      /         Division
+                  ( A / 0.0 ⇒  Infinity for A > 0.0,
+                    A / 0.0 ⇒ -Infinity for A < 0.0,
+                    0.0 / 0.0 ⇒ NaN )
+      **        Power
+                  ( A ** B is okay for A > 0.0,
+                    A ** B is okay for A < 0.0 and B is integer,
+                    A ** B ⇒ NaN for A < 0.0 and B is not integer,
+                    A ** 0.0 ⇒ 1.0,
+                    NaN ** 0.0 ⇒ 1.0,
+                    NaN ** B ⇒ NaN for B <> 0.0,
+                    0.0 ** B ⇒ 0.0 for B > 0.0,
+                    0.0 ** 0.0 ⇒ 1.0,
+                    0.0 ** B ⇒ Infinity for B < 0.0,
+                    (-0.0) ** B ⇒ -Infinity for B < 0.0 and odd(B),
+                    1.0 ** B ⇒ 1.0,
+                    1.0 ** NaN ⇒ 1.0,
+                    A ** NaN ⇒ NaN for A <> 1.0 )
+      **        Power
+                  ( Type of right operand: integer
+                    A ** B is okay for A > 0.0,
+                    A ** B is okay for A < 0.0,
+                    A ** 0 ⇒ 1.0,
+                    NaN ** 0 ⇒ 1.0,
+                    NaN ** B ⇒ NaN for B <> 0,
+                    0.0 ** B ⇒ 0.0 for B > 0,
+                    0.0 ** 0 ⇒ 1.0,
+                    0.0 ** B ⇒ Infinity for B < 0,
+                    (-0.0) ** B ⇒ -Infinity for B < 0 and odd(B),
+                    A ** B ⇒ 1.0 / A ** (-B) for B < 0 )
+      A << B    Shift left
+                  ( Type of argument B: integer
+                    A << B ⇒ A * 2.0 ** B,
+                    A << 0 ⇒ A,
+                    0.0 << B ⇒ 0.0 )
+      A >> B    Arithmetic shift right
+                  ( Type of argument B: integer,
+                    A >> B ⇒ A / 2.0 ** B,
+                    A >> 0 ⇒ A,
+                    0.0 >> B ⇒ 0.0 )
+      A ? B : C  Ternary operator condition ? thenValue : elseValue
+                  ( Type of argument A: boolean,
+                    TRUE ? a : b ⇒ a,
+                    FALSE ? a : b ⇒ b )
+      float conv A   Conversion of integer to float
+                  ( Type of argument A: integer,
+                    float conv 1 ⇒ 1.0 )
+      digits    Conversion to string with specified precision
+                  ( Type of right operand: integer,
+                    Type of result: string,
+                    0.012345 digits 4 ⇒ "0.0123",
+                    1.2468 digits 2 ⇒ "1.25",
+                    0.125 digits 2 ⇒ "0.12",
+                    0.375 digits 2 ⇒ "0.38",
+                    Infinity digits A ⇒ "Infinity",
+                    -Infinity digits A ⇒ "-Infinity",
+                    NaN digits A ⇒ "NaN" )
+      sci       Conversion to a string in scientific notation
+                  ( Type of right operand: integer,
+                    Type of result: string,
+                    0.012345 sci 4 ⇒ "1.2345e-2",
+                    1.2468 sci 2 ⇒ "1.25e+0",
+                    3.1415 sci 0 ⇒ "3e+0",
+                    0.125 sci 1 ⇒ "1.2e-1",
+                    0.375 sci 1 ⇒ "3.8e-1",
+                    Infinity sci 5 ⇒ "Infinity",
+                    -Infinity sci 6 ⇒ "-Infinity",
+                    NaN sci 7 ⇒ "NaN",
+                    -0.004 sci 2 ⇒ "-4.00e-3" )
+      exp       Set the number of exponent digits in a scientific float notation.
+                  ( Type of left operand: string,
+                    Type of right operand: integer,
+                    Type of result: string,
+                    0.012345 sci 4 exp 2 ⇒ "1.2345e-02",
+                    1.2468e15 sci 2 exp 1 ⇒ "1.25e+15",
+                    3.1415 sci 0 exp 3 ⇒ "3e+000",
+                    0.125 sci 1 exp 2 ⇒ "1.2e-01",
+                    0.375 sci 1 exp 2 ⇒ "3.8e-01",
+                    Infinity sci 5 exp 2 ⇒ "Infinity",
+                    -Infinity sci 6 exp 2 ⇒ "-Infinity",
+                    NaN sci 7 exp 2 ⇒ "NaN",
+                    -0.004 sci 2 exp 2 ⇒ "-4.00e-03" )
+      float parse A   Conversion of string to float
+                  ( Type of argument A: string,
+                    float parse "1.2345"    ⇒  1.2345,
+                    float parse "1.2345e6"  ⇒  1234500.0,
+                    float parse "-1.0e-308" ⇒ -1.0e-308,
+                    float parse "1"         ⇒  1.0,
+                    float parse "2."        ⇒  2.0,
+                    float parse ".5"        ⇒  0.5,
+                    float parse "-.25"      ⇒ -0.25,
+                    float parse "Infinity"  ⇒  Infinity,
+                    float parse "-Infinity" ⇒ -Infinity,
+                    float parse "NaN"       ⇒  NaN,
+                    float parse "3.14PI"    ⇒  EXCEPTION RANGE_ERROR )
+    Relations:
+      =, <>, <, <=, >, >=
+    Functions:
+      abs(A)    Absolute value
+      flt(A)    Conversion of integer to float
+                  ( Type of argument A: integer,
+                    flt(1) ⇒ 1.0 )
+      float(A)  Conversion of integer to float
+                  ( Type of argument A: integer,
+                    float(1) ⇒ 1.0 )
+      float(A)  Conversion of string to float
+                  ( Type of argument A: string,
+                    float("1.2345")    ⇒  1.2345,
+                    float("1.2345e6")  ⇒  1234500.0,
+                    float("-1.0e-308") ⇒ -1.0e-308,
+                    float("1")         ⇒  1.0,
+                    float("2.")        ⇒  2.0,
+                    float(".5")        ⇒  0.5,
+                    float("-.25")      ⇒ -0.25,
+                    float("Infinity")  ⇒  Infinity,
+                    float("-Infinity") ⇒ -Infinity,
+                    float("NaN")       ⇒  NaN,
+                    float("3.14PI")    ⇒  EXCEPTION RANGE_ERROR )
+      floor(A)  Truncation towards negative infinity
+                  ( floor( 1.8) ⇒  1.0, floor( 1.0) ⇒  1.0,
+                    floor(-1.0) ⇒ -1.0, floor(-1.2) ⇒ -2.0,
+                    floor( 0.9) ⇒  0.0, floor(-0.1) ⇒ -1.0 )
+      ceil(A)   Rounding up towards positive infinity
+                  ( ceil( 1.2) ⇒  2.0, ceil( 1.0) ⇒  1.0,
+                    ceil(-1.8) ⇒ -1.0, ceil(-1.0) ⇒ -1.0,
+                    ceil( 0.1) ⇒  1.0, ceil(-0.9) ⇒  0.0 )
+      trunc(A)  Truncation towards zero
+                  ( Type of result: integer,
+                    trunc( 1.8) ⇒  1, trunc( 1.0) ⇒  1,
+                    trunc(-1.8) ⇒ -1, trunc(-1.0) ⇒ -1,
+                    trunc( 0.9) ⇒  0, trunc(-0.9) ⇒  0 )
+      round(A)  Round towards zero
+                  ( Type of result: integer,
+                    round(1.5) ⇒ 2, round(-1.5) ⇒ -2,
+                    round(0.5) ⇒ 1, round(-0.5) ⇒ -1,
+                    round(0.4) ⇒ 0, round(-0.4) ⇒ 0 )
+      str(A)    Conversion to string
+                  ( Type of result: string,
+                    str(Infinity) ⇒ "Infinity",
+                    str(-Infinity) ⇒ "-Infinity",
+                    str(NaN) ⇒ "NaN" )
+      isNaN(A)  Check if A is Not-a-Number
+      isNegativeZero(A)   Check if A is negative zero (-0.0)
+      isPositiveZero(A)   Check if A is +0.0
+      sin(A)    Sine
+      cos(A)    Cosine
+      tan(A)    Tangent
+      exp(A)    Exponential function
+      expm1(A)  Compute exp(x) - 1.0
+      log(A)    Natural logarithm
+                  ( log(A) is okay for A > 0.0,
+                    log(1.0)  ⇒  0.0,
+                    log(0.0)  ⇒ -Infinity,
+                    log(-1.0) ⇒  NaN )
+      log1p(A)  Compute log(1.0 + x)
+                  ( log1p(A) is okay for A > -1.0,
+                    log1p(0.0)  ⇒  0.0,
+                    log1p(-1.0)  ⇒ -Infinity,
+                    log1p(-2.0) ⇒  NaN )
+      log10(A)  Base 10 logarithm
+                  ( log10(A) is okay for A > 0.0,
+                    log10(1.0)  ⇒  0.0,
+                    log10(0.0)  ⇒ -Infinity,
+                    log10(-1.0) ⇒  NaN )
+      log2(A)  Base 2 logarithm
+                  ( log2(A) is okay for A > 0.0,
+                    log2(1.0)  ⇒  0.0,
+                    log2(0.0)  ⇒ -Infinity,
+                    log2(-1.0) ⇒  NaN )
+      sqrt(A)   Square root
+                  ( sqrt(A) is okay for A >= 0.0,
+                    sqrt(-1.0) ⇒ NaN )
+      asin(A)   Inverse sine
+                  ( asin(A) is okay for A >= -1.0 and A <= 1.0,
+                    asin(2.0) ⇒ NaN )
+      acos(A)   Inverse cosine
+                  ( acos(A) is okay for A >= -1.0 and A <= 1.0,
+                    acos(2.0) ⇒ NaN )
+      atan(A)   Inverse tangent
+      atan2(A, B) Inverse tangent of A / B
+      sinh(A)   Hyperbolic sine
+      cosh(A)   Hyperbolic cosine
+      tanh(A)   Hyperbolic tangent
+      rand(A, B) Random number in the range [A, B)
+                 The random values are uniform distributed.
+                  ( rand(A, B) returns a random number such that
+                    A <= rand(A, B) and rand(A, B) < B holds.
+                    rand(A, A) ⇒ EXCEPTION RANGE_ERROR,
+                    rand(1.0, 0.0) ⇒ EXCEPTION RANGE_ERROR )
+      min(A, B) Minimum of two numbers.
+                  ( min(2.5, 4.5) ⇒ 2.5 )
+      max(A, B) Maximum of two numbers.
+                  ( max(2.5, 4.5) ⇒ 4.5 )
+      compare(A, B) Compare function
+                  ( Type of result: integer,
+                    compare(1.9, 2.1) ⇒ -1,
+                    compare(5.3, 5.3) ⇒ 0,
+                    compare(7.8, 7.7) ⇒ 1 )
+      hashCode(A) Hash function
+                  ( Type of result: integer )
+    Statements:
+      A +:= B   Increment A by B
+                  ( A +:= B ⇒ A := A + B )
+      A -:= B   Decrement A by B
+                  ( A -:= B ⇒ A := A - B )
+      A *:= B   Multiplying copy
+                  ( A *:= B ⇒ A := A * B )
+      A /:= B   Dividing copy
+                  ( A /:= B ⇒ A := A / B )
+      ignore(A) Ignore value
+```
+
+[]{#types_complex}
+
+### 5.7 complex
+
+The type [`complex`]{.type} consists of complex numbers represented with
+a [`float`](#types_float){.type} real part and a
+[`float`](#types_float){.type} imaginary part. Complex literals do not
+exist. The [`complex`]{.type} functions are defined in the library
+[\"[complex.s7i]{.lib}\"]{.stri}.
+
+``` tt
+    Elements:
+      var float: re is 0.0;
+      var float: im is 0.0;
+    Constants:
+      complex.value  Default value of complex (complex(0.0))
+    Prefix operators:
+      +         Identity
+      -         Change sign
+      conj      Complex conjugate
+    Infix operators:
+      +         Addition
+      -         Subtraction
+      *         Multiplication
+      /         Division
+                  ( A / complex(0.0) ⇒ complex(NaN, NaN) )
+      **        Power
+                  ( Type of right operand: integer
+                    A ** B is okay for A > complex(0.0),
+                    A ** B is okay for A < complex(0.0),
+                    A ** 0 ⇒ complex(1.0),
+                    complex(0.0) ** B ⇒ complex(0.0) for B > 0,
+                    complex(0.0) ** 0 ⇒ complex(1.0),
+                    complex(0.0) ** B ⇒ complex(Infinity, NaN) for B < 0 )
+      A ? B : C  Ternary operator condition ? thenValue : elseValue
+                  ( Type of argument A: boolean,
+                    TRUE ? a : b ⇒ a,
+                    FALSE ? a : b ⇒ b )
+      complex conv A   Conversion of integer to complex
+                  ( Type of argument A: integer,
+                    complex conv A ⇒ complex(float(A)) )
+      complex conv A   Conversion of float to complex
+                  ( Type of argument A: float,
+                    complex conv A ⇒ complex(A) )
+      digits    Conversion to string with specified precision
+                  ( Type of right operand: integer,
+                    Type of result: string,
+                    complex(3.1415) digits 2 ⇒ "3.14+0.00i" )
+      sci       Conversion to a string in scientific notation
+                  ( Type of right operand: integer,
+                    Type of result: string,
+                    complex(3.1415) sci 2 ⇒ "3.14e+0+0.00e+0i" )
+      complex parse A   Conversion of string to complex
+                  ( Type of argument A: string )
+    Relations:
+      =, <>
+    Functions:
+      abs(A)    Absolute value
+                  ( Type of result: float )
+      sqrAbs(A) Square of absolute value
+                  ( Type of result: float )
+      arg(A)    Argument (=angle of the polar form of A)
+                  ( Type of result: float )
+      complex(A, B)  Return a complex number from its real and imaginary part
+                  ( Type of argument A: float,
+                    Type of argument B: float )
+      complex(A)  Return a complex number from its real part
+                  ( Type of argument A: float )
+      complex(A)  Return a complex number from its real part
+                  ( Type of argument A: integer )
+      polar(A, B)  Return a complex number from polar coordinates
+                  ( Type of argument A: float,
+                    Type of argument B: float )
+      str(A)    Conversion to string
+                  ( Type of result: string,
+                    str(complex(1.125)) ⇒ "1.125+0.0i" )
+      compare(A, B) Compare function
+                  ( Type of result: integer )
+      hashCode(A) Hash function
+                  ( Type of result: integer )
+    Statements:
+      A +:= B   Increment A by B
+                  ( A +:= B ⇒ A := A + B )
+      A -:= B   Decrement A by B
+                  ( A -:= B ⇒ A := A - B )
+      A *:= B   Multiplying copy
+                  ( A *:= B ⇒ A := A * B )
+      A /:= B   Dividing copy
+                  ( A /:= B ⇒ A := A / B )
+      ignore(A) Ignore value
+```
+
+[]{#types_char}
+
+### 5.8 char
+
+The type [`char`]{.type} describes Unicode characters encoded with
+UTF-32. In the source file a [character
+literal](#tokens_Character_literals) is written as UTF-8 encoded
+Unicode character enclosed in single quotes.
+[]{#types_escape_sequences}In order to represent non-printable
+characters and certain printable characters the following escape
+sequences may be used.
+
+  ----------------- -- --------- -- ---------------
+  audible alert        BEL          [`\a`]{.stri}
+  backspace            BS           [`\b`]{.stri}
+  escape               ESC          [`\e`]{.stri}
+  formfeed             FF           [`\f`]{.stri}
+  newline              NL (LF)      [`\n`]{.stri}
+  carriage return      CR           [`\r`]{.stri}
+  horizontal tab       HT           [`\t`]{.stri}
+  vertical tab         VT           [`\v`]{.stri}
+  backslash            (\\)         [`\\`]{.stri}
+  apostrophe           (\')         [`\'`]{.stri}
+  double quote         (\")         [`\"`]{.stri}
+  control-A                         [`\A`]{.stri}
+  \...                              
+  control-Z                         [`\Z`]{.stri}
+  ----------------- -- --------- -- ---------------
+
+Additionally the following escape sequence can be used:
+
+- A backslash followed by an integer literal and a semicolon is
+  interpreted as character with the specified ordinal number. Note that
+  the integer literal is interpreted decimal unless it is written as
+  [based integer](#types_based_integer).
+
+Examples of character literals are:
+
+``` box
+    'a'   ' '   '\n'   '!'   '\\'   '2'   '"'   '\"'   '\''   '\8;'
+```
+
+To use characters beyond ASCII (which is a subset of Unicode) in the
+source file make sure that the editor uses UTF-8 encoded characters. The
+[`char`]{.type} functions are defined in the library
+[\"[char.s7i]{.lib}\"]{.stri}.
+
+``` tt
+    Constants:
+      char.value  Default value of char (' ')
+    Infix operators:
+      A ? B : C  Ternary operator condition ? thenValue : elseValue
+                  ( Type of argument A: boolean,
+                    TRUE ? a : b ⇒ a,
+                    FALSE ? a : b ⇒ b )
+      char conv A   Conversion of integer to char
+                  ( Type of argument A: integer,
+                    char conv 65 ⇒ 'A' )
+      char parse A   Conversion of string to char
+                  ( Type of argument A: string )
+    Relations:
+      =, <>, <, <=, >, >=
+    Functions:
+      ord(A)    Ordinal number
+                  ( Type of result: integer )
+      integer(A)  Ordinal number
+                  ( Type of result: integer )
+      chr(A)    Conversion of integer to char
+                  ( Type of argument: integer )
+      char(A)   Conversion of integer to char
+                  ( Type of argument: integer )
+      char(A)   Conversion of string to char
+                  ( Type of argument A: string )
+      succ(A)   Successor
+                  ( succ(A) ⇒ chr(succ(ord(A))) )
+      pred(A)   Predecessor
+                  ( pred(A) ⇒ chr(pred(ord(A))) )
+      str(A)    Conversion to string
+                  ( Type of result: string,
+                    str('A') ⇒ "A" )
+      literal(A) Conversion to a literal
+                  ( Type of result: string,
+                    literal('A') ⇒ "'A'" )
+      upper(A)  Conversion to upper case character
+                  ( upper('A') ⇒ 'A',
+                    upper('z') ⇒ 'Z' )
+      lower(A)  Conversion to lower case character
+                  ( lower('A') ⇒ 'a',
+                    lower('z') ⇒ 'z' )
+      isLetter  Is it an alphabetic Unicode character
+                  ( isLetter('A') ⇒ TRUE,
+                    isLetter('\16#4e2d;') ⇒ TRUE,
+                    isLetter('4') ⇒ FALSE,
+                    isLetter('+') ⇒ FALSE,
+                    isLetter('\t') ⇒ FALSE,
+                    isLetter(KEY_LEFT) ⇒ FALSE,
+                    isLetter(EOF) ⇒ FALSE )
+      width  Number of screen columns occupied by a Unicode character
+                  ( width('\n') ⇒ 0,
+                    width('\t') ⇒ 0,
+                    width(KEY_LEFT) ⇒ 0,
+                    width(EOF) ⇒ 0 )
+                    width('A') ⇒ 1,
+                    width('\16#4e2d;') ⇒ 2 )
+      rand(A, B) Random character in the range [A, B]
+                 The random values are uniform distributed.
+                  ( rand(A, B) returns a random character such that
+                    A <= rand(A, B) and rand(A, B) <= B holds.
+                    rand(A, A) ⇒ A,
+                    rand('B', 'A') ⇒ EXCEPTION RANGE_ERROR )
+      compare(A, B) Compare function
+                  ( Type of result: integer,
+                    compare('A', 'B') ⇒ -1,
+                    compare('A', 'A') ⇒ 0,
+                    compare('B', 'A') ⇒ 1 )
+      hashCode(A) Hash function
+                  ( Type of result: integer )
+    Statements:
+      incr(A)   Increment
+                  ( incr(A) ⇒ A := succ(A) )
+      decr(A)   Decrement
+                  ( decr(A) ⇒ A := pred(A) )
+      ignore(A) Ignore value
+```
+
+[]{#types_string}
+
+### 5.9 string
+
+The type [`string`]{.type} describes sequences of Unicode characters
+(including the empty string). The characters in the [`string`]{.type}
+use the UTF-32 encoding. Strings are not [`'\0;'`]{.stri} terminated.
+Therefore they can also contain binary data. Although [`string`]{.type}s
+are allowed to grow very big, it can happen that there is not enough
+memory to represent a [`string`]{.type} value. In this case the
+exception [`MEMORY_ERROR`](#errors_MEMORY_ERROR){.exception} is raised.
+In the source file a [string literal](#tokens_String_literals) is
+a sequence of UTF-8 encoded Unicode characters surrounded by double
+quotes.
+
+To represent control characters and certain other characters in strings
+the same [escape sequences](#types_escape_sequences) as for
+character literals may be used. E.g.: Quotation characters (\") inside
+strings can be represented by preceding them with a backslash ( \\\" ).
+Additionally there is the following possibility:
+
+- [Two backslashes with a sequence of blanks, horizontal tabs, carriage
+  returns, new lines and]{#types_string_continuation} [line
+  comments](#tokens_Line_comments) between them are completely
+  ignored. The ignored characters are not part of the string. This can
+  be used to continue a string in the following line. Note that in this
+  case the leading spaces in the new line are not part of the string. It
+  is an [error](#errors_WRONG_STRING_CONTINUATION) if a backslash
+  is followed by a sequence of white-space and there is not a second
+  backslash which ends the sequence. Although this possibility exists
+  also for character literals it is mentioned here, since it makes more
+  sense to use it with string literals
+
+Examples of string literals are:
+
+``` box
+    ""   " "   "\""   "'"   "Gold"   "A\"B !"   "Euro: \8364;"   "CRLF\r\n"
+```
+
+To use characters beyond ASCII (which is a subset of Unicode) in the
+source file make sure that the editor uses UTF-8 encoded characters. The
+[`string`]{.type} functions are defined in the library
+[\"[string.s7i]{.lib}\"]{.stri}.
+
+``` tt
+    Constants:
+      string.value  Default value of string ("")
+    Infix operators:
+      &         String concatenation
+                  ( "All " & "OK" ⇒ "All OK" )
+      <&        String concatenation with weak priority
+                Overloaded for various types with enable_output or enable_io
+                  ( write("i=" <& i digits 2 lpad 6 <& " $"); )
+      mult      String multiplication
+                  ( Type of right operand: integer,
+                    "LA" mult 3 ⇒ "LALALA",
+                    "WORD" mult 0 ⇒ "",
+                    "ANY" mult -1 ⇒ EXCEPTION RANGE_ERROR )
+      A ? B : C  Ternary operator condition ? thenValue : elseValue
+                  ( Type of argument A: boolean,
+                    TRUE ? a : b ⇒ a,
+                    FALSE ? a : b ⇒ b )
+      lpad      Left padding with spaces
+                  ( Type of right operand: integer,
+                    "HELLO" lpad  8 ⇒ "   HELLO",
+                    "HELLO" lpad  6 ⇒ " HELLO",
+                    "HELLO" lpad  5 ⇒ "HELLO",
+                    "HELLO" lpad  4 ⇒ "HELLO",
+                    "HELLO" lpad  0 ⇒ "HELLO",
+                    "HELLO" lpad -8 ⇒ "HELLO" )
+      lpad0     Left padding with zeroes
+                  ( Type of right operand: integer,
+                    "12" lpad0  5 ⇒ "00012",
+                    "12" lpad0  3 ⇒ "012",
+                    "12" lpad0  2 ⇒ "12",
+                    "12" lpad0  1 ⇒ "12",
+                    "12" lpad0  0 ⇒ "12",
+                    "12" lpad0 -5 ⇒ "12" )
+      rpad      Right padding with spaces
+                  ( Type of right operand: integer,
+                    "HELLO" rpad  8 ⇒ "HELLO   ",
+                    "HELLO" rpad  6 ⇒ "HELLO ",
+                    "HELLO" rpad  5 ⇒ "HELLO",
+                    "HELLO" rpad  4 ⇒ "HELLO",
+                    "HELLO" rpad  0 ⇒ "HELLO",
+                    "HELLO" rpad -8 ⇒ "HELLO" )
+      string parse A   Identity
+    Indices:
+      [ A ]     Access one character
+                  ( Type of argument A: integer,
+                    Type of result: char,
+                    "abcde"[1] ⇒ 'a',
+                    "abcde"[5] ⇒ 'e',
+                    "abcde"[0] ⇒ EXCEPTION INDEX_ERROR,
+                    "abcde"[6] ⇒ EXCEPTION INDEX_ERROR )
+      [ A .. B ] Access a substring from position A to B
+                  ( Type of arguments A and B: integer,
+                    S[A .. B] is okay for A >= 1 and B >= pred(A),
+                    "abcde"[2 .. 4] ⇒ "bcd",
+                    "abcde"[2 .. 7] ⇒ "bcde",
+                    "abcde"[4 .. 3] ⇒ "",
+                    "abcde"[4 .. 2] ⇒ EXCEPTION INDEX_ERROR,
+                    "abcde"[6 .. 8] ⇒ "",
+                    "abcde"[1 .. 3] ⇒ "abc",
+                    "abcde"[0 .. 3] ⇒ EXCEPTION INDEX_ERROR,
+                    "abcde"[1 .. 0] ⇒ "",
+                    "abcde"[1 .. -1] ⇒ EXCEPTION INDEX_ERROR )
+      [ A len B ] Access a substring from position A with length B
+                  ( Type of arguments A and B: integer,
+                    S[A len B] is okay for A >= 1 and B >= 0,
+                    "abcde"[2 len 3] ⇒ "bcd",
+                    "abcde"[2 len 5] ⇒ "bcde",
+                    "abcde"[3 len 0] ⇒ "",
+                    "abcde"[6 len 2] ⇒ "",
+                    "abcde"[3 len -1] ⇒ EXCEPTION INDEX_ERROR,
+                    "abcde"[1 len 2] ⇒ "ab",
+                    "abcde"[0 len 2] ⇒ EXCEPTION INDEX_ERROR )
+      [ A fixLen B ] Access a substring from position A with guaranteed length B
+                  ( Type of arguments A and B: integer,
+                    S[A fixLen B] is okay for A >= 1 and A <= length(S) and
+                          B >= 0 and pred(A + B) <= length(S),
+                    "abcde"[2 fixLen 3] ⇒ "bcd",
+                    "abcde"[2 fixLen 5] ⇒ EXCEPTION INDEX_ERROR,
+                    "abcde"[3 fixLen 0] ⇒ "",
+                    "abcde"[6 fixLen 2] ⇒ EXCEPTION INDEX_ERROR,
+                    "abcde"[3 fixLen -1] ⇒ EXCEPTION INDEX_ERROR,
+                    "abcde"[1 fixLen 2] ⇒ "ab",
+                    "abcde"[0 fixLen 2] ⇒ EXCEPTION INDEX_ERROR )
+      [ A .. ]  Access a substring beginning at position A
+                  ( Type of argument A: integer,
+                    S[A ..] is okay for A >= 1,
+                    "abcde"[3 ..] ⇒ "cde",
+                    "abcde"[6 ..] ⇒ "",
+                    ""[1 ..] ⇒ "",
+                    "abcde"[1 ..] ⇒ "abcde",
+                    "abcde"[0 ..] ⇒  EXCEPTION INDEX_ERROR )
+      [ .. A ]  Access a substring ending at position A
+                  ( Type of argument A: integer,
+                    S[.. A] is okay for A >= 0,
+                    "abcde"[.. 4] ⇒ "abcd",
+                    "abcde"[.. 6] ⇒ "abcde",
+                    ""[.. 5] ⇒ "",
+                    "abcde"[.. 0] ⇒ "",
+                    "abcde"[.. -1] ⇒ EXCEPTION INDEX_ERROR )
+    Relations:
+      =, <>, <, <=, >, >=
+    Functions:
+      length(A) Length of string
+                  ( Type of result: integer,
+                    length("") ⇒ 0 )
+      pos(A,B)  First position of char B in string A
+                  ( Type of argument B: char,
+                    Type of result: integer,
+                    pos("ABCABC",'B') ⇒ 2,
+                    pos("XYZ",'A') ⇒ 0 )
+      pos(A,B)  First position of string B in string A
+                  ( Type of result: integer,
+                    pos("ABCDE ABCDE","BC") ⇒ 2,
+                    pos("XYZXYZ","ZYX") ⇒ 0,
+                    pos("123456789","") ⇒ 0 )
+      pos(A,B,C) First position of char B in string A
+                 The search starts at position C of string A
+                  ( Type of argument B: char,
+                    Type of argument C: integer,
+                    Type of result: integer,
+                    pos("ABCABC",'B', 3) ⇒ 5,
+                    pos("XYZYX",'Z', 4) ⇒ 0,
+                    pos("12345",'3', 7) ⇒ 0 )
+      pos(A,B,C) First position of string B in string A
+                 The search starts at position C of string A
+                  ( Type of argument C: integer,
+                    Type of result: integer,
+                    pos("ABCDE ABCDE","BC", 3) ⇒ 8,
+                    pos("XYZXYZ","ZXY", 4) ⇒ 0,
+                    pos("12345","34", 7) ⇒ 0 )
+                    pos("123456789","", 2) ⇒ 0 )
+      rpos(A,B) Last position of char B in string A
+                  ( Type of argument B: char,
+                    Type of result: integer,
+                    rpos("ABCABC",'B') ⇒ 5,
+                    rpos("XYZ",'A') ⇒ 0 )
+      rpos(A,B) Last position of string B in string A
+                  ( Type of result: integer,
+                    rpos("ABCDE ABCDE","BC") ⇒ 8,
+                    rpos("XYZXYZ","ZYX") ⇒ 0,
+                    rpos("123456789","") ⇒ 0 )
+      rpos(A,B,C) Last position of char B in string A
+                  The search starts at position C of string A
+                  ( Type of argument B: char,
+                    Type of argument C: integer,
+                    Type of result: integer,
+                    rpos("ABCABC",'B', 4) ⇒ 2,
+                    rpos("XYZYX",'Z', 2) ⇒ 0,
+                    rpos("12345",'3', 5) ⇒ 3 )
+      rpos(A,B,C) Last position of char B in string A
+                  The search starts at position C of string A
+                  ( Type of argument C: integer,
+                    Type of result: integer,
+                    rpos("ABCABC","BC", 4) ⇒ 2,
+                    rpos("XYZYX","ZY", 2) ⇒ 0,
+                    rpos("12345","34", 5) ⇒ 3 )
+      startsWith(A,B) Determine if a string starts with a prefix.
+                  ( Type of result: boolean,
+                    startsWith("tmp_s7c.c", "tmp_") ⇒ TRUE,
+                    startsWith("example", "E") ⇒ FALSE )
+      endsWith(A,B) Determine if a string ends with a suffix.
+                  ( Type of result: boolean,
+                    endsWith("hello.sd7", ".sd7") ⇒ TRUE,
+                    endsWith("A string", "\0;") ⇒ FALSE )
+      equalAtIndex(A,B,C) Check if A has the searched characters B starting from C.
+                  ( Type of result: boolean,
+                    equalAtIndex("The quick brown fox", "quick", 5) ⇒ TRUE,
+                    equalAtIndex("axis", "xi", 3) ⇒ FALSE )
+      replace(A,B,C) Search A for occurrences of B and replace them with C
+                  ( replace("old gold", "old", "one") ⇒ "one gone" )
+      replace2(A,B,C,D) Search A for occurrences of B followed by C and
+                replace them with D.
+                  ( replace2("x := (*ord*) y;", "(*", "*)", "") ⇒ "x :=  y;" )
+      split(A,B) Split A into strings delimited by B
+                  ( Type of argument B: char,
+                    Type of result: array string,
+                    split("", ':') ⇒ [](""),
+                    split(":", ':') ⇒ []("", ""),
+                    split("15:30", ':') ⇒ []("15", "30") )
+      split(A,B) Split A into strings delimited by B
+                  ( Type of result: array string,
+                    split("", "") ⇒ [](""),
+                    split("ABC", "") ⇒ []("ABC"),
+                    split("", "; ") ⇒ [](""),
+                    split("writeln; readln;", "; ") ⇒ []("writeln", "readln;") )
+      join(A,B) Join the elements of A together with B's between them
+                  ( Type of argument A: array string,
+                    Type of argument B: char,
+                    join([]("This", "is", "a", "test"), ' ') ⇒ "This is a test" )
+      join(A,B) Join the elements of A together with B's between them
+                  ( Type of argument A: array string,
+                    Type of argument B: string,
+                    join([]("pro", "gram"), "") ⇒ "program" )
+      trim(A)   Removes leading and trailing spaces and control chars
+                  ( trim(" /n xyz /r") ⇒ "xyz" )
+      ltrim(A)   Removes leading spaces and control chars
+                  ( ltrim(" /n xyz /r") ⇒ "xyz /r" )
+      rtrim(A)   Removes trailing spaces and control chars
+                  ( rtrim(" /n xyz /r") ⇒ " /n xyz" )
+      str(A)    Conversion to string
+                  ( str(A) ⇒ A )
+      literal(A) Conversion to a literal
+                  ( literal("ABC") ⇒ "\"ABC\"",
+                    literal("O' \"X\"") ⇒ "\"O' \\\"X\\\"\"" )
+      upper(A)  Conversion to upper case characters
+                  ( upper("Upper") ⇒ "UPPER" )
+      lower(A)  Conversion to lower case characters
+                  ( lower("Lower") ⇒ "lower" )
+      compare(A, B) Compare function
+                  ( Type of result: integer,
+                    compare("ABC", "ABCD") ⇒ -1,
+                    compare("ABC", "ABC") ⇒ 0,
+                    compare("ABCD", "ABCC") ⇒ 1 )
+      hashCode(A) Hash function
+                  ( Type of result: integer )
+    Statements:
+      A &:= B   Append B to A
+                  ( A &:= B ⇒ A := A & B )
+      A &:= B   Append B to A
+                  ( Type of argument B: char,
+                    A &:= B ⇒ A := A & str(B) )
+      A @:= [B] C  Assign C to element B of string A
+                  ( Type of argument B: integer,
+                    Type of argument C: char,
+                    A @:= [B] C ⇒
+                        A := A[..pred(B)] & str(C) & A[succ(B)..],
+                    A @:= [0] 'x' ⇒ EXCEPTION INDEX_ERROR,
+                    A @:= [succ(length(A))] 'x' ⇒ EXCEPTION INDEX_ERROR )
+      A @:= [B] C  Assign C to the position B of string A
+                  ( Type of argument B: integer,
+                    A @:= [B] C ⇒
+                        A := A[..pred(B)] & C & A[B+length(C)..],
+                    A @:= [0] "xyz" ⇒ EXCEPTION INDEX_ERROR,
+                    A @:= [pred(length(A))] "xyz" ⇒ EXCEPTION INDEX_ERROR )
+      ignore(A) Ignore value
+      for forVar range aString do
+        statements
+      end for   Loop over all elements of a string
+                  ( Type of argument forVar: char,
+                    Type of argument statements: proc )
+      for key keyVar range aString do
+        statements
+      end for   Loop over all indices of a string
+                  ( Type of argument keyVar: integer,
+                    Type of argument statements: proc )
+      for forVar key keyVar range aString do
+        statements
+      end for   Loop over all elements and indices of a string
+                  ( Type of argument forVar: char,
+                    Type of argument keyVar: integer,
+                    Type of argument statements: proc )
+      for forVar range aString until condition do
+        statements
+      end for   Loop over all elements of a string until condition is TRUE
+                Check the condition before the statements in the loop body are executed.
+                  ( Type of argument forVar: char,
+                    Type of argument condition: boolean,
+                    Type of argument statements: proc )
+      for key keyVar range aString until condition do
+        statements
+      end for   Loop over all indices of a string until condition is TRUE
+                Check the condition before the statements in the loop body are executed.
+                  ( Type of argument keyVar: integer,
+                    Type of argument condition: boolean,
+                    Type of argument statements: proc )
+      for forVar key keyVar range aString until condition do
+        statements
+      end for   Loop over all elements and indices of a string until condition is TRUE
+                Check the condition before the statements in the loop body are executed.
+                  ( Type of argument forVar: char,
+                    Type of argument keyVar: integer,
+                    Type of argument condition: boolean,
+                    Type of argument statements: proc )
+```
+
+[]{#types_array}
+
+### 5.10 array
+
+The type [`array`]{.type}` `[`baseType`]{.type} describes sequences of
+[`baseType`]{.type} elements (including the empty sequence). Examples of
+array type declarations are:
+
+``` indent
+const type: striArrayType is array string;
+const type: structArrayType is array aStructType;
+```
+
+This defines [`striArrayType`]{.type} as an array type with
+[`string`](#types_string){.type} elements. The second line defines
+[`structArrayType`]{.type} as an array type with [`aStructType`]{.type}
+elements. Variables of these types are declared with:
+
+``` indent
+var striArrayType: striArr1 is striArrayType.value; # Empty array with starting index 1.
+var striArrayType: striArr2 is 0 times "";          # Empty array with starting index 1.
+var striArrayType: striArr4 is [0 .. -1] times "";  # Empty array with starting index 0.
+var striArrayType: striArr3 is [0 len 0] times "";  # Empty array with starting index 0.
+var striArrayType: striArr5 is [] ("one", "two");   # Array with two string elements and starting index 1.
+var striArrayType: striArr6 is [0] ("zero", "one"); # Array with two string elements and starting index 0.
+var structArrayType: structArr1 is structArrayType.value;
+var structArrayType: structArr2 is 10 times aStructType.value;
+var structArrayType: structArr3 is [42 .. 365] times aStructType.value;
+```
+
+An element of an array can be accessed with an
+[`integer`](#types_integer){.type} index. The minimum and maximum
+indices of an array are part of the value and can be obtained with the
+functions [`minIdx`]{.func} and [`maxIdx`]{.func}. There are functions
+which generate arrays with the default minimum index of 1 and other
+functions which generate arrays with the minimum index taken from a
+parameter. The [`array`]{.type} functions are defined in the library
+[\"[array.s7i]{.lib}\"]{.stri}.
+
+Arrays with non-integer index are defined in the library
+[\"[idxarray.s7i]{.lib}\"]{.stri}. An array type with
+[`char`](#types_char){.type} index and
+[`bigInteger`](#types_bigInteger){.type} elements is defined as:
+
+``` indent
+const type: charIndexArray is array [char] bigInteger;
+```
+
+Variables of this type are declared with:
+
+``` indent
+var charIndexArray: bigArr1 is charIndexArray.value;
+var charIndexArray: bigArr2 is char times 42_;
+var charIndexArray: bigArr3 is [char] (0_, 1_, 2_);
+var charIndexArray: bigArr4 is [' '] (32_, 33_, 34_);
+```
+
+The definition of [`charIndexArray`]{.type} defines also the special
+[`times`]{.op} operator from above and the special possibilities to
+define literals of [`charIndexArray`]{.type}.
+
+``` tt
+    Literal:
+      [] (elem1, elem2)      Create an array with the given elements.
+                             Index type is integer and starting index is 1.
+      [0] (elem1, elem2)     Create an array with the given elements.
+                             Index type is integer and starting index is 0.
+      [char] (elem1, elem2)  Create an array with the given elements.
+                             Index type is char and starting index is char.value (' ').
+      ['A'] (elem1, elem2)   Create an array with the given elements.
+                             Index type is char and starting index is 'A'.
+    Infix operators:
+      &         Array concatenation
+      times     Array generation
+                  ( Left operand: integer,
+                    Right operand: baseType,
+                    A times B Generates an array baseType with A elements of B,
+                    3 times B ⇒ [] (B, B, B),
+                    0 times B ⇒ empty array with starting index 1,
+                    (1 times B)[1] ⇒ B,
+                    (0 times B)[1] ⇒ EXCEPTION INDEX_ERROR,
+                    -1 times B ⇒ EXCEPTION RANGE_ERROR )
+      [ A .. B ] times C    Array generation
+                  ( Type of arguments A and B: integer,
+                    Type of argument C: baseType,
+                    [ A .. B ] times C Generates an array baseType
+                    with pred(B - A) elements of C,
+                    [ -1 .. -2 ] times B ⇒ empty array with starting index -1,
+                    [ -1 .. -3 ] times B ⇒ EXCEPTION RANGE_ERROR )
+      [ A len L ] times C    Array generation
+                  ( Type of arguments A and L: integer,
+                    Type of argument C: baseType,
+                    [ A len L ] times C Generates an array baseType
+                    with L elements of C,
+                    [ -1 len 0 ] times B ⇒ empty array with starting index -1,
+                    [ -1 len -1 ] times B ⇒ EXCEPTION RANGE_ERROR )
+      indexType times A   Array generation for indices from indexType.first
+                          to indexType.last.
+                  ( Type of argument A: baseType,
+                    boolean times 5 ⇒ [FALSE] (5, 5) )
+    Indices:
+      [ A ]     Access one array element
+                  ( Type of argument A: integer,
+                    Type of result: baseType,
+                    A[minIdx(A)] ⇒ First element,
+                    A[maxIdx(A)] ⇒ Last element,
+                    A[pred(minIdx(A))] ⇒ EXCEPTION INDEX_ERROR,
+                    A[succ(maxIdx(A))] ⇒ EXCEPTION INDEX_ERROR )
+      [ A .. B ]  Get a sub array from the position A to the position B
+                  ( Type of arguments A and B: integer,
+                    X[A .. B] is okay for A >= minIdx(X) and B >= pred(A),
+                    anArray[pred(minIdx(anArray)) .. n] ⇒ EXCEPTION INDEX_ERROR,
+                    anArray[n .. n - 2] ⇒ EXCEPTION INDEX_ERROR )
+      [ A len B ]  Get a sub array from the position A with maximum length B
+                  ( Type of arguments A and B: integer,
+                    X[A len B] is okay for A >= minIdx(X) and B >= 0,
+                    anArray[pred(minIdx(anArray)) len n] ⇒ EXCEPTION INDEX_ERROR,
+                    anArray[n len -1] ⇒ EXCEPTION INDEX_ERROR )
+      [ A .. ]  Get a sub array beginning at position A
+                  ( Type of argument A: integer,
+                    X[A ..] is okay for A >= minIdx(X),
+                    anArray[pred(minIdx(anArray)) ..] ⇒ EXCEPTION INDEX_ERROR )
+      [ .. A ]  Get a sub array ending at position A
+                  ( Type of argument A: integer,
+                    X[.. A] is okay for A >= pred(minIdx(X)),
+                    anArray[.. minIdx(anArray) - 2] ⇒ EXCEPTION INDEX_ERROR )
+    Relations:
+      =, <>
+    Functions:
+      length(A) Length of array
+                  ( Type of result: integer,
+                    length(A) = succ(maxIdx(A) - minIdx(A)),
+                    length([] (2, 3, 5))  ⇒ 3,
+                    length([0] (2, 3, 5)) ⇒ 3,
+                    length([2] (2, 3, 5)) ⇒ 3,
+                    length(['a'] (1, 2, 3)) ⇒ 3
+                    length(0 times TRUE) ⇒ 0,
+                    length(5 times TRUE) ⇒ 5 )
+      minIdx(A) Minimum index of array
+                  ( Type of result: integer,
+                    minIdx([] (2, 3, 5))  ⇒ 1,
+                    minIdx([0] (2, 3, 5)) ⇒ 0,
+                    minIdx([2] (2, 3, 5)) ⇒ 2,
+                    minIdx(['a'] (1, 2, 3)) ⇒ 'a',
+                    minIdx(3 times TRUE) ⇒ 1,
+                    minIdx([-1 .. 4] times TRUE) ⇒ -1 )
+      maxIdx(A) Maximum index of array
+                  ( Type of result: integer,
+                    maxIdx([] (2, 3, 5))  ⇒ 3,
+                    maxIdx([0] (2, 3, 5)) ⇒ 2,
+                    maxIdx([2] (2, 3, 5)) ⇒ 4,
+                    maxIdx(['a'] (1, 2, 3)) ⇒ 'c',
+                    maxIdx(3 times TRUE) ⇒ 3,
+                    maxIdx([-1 .. 4] times TRUE) ⇒ 4 )
+      rand(A)   Random element from an array
+                The random elements are uniform distributed.
+                  ( Type of result:  baseType )
+      remove(A,B) Remove element with index B from array A and
+                  return the removed element
+                  ( Type of argument B: integer,
+                    Type of result: baseType,
+                    remove(A,B) is okay for B >= minIdx(A) and B <= maxIdx(A),
+                    remove(anArray, 0) ⇒ EXCEPTION INDEX_ERROR for minIdx(anArray) = 1,
+                    remove(anArray, 5) ⇒ EXCEPTION INDEX_ERROR for maxIdx(anArray) = 4 )
+      remove(A,B,C) Remove the sub-array with with index B and length C from array A and
+                    return the removed sub-array
+                  ( Type of argument B: integer,
+                    Type of argument C: integer,
+                    remove(A,B,C) is okay for B >= minIdx(A) and B <= maxIdx(A) and C >= 0,
+                    remove(anArray, 0, 1) ⇒ EXCEPTION INDEX_ERROR for minIdx(anArray) = 1,
+                    remove(anArray, 6, 1) ⇒ EXCEPTION INDEX_ERROR for maxIdx(anArray) = 4,
+                    remove(anArray, 1, -1) ⇒ EXCEPTION INDEX_ERROR )
+      sort(A)   Sort array using the compare(baseType, baseType) function
+    Statements:
+      A &:= B   Append B to A
+                  ( A &:= B ⇒ A := A & B )
+      A &:= B   Append element B to A
+                  ( Type of argument B: baseType,
+                    A &:= B ⇒ A := A & [] (B) )
+      insert(A,B,C) Insert element C into array A at index B
+                  ( Type of argument B: integer,
+                    Type of argument C: baseType,
+                    insert(A,B,C) is okay for B >= minIdx(A) and B <= succ(maxIdx(A)),
+                    insert(anArray, 0, anElement) ⇒ EXCEPTION INDEX_ERROR for minIdx(anArray) = 1,
+                    insert(anArray, 6, anElement) ⇒ EXCEPTION INDEX_ERROR for maxIdx(anArray) = 4 )
+      insert(A,B,C) Insert array C into array A at index B
+                  ( Type of argument B: integer,
+                    insert(A,B,C) is okay for B >= minIdx(A) and B <= succ(maxIdx(A)),
+                    insert(anArray, 0, anotherAnarry) ⇒ EXCEPTION INDEX_ERROR for minIdx(anArray) = 1,
+                    insert(anArray, 6, anotherAnarry) ⇒ EXCEPTION INDEX_ERROR for maxIdx(anArray) = 4 )
+      insert(A, B) Insert B into the sorted array A
+                  ( Type of argument B: baseType )
+      ignore(A) Ignore value
+      for forVar range anArray do
+        statements
+      end for   Loop over all elements of an array
+                  ( Type of argument forVar: baseType,
+                    Type of argument statements: proc )
+      for key keyVar range anArray do
+        statements
+      end for   Loop over all indices of an array
+                  ( Type of argument keyVar: indexType,
+                    Type of argument statements: proc )
+      for forVar key keyVar range anArray do
+        statements
+      end for   Loop over all elements and indices of an array
+                  ( Type of argument forVar: baseType,
+                    Type of argument keyVar: indexType,
+                    Type of argument statements: proc )
+      for forVar range anArray until condition do
+        statements
+      end for   Loop over all elements of an array until condition is TRUE
+                Check the condition before the statements in the loop body are executed.
+                  ( Type of argument forVar: baseType,
+                    Type of argument condition: boolean,
+                    Type of argument statements: proc )
+      for key keyVar range anArray until condition do
+        statements
+      end for   Loop over all indices of an array until condition is TRUE
+                Check the condition before the statements in the loop body are executed.
+                  ( Type of argument keyVar: indexType,
+                    Type of argument condition: boolean,
+                    Type of argument statements: proc )
+      for forVar key keyVar range anArray until condition do
+        statements
+      end for   Loop over all elements and indices of an array until condition is TRUE
+                Check the condition before the statements in the loop body are executed.
+                  ( Type of argument forVar: baseType,
+                    Type of argument keyVar: indexType,
+                    Type of argument condition: boolean,
+                    Type of argument statements: proc )
+```
+
+[]{#types_hash}
+
+### 5.11 hash
+
+The type [`hash`]{.type}` `[`[keyType]`]{.type}` `[`baseType`]{.type}
+describes hash tables with elements of [`baseType`]{.type}. The elements
+can be accessed with an index of [`keyType`]{.type}. An example of a
+hash type declaration is:
+
+``` indent
+const type: aHashType is hash [string] integer;
+```
+
+This defines [`aHashType`]{.type} as a hash type with
+[`integer`](#types_integer){.type} elements and
+[`string`](#types_string){.type} keys. Variables of this type are
+declared with:
+
+``` indent
+var aHashType: aHashTable1 is aHashType.value;                # Empty hash table.
+var aHashType: aHashTable2 is [] (["one" : 1], ["two" : 2]);  # Hash with two elements which map strings to integers.
+```
+
+The expressions [`aHashType`]{.type}`.value` and
+[`aHashType`]{.type}`.EMPTY_HASH` describe empty hash tables. Beside
+them there are no hash table literals. The [`keyType`]{.type} of a hash
+needs to provide the functions [`hashCode`]{.func} and
+[`compare`]{.func}. Besides this the [`keyType`]{.type} can be any type.
+The [`hash`]{.type} functions are defined in the library
+[\"[hash.s7i]{.lib}\"]{.stri}.
+
+``` tt
+    Literal:
+      [] ([key1 : value1], [key2 : value2])  Create a hash with the given keys and corresponding values.
+    Constants:
+      hashType.EMPTY_HASH  Empty hash table
+    Infix operators:
+      in        Element
+                  ( Left argument: baseType,
+                    Type of result: boolean )
+      not in    Is not Element
+                  ( Left argument: baseType,
+                    Type of result: boolean )
+    Indices:
+      [ A ]     Access one hash table element
+                  ( Type of argument A: keyType,
+                    Type of result: baseType )
+    Relations:
+      =, <>
+    Functions:
+      length(A) Number of elements in hash table A
+                  ( Type of result: integer,
+                    length(hashType.EMPTY_HASH) ⇒ 0 )
+      keys(A)   Unsorted array of keys from hash table A
+                  ( Type of result: array keyType )
+      values(A) Unsorted array of values from hash table A
+                  ( Type of result: array baseType )
+      flip(A)   Deliver a hash with keys and values flipped
+                  ( Type of result: hash [baseType] array keyType )
+    Statements:
+      incl(A,B,C) Include element B to hash table A
+                  ( Type of argument B: keyType,
+                    Type of argument C: baseType )
+      excl(A,B) Exclude element B from hash table A
+                  ( Type of argument B: keyType )
+      A @:= [B] C  Assign C to element B of hash table A
+                  ( Type of argument B: keyType,
+                    Type of argument C: baseType )
+      ignore(A) Ignore value
+      for forVar range aHash do
+        statements
+      end for   Unsorted loop over all values of a hash
+                  ( Type of argument forVar: baseType,
+                    Type of argument statements: proc )
+      for key keyVar range aHash do
+        statements
+      end for   Unsorted loop over all keys of a hash
+                  ( Type of argument keyVar: keyType,
+                    Type of argument statements: proc )
+      for forVar key keyVar range aHash do
+        statements
+      end for   Unsorted loop over all values and keys of a hash
+                  ( Type of argument forVar: baseType,
+                    Type of argument keyVar: keyType,
+                    Type of argument statements: proc )
+```
+
+[]{#types_set}
+
+### 5.12 set
+
+The type [`set`]{.type}` `[`of`]{.type}` `[`baseType`]{.type} describes
+a set of elements of a [`baseType`]{.type}. (including the empty set).
+An example of a set type declaration is:
+
+``` indent
+const type: aSetType is set of integer;
+```
+
+This defines [`aSetType`]{.type} as a set type with
+[`integer`](#types_integer){.type} elements. Variables of this type are
+declared with:
+
+``` indent
+var aSetType: aSet is aSetType.value;
+var aSetType: aSet is {1, 2, 3};
+var aSetType: aSet is {1 .. 5};
+```
+
+The type [`set`]{.type}` `[`of`]{.type}` `[`baseType`]{.type} is defined
+in the library [\"[set.s7i]{.lib}\"]{.stri}. This abstract data type
+decides about the implementation of the set. When [`baseType`]{.type}
+values can be mapped to [`integer`](#types_integer){.type} with the
+[`ord`]{.func} function and [`ord`]{.func} does never raise an exception
+the set is implemented as [`bitset(baseType)`]{.type} (defined in the
+library [\"[bitsetof.s7i]{.lib}\"]{.stri}), otherwise the set is
+implemented as [`hashset(baseType)`]{.type} (defined in the library
+[\"[hashsetof.s7i]{.lib}\"]{.stri}). The type
+[`set`]{.type}` `[`of`]{.type}` `[`integer`](#types_integer){.type} is
+an alternate name for [`bitset`]{.type}, which is defined in the library
+[\"[bitset.s7i]{.lib}\"]{.stri}.
+
+``` tt
+    Constants:
+      {}                 Empty set of the type bitset
+      EMPTY_SET          Empty set of the type bitset
+      {1, 2}             Set with 1 and 2 (type: bitset)
+      {'a', 'b', 'c'}    Set with three characters.
+      {"black", "white"} Set with two strings.
+      bitset.value       Default value of bitset ({})
+      setType.EMPTY_SET  Empty set of the type setType
+      setType.value      Default value of setType (setType.EMPTY_SET)
+    Infix operators:
+      |         Union
+                  ( {1, 2} | {1, 3} ⇒ {1, 2, 3},
+                    {'a', 'b'} | {'a', 'c'} ⇒ {'a', 'b', 'c'},
+                    {"one", "two"} | {"one", "three"} ⇒ {"one", "two", "three"} )
+      &         Intersection
+                  ( {1, 2} & {1, 3} ⇒ {1},
+                    {'a', 'b'} & {'a', 'c'} ⇒ {'a'},
+                    {"one", "two"} & {"one", "three"} ⇒ {"one"} )
+      -         Difference
+                  ( {1, 2} - {1, 3} ⇒ {2},
+                    {'a', 'b'} - {'a', 'c'} ⇒ {'b'},
+                    {"one", "two"} - {"one", "three"} ⇒ {"two"} )
+      ><        Symmetric Difference
+                  ( {1, 2} >< {1, 3} ⇒ {2, 3},
+                    {'a', 'b'} >< {'a', 'c'} ⇒ {'b', 'c'},
+                    {"one", "two"} >< {"one", "three"} ⇒ {"two", "three"} )
+      in        Element
+                  ( Left argument: baseType,
+                    Type of result: boolean,
+                    2 in {2, 3, 5, 7} ⇒ TRUE,
+                    4 in {2, 3, 5, 7} ⇒ FALSE,
+                    'a' in {'a', 'c', 'd'} ⇒  TRUE,
+                    'b' in {'a', 'c', 'd'} ⇒ FALSE,
+                    "one" in {"one", "three"}) ⇒ TRUE,
+                    "two" in {"one", "three"}) ⇒ FALSE )
+      not in    Is not Element
+                  ( Left argument: baseType,
+                    Type of result: boolean,
+                    2 not in {2, 3, 5, 7} ⇒ FALSE,
+                    4 not in {2, 3, 5, 7} ⇒ TRUE,
+                    'a' not in {'a', 'c', 'd'} ⇒ FALSE,
+                    'b' not in {'a', 'c', 'd'} ⇒ TRUE,
+                    "one" not in {"one", "three"}) ⇒ FALSE,
+                    "two" not in {"one", "three"}) ⇒ TRUE )
+    Relations:
+      =, <>     Equal and not equal
+                  ( Type of result: boolean )
+      <=        Subset
+                  ( Type of result: boolean,
+                    A <= B ⇒ TRUE when no element X exists for which
+                       X in A and X not in B
+                    holds.
+                    A <= B ⇒ FALSE when an element X exists for which
+                       X in A and X not in B
+                    holds.
+                    setType.EMPTY_SET <= A ⇒ TRUE,
+                    A <= setType.EMPTY_SET ⇒ FALSE for A <> EMPTY_SET,
+                    A <= B ⇒ B >= A )
+      <         Proper subset
+                  ( Type of result: boolean,
+                    A < B ⇒ A <= B and A <> B,
+                    setType.EMPTY_SET < A ⇒ TRUE for A <> EMPTY_SET,
+                    A < setType.EMPTY_SET ⇒ FALSE,
+                    A < B ⇒ B > A )
+      >=        Superset
+                  ( Type of result: boolean,
+                    A >= B ⇒ TRUE when no element X exists for which
+                       X in B and X not in A
+                    holds.
+                    A >= B ⇒ FALSE when an element X exists for which
+                       X in B and X not in A
+                    holds.
+                    A >= setType.EMPTY_SET ⇒ TRUE,
+                    setType.EMPTY_SET >= A ⇒ FALSE for A <> EMPTY_SET,
+                    A >= B ⇒ B <= A )
+      >         Proper superset
+                  ( Type of result: boolean,
+                    A > B ⇒ A >= B and A <> B,
+                    A > setType.EMPTY_SET ⇒ TRUE for A <> EMPTY_SET,
+                    setType.EMPTY_SET > A ⇒ FALSE,
+                    A > B ⇒ B < A )
+    Functions:
+      bitset(A) Convert an integer number to a bitset
+                  ( Type of argument A: integer,
+                    bitset(2220) ⇒ {2, 3, 5, 7, 11} )
+      bitset(A) Convert a string to a bitset
+                  ( Type of argumant A: string,
+                    bitset("{}") ⇒ {},
+                    bitset("{2, 3, 5, 7}") ⇒ {2, 3, 5, 7} )
+      integer(A) Convert a bitset to an integer
+                  ( Type of result: integer,
+                    integer({2, 3, 5, 7, 11}) ⇒ 2220 )
+      card(A)   Cardinality of a set
+                  ( Type of result: integer,
+                    card({2, 3, 5, 7, 11}) ⇒ 5,
+                    card({'a', 'b', 'c'}) ⇒ 3,
+                    card({"one", "two", "three"}) ⇒ 3
+                    card(setType.EMPTY_SET) ⇒ 0 )
+      min(A)    Minimum element
+                  ( Type of result: baseType,
+                    Delivers the element from the set for
+                    which the following condition holds:
+                       Element <= X
+                    for all X which are in the set.
+                    min({2, 3, 5, 7, 11}) ⇒ 2,
+                    min({'a', 'b', 'c'}) ⇒ 'a',
+                    min(setType.EMPTY_SET) ⇒ EXCEPTION RANGE_ERROR )
+      max(A)    Maximum element
+                  ( Type of result: baseType,
+                    Delivers the element from the set for
+                    which the following condition holds:
+                       Element >= X
+                    for all X which are in the set.
+                    max({2, 3, 5, 7, 11}) ⇒ 11,
+                    max({'a', 'b', 'c'}) ⇒ 'c',
+                    max(setType.EMPTY_SET) ⇒ EXCEPTION RANGE_ERROR )
+      next(A, B) Minimum element of set A that is larger than B
+                  ( Type of argument B: baseType,
+                    Type of result: baseType,
+                    next({2, 3, 5, 7, 11}, 2) ⇒ 3,
+                    next({2, 3, 5, 7, 11}, 3) ⇒ 5,
+                    next({2, 3, 5, 7, 11}, 7) ⇒ 11,
+                    next({2, 3, 5, 7, 11}, 11) ⇒ EXCEPTION RANGE_ERROR,
+                    next({}, 1) ⇒ EXCEPTION RANGE_ERROR,
+                    next(A, max(A)) ⇒ EXCEPTION RANGE_ERROR )
+      str(A)    Conversion to string
+                  ( Type of result: string,
+                    str(setType.EMPTY_SET) ⇒ "{}",
+                    str({}) ⇒ "{}",
+                    str({1, 2}) ⇒ "{1, 2}" )
+      rand(A)   Random element from a set
+                The random elements are uniform distributed.
+                  ( Type of result: baseType,
+                    rand(setType.EMPTY_SET) ⇒ EXCEPTION RANGE_ERROR )
+      compare(A, B) Compare function
+                  ( Type of result: integer )
+      hashCode(A) Hash function
+                  ( Type of result: integer )
+      toArray(A)  Obtain an array containing all the values in A
+                  ( Type of result: array baseType,
+                    toArray({2, 3, 5}) ⇒ [](2, 3, 5),
+                    toArray({'a', 'b', 'c'}) ⇒ []('a', 'b', 'c') )
+    Statements:
+      A |:= B   Assign the union of A and B to A
+      A &:= B   Assign the intersection of A and B to A
+      A -:= B   Assign the difference of A and B to A
+      A @:= [B] C  Add or remove B to respectively from A
+                  ( Type of argument B: baseType,
+                    Type of argument C: boolean,
+                    A @:= [B] TRUE ⇒ incl(A,B),
+                    A @:= [B] FALSE ⇒ excl(A,B) )
+      incl(A,B) Include element B to set A
+                  ( Type of argument B: baseType )
+      excl(A,B) Exclude element B from set A
+                  ( Type of argument B: baseType )
+      ignore(A) Ignore value
+      for forVar range aSet do
+        statements
+      end for   Loop over all elements of a set
+                  ( Type of argument forVar: baseType,
+                    Type of argument statements: proc )
+```
+
+[]{#types_struct}
+
+### 5.13 struct
+
+The type [`struct`]{.type} describes all structured types. An example of
+a struct type declaration is:
+
+``` indent
+const type: aStructType is new struct
+    var string: name is "";
+  end struct
+```
+
+Variables of this type are declared with:
+
+``` indent
+var aStructType: aStructVariable is aStructType.value;
+```
+
+In [`aStructType`]{.type}`.value` all elements have the initialisation
+values from the struct declaration of [`aStructType`]{.type}. Besides
+[`aStructType`]{.type}`.value` there are no struct literals.
+
+``` tt
+    Type generators:
+      new struct
+        var aType: name is value;
+        ...
+      end struct
+                Create new structure type
+
+      new baseType struct
+        var aType: name is value;
+        ...
+      end struct
+                Create new structure type as subtype of baseType,
+                which is not a structure
+
+      sub baseType struct
+        var aType: name is value;
+        ...
+      end struct
+                Create new structure type as subtype of baseType,
+                which is a structure type. The new structure type inherits all
+                elements of the structure type baseType.
+
+      var aType: name is value
+                Declare structure element 'name' with 'value'
+
+    Infix operators:
+      .         Access Element of STRUCT
+                  ( example.element )
+      ->        Access Element of ptr STRUCT
+                  ( example->element )
+    Relations:
+      =, <>
+    Statements:
+      ignore(A) Ignore value
+```
+
+[]{#types_enumeration}
+
+### 5.14 enumeration
+
+With
+
+``` indent
+const type: anEnumType is new enum
+    enum_literal1, enum_literal2
+  end enum;
+```
+
+a new enumeration type is declared. The values of this type are:
+
+``` box
+    enum_literal1 and enum_literal2
+```
+
+For an enumeration type only few operations are predefined. Additional
+operations must be defined separately. So it is necessary to define the
+functions [`str`]{.func} and `parse` in order to do I/O for a new
+enumeration type. E.g.:
+
+``` indent
+const func string: str (in anEnumType: enumValue) is
+    return literal(enumValue);
+
+enable_output(anEnumType);
+```
+
+The need to define [`str`]{.func} opens the oportunity to convert to
+strings, that differ from the original literals.
+
+``` tt
+    Constants:
+      anEnumType.value  Default value of anEnumType (enum_literal1)
+      anEnumType.first  Minimum value of anEnumType (enum_literal1)
+      anEnumType.last   Maximum value of anEnumType (enum_literal2)
+    Infix operators:
+      A ? B : C  Ternary operator condition ? thenValue : elseValue
+                  ( Type of argument A: boolean,
+                    TRUE ? a : b ⇒ a,
+                    FALSE ? a : b ⇒ b )
+      anEnumType conv A  Conversion from integer A to anEnumType
+                  ( Type of argument A: integer,
+                    anEnumType conv 0 ⇒ enum_literal1,
+                    anEnumType conv 1 ⇒ enum_literal2,
+                    anEnumType conv 2 ⇒ EXCEPTION RANGE_ERROR,
+                    anEnumType conv (-1) ⇒ EXCEPTION RANGE_ERROR )
+      integer conv A   Conversion from anEnumType A to integer
+                  ( Type of result: integer,
+                    integer conv enum_literal1 ⇒ 0,
+                    integer conv enum_literal2 ⇒ 1 )
+    Relations:
+      =, <>, <, <=, >, >=
+    Functions:
+      ord(A)    Ordinal number
+                  ( Type of result: integer,
+                    ord(enum_literal1) ⇒ 0,
+                    ord(enum_literal2) ⇒ 1 )
+      integer(A) Ordinal number
+                  ( Type of result: integer,
+                    integer(enum_literal1) ⇒ 0,
+                    integer(enum_literal2) ⇒ 1 )
+      succ(A)   Successor
+                  ( succ(A) ⇒ enumType conv succ(ord(A)),
+                    succ(enum_literal1) ⇒ enum_literal2,
+                    succ(anEnumType.last) ⇒ EXCEPTION RANGE_ERROR )
+      pred(A)   Predecessor
+                  ( pred(A) ⇒ enumType conv pred(ord(A)),
+                    pred(enum_literal2) ⇒ enum_literal1,
+                    pred(anEnumType.first) ⇒ EXCEPTION RANGE_ERROR )
+      literal(A) Conversion to a literal
+                  ( Type of result: string,
+                    literal(enum_literal1) ⇒ "enum_literal1",
+                    literal(enum_literal2) ⇒ "enum_literal2" )
+      rand(A, B) Random value in the range [A, B]
+                 The random values are uniform distributed.
+                  ( rand(A, B) returns a random enumeration value such that
+                    A <= rand(A, B) and rand(A, B) <= B holds.
+                    rand(A, A) ⇒ A,
+                    rand(enum_literal2, enum_literal1) ⇒ EXCEPTION RANGE_ERROR )
+      compare(A, B) Compare function
+                  ( Type of result: integer,
+                    compare(enum_literal1, enum_literal2) ⇒ -1,
+                    compare(enum_literal1, enum_literal1) ⇒ 0,
+                    compare(enum_literal2, enum_literal1) ⇒ 1 )
+      hashCode(A) Hash function
+                  ( Type of result: integer )
+    Statements:
+      incr(A)   Increment
+                  ( incr(A) ⇒ A:=succ(A) )
+      decr(A)   Decrement
+                  ( decr(A) ⇒ A:=pred(A) )
+      ignore(A) Ignore value
+```
+
+[]{#types_bin64}
+
+### 5.15 bin64
+
+The type [`bin64`]{.type} describes bit-patterns with 64 bits. It uses
+the same representation as an [`integer`](#types_integer){.type}. There
+is a division of responsibility. The type [`bin64`]{.type} is for
+bitwise operations and the type [`integer`](#types_integer){.type} is
+for arithmetic operations. In compiled programs conversions between
+[`bin64`]{.type} and [`integer`](#types_integer){.type} have no
+overhead.
+
+``` tt
+    Constants:
+      bin64.value  Default value of bin64 (bin64(0))
+    Prefix operators:
+      ~         Bitwise not
+    Infix operators:
+      &         Bitwise and
+      |         Bitwise inclusive or
+      ><        Bitwise exclusive or (xor)
+      A << B    Shift left
+                  ( Type of argument B: integer,
+                    A << B is okay for B >= 0 and B <= 63,
+                    A << B ⇒ EXCEPTION OVERFLOW_ERROR for B < 0 or B >= 64,
+                    A << 0 ⇒ A,
+                    bin64(16#1234567890abcde0) << 4 ⇒ bin64(16#234567890abcde00) )
+      A >> B    Shift right
+                  ( Type of argument B: integer,
+                    A >> B is okay for B >= 0 and B <= 63,
+                    A >> B ⇒ EXCEPTION OVERFLOW_ERROR for B < 0 or B >= 64,
+                    A >> 0 ⇒ A,
+                    bin64(16#1234567890abcde0) >> 4 ⇒ bin64(16#1234567890abcde) )
+      A ? B : C  Ternary operator condition ? thenValue : elseValue
+                  ( Type of argument A: boolean,
+                    TRUE ? a : b ⇒ a,
+                    FALSE ? a : b ⇒ b )
+      A radix B Convert to a string using a radix
+                  ( Type of result: string,
+                    Type of argument B: integer )
+      A RADIX B Convert to a string using a radix
+                  ( Type of result: string,
+                    Type of argument B: integer )
+      integer conv A  Convert to integer
+                  ( Type of result: integer )
+      bin64 conv A  Convert to bin64
+                  ( Type of argument A: integer )
+    Relations:
+      =, <>
+    Functions:
+      bin64(A)  Conversion of integer to bin64
+                  ( Type of argument: integer )
+      bin64(A)  Conversion of bigInteger to bin64
+                  ( Type of argument: bigInteger )
+      bin64(A)  Conversion of char to bin64
+                  ( Type of argument: char )
+      bin64(A)  Get bits in IEEE 754 double-precision representation from a float
+                  ( Type of argument: float,
+                    bin64(1.0) ⇒ bin64(16#3ff0000000000000) )
+      ord(A)    Ordinal number
+                  ( Type of result: integer )
+      integer(A) Ordinal number
+                  ( Type of result: integer )
+      big(A)    Conversion to bigInteger
+                  ( Type of result: bigInteger )
+      bigInteger(A) Conversion to bigInteger
+                  ( Type of result: bigInteger )
+      float(A)  Get float from bits in IEEE 754 double-precision representation
+                  ( Type of result: float,
+                    float(bin64(16#3ff0000000000000)) ⇒ 1.0 )
+      compare(A, B) Compare function
+                  ( Type of result: integer )
+      hashCode(A) Hash function
+                  ( Type of result: integer )
+      bitLength(A) Number of bits in the minimum binary representation.
+                  ( Type of result: integer,
+                    bitLength(bin64(0)) ⇒ 0,
+                    bitLength(bin64(1)) ⇒ 1,
+                    bitLength(bin64(4)) ⇒ 3 )
+      lowestSetBit(A) Number of lowest-order zero bits in the binary representation.
+                  ( Type of result: integer,
+                    A >> B << B = A for A <> bin64(0) and B = lowestSetBit(A),
+                    lowestSetBit(bin64(0)) ⇒ -1,
+                    lowestSetBit(bin64(1)) ⇒ 0,
+                    lowestSetBit(bin64(2)) ⇒ 1 )
+      rand(bin64) Random bin64 value
+                 The random values are uniform distributed.
+                  ( rand(bin64) ⇒ bin64(rand(integer.first, integer.last)) )
+      str(A)    Conversion to string
+                  ( Type of result: string,
+                    str(bin64(18446744073709551615_)) ⇒ "18446744073709551615" )
+      bytes(aBin64, BE, len) Convert into a string of bytes with big-endian encoding
+                  ( Type of result: string )
+      bytes(aBin64, LE, len) Convert into a string of bytes with little-endian encoding
+                  ( Type of result: string )
+      rotLeft(A, B)  Rotate the bits of a A left by B bits
+                  ( rotLeft(bin64(16#76543210fedcba98), 12) ⇒ bin64(16#43210fedcba98765) )
+      rotRight(A, B)  Rotate the bits of a A right by B bits
+                  ( rotRight(bin64(16#76543210fedcba98), 40) ⇒ bin64(16#10fedcba98765432) )
+      getBinary(aBitset, lowestBitNum)  Get 64 bits from aBitset starting with lowestBitNum
+                  ( Type of argument aBitset: bitset,
+                    Type of argument lowestBitNum: integer )
+      float2MbfBits(aFloat, DOUBLE) Get bits in MBF double-precision representation from aFloat
+                 Microsoft Binary Format (MBF) is a format for floating point numbers.
+                  ( Type of argument aFloat: float,
+                    float2MbfBits(1.0, DOUBLE) ⇒ bin64(16#8100000000000000_) )
+      mbfBits2Float(bits) Get a float from bits in MBF double-precision representation
+                 Microsoft Binary Format (MBF) is a format for floating point numbers.
+                  ( Type of result: float,
+                    mbfBits2Float(bin64(16#8100000000000000_)) ⇒ 1.0 )
+      bin64(bytes, LE) Convert string of little-endian bytes to bin64
+                  ( Type of argument bytes: string )
+      bin64(bytes, BE) Convert string of big-endian bytes to bin64
+                  ( Type of argument bytes: string )
+    Statements:
+      A &:= B   Bitwise and copy
+                  ( A &:= B ⇒ A := A & B )
+      A |:= B   Bitwise inclusive or copy
+                  ( A |:= B ⇒ A := A | B )
+      A ><:= B  Bitwise exclusive or (xor) copy
+                  ( A ><:= B ⇒ A := A >< B )
+      A <<:= B  Shift left copy
+                  ( A <<:= B ⇒ A := A << B )
+      A >>:= B  Shift right copy
+                  ( A >>:= B ⇒ A := A >> B )
+      ignore(A) Ignore value
+```
+
+[]{#types_bin32}
+
+### 5.16 bin32
+
+The type [`bin32`]{.type} describes bit-patterns with 32 bits. It uses
+the same representation as an [`integer`](#types_integer){.type}. There
+is a division of responsibility. The type [`bin32`]{.type} is for
+bitwise operations and the type [`integer`](#types_integer){.type} is
+for arithmetic operations. In compiled programs conversions between
+[`bin32`]{.type} and [`integer`](#types_integer){.type} have no
+overhead.
+
+``` tt
+    Constants:
+      bin32.value  Default value of bin32 (bin32(0))
+    Prefix operators:
+      ~         Bitwise not
+    Infix operators:
+      &         Bitwise and
+      |         Bitwise inclusive or
+      ><        Bitwise exclusive or (xor)
+      A << B    Shift left
+                  ( Type of argument B: integer,
+                    A << B is okay for B >= 0 and B <= 63,
+                    A << B ⇒ EXCEPTION OVERFLOW_ERROR for B < 0 or B >= 64,
+                    A << 0 ⇒ A,
+                    bin32(16#abcdef) << 4 ⇒ bin32(16#abcdef0) )
+      A >> B    Shift right
+                  ( Type of argument B: integer,
+                    A >> B is okay for B >= 0 and B <= 63,
+                    A >> B ⇒ EXCEPTION OVERFLOW_ERROR for B < 0 or B >= 64,
+                    A >> 0 ⇒ A,
+                    bin32(16#abcdef) >> 4 ⇒ bin32(16#abcde) )
+      A ? B : C  Ternary operator condition ? thenValue : elseValue
+                  ( Type of argument A: boolean,
+                    TRUE ? a : b ⇒ a,
+                    FALSE ? a : b ⇒ b )
+      A radix B Convert to a string using a radix
+                  ( Type of result: string,
+                    Type of argument B: integer )
+      A RADIX B Convert to a string using a radix
+                  ( Type of result: string,
+                    Type of argument B: integer )
+      integer conv A  Convert to integer
+                  ( Type of result: integer )
+      bin32 conv A  Convert to bin32
+                  ( Type of argument A: integer )
+    Relations:
+      =, <>
+    Functions:
+      bin32(A)  Conversion of integer to bin32
+                  ( Type of argument: integer )
+      bin32(A)  Conversion of char to bin32
+                  ( Type of argument: char )
+      bin32(A)  Get bits in IEEE 754 single-precision representation from a float
+                  ( Type of argument: float,
+                    bin32(1.0) ⇒ bin32(16#3f800000) )
+      ord(A)    Ordinal number
+                  ( Type of result: integer )
+      integer(A) Ordinal number
+                  ( Type of result: integer )
+      float(A)  Get float from bits in IEEE 754 single-precision representation
+                  ( Type of result: float,
+                    float(bin32(16#3f800000)) ⇒ 1.0 )
+      compare(A, B) Compare function
+                  ( Type of result: integer )
+      hashCode(A) Hash function
+                  ( Type of result: integer )
+      bitLength(A) Number of bits in the minimum binary representation.
+                  ( Type of result: integer,
+                    bitLength(bin32(0)) ⇒ 0,
+                    bitLength(bin32(1)) ⇒ 1,
+                    bitLength(bin32(4)) ⇒ 3 )
+      lowestSetBit(A) Number of lowest-order zero bits in the binary representation.
+                  ( Type of result: integer,
+                    A >> B << B = A for A <> bin32(0) and B = lowestSetBit(A),
+                    lowestSetBit(bin32(0)) ⇒ -1,
+                    lowestSetBit(bin32(1)) ⇒ 0,
+                    lowestSetBit(bin32(2)) ⇒ 1 )
+      rand(bin32) Random bin32 value
+                 The random values are uniform distributed.
+                  ( rand(bin32) ⇒ bin32(rand(0, 4294967295)) )
+      str(A)    Conversion to string
+                  ( Type of result: string,
+                    str(bin32(4294967295)) ⇒ "4294967295" )
+      bytes(aBin32, BE, len) Convert into a string of bytes with big-endian encoding
+                  ( Type of result: string )
+      bytes(aBin32, LE, len) Convert into a string of bytes with little-endian encoding
+                  ( Type of result: string )
+      rotLeft(A, B)  Rotate the bits of a A left by B bits
+                  ( rotLeft(bin32(16#12345678), 8) ⇒ bin32(16#34567812) )
+      rotRight(A, B)  Rotate the bits of a A right by B bits
+                  ( rotRight(bin32(16#12345678), 8) ⇒ bin32(16#78123456) )
+      float2MbfBits(aFloat, SINGLE) Get bits in MBF single-precision representation from aFloat
+                 Microsoft Binary Format (MBF) is a format for floating point numbers.
+                  ( Type of argument aFloat: float,
+                    float2MbfBits(1.0, SINGLE) ⇒ bin32(16#81000000) )
+      mbfBits2Float(bits) Get a float from bits in MBF single-precision representation
+                 Microsoft Binary Format (MBF) is a format for floating point numbers.
+                  ( Type of result: float
+                    mbfBits2Float(bin32(16#81000000)) ⇒ 1.0 )
+      bin32(bytes, LE) Convert string of little-endian bytes to bin32
+                  ( Type of argument bytes: string )
+      bin32(bytes, BE) Convert string of big-endian bytes to bin32
+                  ( Type of argument bytes: string )
+    Statements:
+      A &:= B   Bitwise and copy
+                  ( A &:= B ⇒ A := A & B )
+      A |:= B   Bitwise inclusive or copy
+                  ( A |:= B ⇒ A := A | B )
+      A ><:= B  Bitwise exclusive or (xor) copy
+                  ( A ><:= B ⇒ A := A >< B )
+      A <<:= B  Shift left copy
+                  ( A <<:= B ⇒ A := A << B )
+      A >>:= B  Shift right copy
+                  ( A >>:= B ⇒ A := A >> B )
+      ignore(A) Ignore value
+```
+
+[]{#types_bstring}
+
+### 5.17 bstring
+
+The type [`bstring`]{.type} describes strings of bytes. It is used to
+store binary data.
+
+``` tt
+    Constants:
+      bstring.value  Default value of bstring (bstring(""))
+    Infix operators:
+      A ? B : C  Ternary operator condition ? thenValue : elseValue
+                  ( Type of argument A: boolean,
+                    TRUE ? a : b ⇒ a,
+                    FALSE ? a : b ⇒ b )
+      bstring parse A   Conversion of string to bstring
+                  ( Type of argument A: string )
+    Indices:
+      [ A ]     Access one character
+                  ( Type of argument A: integer,
+                    Type of result: char )
+    Functions:
+      str(A)    Conversion to string
+                  ( Type of result: string )
+      literal(A) Conversion to a literal
+                  ( Type of result: string )
+      string(A) Conversion to string
+                  ( Type of result: string )
+      bstring(A) Conversion to bstring
+                  ( Type of argument A: string )
+      length(A) Length of bstring
+                  ( Type of result: integer )
+      compare(A, B) Compare function
+                  ( Type of result: integer )
+      hashCode(A) Hash function
+                  ( Type of result: integer )
+      bStriBe2BigInt(A, isSigned) Convert a bstring (interpreted as big-endian) to a bigInteger
+                  ( Type of argument isSigned: boolean,
+                    Type of result: bigInteger )
+      bStriLe2BigInt(A, isSigned) Convert a bstring (interpreted as little-endian) to a bigInteger
+                  ( Type of argument isSigned: boolean,
+                    Type of result: bigInteger )
+      bStriBe(A, isSigned) Convert a bigInteger into a big-endian bstring
+                  ( Type of argument A: bigInteger,
+                    Type of argument isSigned: boolean )
+      bStriLe(A, isSigned) Convert a bigInteger into a little-endian bstring
+                  ( Type of argument A: bigInteger,
+                    Type of argument isSigned: boolean )
+    Relations:
+      =, <>
+    Statements:
+      ignore(A) Ignore value
+      for forVar range bstri do
+        statements
+      end for   Loop over all elements of a bstring
+                  ( Type of argument forVar: char,
+                    Type of argument statements: proc )
+```
+
+[]{#types_color}
+
+### 5.18 color
+
+The type [`color`]{.type} describes colors. It uses the additive color
+model with red, green and blue lights. The red, green and blue lights
+are specified with [`integer`](#types_integer){.type} values in the
+range 0 .. 65535. The [`color`]{.type} functions are defined in the
+library [\"[color.s7i]{.lib}\"]{.stri}.
+
+``` tt
+    Elements:
+      var integer: redLight is 0;
+      var integer: greenLight is 0;
+      var integer: blueLight is 0;
+    Constants:
+      color.value    Default value of color (black)
+      black          color(0, 0, 0);
+      dark_red       color(32768, 0, 0);
+      dark_green     color(0, 32768, 0);
+      brown          color(32768, 16384, 0);
+      dark_blue      color(0, 0, 32768);
+      dark_magenta   color(32768, 0, 32768);
+      dark_cyan      color(0, 65535, 65535);
+      light_gray     color(49152, 49152, 49152);
+      dark_gray      color(16384, 16384, 16384);
+      light_red      color(65535, 0, 0);
+      light_green    color(0, 65535, 0);
+      yellow         color(65535, 65535, 0);
+      light_blue     color(0, 0, 65535);
+      light_magenta  color(65535, 0, 65535);
+      light_cyan     color(32768, 65535, 65535);
+      white          color(65535, 65535, 65535);
+      orange         color(65535, 32768, 0);
+      amber          color(49152, 32768, 16384);
+      pink           color(65535, 32768, 32768);
+    Infix operators:
+      +         Add two colors in an additive color system
+      A ? B : C  Ternary operator condition ? thenValue : elseValue
+                  ( Type of argument A: boolean,
+                    TRUE ? a : b ⇒ a,
+                    FALSE ? a : b ⇒ b )
+    Relations:
+      =, <>
+    Functions:
+      color(R,G,B) Creates a color from Red, Green and Blue
+                  ( Type of argument R: integer,
+                    Type of argument G: integer,
+                    Type of argument B: integer )
+      gray(BR)  Create a gray color value from BR
+                  ( Type of argument BR: integer )
+      compare(A, B) Compare function
+                  ( Type of result: integer )
+      hashCode(A) Hash function
+                  ( Type of result: integer )
+    Statements:
+      clear(A)  Clear current window
+      ignore(A) Ignore value
+```
+
+[]{#types_time}
+
+### 5.19 time
+
+The type [`time`]{.type} describes times and dates. For dates the
+proleptic Gregorian calendar is used (which assumes that the Gregorian
+calendar was even in effect at dates preceding its official
+introduction). This convention is used according to ISO 8601 which also
+defines that positive and negative years exist and that the year
+preceding 1 is 0. Time is measured in hours, minutes, seconds and micro
+seconds. Additionally information about the difference to UTC and a flag
+indicating daylight saving time is maintained also. The [`time`]{.type}
+functions are defined in the library [\"[time.s7i]{.lib}\"]{.stri}.
+
+``` tt
+    Elements:
+      var integer: year is 0;
+      var integer: month is 1;
+      var integer: day is 1;
+      var integer: hour is 0;
+      var integer: minute is 0;
+      var integer: second is 0;
+      var integer: micro_second is 0;
+    Constants:
+      time.value  Default value of time (time(0, 1, 1, 0, 0, 0))
+    Infix operators:
+      A ? B : C  Ternary operator condition ? thenValue : elseValue
+                  ( Type of argument A: boolean,
+                    TRUE ? a : b ⇒ a,
+                    FALSE ? a : b ⇒ b )
+      time parse A   Conversion of string to time
+                  ( Type of argument A: string,
+                    time parse "2005-02-28 12:00:01" ⇒ 2005-02-28 12:00:01,
+                    time parse "2005-02-29 12:00:01" ⇒ EXCEPTION RANGE_ERROR )
+    Relations:
+      =, <>, <, <=, >, >=
+    Functions:
+      time(NOW)  Gets the current time
+      time(A)  Conversion of string to time
+                  ( Type of argument A: string,
+                    time("2005-02-28 12:00:01") ⇒ 2005-02-28 12:00:01,
+                    time("2005-02-29 12:00:01") ⇒ EXCEPTION RANGE_ERROR )
+      str(A)    Conversion to string
+                  ( Type of result: string )
+      strDate(A)  Conversion of the date to string
+                    with ISO 8601 YYYY-MM-DD date format
+                  ( Type of result: string )
+      strTime(A)  Conversion of the daytime to string
+                    with ISO 8601 hh:mm:ss time format
+                  ( Type of result: string )
+      strDateTime(A)  Conversion of date and time to string
+                    with ISO 8601 YYYY-MM-DD hh:mm:ss format
+                  ( Type of result: string )
+      strTimeZone(A)  Conversion of the time zone to string
+                  ( Type of result: string )
+      truncToSecond(A)  Truncate a time to a second
+      truncToMinute(A)  Truncate a time to a minute
+      truncToHour(A)  Truncate a time to a hour
+      truncToDay(A)  Truncate a time to a day
+      truncToMonth(A)  Truncate a time to a month
+      truncToYear(A)  Truncate a time to a year
+      isLeapYear(A)  Determine if a given year is a leap year
+                  ( Type of argument A: integer )
+                  ( Type of result: boolean )
+      daysInYear(Y)  Calculate the number of days in a year
+                  ( Type of argument Y: integer,
+                    Type of result: integer )
+      daysInMonth(Y, M)  Calculate the number of days in a month
+                  ( Type of argument Y: integer,
+                    Type of argument M: integer,
+                    Type of result: integer )
+      daysInMonth(A)  Calculate the number of days in a month
+                  ( Type of result: integer )
+      dayOfWeek(A)  Day of the week with Monday as 1
+                  ( Type of result: integer )
+      dayOfYear(A)  Day of the year with 1 January as 1
+                  ( Type of result: integer )
+      weekOfYear(Y, D)  Compute the week number of a year (0 to 53).
+                    According to ISO 8601: Week number 1 of
+                    every year contains the 4. of january.
+                  ( Type of argument Y: integer,
+                    Type of argument D: integer,
+                    Type of result: integer )
+      weekOfYear(A)  Compute the week number of a year (0 to 53).
+                    According to ISO 8601: Week number 1 of
+                    every year contains the 4. of january.
+                  ( Type of result: integer )
+      weekDateYear(A)  Compute the year of the ISO 8601 week date
+                  ( Type of result: integer )
+      weekDateWeek(A)  Compute the week of the ISO 8601 week date
+                  ( Type of result: integer )
+      toUTC(A)  Conversion to Coordinated Universal Time (UTC)
+      toLocalTZ  Convert given time to a time in the local time zone.
+      setLocalTZ  Sets timeZone and daylightSavingTime for a given time.
+      julianDayNumber(A)  Number of days that have elapsed since
+                January 1, 4713 BC in the proleptic Julian calendar
+                  ( Type of result: integer )
+      julianDayNumToTime(A)  Convert julian day number to time
+                  ( Type of argument A: integer )
+      timestamp1970(A)  Time expressed in seconds since the
+                Unix epoch (1970-01-01 00:00:00 UTC)
+                  ( Type of result: integer )
+      timestamp1970ToTime(A)  Convert a Unix timestamp into a time from
+                the local time zone
+                  ( Type of argument A: integer )
+      timestamp1601(A)  100-nanosecond intervals since the
+                Windows epoch (1601-01-01 00:00:00 UTC)
+                  ( Type of result: integer )
+      timestamp1601ToTime(A)  Convert a FILETIME into a time from
+                the local time zone
+                  ( Type of argument A: integer )
+      compare(A, B)  Compare function
+                  ( Type of result: integer )
+      hashCode(A)  Hash function
+                  ( Type of result: integer )
+    Statements:
+      await(A)  Wait until the given time
+      ignore(A) Ignore value
+```
+
+[]{#types_duration}
+
+### 5.20 duration
+
+The type [`duration`]{.type} describes time and date durations. The
+[`duration`]{.type} functions are defined in the library
+[\"[duration.s7i]{.lib}\"]{.stri}.
+
+``` tt
+    Constants:
+      duration.value  Default value of duration (duration("P0D"))
+    Prefix operators:
+      +         Identity
+      -         Change sign
+    Infix operators:
+      +         Add two durations
+      -         Subtract two durations
+      *         Multiply a duration by an integer
+                  ( Type of left operand: integer )
+      *         Multiply a duration by an integer
+                  ( Type of right operand: integer )
+      +         Add a duration to a time
+                  ( Type of left operand: time,
+                    Type of result: time )
+      -         Subtract a duration from a time
+                  ( Type of left operand: time,
+                    Type of result: time )
+      -         Subtract two times
+                  ( Type of left operand: time,
+                    Type of right operand: time )
+      A ? B : C  Ternary operator condition ? thenValue : elseValue
+                  ( Type of argument A: boolean,
+                    TRUE ? a : b ⇒ a,
+                    FALSE ? a : b ⇒ b )
+      duration parse A   Conversion of string to duration
+                  ( Type of argument A: string,
+                    duration parse "P2M28DT12H1S" ⇒ P2M28DT12H1S,
+                    duration parse "P13M28DT12H1S" ⇒ EXCEPTION RANGE_ERROR )
+    Relations:
+      =, <>, <, <=, >, >=
+    Functions:
+      duration(A)  Conversion of string to duration
+                  ( Type of argument A: string,
+                    duration("P2M28DT12H1S") ⇒ P2M28DT12H1S,
+                    duration("P13M28DT12H1S") ⇒ EXCEPTION RANGE_ERROR )
+      getYears(A)  Obtains the years of a duration
+                  ( Type of result: integer )
+      getMonths(A) Obtains the months of a duration
+                  ( Type of result: integer )
+      getDays(A)   Obtains the days of a duration
+                  ( Type of result: integer )
+      getHours(A)  Obtains the hours of a duration
+                  ( Type of result: integer )
+      getMinutes(A) Obtains the minutes of a duration
+                  ( Type of result: integer )
+      getSeconds(A) Obtains the seconds of a duration
+                  ( Type of result: integer )
+      getMicroSeconds(A)  Obtains the micro seconds of a duration
+                  ( Type of result: integer )
+      toYears(A)  Return the duration in years
+                  ( Type of result: integer )
+      toMonths(A) Return the duration in months
+                  ( Type of result: integer )
+      toDays(A)   Return the duration in days
+                  ( Type of result: integer )
+      toHours(A)  Return the duration in hours
+                  ( Type of result: integer )
+      toMinutes(A) Return the duration in minutes
+                  ( Type of result: integer )
+      toSeconds(A) Return the duration in seconds
+                  ( Type of result: integer )
+      toMicroSeconds(A)  Return the duration in micro seconds
+                  ( Type of result: integer )
+      str(A)    Conversion to string
+                  ( Type of result: string )
+      compare(A, B) Compare function
+                  ( Type of result: integer )
+      hashCode(A) Hash function
+                  ( Type of result: integer )
+    Statements:
+      A +:= B   Increment A by B
+                  ( A +:= B ⇒ A := A + B )
+      A -:= B   Decrement A by B
+                  ( A -:= B ⇒ A := A - B )
+      A +:= B   Increment time A by B
+                  ( Type of argument A: time,
+                    A +:= B ⇒ A := A + B )
+      A -:= B   Decrement time A by B
+                  ( Type of argument A: time,
+                    A -:= B ⇒ A := A - B )
+      wait(A)   Wait for given duration
+      ignore(A) Ignore value
+```
+
+For the operations [`-`]{.op} (negate a [`duration`]{.type}) and
+[`-`]{.op} (subtract two [`time`](#types_time){.type} values) holds:
+
+``` box
+    (tim1 - tim2) = - (tim2 - tim1)
+```
+
+For the operations [`+`]{.op} (add a [`duration`]{.type} to a
+[`time`](#types_time){.type}) and [`-`]{.op} (subtract two
+[`time`](#types_time){.type} values) holds:
+
+``` box
+    tim2 + (tim1 - tim2) = tim1
+```
+
+For the operations [`-`]{.op} (subtract a [`duration`]{.type} from a
+[`time`](#types_time){.type}) and [`-`]{.op} (subtract two
+[`time`](#types_time){.type} values) holds:
+
+``` box
+    tim1 - (tim1 - tim2) = tim2
+```
+
+[]{#types_file}
+
+### 5.21 file
+
+The type [`file`]{.type} is the interface type for sequential files. The
+[`file`]{.type} functions are defined in the library
+[\"[file.s7i]{.lib}\"]{.stri}.
+
+``` tt
+    Constants:
+      file.value  Default value of file (STD_NULL)
+    Variables:
+      STD_NULL  Standard null file
+      STD_IN    Standard input of the operating system
+      STD_OUT   Standard output of the operating system
+      STD_ERR   Standard error output of the operating system
+      IN        Standard input file used for file input
+                  operations when no file is specified
+                  ( IN is initialized with STD_IN )
+      OUT       Standard output file used for file output
+                  operations when no file is specified
+                  ( OUT is initialized with STD_OUT )
+      CONSOLE_KEYBOARD  Keyboard file describing the console keyboard.
+      GRAPH_KEYBOARD    Keyboard file describing the graphic keyboard.
+      KEYBOARD  Variable describing the keyboard.
+                  ( KEYBOARD is initialized with CONSOLE_KEYBOARD )
+    Elements:
+      var char: bufferChar is '\n';
+                The bufferChar variable is inherited from null_file.
+                getTerminatedString, getwd and getln store the termination character in bufferChar.
+                Scanner functions use the bufferChar variable to store the current character.
+                If bufferChar contains a digit the scanner will assume that a number follows
+                and if bufferChar contains a " a string literal follows, etc.
+    Implementation types of the file interface:
+      null_file      Base implementation type for the file interface
+      external_file  Files of the operating system
+      utf8File       UTF-8 encoded files of the operating system
+      utf16File      UTF-16 encoded files of the operating system
+      utf16leFile    UTF-16LE encoded files of the operating system
+      utf16beFile    UTF-16BE encoded files of the operating system
+      dirFile        Read the contents of a directory
+      echoFile       Generate an echo of the input
+      lineFile       Read a baseFile line-wise
+      editLineFile   Support line-wise editing with history
+      gzipFile       Read decompressed data from a GZIP file
+      gzipWriteFile  Write compressed data into a GZIP file
+      bufferFile     Buffer (cache) data based on the given base file
+      lzmaFile       Read decompressed data from a LZMA file
+      popenFile      Operating system pipes
+      popen8File     UTF-8 encoded operating system pipes
+      socket         Sockets of the operation system
+      tlsFile        Transport Layer Security (TLS/SSL) sockets
+      striFile       Files stored in a string
+      teeFile        File that writes to several destination files at once
+      moreFile       Filter file which shows another file screenwise
+      lowerFile      Filter file which turns characters to lower case
+      upperFile      Filter file which turns characters to upper case
+      subFile        Read access to the sub segment of a base file
+      xzFile         Read decompressed data from a XZ file
+      zstdFile       Read decompressed data from a Zstandard file
+    Relations:
+      =, <>
+    Functions to open a file:
+      open(path, mode) Open external file
+                  ( Type of argument path: string,
+                    Type of argument mode: string,
+                    Type of result: file,
+                    Returns STD_NULL if open was not possible )
+      openUtf8(path, mode) Open external UTF-8 encoded file
+                  ( Type of argument path: string,
+                    Type of argument mode: string,
+                    Type of result: file,
+                    Returns STD_NULL if open was not possible )
+      openUtf16(path, mode) Open existing UTF-16LE or UTF-16BE encoded file
+                  ( Type of argument path: string,
+                    Type of argument mode: string,
+                    Type of result: file,
+                    Returns STD_NULL if open was not possible )
+      openUtf16le(path, mode) Open UTF-16LE encoded file
+                  ( Type of argument path: string,
+                    Type of argument mode: string,
+                    Type of result: file,
+                    Returns STD_NULL if open was not possible )
+      openUtf16be(path, mode) Open UTF-16BE encoded file
+                  ( Type of argument path: string,
+                    Type of argument mode: string,
+                    Type of result: file,
+                    Returns STD_NULL if open was not possible )
+      openStriFile(content) Open a striFile with the given string content
+                  ( Type of argument content: string )
+      openStriFile Open a striFile with an empty string content
+      openTee(destFiles) Open a tee file to write to the given destination files
+                  ( Type of argument destFiles: array string )
+      openTee(dest1, dest2) Open a tee file to write to the two destination files
+      openMore(dest, cmds, pageSize) Open a more filter file for viewing a file page by page
+                  ( Type of argument pageSize: integer )
+      openLower(dest) Open a filter file which turns characters to lower case
+      openUpper(dest) Open a filter file which turns characters to upper case
+      openGzipFile(compressed, READ) Open a GZIP file for reading (decompression)
+                  ( Returns STD_NULL if the file is not in GZIP format )
+      openGzipFile(destFile, WRITE) Open a GZIP file for writing (compression)
+           The data written to this file is compressed with GZIP and written to destFile.
+      openLzmaFile(compressed) Open a LZMA file for reading (decompression)
+                  ( Returns STD_NULL if the file is not in LZMA format )
+      openXzFile(compressed)  Open a XZ file for reading (decompression)
+                  ( Returns STD_NULL if the file is not in XZ format )
+      openZstdFile(compressed) Open a Zstandard file for reading (decompression)
+                  ( Returns STD_NULL if the file is not in Zstandard format )
+      popen(A, B) Open a pipe to a process
+                  ( Type of argument A: string,
+                    Type of argument B: string,
+                    Type of result: file,
+                    Returns STD_NULL if popen was not possible )
+      popen8(A, B) Open a UTF-8 pipe to a process
+                  ( Type of argument A: string,
+                    Type of argument B: string,
+                    Type of result: file,
+                    Returns STD_NULL if popen8 was not possible )
+      openInetSocket(port) Open local Internet client socket
+                  ( Type of argument port: integer,
+                    Type of result: file,
+                    Returns STD_NULL if open was not possible )
+      openInetSocket(addr, port) Open Internet client socket
+                  ( Type of argument addr: string,
+                    Type of argument port: integer,
+                    Type of result: file,
+                    Returns STD_NULL if open was not possible )
+      openTlsSocket(addr, port) Open TLS socket
+                  ( Type of argument addr: string,
+                    Type of argument port: integer,
+                    Type of result: file,
+                    Returns STD_NULL if open was not possible )
+      openDir(directoryPath)  Open a directory file
+                  ( Type of argument directoryPath: string )
+      openEcho(inFile, outFile) Open an echo file
+      openLine(aFile) Open a lineFile to filter aFile line-wise
+      openEditLine(inFile, outFile) Open a Unicode filter file
+                    for line-wise editing with history
+      openEditLineLatin1(inFile, outFile) Open a Latin-1 filter file
+                    for line-wise editing with history
+    Functions:
+      length(A) Length of file A
+                  ( Type of result: integer )
+      tell(A)   Return the actual file position
+                  ( Type of argument: file,
+                    The first position in the file is 1 )
+      seekable(A) Determine if file A is seekable
+      getc(A)   Get one character from file A
+                  ( Type of result: char )
+      gets(A, B) Get string with maximum length B from file A
+                  ( Type of argument A: integer,
+                    Type of argument B: file,
+                    Type of result: string,
+                    gets(A, -1) ⇒ EXCEPTION RANGE_ERROR )
+      getTerminatedString(A, B)  Read a string from A until the character B is found.
+                The string terminating character is assigned to A.bufferChar.
+                  ( Type of result: string )
+      getwd(A)  Get one word from file A.
+                The word ending character is assigned to A.bufferChar.
+                  ( Type of result: string )
+      getln(A)  Get one line from file A.
+                The line ending character is assigned to A.bufferChar.
+                  ( Type of result: string )
+      eoln(A)   End of line
+                  ( Type of result: boolean )
+      eof(A)    End of file
+                  ( Type of result: boolean )
+      hasNext(A) A call of getc would not return the EOF character
+                  ( Type of result: boolean )
+      inputReady(A) At least one character can be read without blocking.
+                  ( Type of result: boolean )
+      compare(A, B) Compare function
+                  ( Type of result: integer )
+      hashCode(A) Hash function
+                  ( Type of result: integer )
+    Statements:
+      write(A, B) Write string B to file A
+                  ( Type of argument B: string )
+      writeln(A) Write a new line to file A
+      writeln(A, B) Write string B and new line to file A
+                  ( Type of argument B: string )
+      read(A, B) Read a word from file A into string B
+                  ( Type of argument B: string )
+      read(A, B, C) Read a word from file A into B or use default value C
+                  ( Type of argument B: string,
+                    Type of argument C: string )
+      readln(A)  Read a line from file A
+      readln(A, B) Read a line from file A into the string B
+                  ( Type of right operand: string )
+      readln(A, B, C)  Read a line from file A into B or use default value C
+                  ( Type of argument B: string,
+                    Type of argument C: string )
+      skip(A, B) Skip B characters from file A
+      backSpace(A) Write backspace to file A
+      close(A)  Close file A
+      flush(A)  Flush file A
+      seek(A, B) Set actual file position of file A to B
+                  ( Type of argument B: integer,
+                    seek(A, 1) ⇒ Set to file begin,
+                    seek(A, length(A)) ⇒ Set to last position,
+                    seek(A, length(A) + 1) ⇒ Set to end of file,
+                    seek(A, 0) ⇒ EXCEPTION RANGE_ERROR )
+      truncate(A, B) Truncate file A to length B
+                  ( Type of argument B: integer )
+      ignore(A) Ignore value
+```
+
+[]{#types_text}
+
+### 5.22 text
+
+The type [`text`]{.type} is the interface type for two dimensional
+files. These files consist of lines with columns in them. The
+[`text`]{.type} functions are defined in the library
+[\"[text.s7i]{.lib}\"]{.stri}.
+
+``` tt
+    Variables:
+      STD_CONSOLE  Standard console file of the current process.
+    Implementation types of the text interface:
+      console_file    Write to the text console/window
+      graph_file      Write to a graphic window with the system font
+      window_file     Write to a rectangular area in another text
+      pixmapFontFile  Write to a graphic window with a pixmap font
+      striText        Text file stored in an array of strings
+    Relations:
+      =, <>
+    Functions to open a text:
+      open(CONSOLE)  Creates console_file at the upper left corner of the console/window.
+      open(graphWin)  Creates a graph_file at the upper left corner of graphWin
+                  ( Type of argument graphWin: PRIMITIVE_WINDOW )
+      open(graphWin, minX, minY)  Creates a graph_file at (minX, minY) in graphWin
+                  ( Type of argument graphWin: PRIMITIVE_WINDOW,
+                    Type of argument minX: integer,
+                    Type of argument minY: integer )
+      open(graphWin, minX, minY, width, height)  Creates a graph_file at (minX, minY) in graphWin
+                  ( Type of argument graphWin: PRIMITIVE_WINDOW,
+                    Type of argument minX: integer,
+                    Type of argument minY: integer,
+                    Type of argument width: integer,
+                    Type of argument height: integer )
+      openWindow(outText, upper, left, height, width)  Creates a window_file at (left, upper) in outText
+                  ( Type of argument upper: integer,
+                    Type of argument left: integer,
+                    Type of argument height: integer,
+                    Type of argument width: integer )
+      openPixmapFontFile(win)  Creates a pixmapFontFile at the upper left corner of win
+                  ( Type of argument win: PRIMITIVE_WINDOW )
+      openPixmapFontFile(win, minX, minY)  Creates a pixmapFontFile at (minX, minY) in win
+                  ( Type of argument win: PRIMITIVE_WINDOW,
+                    Type of argument minX: integer,
+                    Type of argument minY: integer )
+      openStriText(content)  Open a striText with the given content
+                  ( Type of argument content: array string )
+    Functions:
+      height(A) Height of the text
+                  ( Type of result: integer )
+      width(A)  Width of the text
+                  ( Type of result: integer )
+      line(A)   Current line of the text
+                  ( Type of result: integer )
+      column(A) Current column of the text
+                  ( Type of result: integer )
+    Statements:
+      write(A, B) Write string B to text A
+                  ( Type of argument B: string )
+      writeln(A) Write a new line to text A
+      writeln(A, B) Write string B and new line to text A
+                  ( Type of argument B: string )
+      read(A, B) Read a word from text A into string B
+                  ( Type of right operand: string )
+      readln(A)  Read a line from text A
+      readln(A, B) Read a line from text A into the string B
+                  ( Type of right operand: string )
+      backSpace(A) Write backspace to text A
+      close(A)  Close text A
+      flush(A)  Flush text A
+      clear(A)  Clear the window
+      clear(A, UP, LO, LE, RI)  Clear an area of the window
+                  ( Type of argument UP: integer
+                    Type of argument LO: integer
+                    Type of argument LE: integer
+                    Type of argument RI: integer )
+      v_scroll(A) Scroll the window vertical
+      h_scroll(A) Scroll the window horizontal
+      color(A, B) Set foreground color of the text A
+                  ( Type of argument B: color )
+      color(A, B, C) Set foreground and background color of the text A
+                  ( Type of argument B: color,
+                    Type of argument C: color )
+      setPos(A, B, C) Set the current position of the text A
+                  ( Type of argument B: integer
+                    Type of argument C: integer )
+      setLine(A, B) Set the current line of the text A
+                  ( Type of argument B: integer )
+      setColumn(A, B) Set the current column of the text A
+                  ( Type of argument B: integer )
+      box(A)    Write a box around the window
+      clear_box(A) Clear the box around the window
+      cursor_on(A) Make the cursor visible
+      cursor_off(A) Make the cursor invisible
+      ignore(A) Ignore value
+```
+
+[]{#types_fileSys}
+
+### 5.23 fileSys
+
+The type [`fileSys`]{.type} is the interface type for file systems. The
+files of the operating system and the contents of an archive file are
+both organized as file systems. The connection to files stored at a
+remote computer can also use the [`fileSys`]{.type} interface.
+
+``` tt
+    Constants:
+      fileSys.value  Default value of fileSys (emptyFileSys.value)
+    Variables:
+      osFiles        File system of the operating system files
+    Implementation types of the fileSys interface:
+      emptyFileSys   Empty file system (used as default value)
+      osFileSys      File system to access operating system files
+      arArchive      Access to an AR archive
+      cpioArchive    Access to a CPIO archive
+      rpmArchive     Access to a RPM archive
+      tarArchive     Access to a TAR archive
+      zipArchive     Access to a ZIP archive
+      ftpConnection  Connection to a FTP server
+    Functions to open a fileSys:
+      openAr(arFile)  Open a AR archive with the given arFile
+                  ( Type of argument arFile: file,
+                    Returns fileSys.value if open was not possible )
+      openAr(arFileName)  Open a AR archive with the given arFileName
+                  ( Type of argument arFileName: string,
+                    Returns fileSys.value if open was not possible )
+      openCpio(cpioFile)  Open a CPIO archive with the given cpioFile
+                  ( Type of argument cpioFile: file,
+                    Returns fileSys.value if open was not possible )
+      openCpio(cpioFileName)  Open a CPIO archive with the given cpioFileName
+                  ( Type of argument cpioFileName: string,
+                    Returns fileSys.value if open was not possible )
+      openRpm(rpmFile)  Open a RPM archive with the given rpmFile
+                  ( Type of argument rpmFile: file,
+                    Returns fileSys.value if open was not possible )
+      openRpm(rpmFileName)  Open a RPM archive with the given rpmFileName
+                  ( Type of argument rpmFileName: string,
+                    Returns fileSys.value if open was not possible )
+      openTar(tarFile)  Open a TAR archive with the given tarFile
+                  ( Type of argument tarFile: file,
+                    Returns fileSys.value if open was not possible )
+      openTar(tarFileName)  Open a TAR archive with the given tarFileName
+                  ( Type of argument tarFileName: string,
+                    Returns fileSys.value if open was not possible )
+      openZip(zipFile)  Open a ZIP archive with the given zipFile
+                  ( Type of argument zipFile: file,
+                    Returns fileSys.value if open was not possible )
+      openZip(zipFileName)  Open a ZIP archive with the given zipFileName
+                  ( Type of argument zipFileName: string,
+                    Returns fileSys.value if open was not possible )
+      openFtp(hostName, user, password, ftpControlPort)  Open a FTP file system
+                  ( Type of argument hostName: string,
+                    Type of argument user: string,
+                    Type of argument password: string,
+                    Type of argument ftpControlPort: integer )
+      openFtp(hostName, user, password)  Open a FTP file system
+                  ( Type of argument hostName: string,
+                    Type of argument user: string,
+                    Type of argument password: string )
+      openFtp(connectStri, ftpControlPort)  Open a FTP file system
+                  ( Type of argument connectStri: string,
+                    Type of argument ftpControlPort: integer )
+      openFtp(connectStri)  Open a FTP file system
+                  ( Type of argument connectStri: string )
+    Functions:
+      close(aFileSys)  Close a file system
+      readDir(aFileSys, dirPath)  Read the file names of a directory
+                  ( Type of argument dirPath: string,
+                    Type of result: array string )
+      readDir(aFileSys, dirPath, RECURSIVE)  Read the file paths of a directory recursively
+                  ( Type of argument dirPath: string,
+                    Type of result: array string )
+      readDir(aFileSys)  Read the file names of the root directory
+                  ( Type of result: array string )
+      readDir(aFileSys, RECURSIVE)  Read the file paths of the root directory recursively
+                  ( Type of result: array string )
+      fileType(aFileSys, path)  Get the type of a file
+                  ( Type of argument path: string,
+                    Type of result: fileType )
+      fileTypeSL(aFileSys, path)  Get the type of a file (do not follow symbolic links)
+                  ( Type of argument path: string,
+                    Type of result: fileType )
+      getFileMode(aFileSys, path)  Get the file mode (permissions) of a file
+                  ( Type of argument path: string,
+                    Type of result: fileMode )
+      fileSize(aFileSys, path)  Get the size of a file
+                  ( Type of argument path: string,
+                    Type of result: integer )
+      bigFileSize(aFileSys, path)  Get the size of a file
+                  ( Type of argument path: string,
+                    Type of result: bigInteger )
+      getMTime(aFileSys, path)  Get the modification time of a file
+                  ( Type of argument path: string,
+                    Type of result: time )
+      getOwner(aFileSys, path)  Get the name of the owner (UID) of a file
+                  ( Type of argument path: string,
+                    Type of result: string )
+      getGroup(aFileSys, path)  Get the name of the group (GID) to which a file belongs
+                  ( Type of argument path: string,
+                    Type of result: string )
+      open(aFileSys, filePath, mode)  Open a file with filePath and mode
+                  ( Type of argument filePath: string,
+                    Type of argument mode: string,
+                    Type of result: file )
+      getFile(aFileSys, filePath)  Get the contents of file filePath
+                  ( Type of argument filePath: string,
+                    Type of result: string )
+      readLink(aFileSys, path)  Reads the destination of a symbolic link
+                  ( Type of argument path: string,
+                    Type of result: string )
+    Statements:
+      setFileMode(aFileSys, path, mode)  Change the file mode (permissions) of a file
+                  ( Type of argument path: string,
+                    Type of argument mode: fileMode )
+      setMTime(aFileSys, path, modificationTime)
+                  ( Type of argument path: string,
+                    Type of argument modificationTime: time )
+      setOwner(aFileSys, path, owner)  Set the owner of a file
+                  ( Type of argument path: string,
+                    Type of argument owner: string )
+      setGroup(aFileSys, path, group)  Set the group of a file
+                  ( Type of argument path: string,
+                    Type of argument group: string )
+      putFile(aFileSys, filePath, stri)  Write stri to the file filePath using the file system
+                  ( Type of argument filePath: string,
+                    Type of argument stri: string )
+      removeFile(aFileSys, path)  Remove a file (except a nonempty directory)
+                  ( Type of argument path: string )
+      removeTree(aFileSys, path)  Remove a file of any type inclusive a directory tree
+                  ( Type of argument path: string )
+      moveFile(aFileSys, sourcePath, destPath)  Move and rename a file or directory tree
+                  ( Type of argument sourcePath: string,
+                    Type of argument destPath: string )
+      makeDir(aFileSys, dirPath)  Create a directory
+                  ( Type of argument dirPath: string )
+      makeLink(aFileSys, symlinkPath, targetPath)  Create a symbolic link
+                  ( Type of argument symlinkPath: string,
+                    Type of argument targetPath: string )
+      rmdir(aFileSys, dirPath)  Delete an empty directory
+                  ( Type of argument dirPath: string )
+      getcwd(aFileSys)  Determine the current working directory
+      chdir(aFileSys, dirPath)  Change the current working directory
+                  ( Type of argument dirPath: string )
+      ignore(A) Ignore value
+```
+
+[]{#types_pollData}
+
+### 5.24 pollData
+
+With the type [`pollData`]{.type} input (checkedEvents) and output
+(eventFindings) of the function [`poll`]{.func} are maintained. The type
+[`pollData`]{.type} maintains a set of sockets. For every socket the
+checkedEvents and the eventFindings are maintained. The checkedEvents
+determine, which events (POLLIN, POLLOUT, or POLLINOUT) should be
+checked by [`poll`]{.func}. The function [`poll`]{.func} determines the
+events found and stores them as eventFindings. The type
+[`pollData`]{.type} provides also an iterator, which can be used to
+iterate over checkedEvents and eventFindings.
+
+``` tt
+    Constants:
+      pollData.value  Default value of pollData (empty pollData)
+    Functions:
+      getCheck(pData, aSocket)  Checked events from pData for aSocket
+                  ( Type of argument aSocket: PRIMITIVE_SOCKET,
+                    Type of result: integer )
+      getCheck(pData, aFile)  Checked events from pData for aFile
+                  ( Type of argument aFile: file,
+                    Type of result: integer )
+      getFinding(pData, aSocket)  Event findings from pData for aSocket
+                  ( Type of argument aSocket: PRIMITIVE_SOCKET,
+                    Type of result: integer )
+      getFinding(pData, aFile)  Event findings from pData for aFile
+                  ( Type of argument aFile: file,
+                    Type of result: integer )
+      hasNext(pData)  Determine if the pData iterator can deliver another file
+                  ( Type of result: boolean )
+      nextFile(pData)  Get the next file from the pData iterator
+                  ( Type of result: file )
+    Statements:
+      clear(pData)  Clears pData
+      addCheck(pData, aSocket, eventsToCheck, aFile)  Add eventsToCheck for aSocket to pData
+                  ( Type of argument aSocket: PRIMITIVE_SOCKET,
+                    Type of argument eventsToCheck: integer,
+                    Type of argument aFile: file )
+      addCheck(pData, aFile, eventsToCheck)  Add eventsToCheck for aFile to pData
+                  ( Type of argument aFile: file,
+                    Type of argument eventsToCheck: integer )
+      removeCheck(pData, aSocket, eventsToCheck) Remove eventsToCheck for aSocket from pData
+                  ( Type of argument aSocket: PRIMITIVE_SOCKET,
+                    Type of argument eventsToCheck: integer )
+      removeCheck(pData, aFile, eventsToCheck)  Remove eventsToCheck for aFile from pData
+                  ( Type of argument aFile: file,
+                    Type of argument eventsToCheck: integer )
+      poll(pData)  Waits for one or more of the checkedEvents from pData
+      iterChecks(pData, pollMode)  Reset the pollData iterator to process checkedEvents
+                  ( Type of argument pollMode: integer )
+      iterFindings(pData, pollMode)  Reset the pollData iterator to process eventFindings
+                  ( Type of argument pollMode: integer )
+      ignore(A) Ignore value
+      for forVar range pData do
+        statements
+      end for   Loop over the values of the pData iterator
+                  ( Type of argument forVar: file,
+                    Type of argument statements: proc )
+```
+
+[]{#types_listener}
+
+### 5.25 listener
+
+The type [`listener`]{.type} is the interface type for listeners. The
+[`listener`]{.type} interface is implemented with
+[`inetListener`]{.type}. A [`listener`]{.type} manages its accepted
+sockets.
+
+``` tt
+    Functions:
+      openInetListener(portNumber)  Create a bound internet listener for a port at localhost
+                  ( Type of argument portNumber: integer )
+      accept(aListener)  Create a new accepted connection socket for aListener
+                  ( Type of result: file )
+    Statements:
+      close(aListener)  Close the listener aListener
+      listen(aListener, backlog)  Listen for socket connections and limit the incoming queue
+                  ( Type of argument backlog: integer )
+      signOn(aListener, sock)  Sign on a socket in a listener
+                  ( Type of argument sock: file )
+      signOff(aListener, sock)  Sign off a socket from a listener
+                  ( Type of argument sock: file )
+      waitForRequest(aListener)  Wait until a request can be read or an incoming connection is accepted
+      ignore(A) Ignore value
+```
+
+[]{#types_database}
+
+### 5.26 database
+
+The type [`database`]{.type} describes database connections. The library
+[\"[sql_base.s7i]{.lib}\"]{.stri} defines functions to manage database
+connections.
+
+``` tt
+    Constants:
+      database.value  Default value of database (empty database)
+    Relations:
+      =, <>
+    Functions:
+      openDatabase(driver, host, port, dbName, user, password)  Open database
+                  ( Type of argument driver: dbCategory,
+                    Type of argument host: string,
+                    Type of argument port: integer,
+                    Type of argument dbName: string,
+                    Type of argument user: string,
+                    Type of argument password: string )
+      openDatabase(DB_ODBC, odbcDriver, server, dbName, user, password)  Open ODBC database
+                  ( Type of argument odbcDriver: string,
+                    Type of argument server: string,
+                    Type of argument dbName: string,
+                    Type of argument user: string,
+                    Type of argument password: string )
+      openDatabase(DB_INFORMIX, host, port, server, dbName, user, password)  Open Informix database
+                  ( Type of argument host: string,
+                    Type of argument port: integer,
+                    Type of argument server: string,
+                    Type of argument dbName: string,
+                    Type of argument user: string,
+                    Type of argument password: string )
+      openDatabase(driver, dbPath, user, password)  Open the database dbPath with the specified user and password
+                  ( Type of argument driver: dbCategory,
+                    Type of argument dbPath: string,
+                    Type of argument user: string,
+                    Type of argument password: string )
+      openDatabase(driver, connectStri)  Open a database with the specified driver and connectStri
+                  ( Type of argument driver: dbCategory,
+                    Type of argument connectStri: string )
+      close(db)  Close the specified database db
+      getAutoCommit(db)  Get the current auto-commit mode of db
+                  ( Type of result: boolean )
+    Statements:
+      setAutoCommit(db, autoCommit)  Set the auto-commit mode for db.
+                  ( Type of argument autoCommit: boolean )
+      commit(db)  Execute a commit statement for db
+      rollback (db)  Execute a rollback statement for db
+      ignore(A) Ignore value
+```
+
+[]{#types_sqlStatement}
+
+### 5.27 sqlStatement
+
+The type [`sqlStatement`]{.type} describes prepared sql statements.
+
+``` tt
+    Constants:
+      sqlStatement.value  Default value of sqlStatement
+    Relations:
+      =, <>
+    Functions:
+      prepare(db, sqlStatementStri)  Create a prepared statement for db
+                  ( Type of argument db: database
+                    Type of argument sqlStatementStri: string )
+      fetch(statement)  Fetch a row from the result data of an executed statement
+                  ( Type of result: boolean )
+      column(statement, column, bigInteger)  Get the specified column of fetched data as bigInteger
+                  ( Type of argument column: integer,
+                    Type of result: bigInteger )
+      column(statement, column, bigRational)  Get the specified column of fetched data as bigRational
+                  ( Type of argument column: integer,
+                    Type of result: bigRational )
+      column(statement, column, boolean)  Get the specified column of fetched data as booleaninteger,
+                    Type of result: boolean )
+      column(statement, column, bstring)  Get the specified column of fetched data as bstring
+                  ( Type of argument column: integer,
+                    Type of result: bstring )
+      column(statement, column, duration)  Get the specified column of fetched data as duration
+                  ( Type of argument column: integer,
+                    Type of result: duration )
+      column(statement, column, float)  Get the specified column of fetched data as float
+                  ( Type of argument column: integer,
+                    Type of result: float )
+      column(statement, column, integer)  Get the specified column of fetched data as integer
+                  ( Type of argument column: integer,
+                    Type of result: integer )
+      column(statement, column, string)  Get the specified column of fetched data as string
+                  ( Type of argument column: integer,
+                    Type of result: string )
+      column(statement, column, time)  Get the specified column of fetched data as time
+                  ( Type of argument column: integer,
+                    Type of result: time )
+      isNull(statement, column)  Determine if the specified column of fetched data is NULL
+                  ( Type of argument column: integer,
+                    Type of result: boolean )
+      columnCount(statement)  Return the number of columns in the result data of a statement
+                  ( Type of result: integer )
+      columnName(statement, column)  Return the name of a column in the result data of a statement
+                  ( Type of argument column: integer,
+                    Type of result: string )
+    Statements:
+      bind(statement, pos, num)  Bind a bigInteger parameter to a prepared SQL statement
+                  ( Type of argument pos: integer,
+                    Type of argument num: bigInteger )
+      bind(statement, pos, bigRatData)  Bind a bigRational parameter to a prepared SQL statement
+                  ( Type of argument pos: integer,
+                    Type of argument bigRatData: bigRational )
+      bind(statement, pos, flag)  Bind a boolean parameter to a prepared SQL statement
+                  ( Type of argument pos: integer,
+                    Type of argument flag: boolean )
+      bind(statement, pos, bstri)  Bind a bstring parameter to a prepared SQL statement
+                  ( Type of argument pos: integer,
+                    Type of argument bstri: bstring )
+      bind(statement, pos, number)  Bind a float parameter to a prepared SQL statement
+                  ( Type of argument pos: integer,
+                    Type of argument number: float )
+      bind(statement, pos, number)  Bind an integer parameter to a prepared SQL statement
+                  ( Type of argument pos: integer,
+                    Type of argument number: integer )
+      bind(statement, pos, NULL)  Bind a NULL parameter to a prepared SQL statement.
+                  ( Type of argument pos: integer )
+      bind(statement, pos, stri)  Bind a string parameter to a prepared SQL statement
+                  ( Type of argument pos: integer,
+                    Type of argument : string )
+      bind(statement, pos, timeData)  Bind a time parameter to a prepared SQL statement
+                  ( Type of argument pos: integer,
+                    Type of argument timeData: time )
+      bind(statement, pos, durationData)  Bind a duration parameter to a prepared SQL statement
+                  ( Type of argument pos: integer,
+                    Type of argument durationData: duration )
+      execute(statement)  Execute the specified prepared SQL statement
+      ignore(A) Ignore value
+```
+
+[]{#types_process}
+
+### 5.28 process
+
+The type [`process`]{.type} describes processes of the operating system.
+The library [\"[process.s7i]{.lib}\"]{.stri} defines functions to create
+and manage processes.
+
+``` tt
+    Constants:
+      process.value  Default value of process (process.EMPTY)
+    Relations:
+      =, <>
+    Functions:
+      startProcess(command, parameters)  Start a new process
+                  ( Type of argument command: string,
+                    Type of argument parameters: array string )
+      startProcess(cmdAndParams)  Start a new process
+                  ( Type of argument cmdAndParams: string )
+      pipe2(command, parameters, childStdin, childStdout)  Start a process
+           Connect pipes to its standard I/O files.
+                  ( Type of argument command: string,
+                    Type of argument parameters: array string,
+                    Type of argument childStdin: file,
+                    Type of argument childStdout: file )
+      childStdIn(process)  The standard input file of process
+                  ( Type of result: file )
+      childStdOut(process)  The standard output file of process
+                  ( Type of result: file )
+      childStdErr(process)  The standard error file of process
+                  ( Type of result: file )
+      isAlive(process)  Test whether the specified process is alive
+                  ( Type of result: boolean )
+      exitValue(process)  The exit value of process
+                  ( Type of result: integer )
+      compare(A, B) Compare function
+                  ( Type of result: integer )
+      hashCode(A) Hash function
+                  ( Type of result: integer )
+      str(process)  Get the process identifier (PID)
+      getSearchPath  The search path of the operating system
+                  ( Type of result: array string )
+      commandPath(command)  Search for an executable in the directories of the search path
+                  ( Type of argument command: string,
+                    Type of result: string )
+      commandDir(command)  Search for the directory of an executable in the search path
+                  ( Type of argument command: string,
+                    Type of result: string )
+    Statements:
+      kill(process)  Kill process
+      waitFor(process)  Wait until process has terminated
+      setSearchPath(searchPath)  Set the search path of the current process
+                  ( Type of argument searchPath: array string )
+      ignore(A) Ignore value
+```
+
+[]{#types_category}
+
+### 5.29 category
+
+The type [`category`]{.type} describes the category of a
+[`reference`](#types_reference){.type}. The [`category`]{.type}
+functions are defined in the library [\"[category.s7i]{.lib}\"]{.stri}.
+
+``` tt
+    Literals:
+      SYMBOLOBJECT, DECLAREDOBJECT, FORWARDOBJECT, FWDREFOBJECT, BLOCKOBJECT,
+      CALLOBJECT, MATCHOBJECT, TYPEOBJECT, FORMPARAMOBJECT, INTOBJECT,
+      BIGINTOBJECT, CHAROBJECT, STRIOBJECT, BSTRIOBJECT, ARRAYOBJECT,
+      HASHOBJECT, HASHELEMOBJECT, STRUCTOBJECT, STRUCTELEMOBJECT,
+      CLASSOBJECT, INTERFACEOBJECT, SETOBJECT, FILEOBJECT, SOCKETOBJECT,
+      POLLOBJECT, LISTOBJECT, FLOATOBJECT, WINOBJECT, POINTLISTOBJECT,
+      PROCESSOBJECT, ENUMLITERALOBJECT, CONSTENUMOBJECT, VARENUMOBJECT,
+      REFOBJECT, REFLISTOBJECT, EXPROBJECT, ACTOBJECT, VALUEPARAMOBJECT,
+      REFPARAMOBJECT, RESULTOBJECT, LOCALVOBJECT, DATABASEOBJECT,
+      SQLSTMTOBJECT, PROGOBJECT, ILLEGALOBJECT
+    Constants:
+      category.value  Default value of category (SYMBOLOBJECT)
+    Infix operators:
+      A ? B : C  Ternary operator condition ? thenValue : elseValue
+                  ( TRUE ? a : b ⇒ a,
+                    FALSE ? a : b ⇒ b )
+      category conv A   Conversion of integer to category
+                  ( Type of argument A: integer,
+                    category conv ord(INTOBJECT) ⇒ INTOBJECT )
+      category parse A   Conversion of string to category
+                  ( Type of argument A: string,
+                    category parse "FLOATOBJECT" ⇒ FLOATOBJECT,
+                    category parse "does not exist" ⇒ EXCEPTION RANGE_ERROR )
+    Relations:
+      =, <>
+    Functions:
+      ord(A)    Ordinal number
+                  ( Type of result: integer )
+      category(A)  Conversion of integer to category
+                  ( Type of argument A: integer,
+                    category(ord(INTOBJECT)) ⇒ INTOBJECT )
+      str(A)    Conversion to string
+                  ( Type of result: string,
+                    str(CHAROBJECT) ⇒ "CHAROBJECT" )
+      category(A)  Conversion of string to category
+                  ( Type of argument A: string,
+                    category("FLOATOBJECT") ⇒ FLOATOBJECT,
+                    category("does not exist") ⇒ EXCEPTION RANGE_ERROR )
+      compare(A, B) Compare function
+                  ( Type of result: integer )
+      hashCode(A) Hash function
+                  ( Type of result: integer )
+    Statements:
+      ignore(A) Ignore value
+      for A range B to C do
+        D
+      end for   Loop over all categories from B to C
+                  ( Type of argument D: proc )
+      for A range B downto C do
+        D
+      end for   Loop over all categories from B down to C
+                  ( Type of argument D: proc )
+```
+
+[]{#types_reference}
+
+### 5.30 reference
+
+The type [`reference`]{.type} describes a reference to an object in the
+abstract syntax tree (AST) of a program. You cannot access the AST of
+the program that currently runs. Instead you can parse a program and
+access its AST. The [`reference`]{.type} functions are defined in the
+library [\"[reference.s7i]{.lib}\"]{.stri}.
+
+``` tt
+    Constants:
+      NIL              Reference to no element.
+      reference.value  Default value of reference (NIL)
+    Relations:
+      =, <>
+    Functions:
+      category(A) Get the category of the referenced object
+                  ( Type of result: category,
+                    category(NIL) ⇒ EXCEPTION RANGE_ERROR )
+      str(A)    Conversion to string
+                  ( Type of result: string )
+      getType(A) Get the type of the referenced object
+                  ( Type of result: type,
+                    getType(NIL) ⇒ EXCEPTION RANGE_ERROR )
+      objNumber(A) Delivers an unique number for each object
+                  ( Type of result: integer,
+                    objNumber(NIL) ⇒ 0 )
+      isVar(A)  Reference to a variable object
+                  ( Type of result: boolean,
+                    isVar(NIL) ⇒ EXCEPTION RANGE_ERROR )
+      formalParams(A) Gets the formal parameters of a function
+                  ( Type of result: ref_list,
+                    formalParams(NIL) ⇒ EXCEPTION RANGE_ERROR )
+      localVars(A) Gets the local variables of a function
+                  ( Type of result: ref_list,
+                    localVars(NIL) ⇒ EXCEPTION RANGE_ERROR,
+                    localVars(A) ⇒ EXCEPTION RANGE_ERROR for category(A) <> BLOCKOBJECT )
+      localConsts(A) Gets the local constants of a function
+                  ( Type of result: ref_list,
+                    localConsts(NIL) ⇒ EXCEPTION RANGE_ERROR,
+                    localConsts(A) ⇒ EXCEPTION RANGE_ERROR for category(A) <> BLOCKOBJECT )
+      body(A)   Gets the body of a function
+                  ( body(NIL) ⇒ EXCEPTION RANGE_ERROR,
+                    body(A) ⇒ EXCEPTION RANGE_ERROR for category(A) <> BLOCKOBJECT )
+      resultVar(A) Gets the result variable of a function
+                  ( resultVar(NIL) ⇒ EXCEPTION RANGE_ERROR,
+                    resultVar(A) ⇒ EXCEPTION RANGE_ERROR for category(A) <> BLOCKOBJECT )
+      resultInitValue(A) Gets the initialization value of the result
+                         object of a function
+                  ( resultInitValue(NIL) ⇒ EXCEPTION RANGE_ERROR,
+                    resultInitValue(A) ⇒ EXCEPTION RANGE_ERROR for category(A) <> BLOCKOBJECT )
+      arrayToList(A) Return the array elements as list
+                  ( Type of result: ref_list,
+                    arrayToList(NIL) ⇒ EXCEPTION RANGE_ERROR,
+                    arrayToList(A) ⇒ EXCEPTION RANGE_ERROR for category(A) <> ARRAYOBJECT )
+      arrayMinIdx(A) Return the minimum index of an array
+                  ( Type of result: integer,
+                    arrayMinIdx(NIL) ⇒ EXCEPTION RANGE_ERROR,
+                    arrayMinIdx(A) ⇒ EXCEPTION RANGE_ERROR for category(A) <> ARRAYOBJECT )
+      arrayMaxIdx(A) Return the maximum index of an array
+                  ( Type of result: integer,
+                    arrayMaxIdx(NIL) ⇒ EXCEPTION RANGE_ERROR,
+                    arrayMaxIdx(A) ⇒ EXCEPTION RANGE_ERROR for category(A) <> ARRAYOBJECT )
+      structToList(A) Return the struct elements as list
+                  ( Type of result: ref_list,
+                    structToList(NIL) ⇒ EXCEPTION RANGE_ERROR,
+                    structToList(A) ⇒ EXCEPTION RANGE_ERROR for category(A) <> STRUCTOBJECT )
+      interfaceToStruct(A) Return the struct to which the interface object points.
+                  ( interfaceToStruct(NIL) ⇒ EXCEPTION RANGE_ERROR,
+                    interfaceToStruct(A) ⇒ EXCEPTION RANGE_ERROR for category(A) <> INTERFACEOBJECT )
+      file(A)   File name of the referenced object
+                  ( Type of result: string,
+                    file(NIL) ⇒ EXCEPTION RANGE_ERROR )
+      path(A)   Absolute file path of the referenced object
+                  ( Type of result: string,
+                    path(NIL) ⇒ EXCEPTION RANGE_ERROR )
+      line(A)   Line number of the referenced object
+                  ( Type of result: integer,
+                    line(NIL) ⇒ EXCEPTION RANGE_ERROR )
+      alloc(A)  Create a copy of the object referenced by A
+                The object value of the copy is set to NULL
+      getValue(A, reference) Dereference as reference
+                  ( Type of result: reference,
+                    getValue(NIL, reference) ⇒ EXCEPTION RANGE_ERROR,
+                    getValue(A, reference) ⇒ EXCEPTION RANGE_ERROR for
+                        category(A) not in {FWDREFOBJECT, REFOBJECT, REFPARAMOBJECT, RESULTOBJECT,
+                        LOCALVOBJECT, ENUMLITERALOBJECT, CONSTENUMOBJECT, VARENUMOBJECT} )
+      getValue(A, ref_list) Dereference as ref_list
+                  ( Type of result: ref_list,
+                    getValue(NIL, ref_list) ⇒ EXCEPTION RANGE_ERROR,
+                    getValue(A, ref_list) ⇒ EXCEPTION RANGE_ERROR for
+                        category(A) not in {MATCHOBJECT, CALLOBJECT, REFLISTOBJECT} )
+      getValue(A, boolean) Dereference as boolean
+                  ( Type of result: boolean,
+                    getValue(NIL, boolean) ⇒ EXCEPTION RANGE_ERROR,
+                    getValue(A, boolean) ⇒ EXCEPTION RANGE_ERROR if A does not refer to FALSE or TRUE )
+      getValue(A, integer) Dereference as integer
+                  ( Type of result: integer,
+                    getValue(NIL, integer) ⇒ EXCEPTION RANGE_ERROR,
+                    getValue(A, integer) ⇒ EXCEPTION RANGE_ERROR for category(A) <> INTOBJECT )
+      getValue(A, bigInteger) Dereference as bigInteger
+                  ( Type of result: bigInteger,
+                    getValue(NIL, bigInteger) ⇒ EXCEPTION RANGE_ERROR,
+                    getValue(A, bigInteger) ⇒ EXCEPTION RANGE_ERROR for category(A) <> BIGINTOBJECT )
+      getValue(A, float) Dereference as float
+                  ( Type of result: float,
+                    getValue(NIL, float) ⇒ EXCEPTION RANGE_ERROR,
+                    getValue(A, float) ⇒ EXCEPTION RANGE_ERROR for category(A) <> FLOATOBJECT )
+      getValue(A, char) Dereference as char
+                  ( Type of result: char,
+                    getValue(NIL, char) ⇒ EXCEPTION RANGE_ERROR,
+                    getValue(A, char) ⇒ EXCEPTION RANGE_ERROR for category(A) <> CHAROBJECT )
+      getValue(A, string) Dereference as string
+                  ( Type of result: string,
+                    getValue(NIL, string) ⇒ EXCEPTION RANGE_ERROR,
+                    getValue(A, string) ⇒ EXCEPTION RANGE_ERROR for category(A) <> STRIOBJECT )
+      getValue(A, bstring) Dereference as bstring
+                  ( Type of result: bstring,
+                    getValue(NIL, bstring) ⇒ EXCEPTION RANGE_ERROR,
+                    getValue(A, bstring) ⇒ EXCEPTION RANGE_ERROR for category(A) <> BSTRIOBJECT )
+      getValue(A, bitset) Dereference as bitset
+                  ( Type of result: bitset,
+                    getValue(NIL, bitset) ⇒ EXCEPTION RANGE_ERROR,
+                    getValue(A, bitset) ⇒ EXCEPTION RANGE_ERROR for category(A) <> SETOBJECT )
+      getValue(A, clib_file) Dereference as clib_file
+                  ( Type of result: clib_file,
+                    getValue(NIL, clib_file) ⇒ EXCEPTION RANGE_ERROR,
+                    getValue(A, clib_file) ⇒ EXCEPTION RANGE_ERROR for category(A) <> FILEOBJECT )
+      getValue(A, program) Dereference as program
+                  ( Type of result: program,
+                    getValue(NIL, program) ⇒ EXCEPTION RANGE_ERROR,
+                    getValue(A, program) ⇒ EXCEPTION RANGE_ERROR for category(A) <> PROGOBJECT )
+      getValue(A, ACTION) Dereference as ACTION
+                  ( Type of result: ACTION,
+                    getValue(NIL, ACTION) ⇒ EXCEPTION RANGE_ERROR,
+                    getValue(A, ACTION) ⇒ EXCEPTION RANGE_ERROR for category(A) <> ACTOBJECT )
+      getValue(A, type) Dereference as type
+                  ( Type of result: type,
+                    getValue(NIL, type) ⇒ EXCEPTION RANGE_ERROR,
+                    getValue(A, type) ⇒ EXCEPTION RANGE_ERROR for category(A) <> TYPEOBJECT )
+      compare(A, B) Compare function
+                  ( Type of result: integer )
+      hashCode(A) Hash function
+                  ( Type of result: integer )
+    Statements:
+      setVar(A, B) Set var flag of referenced object A to B
+                  ( Type of argument B: boolean,
+                    setVar(NIL, B) ⇒ EXCEPTION RANGE_ERROR )
+      setCategory(A, B) Set the category of the referenced object A to B
+                  ( Type of argument B: category,
+                    setCategory(NIL, B) ⇒ EXCEPTION RANGE_ERROR )
+      setType(A, B) Set the type of the referenced object A to B
+                  ( Type of argument B: type,
+                    setType(NIL, B) ⇒ EXCEPTION RANGE_ERROR )
+      setValue(A, B) Set the value of the referenced object A to B
+                  ( Type of argument B: ref_list )
+      setFormalParams(A, B) Set the formal parameters of a function
+                  ( Type of argument B: ref_list,
+                    setFormalParams(NIL, B) ⇒ EXCEPTION RANGE_ERROR )
+      ignore(A) Ignore value
+```
+
+[]{#types_ref_list}
+
+### 5.31 ref_list
+
+The type [`ref_list`]{.type} describes a list of
+[`reference`](#types_reference){.type} objects. The [`ref_list`]{.type}
+functions are defined in the library [\"[ref_list.s7i]{.lib}\"]{.stri}.
+
+``` tt
+    Constants:
+      ref_list.EMPTY  Empty reference list.
+      ref_list.value  Default value of ref_list (ref_list.EMPTY)
+    Infix operators:
+      &         Ref_list list concatenation
+      A in B    Is element in ref_list
+                  ( Type of argument A: reference,
+                    Type of result: boolean )
+      A not in B  Is element not in ref_list
+                  ( Type of argument A: reference,
+                    Type of result: boolean )
+    Indices:
+      [ A ]     Access one ref_list element
+                  ( Type of argument A: integer,
+                    Type of result: reference,
+                    A[1] ⇒ First element,
+                    A[length(A)] ⇒ Last element,
+                    A[0] ⇒ EXCEPTION INDEX_ERROR,
+                    A[succ(length(A))] ⇒ EXCEPTION INDEX_ERROR )
+      [ A .. B ]  Access a sub list
+                  ( Type of arguments A and B: integer )
+      [ A .. ]  Access a sub list beginning at position A
+                  ( Type of argument A: integer )
+      [ .. A ]  Access a sub list ending at position A
+                  ( Type of argument A: integer )
+    Relations:
+      =, <>
+    Functions:
+      length(A) Length of ref_list
+                  ( Type of result: integer,
+                    length(ref_list.EMPTY) ⇒ 0 )
+      make_list(A) Create ref_list with element A
+                  ( Type of argument A: reference )
+      pos(A,B)  First position of reference B in ref_list A
+                  ( Type of argument B: reference,
+                    Type of result: integer )
+      pos(A,B,C) First position of reference B in ref_list A
+                 The search starts at position C of ref_list A
+                  ( Type of argument B: reference,
+                    Type of argument C: integer,
+                    Type of result: integer )
+      incl(A, B) Include element in list
+                  ( Type of argument B: reference )
+      excl(A, B) Exclude element from list
+                  ( Type of argument B: reference )
+    Statements:
+      A &:= B   Append B to A
+                  ( A &:= B ⇒ A := A & B )
+      A @:= [B] C  Assign C to element B of ref_list A
+                  ( Type of argument B: integer,
+                    Type of argument C: reference,
+                    A @:= [B] C ⇒
+                        A := A[..pred(B)] & make_list(C) & A[succ(B)..],
+                    A @:= [0] C ⇒ EXCEPTION INDEX_ERROR,
+                    A @:= [succ(length(A))] C ⇒ EXCEPTION INDEX_ERROR )
+      ignore(A) Ignore value
+      for forVar range aRefList do
+        statements
+      end for   Loop over all elements of a ref_list
+                  ( Type of argument forVar: reference,
+                    Type of argument statements: proc )
+      for forVar range aRefList until condition do
+        statements
+      end for   Loop over all elements of a ref_list until condition is TRUE
+                Check the condition before the statements in the loop body are executed.
+                  ( Type of argument forVar: reference,
+                    Type of argument condition: boolean,
+                    Type of argument statements: proc )
+```
+
+[]{#types_structElement}
+
+### 5.32 structElement
+
+The type [`structElement`]{.type} describes an element of a
+[`struct`](#types_struct){.type}. A [`structElement`]{.type} value has
+two properties:
+
+- The [`type`](#types_type){.type} of the struct element (this can be
+  obtained with [`getType`]{.func}).
+- The name of the struct element (this can be obtained with
+  [`getName`]{.func}).
+
+The function [`elements`]{.func} returns a [`structElement`]{.type}
+array, which describes the elements of a
+[`struct`](#types_struct){.type}:
+
+``` indent
+elements(aStructType)
+```
+
+The program below writes the types and names of
+[`exampleStruct`]{.type}:
+
+``` indent
+$ include "seed7_05.s7i";
+
+const type: exampleStruct is new struct
+    var string: aKey is "";
+    var integer: number is 0;
+  end struct;
+
+const proc: main is func
+  local
+    var structElement: anElement is structElement.value;
+  begin
+    for anElement range elements(exampleStruct) do
+      writeln(str(getType(anElement)) <& ": " <& getName(anElement));
+    end for;
+  end func;
+```
+
+The output of this program is:
+
+``` indent
+string: aKey
+integer: number
+```
+
+Element descriptions can be used in templates. The JSON serialization
+and de-serialization in the [\"[json_serde.s7i]{.lib}\"]{.stri} library
+uses [`structElement`]{.type}. The [`structElement`]{.type} functions
+are defined in the library [\"[struct_elem.s7i]{.lib}\"]{.stri}.
+
+``` tt
+    Constants:
+      structElement.value  Empty struct element.
+    Prefix operators:
+      symb    Convert into a symbol parameter
+                  ( Type of result: f_param,
+            symb structElement.value ⇒ EXCEPTION RANGE_ERROR )
+    Relations:
+      =, <>
+    Functions:
+      getName(A) Name of a struct element
+                  ( Type of result: string )
+      getType(A) Type of a struct element
+                  ( Type of result: type )
+      elements(A) Get all struct elements from a struct type
+                  ( Type of argument A: type,
+                    Type of result: structElementArray,
+                    elements(boolean) ⇒ EXCEPTION ILLEGAL_ACTION )
+      structElement(A) Convert a reference to a structElement
+                  ( Type of argument A: reference )
+      compare(A, B) Compare function
+                  ( Type of result: integer )
+      hashCode(A) Hash function
+                  ( Type of result: integer )
+    Statements:
+      ignore(A) Ignore value
+```
+
+[]{#types_program}
+
+### 5.33 program
+
+The type [`program`]{.type} describes a Seed7 program. You cannot access
+the program that currently runs. Instead you can parse a program and
+access its data. The [`program`]{.type} functions are defined in the
+library [\"[progs.s7i]{.lib}\"]{.stri}.
+
+``` tt
+    Constants:
+      program.EMPTY  Empty program.
+      program.value  Default value of program (program.EMPTY)
+    Relations:
+      =, <>
+    Functions:
+      name(A)   Name of program A without path and extension
+      path(A)   Absolute path of program A
+      parseFile(A)  Parse the file with the name A
+                  ( Type of argument A: string )
+      parseStri(A)  Parse the string A
+                  ( Type of argument A: string )
+      parseStri(A)  Parse the bstring A
+                  ( Type of argument A: bstring )
+      evaluate(A, B)  Evaluate the expression B which is part of program A
+                  ( Type of result: reference,
+                    Type of argument B: reference )
+      sysVar(A, B)  Return a reference of the system var B of program A
+                  ( Type of result: reference,
+                    Type of argument B: string )
+      errorCount(A)  Number of errors in the program A
+                  ( Type of result: integer )
+      getError(A, N)  Get error N from program A
+                  ( Type of argument N: integer,
+                    Type of result: parseError )
+      globalObjects(A)  List of global defined objects in the program A
+                  ( Type of result: ref_list )
+      syobject(A, B)  Return object with name B in program A
+                  ( Type of result: reference,
+                    Type of argument B: string )
+      match(A, B)  Return object from program A which matches B
+                  ( Type of result: reference,
+                    Type of argument B: ref_list )
+      compare(A, B) Compare function
+                  ( Type of result: integer )
+      hashCode(A) Hash function
+    Statements:
+      execute(A) Execute the program referred by A
+      ignore(A) Ignore value
+```
+
+[]{#types_parseError}
+
+### 5.34 parseError
+
+The type [`parseError`]{.type} describes syntactic and semantic
+[errors](#errors_Parsing_errors) discovered by the parser. It
+contains information about the error, file, line, column, error message
+and error line.
+
+``` tt
+    Elements:
+      var errorType: error is errorType.value;
+      var string: fileName is "";
+      var integer: lineNumber is 0;
+      var integer: columnNumber is 0;
+      var string: message is "";
+      var string: errorLine is "";
+    Functions:
+      getError(A, N)  Get error N from program A
+                  ( Type of argument A: program,
+                    Type of argument N: integer )
+    Statements:
+      ignore(A) Ignore value
+```
+
+[]{#types_ptr}
+
+### 5.35 ptr
+
+The type [`ptr`](#types_ptr){.type}` `[`baseType`]{.type} describes a
+pointer to an object of a [`baseType`]{.type}. With
+
+``` indent
+const type: ptrType is ptr baseType;
+```
+
+a new pointer type [`ptrType`]{.type} is declared.
+
+``` tt
+    Constants:
+      ptrType.NIL   Reference to no element
+    Prefix operators:
+      &         Address of
+                  ( Type of operand: baseType )
+    Postfix operators:
+      ^         Dereference
+                  ( Type of result: baseType )
+    Infix operators:
+      ptrType conv A  Conversion from reference A to ptrType
+      reference conv A  Conversion from ptrType A to reference
+    Relations:
+      =, <>
+    Functions:
+      base_type(ptrType)  Gets the baseType of a ptrType
+                  ( Type of argument ptrType: type )
+```
+
+[]{#types_func}
+
+### 5.36 func
+
+The type [`func`](#types_func){.type}` `[`baseType`]{.type} describes
+functions which return a [`baseType`]{.type}. For example:
+[`func`](#types_func){.type}` `[`integer`](#types_integer){.type}
+describes an [`integer`](#types_integer){.type} function.
+
+``` tt
+    Values:
+      ord, str, abs, sqrt, rand, A + B, A * B, A ** B,
+      trunc, round, sin, cos, compare, hashCode, pos,
+      replace, trim, length, keys, color, dayOfWeek,
+      ...
+                Every function declared with const func ... is a value
+
+    Prefix operators:
+      func
+      result
+        var baseType: resultVariable is baseType.value;
+      begin
+        statements
+      end func
+                Create a baseType function
+                  ( Type of 'statements': proc,
+                    Type of result: func baseType )
+
+      func
+      result
+        var baseType: resultVariable is baseType.value;
+      local
+        declarations
+      begin
+        statements
+      end func
+                Create a baseType function with local variables
+                  ( Type of 'declarations': proc,
+                    Type of 'statements': proc,
+                    Type of result: func baseType )
+
+      return value
+                Create a function with the result type of value
+                  ( Type of value: anyType - which means: any type,
+                    Type of result: func anyType )
+```
+
+Functions are declared as constants with a [`func`](#types_func){.type}
+type and are initialized with a [`func result`]{.keywd}` ...` or
+[`return`]{.keywd}` ...` operator. For example:
+
+``` indent
+const func integer: tak (in integer: x, in integer: y, in integer: z) is func
+  result
+    var integer: tak is 0;
+  begin
+    if y >= x then
+      tak := z;
+    else
+      tak := tak(tak(pred(x), y, z),
+                 tak(pred(y), z, x),
+                 tak(pred(z), x, y));
+    end if;
+  end func
+```
+
+Another example using the [`return`]{.keywd} function:
+
+``` indent
+const func float: convertRadianToDegree (in float: x) is
+  return x * 57.295779513082320876798154814114;
+```
+
+This [`return`]{.keywd} function should not be confused with a
+[`return`]{.keywd} statement. It is important to note that no
+[`return`]{.keywd} statement exists. The declaration for the
+[`return`]{.keywd} function is as follows:
+
+``` indent
+const func func aType: return (ref func aType param)  is action "PRC_RETURN";
+const func func aType: return (ref aType param)       is action "PRC_RETURN";
+```
+
+The [`func`](#types_func){.type} types can also be used for parameters.
+Functions which use a [`func`](#types_func){.type} parameter do not
+evaluate this parameter before the function call. Instead this parameter
+can be evaluated zero or more times inside the function. For example:
+
+``` indent
+const func boolean: (in boolean: first) and (in func boolean: second) is func
+  result
+    var boolean: conjunction is FALSE;
+  begin
+    if first then
+      conjunction := second;
+    end if;
+  end func;
+```
+
+Here the second parameter is only evaluated if the first parameter is
+[`TRUE`]{.var}.
+
+[]{#types_varfunc}
+
+### 5.37 varfunc
+
+The type [`varfunc`](#types_varfunc){.type}` `[`baseType`]{.type}
+describes functions which return a [`baseType`]{.type} variable. For
+example: A function which returns an [`integer`](#types_integer){.type}
+variable is described with
+[`varfunc`](#types_varfunc){.type}` `[`integer`](#types_integer){.type}.
+A call of a [`varfunc`](#types_varfunc){.type} can be used at the left
+side of an assignment. Generally a [`varfunc`](#types_varfunc){.type}
+can be used at places where an [`inout`]{.keywd} parameter requests a
+variable.
+
+``` tt
+    Prefix operators:
+      return var value;
+                Create a varfunc which returns the variable 'value'
+                  ( Type of value: anyType - which means: any type,
+                    Accessright of value: var = A variable, an inout parameter or a varfunc
+                    Type of result: varfunc anyType )
+```
+
+Varfunctions are used to express [`array`](#types_array){.type},
+[`hash`](#types_hash){.type} and [`struct`](#types_struct){.type}
+accesses which can be used at the left and right side of an assignment.
+The access function for a [`hash`](#types_hash){.type} is defined as:
+
+``` indent
+const func baseType: (in hashType: aHash) [ (in keyType: aKey) ] is
+  return INDEX(aHash, aKey, hashCode(aKey), hashType.keyCompare);
+
+const varfunc baseType: (inout hashType: aHash) [ (in keyType: aKey) ] is
+  return var INDEX(aHash, aKey, hashCode(aKey), hashType.keyCompare);
+```
+
+The example above shows that functions with [`in`]{.keywd} and
+[`inout`]{.keywd} parameters can be overloaded. At the right side of an
+assignment the [`func`](#types_func){.type} is called, while at the left
+side the [`varfunc`](#types_varfunc){.type} is called. That way the
+access functions of [array](#types_array){.type}s,
+[hash](#types_hash){.type}es and [struct](#types_struct){.type}s can be
+used in the usual way.
+
+[]{#types_void}
+
+### 5.38 void
+
+The type [`void`](#types_void){.type} describes the empty type.
+
+``` tt
+    Value:
+      empty     This is the only value of the type void.
+    Constants:
+      void.value  Default value of void (empty)
+```
+
+[]{#types_proc}
+
+### 5.39 proc
+
+The type [`proc`](#types_proc){.type} describes procedures. The type
+[`proc`](#types_proc){.type} is defined as
+[`func`](#types_func){.type}` `[`void`](#types_void){.type}.
+
+``` tt
+    Values:
+      noop;
+      while ... do ... end while;
+      repeat ... until ... ;
+      writeln( ... );
+      A := B;
+      incr(A);
+      ...
+                Every procedure declared with const proc: ... is a value
+                The procedure 'noop' does nothing and is used as empty procedure.
+
+    Prefix operators:
+      func
+      begin
+        statements
+      end func
+                Create a procedure
+                  ( Type of 'statements': proc,
+                    Type of result: proc )
+
+      func
+      local
+        declarations
+      begin
+        statements
+      end func
+                Create a procedure with local variables
+                  ( Type of 'declarations': proc,
+                    Type of 'statements': proc,
+                    Type of result: proc )
+```
+
+[]{#types_creator}
+
+### 5.40 creator
+
+The type [`creator`](#types_creator){.type} describes create operators.
+Create operators ( `::=` ) are used for initializations. They are
+similar to [assignment statements](#stats_Assignment) (
+[`:=`](#stats_Assignment){.op_no_ul} ) but they assume that the
+destination is undefined (It may contain garbage). Create operators are
+not called explicitly. They are called by constant- and
+variable-declarations instead. Value parameters use create operators for
+initialization as well. To allow declarations and value parameters a
+type needs a corresponding create operator. Examples of create operator
+declarations are:
+
+``` indent
+const creator: (ref boolean: dest) ::= (in boolean: source)         is action "BLN_CREATE";
+const creator: (ref integer: dest) ::= (ref integer: source)        is action "INT_CREATE";
+const creator: (ref bigInteger: dest) ::= (ref bigInteger: source)  is action "BIG_CREATE";
+const creator: (ref string: dest) ::= (in string: source)           is action "STR_CREATE";
+const creator: (ref proc: dest) ::= (ref proc: source)              is action "PRC_CREATE";
+```
+
+The types [`boolean`](#types_boolean){.type_no_ul},
+[`integer`](#types_integer){.type_no_ul},
+[`float`](#types_float){.type_no_ul},
+[`char`](#types_char){.type_no_ul},
+[`bin64`](#types_bin64.htm#bin64){.type_no_ul},
+[`bin32`](#types_bin32.htm#bin64){.type_no_ul} and [enumeration
+types](#types_enumeration) don\'t use the heap. In this case the
+`::=` operator just copies some bytes from the source to the destination
+(like the assignment does).
+
+For types like [`string`](#types_string){.type_no_ul} and
+[`bigInteger`](#types_bigInteger){.type_no_ul} data is stored in the
+heap. In this case the `::=` operator allocates heap memory and copies
+data to the allocated area. Finally the pointer to the heap is stored in
+the destination.
+
+The type [`creator`](#types_creator){.type} is defined as
+[`func`](#types_func){.type}` `[`create_result`]{.type}. The type
+[`creator`](#types_creator){.type} is similar to
+[`proc`](#types_proc){.type_no_ul}. The type
+[`creator`](#types_creator){.type} has been introduced to prohibit
+create operators in places where statements are required. An attempt to
+use `::=` as statement leads to an error:
+
+``` indent
+*** tst492.sd7(7):57: Match for {INT_CREATE({number ::= 1 }) ; {number writeln } } failed
+    number ::= 1;
+```
+
+[]{#types_destroyer}
+
+### 5.41 destroyer
+
+The type [`destroyer`](#types_destroyer){.type} describes destroy
+operations. Destroy operations are used to free data. They are not
+called explicitly. Destroy operations are executed by the automatic
+memory management when a certain value cannot be accessed any more.
+Examples of destroy operation declarations are:
+
+``` indent
+const destroyer: destroy (ref boolean: aValue)     is action "GEN_DESTR";
+const destroyer: destroy (ref integer: aValue)     is action "GEN_DESTR";
+const destroyer: destroy (ref bigInteger: aValue)  is action "BIG_DESTR";
+const destroyer: destroy (ref bstring: aValue)     is action "BST_DESTR";
+const destroyer: destroy (ref proc: aValue)        is action "PRC_DESTR";
+```
+
+For the types [`boolean`](#types_boolean){.type_no_ul},
+[`integer`](#types_integer){.type_no_ul},
+[`float`](#types_float){.type_no_ul},
+[`char`](#types_char){.type_no_ul},
+[`bin64`](#types_bin64.htm#bin64){.type_no_ul},
+[`bin32`](#types_bin32.htm#bin64){.type_no_ul} and for [enumeration
+types](#types_enumeration) the destroy operation does nothing.
+
+For types like [`string`](#types_string){.type_no_ul} and
+[`bigInteger`](#types_bigInteger){.type_no_ul} the destroy operation
+frees the heap data.
+
+The type [`destroyer`](#types_destroyer){.type} is defined as
+[`func`](#types_func){.type}` `[`destroy_result`]{.type}. The type
+[`destroyer`](#types_destroyer){.type} is similar to
+[`proc`](#types_proc){.type_no_ul}. The type
+[`destroyer`](#types_destroyer){.type} has been introduced to prohibit
+destroy operations in places where statements are required. An attempt
+to do use a destroy operation as statement leads to an error:
+
+``` indent
+*** tst493.sd7(8):57: Match for {GEN_DESTR({number destroy }) ; {number writeln } } failed
+    destroy(number);
+```
+
+[]{#types_type}
+
+### 5.42 type
+
+The type [`type`](#types_type){.type} describes all types. Examples of
+type declarations are:
+
+``` indent
+const type: intArrayType is array integer;
+const type: arrayIndexChar is array [char] string;
+const type: hashType is hash [string] intArrayType;
+const type: setType is set of char;
+```
+
+Note that type declarations should always be made at the top level.
+E.g.:
+
+``` indent
+$ include "seed7_05.s7i";
+
+const type: intArrayType is array integer;
+
+const proc: main is func
+  local
+    var intArrayType: arr is [](1, 2);
+  begin
+    writeln(length(arr));
+  end func;
+```
+
+If the type declaration of [`intArrayType`]{.type} would be inside of
+the [`local`]{.keywd} declaration block you would receive a [parsing
+error](#errors_Parsing_errors):
+
+``` indent
+*** tst249.sd7(6):57: Match for {var intArrayType : {arr } is {[ ] {1 , 2 } } } failed
+    var intArrayType: arr is [](1, 2);
+```
+
+A [`local`]{.keywd} declaration block is parsed completely before it is
+executed. This causes that [`intArrayType`]{.type} is not defined during
+the parsing.
+
+``` tt
+    Values:
+      void, boolean, integer, rational, float, char,
+      string, reference, ref_list, color, time, duration
+      file, proc, type, ...
+                Every type declared with const type: ... is a value
+                The type void is used as empty type.
+    Constants:
+      type.value  Default value of type (void)
+    Prefix operators:
+      func      Function type
+                  ( func char ⇒ Function which returns a char )
+      varfunc   Varfunc type
+                  ( varfunc char ⇒ Function which returns a char variable )
+      ptr       Pointer type
+                  ( ptr bitset ⇒ Pointer to bitset )
+      array     Array type
+                  ( array string ⇒ Array of strings )
+      set of    Set type
+                  ( set of integer ⇒ Set of integer )
+      subtype   Create subtype of existing type
+                  ( subtype char ⇒ Subtype of char )
+    Infix operators:
+      A ? B : C  Ternary operator condition ? thenValue : elseValue
+                  ( TRUE ? a : b ⇒ a,
+                    FALSE ? a : b ⇒ b )
+    Relations:
+      =, <>
+    Functions:
+      str(A)    Conversion to string
+                  ( Type of result: string )
+      newtype   Create a new type
+      gentype   Generate a type
+      gensub(A) Generate a subtype
+      typeof(A) Get the type of an expression
+                  ( Type of argument A: Defined for all types,
+                    typeof(1) ⇒ integer,
+                    typeof("asdf") ⇒ string )
+      isFunc(A)  Is this type a func type
+                  ( Type of result: boolean,
+                    isFunc(func char) ⇒ TRUE,
+                    isFunc(varfunc char) ⇒ FALSE )
+                    isFunc(char) ⇒ FALSE )
+      isVarfunc(A)  Is this type a varfunc type
+                  ( Type of result: boolean,
+                    isVarfunc(func char) ⇒ FALSE,
+                    isVarfunc(varfunc char) ⇒ TRUE,
+                    isVarfunc(char) ⇒ FALSE )
+      resultType(A)  Get the result type of a func or varfunc type
+                  ( resultType(func char) ⇒ char,
+                    resultType(proc) ⇒ void,
+                    resultType(integer) ⇒ EXCEPTION RANGE_ERROR )
+      isDerived(A)  Is this type derived from another type
+                  ( Type of result: boolean,
+                    isDerived(subtype char) ⇒ TRUE )
+      meta(A)       Get the type from which type A is derived
+                  ( meta(subtype char) ⇒ char )
+      base_type(A)  Get the base type of an array, pointer or
+                    set type
+                  ( base_type(array char) ⇒ char,
+                    base_type(ptr string) ⇒ string,
+                    base_type(set of integer) ⇒ integer )
+      typeNumber(A)  Get an unique number for a type
+                  ( Type of result: integer )
+      typeObject(A)  Get a unique object (match object) of a type
+                  ( Type of result: reference )
+      compare(A, B) Compare function
+                  ( Type of result: integer )
+      hashCode(A) Hash function
+                  ( Type of result: integer )
+    Statements:
+      addInterface(A, B)  Adds the interface type B to the implementation type A
+      const aType: name is value
+                Declare constant 'name' with 'value'
+      var aType: name is value
+                Declare variable 'name' with 'value'
+      ignore(A) Ignore value
+```
+
+[]{#types_object}
+
+### 5.43 object
+
+The type [`object`](#types_object){.type} is used as meta type for
+various types. This allows defining common operations for all this
+types. The type [`object`](#types_object){.type} is not used as element
+type for container classes since this can be done much better and type
+safe with abstract data types like [`array`](#types_array){.type},
+[`set`](#types_set){.type}, [`hash`](#types_hash){.type} and others.
+
+``` tt
+    Functions:
+      TRACE_OBJ(A)  Write internal information
+```
+
+[]{#types_expr}
+
+### 5.44 expr
+
+The type [`expr`](#types_expr){.type} is used to describe unmatched
+expressions. These are expressions where the recognizing of the
+functions and the type check is not done yet. This is used for example
+in the definition of function bodies.
+
+``` tt
+    Functions:
+      WRITE_EXPR(A)
+                Write expr A to FILE OUT
+```
+
+[]{#params_file_start}
+
+[]{#params_PARAMETERS}
+
+## 6. PARAMETERS
+
+The following sub-chapters introduce the parameter types of Seed7.
+
+  Parameter                                                                                                                            Evaluation strategy                   Assignment to formal parameter
+  ------------------------------------------------------------------------------------------------------------------ ------------------------------------------------------- -----------------------------------------
+  [`val`](#params_val_parameter){.keywd_no_ul}` `[***`aType`***]{.type}`: name`                                                           call-by-value                      forbidden
+  [`ref`](#params_ref_parameter){.keywd_no_ul}` `[***`aType`***]{.type}`: name`                                                         call-by-reference                    forbidden
+  [`in`](#params_in_parameter){.keywd_no_ul}` `[***`aType`***]{.type}`: name`                                                          depends on the type                   forbidden
+  [`in var`](#params_in_var_parameter){.keywd_no_ul}` `[***`aType`***]{.type}`: name`                                                     call-by-value                      allowed (no effect on actual parameter)
+  [`inout`](#params_inout_parameter){.keywd_no_ul}` `[***`aType`***]{.type}`: name`                                                     call-by-reference                    allowed (changes actual parameter)
+  [`in`](#params_in_parameter){.keywd_no_ul}` `[`func`](#types_func){.type_no_ul}` `[***`aType`***]{.type}`: name`    [call-by-name](#params_call_by_name_parameter)  forbidden
+
+[]{#params_val_parameter}
+
+### 6.1 \'val\' parameter
+
+Value parameters are introduced with the keyword `'`[`val`]{.keywd}`'`
+(e.g.: [`val`]{.keywd}` `[`string`](#types_string){.type}`: stri`). A
+value parameter copies the value of the actual parameter. The formal
+`'`[`val`]{.keywd}`'` parameter cannot be changed inside the function.
+Value parameters are used, when copying is cheap or when copying is
+necessary for the correct behavior. The function below appends a comma
+and a string to the variable `'globalStri'`:
+
+``` indent
+const proc: appendStri (val string: stri) is func
+  begin
+    globalStri &:= ",";
+    globalStri &:= stri;
+  end func;
+```
+
+After doing
+
+``` indent
+globalStri &:= "a";
+appendStri(globalStri);
+```
+
+the variable globalStri contains the value [`"a,a"`]{.stri}. If the
+function header would be
+
+``` indent
+const proc: appendStri (in string: stri) is func
+```
+
+the variable globalStri would contain the value [`"a,a,"`]{.stri}. This
+difference is because of the following reasons:
+
+For arrays `'`[`in`]{.keywd}`'` parameters are equal to
+`'`[`ref`]{.keywd}`'` parameters. When appendStri is called with
+globalStri as parameter an unwanted side effect takes place: Every
+change of globalStri changes also the `'`[`ref`]{.keywd}`'` parameter
+stri. Changes to the `'`[`ref`]{.keywd}`'` parameter would also change
+the global variable. Such unwanted side effects can also take place
+between parameters (when at least one parameter is an
+`'`[`inout`]{.keywd}`'` parameter).
+
+In most cases such unwanted side effects are impossible or can be
+avoided easily. An `'`[`in`]{.keywd}`'` parameter should be preferred
+over an `'`[`val`]{.keywd}`'` parameter, when possible.
+
+Semantics:
+:   When calling a function a formal `'`[`val`]{.keywd}`'` parameter
+    gets its value from the corresponding actual parameter. This is done
+    with a create procedure ( ::= ). Inside the function it is only
+    possible to read a formal `'`[`val`]{.keywd}`'` parameter. Changing
+    a formal `'`[`val`]{.keywd}`'` parameter is not possible. When a
+    function is left a `'destr'` procedure is called for every
+    `'`[`val`]{.keywd}`'` parameter. Formal `'`[`val`]{.keywd}`'`
+    parameters have the access right `'`[`const`]{.keywd}`'`.
+
+<!-- -->
+
+Syntax:
+
+:   
+
+    val_parameter ::=
+    :   \'[val]{.keywd}\' type_expression \':\' identifier_declaration
+        \|\
+        \'[val]{.keywd}\' type_expression \'[param]{.keywd}\' .
+
+Declaration:
+
+``` indent
+$ syntax expr: .val.().param       is -> 40;
+$ syntax expr: .val.(). : .(expr)  is -> 40;
+
+const func f_param: val (ref type param) param               is action "DCL_VAL1";
+const func f_param: val (ref type param) : (ref expr param)  is action "DCL_VAL2";
+```
+
+[]{#params_ref_parameter}
+
+### 6.2 \'ref\' parameter
+
+Reference parameters are introduced with the keyword
+`'`[`ref`]{.keywd}`'` (e.g.:
+[`ref`]{.keywd}` `[`array`](#types_array){.type}` `[`string`](#types_string){.type}`: arr`).
+A reference parameter refers to the value of the actual parameter. The
+formal `'`[`ref`]{.keywd}`'` parameter cannot be changed inside the
+function. Reference parameters are used, when copying is expensive and
+referring to the value does not change the correct behavior. The
+function below defines the primitive action for the semicolon operator:
+
+``` indent
+const proc: (ref void: statement1) ; (ref void: statement2) is noop;
+```
+
+In this definition and other definitions of primitive actions
+`'`[`ref`]{.keywd}`'` parameters are used. For normal functions usually
+`'`[`in`]{.keywd}`'` parameters are used instead of
+`'`[`ref`]{.keywd}`'` parameters:
+
+``` indent
+const func integer: total_length (in array string: arr) is func
+  result
+    var integer: lengthSum is 0;
+  local
+    var integer: index is 0;
+  begin
+    for index range 1 to length(arr) do
+      lengthSum +:= length(arr[index]);
+    end for;
+  end func;
+```
+
+Above function could also be defined with the following function head:
+
+``` indent
+const func integer: total_length (ref array string: arr) is func
+```
+
+Since for array types (and also for struct types) `'`[`in`]{.keywd}`'`
+parameters are defined to act as `'`[`ref`]{.keywd}`'` parameters both
+definitions are equal. An `'`[`in`]{.keywd}`'` parameter should be
+preferred over an `'`[`ref`]{.keywd}`'` parameter, when possible.
+
+Semantics:
+:   When calling a function a formal `'`[`ref`]{.keywd}`'` parameter is
+    set to refer to the corresponding actual parameter. Inside the
+    function it is only possible to read a formal `'`[`ref`]{.keywd}`'`
+    parameter. Changing a formal `'`[`ref`]{.keywd}`'` parameter is not
+    possible. Formal `'`[`ref`]{.keywd}`'` parameters have the access
+    right `'`[`const`]{.keywd}`'`.
+
+<!-- -->
+
+Syntax:
+
+:   
+
+    ref_parameter ::=
+    :   \'[ref]{.keywd}\' type_expression \':\' identifier_declaration
+        \|\
+        \'[ref]{.keywd}\' type_expression \'[param]{.keywd}\' .
+
+Declaration:
+
+``` indent
+$ syntax expr: .ref.().param       is -> 40;
+$ syntax expr: .ref.(). : .(expr)  is -> 40;
+
+const func f_param: ref (ref type param) param               is action "DCL_REF1";
+const func f_param: ref (ref type param) : (ref expr param)  is action "DCL_REF2";
+```
+
+[]{#params_in_parameter}
+
+### 6.3 \'in\' parameter
+
+Input parameters are introduced with the keyword `'`[`in`]{.keywd}`'`
+(e.g.: [`in`]{.keywd}` `[`integer`](#types_integer){.type}`: number`).
+Depending on the type an input parameter is either a value or a
+reference parameter. The formal `'`[`in`]{.keywd}`'` parameter cannot be
+changed inside the function. The function below checks if a given number
+is a prime number:
+
+``` indent
+const func boolean: is_prime (in integer: number) is func
+  result
+    var boolean: prime is FALSE;
+  local
+    var integer: count is 2;
+  begin
+    if number = 2 then
+      prime := TRUE;
+    elsif number >= 3 then
+      while number rem count <> 0 and count * count <= number do
+        incr(count);
+      end while;
+      prime := number rem count <> 0;
+    end if;
+  end func;
+```
+
+The following function defines the ex (outer) product:
+
+``` indent
+const func array array integer:
+    (in array integer: a) ex (in array integer: b) is func
+  result
+    var array array integer: product is 0 times 0 times 0;
+  local
+    var integer: index1 is 1;
+  begin
+    product := length(a) times length(b) times 0;
+    for index1 range 1 to length(a) do
+      for index2 range 1 to length(b) do
+        product[index1][index2] := a[index1] * b[index2];
+      end for;
+    end for;
+  end func;
+```
+
+Although both examples use `'`[`in`]{.keywd}`'` parameters the parameter
+in the first example is actually a `'`[`val`]{.keywd}`'` parameter while
+the parameters in the second example are actually `'`[`ref`]{.keywd}`'`
+parameters. When a new type is created with the `'newtype'` function it
+is necessary to specify the meaning of the `'`[`in`]{.keywd}`'`
+parameter. This is done with a call of the IN_PARAM_IS_VALUE or the
+IN_PARAM_IS_REFERENCE function with the new generated type as parameter.
+If a new type is created with the `'subtype'` function this
+specification is optional since the base type has already a
+specification of the `'`[`in`]{.keywd}`'` parameter.
+
+Semantics:
+:   Depending on the type an `'`[`in`]{.keywd}`'` parameter is
+    equivalent to an `'`[`val`]{.keywd}`'` (call by value) parameter or
+    to an `'`[`ref`]{.keywd}`'` (call by reference) parameter. Formal
+    `'`[`in`]{.keywd}`'` parameters have the access right
+    `'`[`const`]{.keywd}`'`.
+
+<!-- -->
+
+Syntax:
+
+:   
+
+    in_parameter ::=
+    :   \'[in]{.keywd}\' type_expression \':\' identifier_declaration .
+
+Declaration:
+
+``` indent
+$ syntax expr: .in.().param       is -> 40;
+$ syntax expr: .in.(). : .(expr)  is -> 40;
+
+const func f_param: in (ref type param) param               is action "DCL_IN1";
+const func f_param: in (ref type param) : (ref expr param)  is action "DCL_IN2";
+
+const proc: IN_PARAM_IS_VALUE (ref type: aType)             is action "TYP_SET_IN_PARAM_VALUE";
+const proc: IN_PARAM_IS_REFERENCE (ref type: aType)         is action "TYP_SET_IN_PARAM_REF";
+```
+
+[]{#params_in_var_parameter}
+
+### 6.4 \'in var\' parameter
+
+Value parameters that can be changed inside the function are introduced
+with the keywords `'`[`in var`]{.keywd}`'` (e.g.:
+[`in var`]{.keywd}` `[`integer`](#types_integer){.type}`: a`). The value
+of the actual parameter is copied. Changes to the formal
+`'`[`in var`]{.keywd}`'` parameter have no effect outside the function.
+The function below computes the greatest common divisor:
+
+``` indent
+const func integer: gcd (in var integer: a, in var integer: b) is func
+  result
+    var integer: gcd is 0;
+  local
+    var integer: help is 0;
+  begin
+    while a <> 0 do
+      help := b rem a;
+      b := a;
+      a := help;
+    end while;
+    gcd := b;
+  end func;
+```
+
+Semantics:
+:   When calling a function a formal [`in var`]{.keywd} parameter gets
+    its value from the corresponding actual parameter. This is done with
+    a create procedure ( ::= ). Inside the function it is possible to
+    read and change a formal [`in var`]{.keywd} parameter. Changing a
+    formal [`in var`]{.keywd} parameter has no effect on the actual
+    parameter. When a function is left a `'destr'` procedure is called
+    for every [`in var`]{.keywd} parameter. Formal [`in var`]{.keywd}
+    parameters have the access right [`var`]{.keywd}.
+
+<!-- -->
+
+Syntax:
+
+:   
+
+    in_var_parameter ::=
+    :   \'[in var]{.keywd}\' type-expression \':\'
+        identifier_declaration .
+
+Declaration:
+
+``` indent
+$ syntax expr: .in.var.().param       is -> 40;
+$ syntax expr: .in.var.(). : .(expr)  is -> 40;
+
+const func f_param: in var (ref type param) param               is action "DCL_IN1VAR";
+const func f_param: in var (ref type param) : (ref expr param)  is action "DCL_IN2VAR";
+```
+
+[]{#params_inout_parameter}
+
+### 6.5 \'inout\' parameter
+
+Reference parameters, that can be changed inside the function, are
+introduced with the keyword `'`[`inout`]{.keywd}`'` (e.g.:
+[`inout`]{.keywd}` `[`integer`](#types_integer){.type}`: number`). A
+reference parameter refers to the value of the actual parameter. Changes
+to the formal `'`[`inout`]{.keywd}`'` parameter effect also the actual
+parameter. The procedure below doubles the given parameter \'number\':
+
+``` indent
+const proc: double (inout integer: number) is func
+  begin
+    number := 2 * number;
+  end func;
+```
+
+Semantics:
+:   When calling a function a formal `'`[`inout`]{.keywd}`'` parameter
+    is set to refer to the corresponding actual parameter. Inside the
+    function it is possible to read and change a formal
+    `'`[`inout`]{.keywd}`'` parameter. Changing a formal
+    `'`[`inout`]{.keywd}`'` parameter changes the actual parameter as
+    well. Formal `'`[`inout`]{.keywd}`'` parameters have the access
+    right `'`[`var`]{.keywd}`'`.
+
+<!-- -->
+
+Syntax:
+
+:   
+
+    inout_parameter ::=
+    :   \'[inout]{.keywd}\' type_expression \':\' identifier_declaration
+        .
+
+Declaration:
+
+``` indent
+$ syntax expr: .inout.().param       is -> 40;
+$ syntax expr: .inout.(). : .(expr)  is -> 40;
+
+const func f_param: inout (ref type param) param               is action "DCL_INOUT1";
+const func f_param: inout (ref type param) : (ref expr param)  is action "DCL_INOUT2";
+```
+
+[]{#params_call_by_name_parameter}
+
+### 6.6 Call-by-name parameter
+
+Call-by-name is an evaluation strategy for parameters. Call-by-name
+parameters are not introduced with a keyword. All parameters with a
+function type like
+[`func`](#types_func){.type_no_ul}` `[`boolean`](#types_boolean){.type_no_ul}
+or [`proc`](#types_proc){.type_no_ul} are a call-by-name parameters. The
+actual call-by-name parameter is not evaluated before the function is
+called. When the function is executed the call-by-name parameter might
+be executed once, many times or not at all.
+
+For normal (not call-by-name) parameters the following holds: When the
+function is called the actual parameter expressions are evaluated and
+the results of the evaluation are forwarded to the function. Assume
+`number` has the value `12` and the following statement is executed:
+
+``` indent
+seek(aFile, number + 5);
+```
+
+The expression `number `[`+`]{.op_no_ul}` 5` is evaluated to `17` before
+[`seek`]{.func_no_ul} is called. The statement actually executed is:
+
+``` indent
+seek(aFile, 17);
+```
+
+The definition of [`seek`]{.func_no_ul} requests that its 2nd parameter
+must be an [`integer`](#types_integer){.type} and not an integer
+expression:
+
+``` indent
+const proc: seek (inout file: aFile, in integer: position) is ...
+```
+
+This triggers the evaluation of `number `[`+`]{.op_no_ul}` 5`. Compare
+this to:
+
+``` indent
+while number > 0 do
+  number -:= 5;
+end while;
+```
+
+The [while-statement](#stats_while-statement) is not called with
+the result of `number `[`>`]{.op_no_ul}` 0`. This would not work for the
+loop condition. The [while-statement](#stats_while-statement)
+receives the expression `number `[`>`]{.op_no_ul}` 0` instead. This way
+the [while-statement](#stats_while-statement) can decide how
+often `number `[`>`]{.op_no_ul}` 0` is evaluated. This contradicts the
+claim from above that actual parameter expressions are evaluated before
+the function is called. Obviously the condition parameter behaves
+different. This behavior is triggered by the declaration of the
+[while-statement](#stats_while-statement):
+
+``` indent
+const proc: while (in func boolean: condition) do (in proc: statement) end while is ...
+```
+
+The parameter `condition` has the type
+[`func`](#types_func){.type}` `[`boolean`](#types_boolean){.type} which
+is exactly the type of the expression `number `[`>`]{.op_no_ul}` 0`. For
+this reason `number `[`>`]{.op_no_ul}` 0` is forwarded to the
+[while-statement](#stats_while-statement) without evaluating it.
+All parameters with a [`func`](#types_func){.type} type have this
+behavior. The common name for all of them is call-by-name parameter. All
+call-by-name parameters are not evaluated before the function is called.
+
+Examples of normal and call-by-name parameters:
+
+  Normal parameter                                                                                Call-by-name parameter
+  ----------------------------------------------------------------------------------------------- ------------------------------------------------------------------------------------------------------------------------------------
+  [`in`](#params_in_parameter){.keywd_no_ul}` `[`boolean`](#types_boolean){.type_no_ul}`: name`   [`in`](#params_in_parameter){.keywd_no_ul}` `[`func`](#types_func){.type_no_ul}` `[`boolean`](#types_boolean){.type_no_ul}`: name`
+  [`in`](#params_in_parameter){.keywd_no_ul}` `[`integer`](#types_integer){.type_no_ul}`: name`   [`in`](#params_in_parameter){.keywd_no_ul}` `[`func`](#types_func){.type_no_ul}` `[`integer`](#types_integer){.type_no_ul}`: name`
+  [`in`](#params_in_parameter){.keywd_no_ul}` `[`string`](#types_string){.type_no_ul}`: name`     [`in`](#params_in_parameter){.keywd_no_ul}` `[`func`](#types_func){.type_no_ul}` `[`string`](#types_string){.type_no_ul}`: name`
+
+The type [`proc`](#types_proc){.type_no_ul} can also be used to define a
+call-by-name parameter:
+
+``` indent
+const proc: possiblyDo (in proc: statement) is func
+  begin
+    if flipCoin then
+      statement;
+    end if;
+  end func;
+```
+
+The function `possiblyDo` can be called with any statement (procedure):
+
+``` indent
+possiblyDo(writeln("hello world"));
+```
+
+[]{#params_Symbol_parameter}
+
+### 6.7 Symbol parameter
+
+Some functions use keywords at fixed places in the parameter list. These
+keywords in the parameter list are symbol parameters. The symbol
+parameters can be used to distinguish two versions of a function. E.g.:
+
+- The function [`getc`]{.func}`(aFile)` waits until it can read a
+  character.
+- The function [`getc`]{.func}`(KEYBOARD, NO_WAIT)` does not wait.
+
+The function [`getc`]{.func}`(KEYBOARD, NO_WAIT)` is declared as:
+
+``` indent
+const func char: getc (inout file: inFile, NO_WAIT) is
+  return inputReady(inFile) ? getc(inFile) : KEY_NONE;
+```
+
+In this case `NO_WAIT` is a symbol parameter. Symbol parameters can be
+used as keywords in statements as well. The following IF-statement
+requests the keywords `'`[`THEN`]{.keywd}`'` `'`[`END`]{.keywd}`'` and
+`'`[`IF`]{.keywd}`'` at specific places:
+
+``` indent
+IF condition THEN
+  statement
+END IF;
+```
+
+After defining the syntax of this IF-statement with
+
+``` indent
+$ syntax expr: .IF.().THEN.().END.IF  is -> 25;
+```
+
+the semantic can be defined with:
+
+``` indent
+const proc: IF (in boolean: condition) THEN
+              (in proc: statement)
+            END IF is func
+
+              begin
+                case condition of
+                  when {TRUE}: statement;
+                end case;
+              end func;
+```
+
+The symbol parameters are just written outside the parentheses. A call
+of this statement could be:
+
+``` indent
+IF value < maximum THEN
+  write(value)
+END IF;
+```
+
+Semantics:
+:   If a symbol parameter is part of a function call only a semantic
+    definition is needed. If a symbol parameter is not part of a
+    function call it must be defined in a syntax definition and in a
+    corresponding semantic definition. In the actual parameter list the
+    corresponding symbol of the formal parameter list must be written.
+
+<!-- -->
+
+Syntax:
+
+:   
+
+    symbol_parameter ::=
+    :   name_identifier \| special_identifier .
+
+[]{#params_attr_parameter}
+
+### 6.8 \'attr\' parameter
+
+This declaration associates a name to the type
+`'`[`char`](#types_char){.type}`'`:
+
+``` indent
+const string: name (attr char) is "char";
+```
+
+This `'name'` can be used as follows:
+
+``` indent
+writeln(name(char));
+```
+
+It is possible to overload such declarations:
+
+``` indent
+const string: name (attr boolean)  is "boolean";
+const string: name (attr float)    is "float";
+```
+
+An `'`[`attr`]{.keywd}`'` parameter can be used in a function also:
+
+``` indent
+const func char: (attr char) parse (in string: stri) is
+  return stri[1];
+```
+
+Semantics:
+:   The actual parameter which corresponds to an `'`[`attr`]{.keywd}`'`
+    parameter must be the type mentioned in the declaration of the
+    `'`[`attr`]{.keywd}`'` parameter. An `'`[`attr`]{.keywd}`'`
+    parameter does not declare a formal parameter variable which could
+    be used inside a function.
+
+<!-- -->
+
+Syntax:
+
+:   
+
+    attr_parameter ::=
+    :   \'[attr]{.keywd}\' type_expression .
+
+[]{#objects_file_start}
+
+[]{#objects_OBJECT_ORIENTATION}
+
+## 7. OBJECT ORIENTATION
+
+Many people will be familiar with object-orientation from languages like
+C++, Smalltalk, and Java. Seed7 follows the route of declaring
+\"interfaces\". An interface is a common set of operations supported by
+an object. For instance cars, motorcycles, lorries and vans can all
+accelerate or brake, if they are legal to drive on the road they can all
+indicate right and left.
+
+This view isn\'t new. C provides a primitive form of interfacing. When
+you write to a `'file'` in C you use the same interface (`'fprintf'`)
+for hard disk files, console output and printer output. The
+implementation does totally different things for these files. Unix has
+used the \"everything is a file\" philosophy for ages (even network
+communication uses the `'file'` interface (see
+[`sockets`](#file_Sockets){.type})).
+
+For short: An interface defines which methods are supported while the
+implementation describes how this is done. Several types with different
+method implementations can share the same interface.
+
+[]{#objects_interface_and_implementation}
+
+### 7.1 Interface and implementation
+
+Seed7 uses interface types and implementation types. Objects declared
+with an interface type refer to a value which has an implementation
+type. This situation is described with the following picture:
+
+``` box
+              +----------------+
+    declared  |    interface   |<--- interface type
+    object:   |     object     |     (known at compile-time)
+              +----------------+
+                      |
+                      | refer to value
+                      V
+              +----------------+
+    value:    | implementation |<--- implementation type
+              |     object     |     (unknown at compile-time)
+              +----------------+
+```
+
+The interface type of an object can always be determined at
+compile-time. Several implementation types can belong to one interface
+type (they implement the interface type). E.g.: The types
+[`null_file`]{.type}, [`external_file`]{.type} and [`socket`]{.type}
+implement the [`file`](#types_file){.type} interface. On the other hand:
+An implementation type can also implement several interface types. An
+interface object can only refer to a value with an implementation type
+that implements the interface. E.g.: A [`shape`]{.type} variable cannot
+refer to a [`socket`]{.type}.
+
+A new interface type is declared with:
+
+``` indent
+const type: shape is new interface;
+```
+
+Interface (DYNAMIC) functions describe what can be done with objects of
+an interface type. An interface function for a [`shape`]{.type} could
+be:
+
+``` indent
+const proc: draw (in shape: aShape, inout window: aWindow) is DYNAMIC;
+```
+
+Now we know that it is possible to `'draw'` a [`shape`]{.type} to a
+[`window`]{.type}. How this drawing is done is described in the
+implementation type. An implementation type for [`shape`]{.type} is:
+
+``` indent
+const type: circle is new struct
+    var integer: radius is 0;
+  end struct;
+```
+
+The fact that the type [`circle`]{.type} is an implementation type of
+[`shape`]{.type} is described with:
+
+``` indent
+type_implements_interface(circle, shape);
+```
+
+The function which implements `'draw'` for [`circle`]{.type}`s` is:
+
+``` indent
+const proc: draw (in circle: aCircle, inout window: aWindow) is func
+  begin
+    circle(aWindow.win, aWindow.currX, aWindow.currY,
+        aCircle.radius, aWindow.foreground);
+  end func;
+```
+
+In the classic OOP philosophy a message is sent to an object. To express
+this situation classic OO languages use the following method call
+syntax:
+
+``` indent
+param1.method(param2, param3)
+```
+
+In the method the receiving object is referred with `'self'` or
+`'this'`. The other parameters use the same mechanisms as in procedural
+programming languages (value or reference parameter). Seed7 uses a
+different approach: Instead of an implicit defined `'self'` or `'this'`
+parameter, all formal parameters get a user defined name. To reflect
+this symmetric approach a Seed7 method call looks like a normal function
+call:
+
+``` indent
+method(param1, param2, param3)
+```
+
+The definition of the `'draw'` function above uses the formal parameter
+`'aCircle'` in the role of a `'self'` or `'this'` parameter. Formal
+parameters which have an implementation type are automatically in the
+role of a `'self'` or `'this'` parameter.
+
+A function to create new circle objects can also be helpful:
+
+``` indent
+const func circle: circle (in integer: radius) is func
+  result
+    var circle: aCircle is circle.value;
+  begin
+    aCircle.radius := radius;
+  end func;
+```
+
+Now we can draw a [`circle`]{.type} object with:
+
+``` indent
+draw(circle(50), aWindow);
+```
+
+Although the statement above does exactly what it should do and the
+separation between interface and implementation is obvious, most OO
+enthusiasts would not be thrilled. All decisions which implementation
+function should be called can be made at compile time. To please the OO
+fans such decisions must be made at runtime. This decision process is
+called dynamic dispatch.
+
+[]{#objects_dynamic_dispatch}
+
+### 7.2 Dynamic dispatch
+
+When the implementation types have different implementations of the same
+function (method) a dynamic dispatch is necessary. The type of the
+value, referred by an interface object, is not known at compile-time. In
+this case the program must decide at runtime which implementation of the
+function should be invoked. This decision is based on the implementation
+type of the value (referred by the interface object). A dynamic dispatch
+only takes place when a DYNAMIC (or interface) function is called. When
+the program is analyzed (in the interpreter or compiler) the interface
+functions take precedence over normal functions when both are to be
+considered.
+
+To demonstrate the dynamic dispatch we define the type [`line`]{.type}
+which also implements a [`shape`]{.type}:
+
+``` indent
+const type: line is new struct
+    var integer: xLen is 0.0;
+    var integer: yLen is 0.0;
+  end func;
+
+type_implements_interface(line, shape);
+
+const proc: draw (in line: aLine, in window: aWindow) is func
+  begin
+    line(aWindow.win, aWindow.currX, aWindow.currY,
+        aLine.xLen, aLine.yLen, aWindow.foreground);
+  end func;
+
+const func line: line (in integer: xLen, in integer: yLen) is func
+  result
+    var line: aLine is line.value;
+  begin
+    aLine.xLen := xLen;
+    aLine.yLen := yLen;
+  end func;
+```
+
+In addition we define a normal (not DYNAMIC) function which draws
+[`shape`]{.type}`s` to the `'currWindow'`:
+
+``` indent
+const proc: draw (in shape: aShape) is func
+  begin
+    draw(aShape, currWindow);
+  end func;
+```
+
+In the example above the call of the (DYNAMIC) interface function is
+`'draw(aShape, currWindow)'`. The interface function declared with
+
+``` indent
+const proc: draw (in shape: aShape, inout window: aWindow) is DYNAMIC;
+```
+
+decides which implementation function has to be called. The dynamic
+dispatch works as follows:
+
+- For all parameters which have an interface type the parameter is
+  replaced with its value. In this case the parameter `'aShape'` is
+  replaced by a value of type [`circle`]{.type} or [`line`]{.type}.
+- The same logic as in the analyze part of the compiler is used to find
+  the matching function. In this search normal functions take precedence
+  over interface functions.
+- When a matching function is found it is called.
+
+This process describes the principal logic of the dynamic dispatch. In
+practice it is not necessary to execute the analyze part of the compiler
+during the runtime. It is possible to simplify this process with tables
+and function pointers.
+
+[]{#objects_inheritance}
+
+### 7.3 Inheritance
+
+When a new [`struct`](#types_struct){.type} type is defined it is
+possible to inherit from an existing [`struct`](#types_struct){.type}
+type. E.g.:
+
+``` indent
+const type: external_file is sub null_file struct
+    var clib_file: ext_file is PRIMITIVE_NULL_FILE;
+    var string: name is "";
+  end struct;
+```
+
+That way the type [`external_file`]{.type} inherits the fields and
+methods of [`null_file`]{.type}, which is declared as:
+
+``` indent
+const type: null_file is new struct
+  var char: bufferChar is '\n';
+end struct;
+```
+
+In most situations it makes sense when the implementation types inherit
+from a basic implementation type such as [`null_file`]{.type}. That way
+it is possible to define functions which are inherited by all derived
+implementation types. In the standard library [`getln`]{.func} is such a
+function:
+
+``` indent
+const func string: getln (inout null_file: aFile) is func
+  result
+    var string: stri is "";
+  local
+    var string: buffer is "";
+  begin
+    buffer := gets(aFile, 1);
+    while buffer <> "\n" and buffer <> "" do
+      stri &:= buffer;
+      buffer := gets(aFile, 1);
+    end while;
+    aFile.bufferChar := buffer[1];
+  end func;
+```
+
+All inherited types of [`null_file`]{.type} inherit the function
+[`getln`]{.func}, but they are also free to redefine it. In the
+[`getln`]{.func} function above the function call
+`'`[`gets`]{.func}`(aFile, 1)'` uses the (DYNAMIC) interface function:
+
+``` indent
+const func string: gets (inout file: inFile, in integer: maxLength) is DYNAMIC;
+```
+
+In other OO languages the distinction between interface type and basic
+implementation type is not done. Such languages either use a dynamic
+dispatch for every method call (as Java does) or need a keyword to
+request a dynamic dispatch (as C++ does with the `'virtual'` keyword).
+
+When assignments take place between inherited implementation types it is
+important to note that structure assignments are done with (deep)
+copies. Naturally such assignments can only copy the elements that are
+present in both structures. In the following example just the
+[`null_file`]{.type} elements are copied from `'anExternalFile'` to
+`'aNullFile'`:
+
+``` indent
+const proc: example is func
+  local
+    var null_file: aNullFile is null_file.value;
+    var external_file: anExternalFile is external_file.value;
+  begin
+    aNullFile := anExternalFile;
+    write(aNullFile, "hello");
+  end func;
+```
+
+Although the variable `'anExternalFile'` is assigned to `'aNullFile'`,
+the statement `'`[`write`]{.func}`(aNullFile, "hello")'` calls the
+[`write`]{.func} function (method) of the type [`null_file`]{.type}.
+
+A new interface type can also inherit from an existing interface type:
+
+``` indent
+const type: shape is sub object interface;
+```
+
+Although inheritance is a very powerful feature it should be used with
+care. In many situations it makes more sense that a new type has an
+element of another type (so called has-a relation) instead of inheriting
+from that type (so called is-a relation).
+
+[]{#objects_class_methods}
+
+### 7.4 Class methods
+
+Many object-oriented programming languages support methods that are
+associated with a class instead of an instantiated object. Such methods
+are called class methods or static methods. Seed7 supports class methods
+via attribute (`'`[`attr`](#params_attr_parameter){.keywd_no_ul}`'`)
+parameters which allow that a function is attached to a
+[`type`](#types_type){.type}:
+
+``` indent
+const func circle: create (attr circle, in integer: radius) is
+  return circle(radius);
+```
+
+This `'create'` function is attached to the type [`circle`]{.type} and
+can be called with
+
+``` indent
+create(circle, 10)
+```
+
+Many languages require that the class name must precede the method name
+when a class method is called (E.g. `'circle::create(10)'` in C++). In
+contrast to that `'`[`attr`](#params_attr_parameter){.keywd_no_ul}`'`
+parameters are not restricted to a specific parameter position. They can
+be used in any parameter position as in the following example:
+
+``` indent
+const func circle: create (in integer: radius, attr circle) is
+  return circle(radius);
+```
+
+This function can be called with
+
+``` indent
+create(10, circle)
+```
+
+Attribute parameters can be used for any type not just for interface and
+implementation types. Objects which do not have a function type such as
+a character constant can also be attached to a type:
+
+``` indent
+const char: (attr char) . value is ' ';
+```
+
+This way attributes can be used to specify properties of a type such as
+its default `'value'`. Programming languages such as Seed7 which support
+function definitions outside a class can also use normal functions
+instead of class methods. It is a matter of taste if a function should
+be grouped to a type or if it should exist stand alone and is called
+with:
+
+``` indent
+circle(10)
+```
+
+[]{#objects_multiple_dispatch}
+
+### 7.5 Multiple dispatch
+
+The Seed7 object system allows multiple dispatch (not to be confused
+with multiple inheritance). The methods are not assigned to one type
+(class). The decision which function (method) is called at runtime is
+done based upon the types of several arguments. The classic object
+orientation is a special case where a method is connected to one class
+and the dispatch decision is done based on the type of the `'self'` or
+`'this'` parameter. The classic object orientation is a single dispatch
+system.
+
+In the following example the type [`Number`]{.type} is introduced which
+is capable to unify numerical types. The type [`Number`]{.type} is an
+interface type which defines the interface function for the `'+'`
+operation:
+
+``` indent
+const type: Number is sub object interface;
+
+const func Number: (in Number: a) + (in Number: b) is DYNAMIC;
+```
+
+The interface type [`Number`]{.type} can represent an
+`'`[`Integer`]{.type}`'` or a `'`[`Float`]{.type}`'`:
+
+``` indent
+const type: Integer is new struct
+    var integer: data is 0;
+  end struct;
+
+type_implements_interface(Integer, Number);
+
+const type: Float is new struct
+    var float: data is 0.0;
+  end struct;
+
+type_implements_interface(Float, Number);
+```
+
+The declarations of the converting `'+'` operators are:
+
+``` indent
+const func Float: (in Integer: a) + (in Float: b) is func
+  result
+    var Float: sum is Float.value;
+  begin
+    sum.data := float(a.data) + b.data;
+  end func;
+
+const func Float: (in Float: a) + (in Integer: b) is func
+  result
+    var Float: sum is Float.value;
+  begin
+    sum.data := a.data + float(b.data);
+  end func;
+```
+
+The declarations of the normal `'+'` operators (which do not convert)
+are:
+
+``` indent
+const func Integer: (in Integer: a) + (in Integer: b) is func
+  result
+    var Integer: sum is Integer.value;
+  begin
+    sum.data := a.data + b.data;
+  end func;
+
+const func Float: (in Float: a) + (in Float: b) is func
+  result
+    var Float: sum is Float.value;
+  begin
+    sum.data := a.data + b.data;
+  end func;
+```
+
+The type [`Number`]{.type} can be extended to support other operators
+and there can be also implementations using
+[`complex`](#types_complex){.type},
+[`bigInteger`](#types_bigInteger){.type},
+[`bigRational`](#types_bigRational){.type}, etc. . That way
+[`Number`]{.type} can be used as universal type for math calculation.
+Further extending can lead to a universal type. Such a universal type is
+loved by proponents of dynamic typed languages, but there are also good
+reasons to have distinct types for different purposes.
+
+[]{#objects_replacing_pointers}
+
+### 7.6 Replacing pointers with interface types
+
+Many languages have the concept of a pointer. It is possible to
+implement data structures, such as lists and trees, with pointers.
+Although Seed7 supports the concept of a pointer, they are not well
+suited to describe such data structures. Instead of pointers interface
+types can be used. This way list, trees and other advanced data
+structures can be defined.
+
+The following example shows how to do this: The interface type
+[`element`]{.type} will be used as \"pointer\":
+
+``` indent
+const type: element is new interface;
+```
+
+An implementation type for the empty [`element`]{.type} (emptyElement)
+can be used as basic implementation type from which other implementation
+types can inherit:
+
+``` indent
+const type: emptyElement is new struct
+  end struct;
+```
+
+That the implementation type [`emptyElement`]{.type} implements the
+interface type [`element`]{.type} is described with:
+
+``` indent
+type_implements_interface(emptyElement, element);
+```
+
+Since every Seed7 expression has exactly one type, it is necessary to
+define a special `'NIL'` value (used with `'`[`element`]{.type}`.NIL'`)
+for the type [`element`]{.type}:
+
+``` indent
+const element: (attr element) . NIL is emptyElement.value;
+```
+
+Now the struct with two \"pointers\" and an
+[`integer`](#types_integer){.type} can be declared:
+
+``` indent
+const type: treeElement is sub emptyElement struct
+    var element: left is element.NIL;
+    var element: right is element.NIL;
+    var integer: item is 0;
+  end struct;
+```
+
+Finally the type [`treeElement`]{.type} is defined as implementation of
+the type [`element`]{.type}:
+
+``` indent
+type_implements_interface(treeElement, element);
+```
+
+To allow the direct access to the structure elements `'left'`, `'right'`
+and `'item'` for objects of type [`element`]{.type} the following
+declarations are necessary:
+
+``` indent
+const func    element: (ref   element: anElem).left  is DYNAMIC;
+const varfunc element: (inout element: anElem).left  is DYNAMIC;
+const func    element: (ref   element: anElem).right is DYNAMIC;
+const varfunc element: (inout element: anElem).right is DYNAMIC;
+const func    integer: (ref   element: anElem).item  is DYNAMIC;
+const varfunc integer: (inout element: anElem).item  is DYNAMIC;
+```
+
+When all this was declared the following code is possible:
+
+``` indent
+const proc: addItem (inout element: anElem, in integer: item) is func
+  begin
+    if anElem = element.NIL then
+      anElem := xalloc(treeElement.value);
+      anElem.item := item;
+    elsif item < anElem.item then
+      addItem(anElem.left, item);
+    elsif item > anElem.item then
+      addItem(anElem.right, item);
+    end if;
+  end func;
+
+const proc: listItems (in element: anElem) is func
+  begin
+    if anElem <> element.NIL then
+      listItems(anElem.left);
+      write(" " <& anElem.item);
+      listItems(anElem.right);
+    end if;
+  end func;
+
+const func integer: sum (in element: anElem) is func
+  result
+    var integer: sum is 0;
+  begin
+    if anElem <> element.NIL then
+      sum := anElem.item + sum(anElem.left) + sum(anElem.right);
+    end if;
+  end func;
+```
+
+New elements can be created with the function \'xalloc\'. This way
+interface and implementation types help to provide the pointer
+functionality.
+
+Pointers and interface types are not always the best solution. Abstract
+data types like dynamic arrays, hash tables, struct types and set types
+can also be used to declare data structures.
+
+[]{#file_file_start}
+
+[]{#file_FILE_INPUT_AND_OUTPUT}
+
+## 8. FILE INPUT AND OUTPUT
+
+Files are used for communication in various ways. For example: To write
+strings on the screen we use the following statements:
+
+``` indent
+write("hello world");
+writeln;
+```
+
+The procedure [`write`]{.func} writes a given string and
+[`writeln`]{.func} means: Write newline. We can also write data of
+various types with `'write'`:
+
+``` indent
+write("result = ");
+write(number div 5);
+write(" ");
+writeln(not error);
+```
+
+The `'writeln'` above writes data and then terminates the line. This is
+equal to a `'write'` followed by a `'writeln'`. Instead of multiple
+write statements the [`<&`]{.keywd} operator can be used to concatenate
+the elements to be written:
+
+``` indent
+writeln("result = " <& number div 5 <& " " <& not error);
+```
+
+The [`<&`]{.keywd} operator is overloaded for various types and is
+present it three variants:
+
+- [`string`](#types_string){.type}` `[`<&`]{.keywd}` `[`otherType`]{.type}:
+  In this case the right operand is converted to a
+  [`string`](#types_string){.type} before the concatenation takes place.
+- [`otherType`]{.type}` `[`<&`]{.keywd}` `[`string`](#types_string){.type}:
+  In this case the left operand is converted to a
+  [`string`](#types_string){.type} before the concatenation takes place.
+- [`string`](#types_string){.type}` `[`<&`]{.keywd}` `[`string`](#types_string){.type}:
+  In this case the two operands are concatenated.
+
+This allows chaining concatenations like in:
+
+``` indent
+write(next_time <& " is " <& booleanExpression);
+```
+
+Several objects can be concatenated in a chain, if the first or the
+second object is a [`string`](#types_string){.type}.
+
+We can also read data from the keyboard:
+
+``` indent
+write("Amount? ");
+read(amount);
+```
+
+The user is allowed to use [Backspace]{.box} and sends the input to the
+program with the [Return]{.box} key. To let the user respond with the
+[Return]{.box} key we can write:
+
+``` indent
+writeln("Type RETURN");
+readln;
+```
+
+To read a line of data we can use `'readln'`:
+
+``` indent
+write("Your comment? ");
+readln(user_comment_string);
+```
+
+In the previous examples all `'read'` statements read from the file
+[`IN`]{.var} and all `'write'` statements write to the file
+[`OUT`]{.var}. The files [`IN`]{.var} and [`OUT`]{.var} are initialized
+with [`STD_IN`]{.var} and [`STD_OUT`]{.var} which are the stdin and
+stdout files of the operating system. (Usually the keyboard and the
+screen). If we want to write to other files we use write statements with
+the file as first parameter. To write a line of text to the file
+[`"info.fil"`]{.stri} we use the following statements:
+
+``` indent
+info_file := open("info.fil", "w");
+writeln(info_file, "This is the first line of the info file.");
+close(info_file);
+```
+
+First the external file is opened for writing and then it is used. To
+read the file back in the string `'stri'` we write:
+
+``` indent
+info_file := open("info.fil", "r");
+readln(info_file, stri);
+close(info_file);
+```
+
+It is also possible to write values of other types to `'info_file'`:
+
+``` indent
+writeln(info_file, number);
+```
+
+Here the `'number'` is converted to a string which is written to the
+file. A `'number'` is read back with:
+
+``` indent
+readln(info_file, number);
+```
+
+For doing I/O to a window on the screen we write:
+
+``` indent
+window1 := openWindow(screen, 10, 10, 5, 60);
+box(window1);
+setPos(window1, 3, 1);
+write(window1, "hello there");
+```
+
+This opens the window `'window1'` on the `'screen'` at the position 10,
+10. This window has 5 lines and 60 columns. A box (of characters: - \| +
+) is written to surround the `'window1'` and finally the string
+[`"hello there"`]{.stri} is written in the window `'window1'` at
+Position 3, 1. If we want to clear the `'window1'` we write:
+
+``` indent
+clear(window1);
+```
+
+Files can be used for much more things. Here is a list of goals for an
+input/output system:
+
+- A concept which provides conversions from arbitrary types to strings
+  and back.
+- Basic input and output operations to process a file character wise,
+  word wise or line wise.
+- Input and output statements which combine input with conversion
+  respectively conversion with output.
+- Simple read and write statements for standard input and output for
+  arbitrary types.
+- Standard input and output files and the possibility to route the
+  standard I/O to any file.
+- Access to operating system files and devices.
+- An interface which allows the user to define his own file types.
+
+In the following sub-chapters we discuss each of these goals.
+
+[]{#file_Conversion_to_strings_and_back}
+
+### 8.1 Conversion to strings and back
+
+We archive the goal of doing I/O for arbitrary types with two conversion
+functions. In order to do I/O with a type the [`str`]{.func} and
+[`parse`]{.op} functions must be defined for that type. As an example we
+show the conversion functions for the type
+[`boolean`](#types_boolean){.type}:
+
+``` indent
+const func string: str (in boolean: aBool) is func
+  result
+    var string: stri is "";
+  begin
+    if aBool then
+      stri := "TRUE";
+    else
+      stri := "FALSE";
+    end if;
+  end func;
+
+const func boolean: (attr boolean) parse (in string: stri) is func
+  result
+    var boolean: aBoolean is FALSE;
+  begin
+    if stri = "TRUE" then
+      aBoolean := TRUE;
+    elsif stri = "FALSE" then
+      aBoolean := FALSE;
+    else
+      raise RANGE_ERROR;
+    end if;
+  end func;
+```
+
+The [`str`]{.func} function must deliver a corresponding string for
+every value of the type. The [`parse`]{.keywd} operator parses a string
+and delivers the converted value as result. If the conversion is not
+successful the exception
+[`RANGE_ERROR`](#errors_RANGE_ERROR){.exception} is raised. The
+attribute used with [`parse`]{.op} allows that it is overloaded for
+different types.
+
+After defining the [`str`]{.func} and [`parse`]{.op} functions for a
+type the [`enable_io`]{.func} function can be called for this type as
+in:
+
+``` indent
+enable_io(boolean);
+```
+
+The [`enable_io`]{.func} template declares various io functions like
+`'read'`, `'write'` and others for the provided type (in this example
+[`boolean`](#types_boolean){.type}). If only output (or only input) is
+needed for a type it is possible to define just [`str`]{.func} (or
+[`parse`]{.op}) and activate just [`enable_output`]{.func} (or
+[`enable_input`]{.func}).
+
+There is also a formatting operator called [`lpad`]{.keywd} which is
+based on the [`str`]{.func} function. The statements
+
+``` indent
+write(12 lpad 6);
+write(3 lpad 6);
+writeln(45 lpad 6);
+write(678 lpad 6);
+write(98765 lpad 6);
+writeln(4321 lpad 6);
+```
+
+produce the following output:
+
+``` indent
+    12     3    45
+   678 98765  4321
+```
+
+As we see the [`lpad`]{.keywd} operator can be used to produce right
+justified output. There is also [`rpad`]{.keywd} operator to produce
+left justified output. The basic definitions of the [`lpad`]{.keywd} and
+[`rpad`]{.keywd} operators work on strings and are as follows:
+
+``` indent
+const func string: (ref string: stri) lpad (in integer: leng) is func
+  result
+    var string: padded is "";
+  begin
+    if leng > length(stri) then
+      padded := " " mult leng - length(stri) & stri;
+    else
+      padded := stri;
+    end if;
+  end func;
+
+const func string: (ref string: stri) rpad (in integer: leng) is func
+  result
+    var string: padded is "";
+  begin
+    if leng > length(stri) then
+      padded := stri & " " mult leng - length(stri);
+    else
+      padded := stri;
+    end if;
+  end func;
+```
+
+The [`enable_io`]{.func} template contains definitions of
+[`lpad`]{.keywd} and [`rpad`]{.keywd} to work on the type specified with
+[`enable_io`]{.func}:
+
+``` indent
+const func string: (in aType: aValue) lpad (in integer: leng) is
+  return str(aValue) lpad leng;
+
+const func string: (in aType: aValue) rpad (in integer: leng) is
+  return str(aValue) rpad leng;
+```
+
+Values of type [`integer`](#types_integer){.type} and
+[`bigInteger`](#types_bigInteger){.type} can be written in a numeral
+system with a radix (base) other than 10. The operators
+[`radix`]{.keywd} and [`RADIX`]{.keywd} can be used for this purpose.
+E.g. the statements
+
+``` indent
+writeln(48879 radix 16);
+writeln(3735928559_ RADIX 16);
+```
+
+produce the following output:
+
+``` indent
+beef
+DEADBEEF
+```
+
+For [`float`](#types_float){.type} values exist additional ways to
+convert them to strings. The [`digits`]{.keywd} operator allows the
+specification of a precision. E.g. the statements
+
+``` indent
+writeln(3.1415 digits 2);
+writeln(4.0 digits 2);
+```
+
+produce the following output:
+
+``` indent
+3.14
+4.00
+```
+
+A combination with the [`lpad`]{.keywd} operator as in
+
+``` indent
+writeln(3.1415 digits 2 lpad 6);
+writeln(99.9 digits 2 lpad 6);
+```
+
+is also possible and produces the following output:
+
+``` indent
+  3.14
+ 99.90
+```
+
+Scientific notation for [`float`](#types_float){.type} is supported with
+the conversion operator [`sci`]{.keywd}. The statements
+
+``` indent
+writeln(0.012345 sci 4);
+writeln(1.2468 sci 2 );
+writeln(3.1415 sci 0);
+writeln(0.125 sci 1);
+writeln(0.375 sci 1);
+```
+
+produce the following output:
+
+``` indent
+1.2345e-2
+1.25e+0
+3e+0
+1.2e-1
+3.8e-1
+```
+
+The operator [`exp`]{.keywd} is used to specify the number of exponent
+digits. The statements
+
+``` indent
+writeln(0.012345 sci 4 exp 2);
+writeln(1.2468e15 sci 2 exp 1);
+writeln(3.1415 sci 0 exp 3);
+writeln(0.125 sci 1 exp 2);
+writeln(0.375 sci 1 exp 2);
+```
+
+produce the following output:
+
+``` indent
+1.2345e-02
+1.25e+15
+3e+000
+1.2e-01
+3.8e-01
+```
+
+[]{#file_Basic_input_and_output_operations}
+
+### 8.2 Basic input and output operations
+
+To allow arbitrary user defined file-types beside the operating system
+files we chose a model in which the I/O methods are assigned to the type
+of the file-value and not to the type of the file-variable. This allows
+a file variable to point to any file-value. The file-variables have the
+type [`file`](#types_file){.type}, which is the interface type for
+sequential files. For the operating system files and for each user
+defined file a file-type must be declared which has the I/O methods
+defined. These file-types are derived (direct or indirect) from the type
+[`null_file`]{.type} for which all I/O methods are defined upon a base
+of basic string I/O methods. So for a new user defined file-type only
+the basic string I/O methods must be defined.
+
+The two basic I/O methods defined for [`null_file`]{.type} are
+
+``` indent
+const proc: write (in null_file: aFile, in string: stri) is noop;
+
+const func string: gets (in null_file: inFile, in integer: maxLength) is func
+  result
+    var string: striRead is "";
+  begin
+    if maxLength < 0 then
+      raise RANGE_ERROR;
+    end if;
+  end func;
+```
+
+A [`write`]{.func} to [`null_file`]{.type} with any string has no
+effect. Reading any number of characters with [`gets`]{.func} from
+[`null_file`]{.type} delivers the empty string. When a user defined file
+type is declared these are the two methods, which must be redefined, for
+the new file-type. Based upon these two methods three more methods are
+defined for [`null_file`]{.type}, named [`getc`]{.func},
+[`getwd`]{.func} and [`getln`]{.func}. These methods get a character, a
+word and a line respectively. A word is terminated by a space, a tab or
+a linefeed. A line is terminated by a linefeed. This methods need not to
+be redefined for a user defined file type but for performance reasons
+they can also be redefined. The definitions for [`getc`]{.func},
+[`getwd`]{.func} and [`getln`]{.func} for [`null_file`]{.type} are
+
+``` indent
+const func char: getc (inout null_file: aFile) is func
+  result
+    var char: ch is ' ';
+  local
+    var string: buffer is "";
+  begin
+    buffer := gets(aFile, 1);
+    if buffer = "" then
+      ch := EOF;
+    else
+      ch := buffer[1];
+    end if;
+  end func;
+
+const func string: getwd (inout null_file: aFile) is func
+  result
+    var string: stri is "";
+  local
+    var string: buffer is "";
+  begin
+    repeat
+      buffer := gets(aFile, 1);
+    until buffer <> " " and buffer <> "\t";
+    while buffer <> " " and buffer <> "\t" and
+        buffer <> "\n" and buffer <> "" do
+      stri &:= buffer;
+      buffer := gets(aFile, 1);
+    end while;
+    if buffer = "" then
+      aFile.bufferChar := EOF;
+    else
+      aFile.bufferChar := buffer[1];
+    end if;
+  end func;
+
+const func string: getln (inout null_file: aFile) is func
+  result
+    var string: stri is "";
+  local
+    var string: buffer is "";
+  begin
+    buffer := gets(aFile, 1);
+    while buffer <> "\n" and buffer <> "" do
+      stri &:= buffer;
+      buffer := gets(aFile, 1);
+    end while;
+    if buffer = "" then
+      aFile.bufferChar := EOF;
+    else
+      aFile.bufferChar := buffer[1];
+    end if;
+  end func;
+```
+
+Note that [`getwd`]{.func} skips leading spaces and tabs while
+[`getc`]{.func} and [`getln`]{.func} do not. If [`getc`]{.func},
+[`getwd`]{.func} or [`getln`]{.func} is not defined for a new user
+defined file type the declarations from the [`null_file`]{.type} are
+used instead. These declarations are based on the method [`gets`]{.func}
+which must be defined for every new user defined file-type.
+
+Note that there is an assignment to the variable `'bufferChar'`. This
+variable is an element of [`null_file`]{.type} and therefore also an
+element of all derived file types. This allows an `'eoln'` function to
+test if the last [`getwd`]{.func} or [`getln`]{.func} reach the end of a
+line. Here is a definition of the `'eoln'` function:
+
+``` indent
+const func boolean: eoln (in null_file: inFile) is
+  return inFile.bufferChar = '\n';
+```
+
+Besides assigning a value to `'bufferChar'` in [`getwd`]{.func} and
+[`getln`]{.func} and using it in `'eoln'` the standard
+[`file`](#types_file){.type} functions do nothing with `'bufferChar'`.
+The functions of the [\"[scanfile.s7i]{.lib}\"]{.stri} library use the
+`'bufferChar'` variable as current character in the scan process. As
+such all functions of the [\"[scanfile.s7i]{.lib}\"]{.stri} library
+assume that the first character to be processed is always in
+`'bufferChar'`. Since the standard [`file`](#types_file){.type}
+functions do not have this behavior, care has to be taken if mixing
+scanner and file functions.
+
+The type [`null_file`]{.type} provides default functions to write
+end-of-line:
+
+``` indent
+const proc: writeln (inout null_file: outFile) is func
+  begin
+    write(outFile, "\n");
+  end func;
+
+const proc: writeln (inout null_file: outFile, in string: stri) is func
+  begin
+    write(outFile, stri);
+    writeln(outFile);
+  end func;
+```
+
+The next declarations allow various I/O operations for strings:
+
+``` indent
+const proc: read (inout file: aFile, inout string: stri) is func
+  begin
+    stri := getwd(aFile);
+  end func;
+
+const proc: readln (inout file: aFile, inout string: stri) is func
+  begin
+    stri := getln(aFile);
+  end func;
+```
+
+[]{#file_Input_and_output_with_conversion}
+
+### 8.3 Input and output with conversion
+
+Normally we need a combination of an I/O operation with a conversion
+operation. There are several functions which are based on the
+[`str`]{.func} and [`parse`]{.op} conversions and on the basic
+I/O-functions. The declaration of this functions is done by the
+templates [`enable_io`]{.func}, [`enable_input`]{.func} and
+[`enable_output`]{.func}. The templates [`enable_io`]{.func} and
+[`enable_output`]{.func} define the following [`write`]{.func} function:
+
+``` indent
+const proc: write (in file: aFile, in aType: aValue) is func
+  begin
+    write(aFile, str(aValue));
+  end func;
+```
+
+The templates [`enable_io`]{.func} and [`enable_input`]{.func} define
+the following [`read`]{.func} and [`readln`]{.func} functions:
+
+``` indent
+const proc: read (inout file: aFile, inout aType: aValue) is func
+  begin
+    aValue := aType parse getwd(aFile);
+  end func;
+
+const proc: readln (inout file: aFile, inout aType: aValue) is func
+  begin
+    aValue := aType parse trimValue(aType, getln(aFile));
+  end func;
+```
+
+The function [`trimValue`]{.func} is used to trim the
+[`string`](#types_string){.type} retrieved by [`getln`]{.func}. This
+adjusts the [`string`](#types_string){.type} before the [`parse`]{.op}
+operator is applied. There are 3 cases:
+
+- Trimming of a [`string`](#types_string){.type} with
+  [`trimValue`]{.func}`(`[`string`](#types_string){.type}`, aString)`:
+  This leaves the string unchanged.
+- Trimming of a [`char`](#types_char){.type} with
+  [`trimValue`]{.func}`(`[`char`](#types_char){.type}`, aString)`: For
+  [\"\"]{.stri} it returns [\"\"]{.stri}. In all other cases it returns
+  a trimmed string of length 1.
+- Trimming of all other types with
+  [`trimValue`]{.func}`(`[`aType`]{.type}`, aString)`: This removes
+  leading and trailing spaces.
+
+The next declaration defines `'backSpace'`:
+
+``` indent
+const proc: backSpace (ref external_file: aFile) is func
+  begin
+    write(aFile, "\b \b");
+  end func;
+```
+
+[]{#file_Simple_read_and_write_statements}
+
+### 8.4 Simple read and write statements
+
+The simple input/output for the standard I/O-files are `'read'` and
+`'write'` which are defined with [`enable_io`]{.func}. Simple I/O may
+look like:
+
+``` indent
+write("Amount? ");
+read(amount);
+```
+
+`'read'` and `'write'` use the files [`IN`]{.var} and [`OUT`]{.var},
+which are described in the next chapter. Here is the definition of the
+`'read'` and `'write'` procedures done with [`enable_io`]{.func}:
+
+``` indent
+const proc: read (inout aType: aValue) is func
+  begin
+    read(IN, aValue);
+  end func;
+
+const proc: readln (inout aType: aValue) is func
+  begin
+    readln(IN, aValue);
+  end func;
+
+const proc: write (in aType: aValue) is func
+  begin
+    write(OUT, aValue);
+  end func;
+
+const proc: writeln (in aType: aValue) is func
+  begin
+    writeln(OUT, aValue);
+  end func;
+```
+
+Additional procedures defined outside of [`enable_io`]{.func} are:
+
+``` indent
+const proc: readln is func
+  local
+    var string: stri is "";
+  begin
+    stri := getln(IN);
+  end func;
+
+const proc: writeln is func
+  begin
+    writeln(OUT);
+  end func;
+```
+
+As an example, when you call
+
+``` indent
+readln(number);
+```
+
+the `readln(number)` function of the type
+[`integer`](#types_integer){.type} calls
+
+``` indent
+readln(IN, number);
+```
+
+which executes
+
+``` indent
+number := integer parse trimValue(integer, getln(IN));
+```
+
+The file [`IN`]{.var} may have its own implementation of
+[`getln`]{.func} (e.g. as [`getln`]{.func} of [`external_file`]{.type}).
+The default implementation of [`getln`]{.func} (in [`null_file`]{.type})
+calls [`gets`]{.func}`(`[`IN`]{.var}`, 1)` in a loop. For the type
+[`integer`](#types_integer){.type} the function [`trimValue`]{.func}
+removes leading and trailing spaces. Finally the [`parse`]{.op} operator
+converts the string read into an [`integer`](#types_integer){.type}
+which is assigned to `'number'`.
+
+[]{#file_Standard_input_and_output_files}
+
+### 8.5 Standard input and output files
+
+The standard I/O files are [`IN`]{.var} for input and [`OUT`]{.var} for
+output. [`IN`]{.var} and [`OUT`]{.var} are [`file`](#types_file){.type}
+variables, which are defined as follows:
+
+``` indent
+var file: IN is STD_IN;
+var file: OUT is STD_OUT;
+```
+
+The files [`STD_IN`]{.var} and [`STD_OUT`]{.var} are the standard input
+and output files of the operating system (Usually the keyboard and the
+screen). Because [`IN`]{.var} and [`OUT`]{.var} are variables
+redirection of standard input or standard output can be done easily by
+assigning a new value to them:
+
+``` indent
+IN := OTHER_FILE;
+```
+
+After that all `'read'` statements refer to `OTHER_FILE`. Most operating
+systems have also a stderr file which can be accessed via the name
+[`STD_ERR`]{.var}. If you want to write error messages to the screen
+even if stdout is redirected elsewhere you can write:
+
+``` indent
+writeln(STD_ERR, "ERROR MESSAGE");
+```
+
+To redirect the standard output to [`STD_ERR`]{.var} you can write:
+
+``` indent
+OUT := STD_ERR;
+```
+
+There is also a file [`STD_NULL`]{.var} defined. Anything written to it
+is ignored. Reading from it does deliver empty strings. This file can be
+used to initialize file variables as in:
+
+``` indent
+var file: MY_FILE is STD_NULL;
+```
+
+It is also used to represent an illegal file value, if for example an
+attempt to [`open`]{.func} a [`file`](#types_file){.type} fails.
+
+[]{#file_Access_to_operating_system_files}
+
+### 8.6 Access to operating system files
+
+The interface type [`file`](#types_file){.type} is also used to access
+operating system files. Usually a file variable is defined
+
+``` indent
+var file: my_out is STD_NULL;
+```
+
+and the result of the [`open`]{.func} function is assigned to this file
+variable
+
+``` indent
+my_out := open("my_file", "w");
+```
+
+The first parameter of [`open`]{.func} is the path of the file to be
+opened. The path must use the [standard path
+representation](#os_Standard_path_representation). This means
+that a slash (`'/'`) is used as path delimiter. A path with a backslash
+or a drive letter may raise the exception
+[`RANGE_ERROR`](#errors_RANGE_ERROR){.exception}. The second parameter
+of [`open`]{.func} specifies the mode:
+
+Binary mode:
+
+:   ----------------- ------- --------------------------------------------------------------
+      [\"r\"]{.stri}    \...    Open file for reading.
+      [\"w\"]{.stri}    \...    Open or create file for writing and truncate to zero length.
+      [\"a\"]{.stri}    \...    Open or create file for appending (writing at end-of-file).
+      [\"r+\"]{.stri}   \...    Open file for update (reading and writing).
+      [\"w+\"]{.stri}   \...    Open or create file for update and truncate to zero length.
+      [\"a+\"]{.stri}   \...    Open or create file for appending and reading.
+      ----------------- ------- --------------------------------------------------------------
+
+Text mode:
+
+:   ------------------ ------- --------------------------------------------------------------
+      [\"rt\"]{.stri}    \...    Open file for reading.
+      [\"wt\"]{.stri}    \...    Open or create file for writing and truncate to zero length.
+      [\"at\"]{.stri}    \...    Open or create file for appending (writing at end-of-file).
+      [\"rt+\"]{.stri}   \...    Open file for update (reading and writing).
+      [\"wt+\"]{.stri}   \...    Open or create file for update and truncate to zero length.
+      [\"at+\"]{.stri}   \...    Open or create file for appending and reading.
+      ------------------ ------- --------------------------------------------------------------
+
+Note that Seed7 defines the modes [`"r"`]{.stri}, [`"w"`]{.stri},
+[`"a"`]{.stri}, [`"r+"`]{.stri}, [`"w+"`]{.stri} and [`"a+"`]{.stri} as
+binary modes. If [`open`]{.func} is called, with a mode not listed in
+the table above, the exception
+[`RANGE_ERROR`](#errors_RANGE_ERROR){.exception} is raised. If there is
+not enough memory to convert `'path'` to the system path type the
+exception [`MEMORY_ERROR`](#errors_MEMORY_ERROR){.exception} is raised.
+If [`open`]{.func} fails for other reasons it returns
+[`STD_NULL`]{.var}. E.g.: It is not allowed to [`open`]{.func} a
+directory. An attempt to [`open`]{.func} a directory returns
+[`STD_NULL`]{.var}. It is recommended to check the file variable after
+opening a file:
+
+``` indent
+if my_out <> STD_NULL then
+```
+
+After that output to `'my_out'` is possible with
+
+``` indent
+writeln(my_out, "hi there");
+```
+
+When processing of a file has finished it should be closed
+
+``` indent
+close(my_out);
+```
+
+Writing to a file after it has been closed results in the exception
+[`FILE_ERROR`](#errors_FILE_ERROR){.exception}. The following program
+writes [`"hi there"`]{.stri} to the file [`"my_file"`]{.stri}:
+
+``` indent
+$ include "seed7_05.s7i";
+
+const proc: main is func
+  local
+    var file: my_out is STD_NULL;
+  begin
+    my_out := open("my_file", "w");
+    if my_out <> STD_NULL then
+      writeln(my_out, "hi there");
+      close(my_out);
+    end if;
+  end func;
+```
+
+Note that [`open`]{.func} opens BYTE files. Writing a character with an
+ordinal \>= 256 such as
+
+``` indent
+writeln(my_out, "illegal char: \256;");
+```
+
+results in the exception
+[`RANGE_ERROR`](#errors_RANGE_ERROR){.exception}. To write Unicode
+characters other file types must be used. The libraries
+[\"[utf8.s7i]{.lib}\"]{.stri} and [\"[utf16.s7i]{.lib}\"]{.stri} provide
+access to UTF-8 and UTF-16 files. The function [`openUtf8`]{.func} can
+be used the same way as [`open`]{.func}:
+
+``` indent
+my_out := openUtf8("utf8_file", "w");
+```
+
+An UTF-8 file accepts all Unicode characters. That way
+
+``` indent
+writeln(my_out, "Unicode char: \256;");
+```
+
+works without problems. UTF-8 files are byte order independent.
+Therefore they do not need a byte order mark (BOM). In case a BOM is
+required it can be written by the user program:
+
+``` indent
+my_out := openUtf8("utf8_file", "w");
+write("\16#feff;");
+```
+
+The following example expects a mandatory BOM at the beginning of an
+UTF-8 file:
+
+``` indent
+my_out := openUtf8("utf8_file", "r");
+if getc(my_file) <> '\16#feff;' then
+  writeln("The BOM is missing"");
+else
+  ...
+end if;
+```
+
+Accepting an optional BOM at the beginning of an UTF-8 file is done
+with:
+
+``` indent
+my_out := openUtf8("utf8_file", "r");
+if getc(my_file) <> '\16#feff;' then
+  # This is a file without BOM (the first character will be read later).
+  seek(my_file, 1);
+end if;
+...
+```
+
+UTF-16 comes in two flavors UTF-16LE and UTF-16BE. To support both
+flavors the [\"[utf16.s7i]{.lib}\"]{.stri} library defines several
+functions.
+
+The function [`openUtf16`]{.func} opens a Unicode file which uses the
+UTF-16LE or UTF-16BE encoding. The function [`openUtf16`]{.func} checks
+for a BOM and depending on that it opens an UTF-16LE or UTF-16BE file.
+
+The functions [`openUtf16le`]{.func} and [`openUtf16be`]{.func} open
+Unicode files with the UTF-16LE and UTF-16BE encoding respectively. If
+the file is opened with one of the modes [`"w"`]{.stri},
+[`"w+"`]{.stri}, [`"wt"`]{.stri} or [`"wt+"`]{.stri} an appropriate BOM
+is created. If the file is opened with any other mode the application
+program is in charge to handle optional BOM markers. This way
+[`openUtf16le`]{.func} and [`openUtf16be`]{.func} can be used to open
+existing files without BOM.
+
+External BYTE files use the implementation type
+[`external_file`]{.type}. The type [`external_file`]{.type} is defined
+as:
+
+``` indent
+const type: external_file is sub null_file struct
+    var clib_file: ext_file is CLIB_NULL_FILE;
+    var string: name is "";
+  end struct;
+```
+
+This means that every data item of the type [`external_file`]{.type} has
+the elements from [`null_file`]{.type} and additionally the elements
+`'ext_file'` and `'name'`. The type [`clib_file`]{.type} points directly
+to an operating system file. Objects of type [`clib_file`]{.type} can
+only have operating system files as values while objects of type
+[`file`](#types_file){.type} can also have other files as values. To
+allow the implementation of the type [`external_file`]{.type} several
+operations for the type [`clib_file`]{.type} are defined. But outside
+[`external_file`]{.type} the type [`clib_file`]{.type} and its
+operations should not be used.
+
+There are three predefined external files [`STD_IN`]{.var},
+[`STD_OUT`]{.var} and [`STD_ERR`]{.var} which have the following
+declarations:
+
+``` indent
+const func external_file: INIT_STD_FILE (ref clib_file: primitive_file,
+    in string: file_name) is func
+  result
+    var external_file: standardFile is external_file.value;
+  begin
+    standardFile.ext_file := primitive_file;
+    standardFile.name := file_name;
+  end func;
+
+var external_file: STD_IN is  INIT_STD_FILE(CLIB_INPUT,  "STD_IN");
+var external_file: STD_OUT is INIT_STD_FILE(CLIB_OUTPUT, "STD_OUT");
+var external_file: STD_ERR is INIT_STD_FILE(CLIB_ERROR,  "STD_ERR");
+```
+
+It is possible to do I/O directly with them, but it is more wisely to
+use them only to initialize user defined file variables as in:
+
+``` indent
+var file: err is STD_ERR;
+```
+
+In the rest of the program references to such a variable can be used:
+
+``` indent
+writeln(err, "Some error occurred");
+```
+
+In this case redirection of the file `'err'` can be done very easy.
+Another way to access external files is to use the function
+[`open`]{.func}. The modes used by [`open`]{.func} differ from those
+used by the `'fopen'` function in the C library. The following table
+compares the file modes of Seed7 and C:
+
+  --------------------- ------------------
+  Seed7 `'open'` mode   C `'fopen'` mode
+  [\"r\"]{.stri}        [\"rb\"]{.stri}
+  [\"w\"]{.stri}        [\"wb\"]{.stri}
+  [\"a\"]{.stri}        [\"ab\"]{.stri}
+  [\"r+\"]{.stri}       [\"rb+\"]{.stri}
+  [\"w+\"]{.stri}       [\"wb+\"]{.stri}
+  [\"a+\"]{.stri}       [\"ab+\"]{.stri}
+  [\"rt\"]{.stri}       [\"r\"]{.stri}
+  [\"wt\"]{.stri}       [\"w\"]{.stri}
+  [\"at\"]{.stri}       [\"a\"]{.stri}
+  [\"rt+\"]{.stri}      [\"r+\"]{.stri}
+  [\"wt+\"]{.stri}      [\"w+\"]{.stri}
+  [\"at+\"]{.stri}      [\"a+\"]{.stri}
+  --------------------- ------------------
+
+The difference between binary and text mode is as follows:
+
+- Binary mode provides an implementation independent behavior on all
+  operating systems. In binary mode no conversion to and from the line
+  end character ([`'\n'`]{.stri}) is done. This has the advantage that
+  an [`external_file`]{.type} written in binary mode is identical on all
+  operating systems. Reading files with different line endings
+  ([`"\n"`]{.stri} and [`"\r\n"`]{.stri}) is supported by every
+  [`external_file`]{.type}: The functions [`getwd`]{.func},
+  [`getln`]{.func}, [`read`]{.func} and [`readln`]{.func}, of
+  [`external_file`]{.type} skip a carriage return ([`'\r'`]{.stri}) if
+  it is just before a linefeed ([`'\n'`]{.stri}). The rest of the
+  [`external_file`]{.type} functions like [`getc`]{.func} and
+  [`gets`]{.func} deliver line endings unchanged.
+- The behavior of an [`external_file`]{.type} in text mode is
+  implementation dependent. Under Unix/Linux/Bsd text and binary modes
+  are identical. Other operating systems prefer to do some line end
+  conversions in text mode: When reading a file all occurrences of
+  [`"\r\n"`]{.stri} are converted to [`'\n'`]{.stri}. When writing to a
+  file all occurrences of [`'\n'`]{.stri} are converted to
+  [`"\r\n"`]{.stri}. Note that text mode cannot be used to automatically
+  create files with [`"\r\n"`]{.stri} line endings under Unix/Linux/Bsd.
+
+The library [\"[utf8.s7i]{.lib}\"]{.stri} defines the implementation
+type [`utf8File`]{.type} as
+
+``` indent
+const type: utf8File is sub external_file struct
+  end struct;
+```
+
+[]{#file_Keyboard_file}
+
+### 8.7 Keyboard file
+
+As stated earlier [`STD_IN`]{.var} provides an interface to the keyboard
+which is line buffered and echoed on [`STD_OUT`]{.var}. This means that
+you can see everything you typed. Additionally you can correct your
+input with [Backspace]{.box} until you press [Return]{.box}. But
+sometimes an unbuffered and unechoed input is needed. This is provided
+in the library [\"[keybd.s7i]{.lib}\"]{.stri}, which defines the type
+[`keyboard_file`]{.type} and the file [`KEYBOARD`]{.var}. Characters
+typed at the keyboard are queued (first in first out) and can be read
+directly from [`KEYBOARD`]{.var} without any possibility to correct.
+Additionally [`KEYBOARD`]{.var} does not echo the characters. Reading
+from [`KEYBOARD`]{.var} delivers normal Unicode characters or special
+codes (which may be or may not be Unicode characters) for function and
+cursor keys. Unicode characters and special codes both are
+[`char`](#types_char){.type} values. The library
+[\"[keybd.s7i]{.lib}\"]{.stri} defines [`char`](#types_char){.type}
+constants for various keys:
+
+  ---------------------------------------------------- -------------------------------------------------------------------------------------------
+  Key character constant                               Description
+  [`KEY_CTL_A`]{#file_KEY_CTL_A_TO_Z} to `KEY_CTL_Z`   The control keys ctrl-a to ctrl-z
+  `KEY_ALT_A` to `KEY_ALT_Z`                           The alternate keys alt-a to alt-z
+  `KEY_CTL_0` to `KEY_CTL_9`                           The control keys ctrl-0 to ctrl-9
+  `KEY_ALT_0` to `KEY_ALT_9`                           The alternate keys alt-0 to alt-9
+  `KEY_F1` to `KEY_F12`                                Function keys F1 to F12
+  `KEY_SFT_F1` to `KEY_SFT_F12`                        Shifted function keys F1 to F12
+  `KEY_CTL_F1` to `KEY_CTL_F12`                        Control function keys F1 to F12
+  `KEY_ALT_F1` to `KEY_ALT_F12`                        Alternate function keys F1 to F12
+  [`KEY_LEFT`]{#file_KEY_LEFT}                         Cursor left
+  [`KEY_RIGHT`]{#file_KEY_RIGHT}                       Cursor right
+  [`KEY_UP`]{#file_KEY_UP}                             Cursor up
+  [`KEY_DOWN`]{#file_KEY_DOWN}                         Cursor down
+  [`KEY_HOME`]{#file_KEY_HOME}                         Home key
+  [`KEY_END`]{#file_KEY_END}                           End key
+  [`KEY_PGUP`]{#file_KEY_PGUP}                         Page up
+  [`KEY_PGDN`]{#file_KEY_PGDN}                         Page down
+  [`KEY_INS`]{#file_KEY_INS}                           Insert key
+  [`KEY_DEL`]{#file_KEY_DEL}                           Delete key
+  `KEY_PAD_CENTER`                                     Numeric keypad center key
+  `KEY_SFT_LEFT`                                       Shifted cursor left
+  `KEY_SFT_RIGHT`                                      Shifted cursor right
+  `KEY_SFT_UP`                                         Shifted cursor up
+  `KEY_SFT_DOWN`                                       Shifted cursor down
+  `KEY_SFT_HOME`                                       Shifted home key
+  `KEY_SFT_END`                                        Shifted end key
+  `KEY_SFT_PGUP`                                       Shifted page up
+  `KEY_SFT_PGDN`                                       Shifted page down
+  `KEY_SFT_INS`                                        Shifted insert key
+  `KEY_SFT_DEL`                                        Shifted delete key
+  `KEY_SFT_PAD_CENTER`                                 Shifted numeric keypad center key
+  `KEY_CTL_LEFT`                                       Control cursor left
+  `KEY_CTL_RIGHT`                                      Control cursor right
+  `KEY_CTL_UP`                                         Control cursor up
+  `KEY_CTL_DOWN`                                       Control cursor down
+  `KEY_CTL_HOME`                                       Control home key
+  `KEY_CTL_END`                                        Control end key
+  `KEY_CTL_PGUP`                                       Control page up
+  `KEY_CTL_PGDN`                                       Control page down
+  `KEY_CTL_INS`                                        Control insert key
+  `KEY_CTL_DEL`                                        Control delete key
+  `KEY_CTL_PAD_CENTER`                                 Control numeric keypad center key
+  `KEY_ALT_LEFT`                                       Alt cursor left
+  `KEY_ALT_RIGHT`                                      Alt cursor right
+  `KEY_ALT_UP`                                         Alt cursor up
+  `KEY_ALT_DOWN`                                       Alt cursor down
+  `KEY_ALT_HOME`                                       Alt home key
+  `KEY_ALT_END`                                        Alt end key
+  `KEY_ALT_PGUP`                                       Alt page up
+  `KEY_ALT_PGDN`                                       Alt page down
+  `KEY_ALT_INS`                                        Alt insert key
+  `KEY_ALT_DEL`                                        Alt delete key
+  `KEY_ALT_PAD_CENTER`                                 Alt numeric keypad center key
+  [`KEY_NL`]{#file_KEY_NL}                             Newline/enter/return key (equal to KEY_CTL_J)
+  [`KEY_BS`]{#file_KEY_BS}                             Backspace (equal to KEY_CTL_H)
+  [`KEY_TAB`]{#file_KEY_TAB}                           Horizontal tab (equal to KEY_CTL_H)
+  [`KEY_CR`]{#file_KEY_CR}                             Carriage return (equal to KEY_CTL_M)
+  [`KEY_ESC`]{#file_KEY_ESC}                           Escape key
+  `KEY_MENU`                                           Menu key
+  `KEY_PRINT`                                          Print key
+  `KEY_PAUSE`                                          Pause key
+  `KEY_SFT_NL`                                         Shift newline/enter/return key
+  `KEY_SFT_BS`                                         Shift backspace
+  `KEY_SFT_TAB`                                        Shift tab (same as `KEY_BACKTAB`)
+  [`KEY_BACKTAB`]{#file_KEY_BACKTAB}                   Shift tab (same as `KEY_SFT_TAB`)
+  `KEY_SFT_ESC`                                        Shift escape
+  `KEY_SFT_MENU`                                       Shift menu
+  `KEY_SFT_PRINT`                                      Shift print
+  `KEY_SFT_PAUSE`                                      Shift pause
+  `KEY_CTL_NL`                                         Control newline/enter/return key
+  `KEY_CTL_BS`                                         Control backspace
+  `KEY_CTL_TAB`                                        Control tab
+  `KEY_CTL_ESC`                                        Control escape
+  `KEY_CTL_MENU`                                       Control menu
+  `KEY_CTL_PRINT`                                      Control print
+  `KEY_CTL_PAUSE`                                      Control pause
+  `KEY_ALT_NL`                                         Alt newline/enter/return key
+  `KEY_ALT_BS`                                         Alt backspace
+  `KEY_ALT_TAB`                                        Alt tab
+  `KEY_ALT_ESC`                                        Alt escape
+  `KEY_ALT_MENU`                                       Alt menu
+  `KEY_ALT_PRINT`                                      Alt print
+  `KEY_ALT_PAUSE`                                      Alt pause
+  `KEY_SCRLUP`                                         Scroll up key
+  `KEY_SCRLDN`                                         Scroll down key
+  `KEY_INSLN`                                          Insert line key
+  `KEY_DELLN`                                          Delete line key
+  `KEY_ERASE`                                          Erase key
+  [`KEY_NULCHAR`]{#file_KEY_NULCHAR}                   Nul character key
+  `KEY_NULLCMD`                                        Null command of window manager
+  `KEY_REDRAW`                                         Redraw command of window manager
+  [`KEY_MOUSE1`]{#file_KEY_MOUSE1}                     Mouse button 1 (counted from left)
+  [`KEY_MOUSE2`]{#file_KEY_MOUSE2}                     Mouse button 2 (counted from left)
+  [`KEY_MOUSE3`]{#file_KEY_MOUSE3}                     Mouse button 3 (counted from left)
+  [`KEY_MOUSE4`]{#file_KEY_MOUSE4}                     Mouse wheel scroll up
+  [`KEY_MOUSE5`]{#file_KEY_MOUSE5}                     Mouse wheel scroll down
+  [`KEY_MOUSE_FWD`]{#file_KEY_MOUSE_FWD}               Mouse forward button
+  [`KEY_MOUSE_BACK`]{#file_KEY_MOUSE_BACK}             Mouse back button
+  `KEY_SFT_MOUSE1`                                     Shift mouse button 1 (counted from left)
+  `KEY_SFT_MOUSE2`                                     Shift mouse button 2 (counted from left)
+  `KEY_SFT_MOUSE3`                                     Shift mouse button 3 (counted from left)
+  `KEY_SFT_MOUSE4`                                     Shift mouse wheel scroll up
+  `KEY_SFT_MOUSE5`                                     Shift mouse wheel scroll down
+  `KEY_SFT_MOUSE_FWD`                                  Shift mouse forward button
+  `KEY_SFT_MOUSE_BACK`                                 Shift mouse back button
+  `KEY_CTL_MOUSE1`                                     Control mouse button 1 (counted from left)
+  `KEY_CTL_MOUSE2`                                     Control mouse button 2 (counted from left)
+  `KEY_CTL_MOUSE3`                                     Control mouse button 3 (counted from left)
+  `KEY_CTL_MOUSE4`                                     Control mouse wheel scroll up
+  `KEY_CTL_MOUSE5`                                     Control mouse wheel scroll down
+  `KEY_CTL_MOUSE_FWD`                                  Control mouse forward button
+  `KEY_CTL_MOUSE_BACK`                                 Control mouse back button
+  `KEY_ALT_MOUSE1`                                     Alt mouse button 1 (counted from left)
+  `KEY_ALT_MOUSE2`                                     Alt mouse button 2 (counted from left)
+  `KEY_ALT_MOUSE3`                                     Alt mouse button 3 (counted from left)
+  `KEY_ALT_MOUSE4`                                     Alt mouse wheel scroll up
+  `KEY_ALT_MOUSE5`                                     Alt mouse wheel scroll down
+  `KEY_ALT_MOUSE_FWD`                                  Alt mouse forward button
+  `KEY_ALT_MOUSE_BACK`                                 Alt mouse back button
+  [`KEY_CLOSE`]{#file_KEY_CLOSE}                       The close button of the window has been pressed
+  [`KEY_RESIZE`]{#file_KEY_RESIZE}                     The window has been resized
+  `KEY_UNDEF`                                          Undefined key
+  [`KEY_NONE`]{#file_KEY_NONE}                         No key pressed (returned by [`getc`]{.func}`(`[`KEYBOARD`]{.var}`, `[`NO_WAIT`]{.var}`)`)
+  ---------------------------------------------------- -------------------------------------------------------------------------------------------
+
+The following example uses the [`char`](#types_char){.type} constant
+[`KEY_UP`](#file_KEY_UP){.var}:
+
+``` indent
+$ include "seed7_05.s7i";
+  include "keybd.s7i";
+
+const proc: main is func
+  begin
+    writeln("Please press cursor up");
+    while getc(KEYBOARD) <> KEY_UP do
+      writeln("This was not cursor up");
+    end while;
+    writeln("Cursor up was pressed");
+  end func;
+```
+
+Programs should use the [`char`](#types_char){.type} constants defined
+in [\"[keybd.s7i]{.lib}\"]{.stri} to deal with function and cursor keys,
+since the special key codes may change in future versions of Seed7.
+
+Note that [`getc`]{.func}`(`[`KEYBOARD`]{.var}`)` works synchronous.
+This means that it might wait (block) until a key has been pressed.
+Blocking can be avoided with the following functions:
+
+- [`inputReady`]{.func}, which returns [`TRUE`]{.var} if a character can
+  be read without blocking and [`FALSE`]{.var} otherwise.
+- [`getc`]{.func}`(`[`KEYBOARD`]{.var}`, `[`NO_WAIT`]{.var}`)`, which
+  delivers the next character from the keyboard or
+  [`KEY_NONE`](#file_KEY_NONE){.var} if no key has been pressed.
+
+Note that [`inputReady`]{.func} does not actually read a character.
+Reading must be done with with a different function (e.g.
+[`getc`]{.func}) after [`inputReady`]{.func} returns [`TRUE`]{.var}. The
+program below writes a sequence of `#` characters. If any key is pressed
+it starts a new line. Pressing [Return]{.box} (or [Enter]{.box})
+terminates the program:
+
+``` indent
+$ include "seed7_05.s7i";
+  include "keybd.s7i";
+  include "duration.s7i";
+
+const proc: main is func
+  begin
+    repeat
+      while not inputReady(KEYBOARD) do
+        write("#");
+        flush(OUT);
+        wait(30000 . MICRO_SECONDS);
+      end while;
+      writeln;
+    until getc(KEYBOARD) = KEY_NL;
+  end func;
+```
+
+Both functions
+([`getc`]{.func}`(`[`KEYBOARD`]{.var}`, `[`NO_WAIT`]{.var}`)` and
+[`inputReady`]{.func}) are useful when user input is allowed while some
+processing takes place. The following program uses
+[`getc`]{.func}`(`[`KEYBOARD`]{.var}`, `[`NO_WAIT`]{.var}`)` to display
+the time until a key is pressed:
+
+``` indent
+$ include "seed7_05.s7i";
+  include "time.s7i";
+  include "keybd.s7i";
+
+const proc: main is func
+  begin
+    writeln;
+    while getc(KEYBOARD, NO_WAIT) = KEY_NONE do
+      write(time(NOW) <& "\r");
+      flush(OUT);
+    end while;
+    writeln;
+    writeln;
+  end func;
+```
+
+Seed7 programs can run in two modes:
+
+- Console mode, where the program runs in a console/terminal window (the
+  default).
+- Graphics mode, where the program has its own graphic window.
+
+These two modes are supported with two basic keyboard files:
+
+- [`CONSOLE_KEYBOARD`]{.var}, which uses a terminfo or console driver.
+- [`GRAPH_KEYBOARD`]{.var}, which uses a X11 or GDI driver.
+
+The file [`KEYBOARD`]{.var} is actually a variable which refers to one
+of the two basic keyboard files. The declaration of the type
+[`keyboard_file`]{.type} and the file [`KEYBOARD`]{.var} in
+[\"[keybd.s7i]{.lib}\"]{.stri} is:
+
+``` indent
+const type: keyboard_file is subtype file;
+
+var keyboard_file: KEYBOARD is CONSOLE_KEYBOARD;
+```
+
+Graphic programs switch to to the [`GRAPH_KEYBOARD`]{.var} driver with:
+
+``` indent
+KEYBOARD := GRAPH_KEYBOARD;
+```
+
+A [`GRAPH_KEYBOARD`]{.var} additionally provides the following
+functions:
+
+- [`buttonPressed`]{.func}, which determines if a given button is
+  currently pressed.
+- [`clickedXPos`]{.func}, which returns the X position of the mouse
+  cursor when a button was pressed.
+- [`clickedYPos`]{.func}, which returns the Y position of the mouse
+  cursor when a button was pressed.
+
+Modifier keys such as [shift]{.box}, [control]{.box}, [super]{.box} and
+[alt]{.box} do not send key/button down or up events. The function
+[`buttonPressed`]{.func} can be used to determine if a modifier has been
+pressed. The program below displays blue and red squares depending on
+the state of the left and right [shift]{.box} keys. The program is
+terminated by pressing any non-modifier key:
+
+``` indent
+$ include "seed7_05.s7i";
+  include "keybd.s7i";
+  include "draw.s7i";
+  include "duration.s7i";
+
+const proc: main is func
+  begin
+    screen(640, 480);
+    KEYBOARD := GRAPH_KEYBOARD;
+    repeat
+      rect(  85, 190, 100, 100, buttonPressed(KEYBOARD, KEY_LEFT_SHIFT)  ? light_blue : light_red);
+      rect( 270, 190, 100, 100, buttonPressed(KEYBOARD, KEY_SHIFT)       ? light_blue : light_red);
+      rect( 455, 190, 100, 100, buttonPressed(KEYBOARD, KEY_RIGHT_SHIFT) ? light_blue : light_red);
+      flushGraphic;
+      wait(30000 . MICRO_SECONDS);
+    until inputReady(KEYBOARD);
+  end func;
+```
+
+Note that [`buttonPressed`]{.func} does not process key/button events.
+This must be done with [`inputReady`]{.func} or [`getc`]{.func}.
+
+The library [\"[keybd.s7i]{.lib}\"]{.stri} provides definitions for
+modifier keys:
+
+  -------------------------------------------------- ----------------------------------
+  Key character constant                             Description
+  [`KEY_SHIFT`]{#file_KEY_SHIFT}                     Left or right shift is pressed
+  [`KEY_LEFT_SHIFT`]{#file_KEY_LEFT_SHIFT}           Left shift is pressed
+  [`KEY_RIGHT_SHIFT`]{#file_KEY_RIGHT_SHIFT}         Right shift is pressed
+  [`KEY_CONTROL`]{#file_KEY_CONTROL}                 Left or right control is pressed
+  [`KEY_LEFT_CONTROL`]{#file_KEY_LEFT_CONTROL}       Left control is pressed
+  [`KEY_RIGHT_CONTROL`]{#file_KEY_RIGHT_CONTROL}     Right control is pressed
+  [`KEY_ALT`]{#file_KEY_ALT}                         Left or right alt is pressed
+  [`KEY_LEFT_ALT`]{#file_KEY_LEFT_ALT}               Left alt is pressed
+  [`KEY_RIGHT_ALT`]{#file_KEY_RIGHT_ALT}             Right alt is pressed
+  [`KEY_SUPER`]{#file_KEY_SUPER}                     Left or right super is pressed
+  [`KEY_LEFT_SUPER`]{#file_KEY_LEFT_SUPER}           Left super is pressed
+  [`KEY_RIGHT_SUPER`]{#file_KEY_RIGHT_SUPER}         Right super is pressed
+  [`KEY_SHIFT_LOCK`]{#file_KEY_SHIFT_LOCK}           Shift lock is pressed
+  [`KEY_SHIFT_LOCK_ON`]{#file_KEY_SHIFT_LOCK_ON}     Shift lock is currently on
+  [`KEY_NUM_LOCK`]{#file_KEY_NUM_LOCK}               Num lock is pressed
+  [`KEY_NUM_LOCK_ON`]{#file_KEY_NUM_LOCK_ON}         Num lock is currently on
+  [`KEY_SCROLL_LOCK`]{#file_KEY_SCROLL_LOCK}         Scroll lock is pressed
+  [`KEY_SCROLL_LOCK_ON`]{#file_KEY_SCROLL_LOCK_ON}   Scroll lock is currently on
+  -------------------------------------------------- ----------------------------------
+
+The functions [`clickedXPos`]{.func} and [`clickedYPos`]{.func} can be
+used to determine which position was \"clicked\". The program below uses
+[`clickedXPos`]{.func} and [`clickedYPos`]{.func} to produce a dot for
+each keypress.
+
+``` indent
+$ include "seed7_05.s7i";
+  include "keybd.s7i";
+  include "draw.s7i";
+
+const proc: main is func
+  local
+    var char: command is ' ';
+  begin
+    screen(640, 480);
+    KEYBOARD := GRAPH_KEYBOARD;
+    command := getc(KEYBOARD);
+    while command = KEY_MOUSE1 do
+      fcircle(clickedXPos(KEYBOARD), clickedYPos(KEYBOARD), 4, light_red);
+      command := getc(KEYBOARD);
+    end while;
+  end func;
+```
+
+The current position of the mouse cursor, which is independent from key
+presses can be retrieved with the following functions:
+
+- [`pointerXPos`]{.func}, which returns the actual X position of the
+  mouse pointer.
+- [`pointerYPos`]{.func}, which returns the actual Y position of the
+  mouse pointer.
+
+The functions [`pointerXPos`]{.func} and [`pointerYPos`]{.func} can be
+used to move something with the cursor (e.g.: drag and drop). The
+program below uses [`buttonPressed`]{.func} to determine how long the
+mouse button is pressed. This is used together with
+[`pointerXPos`]{.func} and [`pointerYPos`]{.func} to draw along the
+mouse cursor while the mouse button is pressed:
+
+``` indent
+$ include "seed7_05.s7i";
+  include "keybd.s7i";
+  include "draw.s7i";
+
+const proc: main is func
+  local
+    var char: command is ' ';
+  begin
+    screen(640, 480);
+    KEYBOARD := GRAPH_KEYBOARD;
+    command := getc(KEYBOARD);
+    while command = KEY_MOUSE1 do
+      while buttonPressed(KEYBOARD, KEY_MOUSE1) do
+        fcircle(pointerXPos(curr_win), pointerYPos(curr_win), 4, light_red);
+      end while;
+      command := getc(KEYBOARD);
+    end while;
+  end func;
+```
+
+Some keys are not delivered to the program by default. By default the
+close button of the window (often marked with [`X`]{.box}) just exits
+the program. By default resizing a window is also not communicated to
+the program. These two events can be activated with
+[`selectInput`]{.func}. This way a program can also receive
+[`KEY_CLOSE`]{.var} and [`KEY_RESIZE`]{.var}:
+
+``` indent
+$ include "seed7_05.s7i";
+  include "keybd.s7i";
+  include "draw.s7i";
+
+const proc: main is func
+  local
+    var char: command is ' ';
+  begin
+    screen(640, 480);
+    KEYBOARD := GRAPH_KEYBOARD;
+    selectInput(curr_win, KEY_CLOSE, TRUE);  # Enable the program to get KEY_CLOSE without closing the window.
+    selectInput(curr_win, KEY_RESIZE, TRUE); # Enable the program to get KEY_RESIZE.
+    command := getc(KEYBOARD);
+    while command <> KEY_CLOSE do
+      if command = KEY_RESIZE then
+        lineTo(0, 0, width(curr_win), height(curr_win), white);
+      end if;
+      command := getc(KEYBOARD);
+    end while;
+  end func;
+```
+
+Some file types are defined to support the [`KEYBOARD`]{.var}. One such
+file type is [`echoFile`]{.type}, which is defined in the library
+[\"[echo.s7i]{.lib}\"]{.stri}. An [`echoFile`]{.type} file can be used
+to write input characters to an output file. This is useful since
+[`KEYBOARD`]{.var} does not echo its input, but [`echoFile`]{.type} is
+not restricted to support [`KEYBOARD`]{.var}. The following program
+writes echoes of the keys typed and exits as soon as a [`'!'`]{.stri} is
+encountered:
+
+``` indent
+$ include "seed7_05.s7i";
+  include "keybd.s7i";
+  include "echo.s7i";
+
+const proc: main is func
+  local
+    var char: ch is ' ';
+  begin
+    IN := openEcho(KEYBOARD, OUT);
+    repeat
+      ch := getc(IN);
+    until ch = '!';
+    writeln;
+  end func;
+```
+
+An [`echoFile`]{.type} checks also for [control-C]{.box}
+([`KEY_CTL_C`](#file_KEY_CTL_A_TO_Z){.var}). If [control-C]{.box} is
+typed an [`echoFile`]{.type} asks if the program should be terminated:
+
+``` indent
+terminate (y/n)?
+```
+
+Answering `'y'` or `'Y'` is interpreted as `'yes'` and the program is
+terminated with the following message:
+
+``` indent
+*** PROGRAM TERMINATED BY USER
+```
+
+Any other input removes the question and the program continues to read
+input.
+
+Another helpful file type is [`lineFile`]{.type}, which is defined in
+the library [\"[line.s7i]{.lib}\"]{.stri}. A [`lineFile`]{.type} allows
+to correct the input with [Backspace]{.box} until a [Return]{.box}
+(represented with [`'\n'`]{.stri}) is encountered. In contrast to this
+editing feature the possibility to edit a line of [`STD_IN`]{.var} is
+provided by the operating system. The following program uses
+[`echoFile`]{.type} and [`lineFile`]{.type} to simulate input line
+editing:
+
+``` indent
+$ include "seed7_05.s7i";
+  include "keybd.s7i";
+  include "echo.s7i";
+  include "line.s7i";
+
+const proc: main is func
+  local
+    var char: ch is ' ';
+  begin
+    IN := openEcho(KEYBOARD, OUT);
+    IN := openLine(IN);
+    repeat
+      ch := getc(IN);
+      write(ch);
+    until ch = '!';
+  end func;
+```
+
+This program terminates if a line containing [`'!'`]{.stri} is confirmed
+with [Return]{.box}.
+
+There is also the [`editLineFile`]{.type}, which is defined in the
+library [\"[editline.s7i]{.lib}\"]{.stri}. An [`editLineFile`]{.type}
+provides more than a combination of an [`echoFile`]{.type} with a
+[`lineFile`]{.type}. An [`editLineFile`]{.type} allows editing with
+[Backspace]{.box}, [Delete]{.box}, [←]{.box}, [→]{.box}, [Home]{.box}
+and [End]{.box}. The vertical curser keys can be used to get previous
+input lines. Like an [`echoFile`]{.type} it checks also for
+[control-C]{.box} ([`KEY_CTL_C`](#file_KEY_CTL_A_TO_Z){.var}).
+
+``` indent
+$ include "seed7_05.s7i";
+  include "keybd.s7i";
+  include "console.s7i";
+  include "editline.s7i";
+
+const proc: main is func
+  local
+    var string: command is "";
+  begin
+    OUT := STD_CONSOLE;
+    IN := openEditLine(KEYBOARD, OUT);
+    writeln("Use the command quit to exit the program.");
+    repeat
+      write("command> ");
+      readln(command);
+    until command = "quit";
+  end func;
+```
+
+[]{#file_Files_with_line_structure}
+
+### 8.8 Files with line structure
+
+The library [\"[text.s7i]{.lib}\"]{.stri} defines the type
+[`text`](#types_text){.type}, which is a subtype of
+[`file`](#types_file){.type}. The type [`text`](#types_text){.type} adds
+a line structure and other features such as scrolling and color to
+[`file`](#types_file){.type}. The lines and columns of a
+[`text`](#types_text){.type} start with 1 in the upper left corner and
+increase downward and rightward. The function [`setPos`]{.func} sets the
+current line and column of a [`text`](#types_text){.type}:
+
+``` indent
+setPos(aText, 10, 20);
+```
+
+The functions [`setLine`]{.func} and [`setColumn`]{.func} set just the
+line and column respectively:
+
+``` indent
+setLine(aText, 2);
+setColumn(aText, 72);
+```
+
+The current line and column of a [`text`](#types_text){.type} file can
+be retrieved with [`line`]{.func} and [`column`]{.func}:
+
+``` indent
+writeln("The current line is: " <& line(aText));
+writeln("The current column is: " <& column(aText));
+```
+
+The current height and width of a [`text`](#types_text){.type} file can
+be retrieved with [`height`]{.func} and [`width`]{.func}:
+
+``` indent
+writeln("The height is: " <& height(aText));
+writeln("The width is: " <& width(aText));
+```
+
+To allow random access output to a text console (or text window) the
+library [\"[console.s7i]{.lib}\"]{.stri} defines the type
+[`console_file`]{.type}. The function
+
+``` indent
+open(CONSOLE)
+```
+
+returns a [`console_file`]{.type}.
+
+[]{#file_Sockets}
+
+### 8.9 Sockets
+
+The library [\"[socket.s7i]{.lib}\"]{.stri} defines types and functions
+to access sockets. The implementation type for sockets is
+[`socket`]{.type}. As interface type [`file`](#types_file){.type} is
+used:
+
+``` indent
+var file: clientSocket is STD_NULL;
+```
+
+With [`openInetSocket`]{.func} an Internet client socket can be opened:
+
+``` indent
+clientSocket := openInetSocket("www.google.com", 80);
+```
+
+The function [`openInetSocket`]{.func} creates and connects a socket.
+Opening an Internet socket at the local host is also done with a variant
+of [`openInetSocket`]{.func}:
+
+``` indent
+clientSocket := openInetSocket(1080);
+```
+
+Since sockets use the [`file`](#types_file){.type} interface functions
+like [`writeln`]{.func} and [`getln`]{.func} can be used:
+
+``` indent
+$ include "seed7_05.s7i";
+  include "socket.s7i";
+
+const proc: main is func
+  local
+    const string: serverName is "www.google.com";
+    var file: aSocket is STD_NULL;
+  begin
+    aSocket := openInetSocket(serverName, 80);
+    if aSocket <> STD_NULL then
+      writeln(aSocket, "GET / HTTP/1.1");
+      writeln(aSocket, "Host: " <& serverName);
+      writeln(aSocket, "User-Agent: BlackHole");
+      writeln(aSocket);
+      writeln(getln(aSocket));
+    end if;
+  end func;
+```
+
+The example above sends a HTTP request to a server and gets the status
+code from the response. The example above consists of code from the
+library [\"[gethttp.s7i]{.lib}\"]{.stri}.
+
+Server sockets are supported with the type [`listener`]{.type}. A
+listener is defined with:
+
+``` indent
+var listener: myListener is listener.value;
+```
+
+The library [\"[listener.s7i]{.lib}\"]{.stri} defines the function
+[`openInetListener`]{.func}, which opens a [`listener`]{.type}:
+
+``` indent
+aListener := openInetListener(1080);
+```
+
+The function [`listen`]{.func} is used to listen for incoming socket
+connections of a [`listener`]{.type}, and to limit the incoming queue:
+
+``` indent
+listen(aListener, 10);
+```
+
+The function [`accept`]{.func} returns the first connected socked of the
+[`listener`]{.type}:
+
+``` indent
+serverSocket := accept(aListener);
+```
+
+Together the functions above can be use to process requests without
+sessions:
+
+``` indent
+aListener := openInetListener(1080);
+listen(aListener, 10);
+while TRUE do
+  sock := accept(aListener);
+  # Read and process the request from sock.
+  close(sock);
+end while;
+```
+
+A similar loop is used in the [Comanche] web server (see main
+function). The function [`waitForRequest`]{.func} can be used to process
+requests with session:
+
+``` indent
+aListener := openInetListener(2021);
+listen(aListener, 10);
+while TRUE do
+  waitForRequest(aListener, existingConnection, newConnection);
+  if existingConnection <> STD_NULL then
+    # Read and process the request from existingConnection.
+  end if;
+  if newConnection <> STD_NULL then
+    # Send welcome message to newConnection.
+  end if;
+end while;
+```
+
+Similar code is used in the program [\"ftpserv.sd7\"]{.stri}. The
+implementation of [`waitForRequest`]{.func} is based on
+[`pollData`]{.type}, which is defined in [\"[poll.s7i]{.lib}\"]{.stri}.
+
+[]{#file_Transport_layer_security}
+
+### 8.10 Transport Layer Security
+
+Transport Layer Security (TLS) is the successor of the Secure Sockets
+Layer (SSL). It provides secure communication over a computer network.
+The library [\"[tls.s7i]{.lib}\"]{.stri} defines types and functions for
+TLS sockets. The implementation type for sockets is [`tlsFile`]{.type}.
+As interface type [`file`](#types_file){.type} is used:
+
+``` indent
+var file: aTlsSocket is STD_NULL;
+```
+
+With [`openTlsSocket`]{.func} a TLS socket can be opened:
+
+``` indent
+aTlsSocket := openTlsSocket("www.google.com", 443);
+```
+
+The function [`openTlsSocket`]{.func} opens a TLS socket. Since TLS
+sockets use the [`file`](#types_file){.type} interface functions like
+[`writeln`]{.func} and [`getln`]{.func} can be used:
+
+``` indent
+$ include "seed7_05.s7i";
+  include "tls.s7i";
+
+const proc: main is func
+  local
+    const string: serverName is "www.google.com";
+    var file: aTlsSocket is STD_NULL;
+  begin
+    aTlsSocket := openTlsSocket(serverName, 443);
+    if aTlsSocket <> STD_NULL then
+      writeln(aTlsSocket, "GET / HTTP/1.1");
+      writeln(aTlsSocket, "Host: " <& serverName);
+      writeln(aTlsSocket, "User-Agent: BlackHole");
+      writeln(aTlsSocket);
+      writeln(getln(aTlsSocket));
+    end if;
+  end func;
+```
+
+The example above sends a HTTPS request to a server and gets the status
+code from the response. The example above consists of code from the
+library [\"[gethttps.s7i]{.lib}\"]{.stri}.
+
+The function [`openServerTls`]{.func} can be used to open a TLS socket
+at the server side. The library [\"[x509cert.s7i]{.lib}\"]{.stri}
+defines the self signed certificate [`stdCertificate`]{.var}. This
+certificate can be used to open a TLS server socket:
+
+``` indent
+$ include "seed7_05.s7i";
+  include "socket.s7i";
+  include "listener.s7i";
+  include "tls.s7i";
+
+const proc: main is func
+  local
+    var listener: aListener is listener.value;
+    var file: sock is STD_NULL;
+    var file: tlsSock is STD_NULL;
+    var string: line is "";
+  begin
+    aListener := openInetListener(11111);
+    listen(aListener, 10);
+    while TRUE do
+      sock := accept(aListener);
+      tlsSock := openServerTls(sock, stdCertificate);
+      if tlsSock <> STD_NULL then
+        writeln("Success");
+        repeat
+          line := getln(tlsSock);
+          writeln(line <& " received");
+        until line = "";
+        close(tlsSock);
+      else
+        writeln(" *** Cannot open TLS connection.");
+      end if;
+    end while;
+  end func;
+```
+
+[]{#file_User_defined_file_types}
+
+### 8.11 User defined file types
+
+In addition to the predefined file types it is often necessary to define
+a new type of file. Such a new file has several possibilities:
+
+- It could store its contents in a string (not only to be faster but
+  also to provide additional file operations)
+- The information can be processed (e.g. to upper case) and sent to
+  another file.
+- It could work just like an Unix utility (Think of more, sort, tee,
+  uniq \...)
+- It could provide a file-like interface for something with an other
+  interface. (e.g. The contents of a directory, or random access I/O to
+  the screen)
+
+With the following declaration we define a new file type:
+
+``` indent
+const type: my_file_type is sub null_file struct
+    ...
+    (* Local data *)
+    ...
+  end struct;
+```
+
+It is not necessary to derive the type [`my_file_type`]{.type} directly
+from [`null_file`]{.type}. The type [`my_file_type`]{.type} may also be
+an indirect descendant of [`null_file`]{.type}. So it is possible to
+create file type hierarchies. The interface implemented by the new file
+needs also to be specified:
+
+``` indent
+type_implements_interface(my_file_type, file);
+```
+
+The type [`file`](#types_file){.type} is not the only interface type
+which can be used. There is also the type [`text`](#types_text){.type}
+which is derived from [`file`](#types_file){.type}. The type
+[`text`](#types_text){.type} describes a line oriented file which allows
+[`setPos`]{.func} (which moves the current position to the line and
+column specified) and other functions. It is also possible to define new
+interface types which derive from [`file`](#types_file){.type} or
+[`text`](#types_text){.type}.
+
+As next an open function is needed to open a [`my_file_type`]{.type}
+file:
+
+``` indent
+const func file: open_my_file (  (* Parameters *) ) is func
+  result
+    var file: newFile is STD_NULL;
+  local
+    var my_file_type: new_file is my_file_type.value;
+  begin
+    ...
+    (* Initialization of the data elements of new_file *)
+    newFile := toInterface(new_file);
+    ...
+  end func;
+```
+
+Note that the function `'toInterface'` is used to generate a new
+[`file`](#types_file){.type} object. Now only the two basic I/O
+operations must be defined:
+
+``` indent
+const proc: write (inout my_file_type: new_fil, in string: stri) is func
+  begin
+    ...
+    (* Statements that do the output *)
+    ...
+  end func;
+
+const proc: gets (inout my_file_type: new_fil, in integer: leng) is func
+  result
+    var string: stri is "";
+  begin
+    ...
+    (* Statements that do the input *)
+    ...
+  end func;
+```
+
+[]{#file_Scanning_a_file}
+
+### 8.12 Scanning a file
+
+The I/O concept introduced in the previous chapters separates the input
+of data from its conversion. The [`read`]{.func}, [`readln`]{.func},
+[`getwd`]{.func} and [`getln`]{.func} functions are designed to read
+whitespace separated data elements. If the data elements are not
+separated by whitespace characters this I/O concept is not possible.
+Instead the functions which read from the file need some knowledge about
+the type which they intend to read. Fortunately this is a well
+researched area. The lexical scanners used by compilers solve exactly
+this problem.
+
+Lexical scanners read symbols from a file and use the concept of a
+current character. A symbol can be a name, a number, a string, an
+operator, a bracket or something else. The current character is the
+first character to be processed when scanning a symbol. After a scanner
+has read a symbol the current character contains the character just
+after the symbol. This character could be the first character of the
+next symbol or some whitespace character. If the set of symbols is
+chosen wisely all decisions about the type of the symbol and when to
+stop reading characters for a symbol can be done based on the current
+character.
+
+Every [`file`](#types_file){.type} contains a `'bufferChar'` variable
+which is used as current character by the scanner functions defined in
+the [\"[scanfile.s7i]{.lib}\"]{.stri} library. The
+[\"[scanfile.s7i]{.lib}\"]{.stri} library contains skip\... and get\...
+functions. The skip\... procedures return void and are used to skip
+input while the get\... functions return the string of characters they
+have read. The following basic scanner functions are defined in the
+[\"[scanfile.s7i]{.lib}\"]{.stri} library:
+
+[skipComment]{.func}
+:   Skips a possibly nested [Seed7 comment](#tokens_Comments)
+    from a [`file`](#types_file){.type}.
+
+[getComment]{.func}
+:   Reads a possibly nested [Seed7 comment](#tokens_Comments)
+    from a [`file`](#types_file){.type}.
+
+[skipClassicComment]{.func}
+:   Skips a classic C comment from a [`file`](#types_file){.type}.
+
+[skipLineComment]{.func}
+:   Skips a [line comment](#tokens_Line_comments) from a
+    [`file`](#types_file){.type}.
+
+[getLineComment]{.func}
+:   Reads a [line comment](#tokens_Line_comments) from a
+    [`file`](#types_file){.type}.
+
+[getDigits]{.func}
+:   Reads a sequence of digits from a [`file`](#types_file){.type}.
+
+[getInteger]{.func}
+:   Reads a decimal integer with optional sign from a
+    [`file`](#types_file){.type}.
+
+[getNumber]{.func}
+:   Reads a numeric literal ([integer](#tokens_Integer_literals),
+    [bigInteger](#tokens_BigInteger_literals) or
+    [float](#tokens_Float_literals) literal) from a
+    [`file`](#types_file){.type}.
+
+[getNonDigits]{.func}
+:   Reads a sequence of non digits from a [`file`](#types_file){.type}.
+
+[getQuotedText]{.func}
+:   Reads a text quoted with \" or \' from a
+    [`file`](#types_file){.type}.
+
+[getSimpleStringLiteral]{.func}
+:   Read a simple string literal from a [`file`](#types_file){.type}.
+
+[getCharLiteral]{.func}
+:   Reads a [character literal](#tokens_Character_literals) from
+    a [`file`](#types_file){.type}.
+
+[getStringLiteral]{.func}
+:   Reads a [string literal](#tokens_String_literals) from a
+    [`file`](#types_file){.type}.
+
+[getName]{.func}
+:   Reads an alphanumeric name from a [`file`](#types_file){.type}.
+
+Contrary to [`read`]{.func} and [`getwd`]{.func} basic scanner functions
+do not skip leading whitespace characters. To skip whitespace characters
+one of the following functions can be used:
+
+[skipSpace]{.func}
+:   Skips space characters from a [`file`](#types_file){.type}.
+
+[skipSpaceOrTab]{.func}
+:   Skips space and tab characters from a [`file`](#types_file){.type}.
+
+[skipWhiteSpace]{.func}
+:   Skips whitespace characters from a [`file`](#types_file){.type}.
+
+[getWhiteSpace]{.func}
+:   Reads whitespace characters from a [`file`](#types_file){.type}.
+
+[getWord]{.func}
+:   Reads a white space delimited word from a
+    [`file`](#types_file){.type}.
+
+[skipLine]{.func}
+:   Skips a line from a [`file`](#types_file){.type}.
+
+[getLine]{.func}
+:   Reads a line from a [`file`](#types_file){.type}.
+
+The advanced scanner functions do skip whitespace characters before
+reading a symbol:
+
+[getSymbolOrComment]{.func}
+:   Reads a symbol or a comment from a [`file`](#types_file){.type}.
+
+[getSymbol]{.func}
+:   Reads a symbol from a [`file`](#types_file){.type}.
+
+[getSymbolWithHtmlEntities]{.func}
+:   Reads a symbol, where html entities are allowed, from a
+    [`file`](#types_file){.type}.
+
+[getHtmlTagSymbolOrComment]{.func}
+:   Reads a HTML tag, a symbol or a comment from a
+    [`file`](#types_file){.type}.
+
+[skipXmlComment]{.func}
+:   Skips a XML comment from a [`file`](#types_file){.type}.
+
+[getXmlTagOrContent]{.func}
+:   Reads a XML/HTML tag or the XML/HTML content text from a
+    [`file`](#types_file){.type}.
+
+[getXmlCharacterReference]{.func}
+:   Reads a predefined XML entity from a [`file`](#types_file){.type}.
+
+[getXmlCdataContent]{.func}
+:   Read the content text of a CDATA section from a
+    [`file`](#types_file){.type}.
+
+[getXmlTagHeadOrContent]{.func}
+:   Reads a XML/HTML tag head or a XML/HTML content from a
+    [`file`](#types_file){.type}.
+
+[getSymbolInXmlTag]{.func}
+:   Reads a symbol which can appear inside a XML/HTML tag from a
+    [`file`](#types_file){.type}.
+
+[skipXmlTag]{.func}
+:   Skips beyond an XML Tag in a [`file`](#types_file){.type}.
+
+[getNextXmlAttribute]{.func}
+:   Reads name and value of an attribute inside a XML tag from
+    [`file`](#types_file){.type}.
+
+[getHtmlAttributeValue]{.func}
+:   Reads a HTML tag attribute value from a
+    [`file`](#types_file){.type}.
+
+[getNextHtmlAttribute]{.func}
+:   Reads name and value of an attribute inside a HTML tag from a
+    [`file`](#types_file){.type}.
+
+[getSimpleSymbol]{.func}
+:   Reads a simple symbol from a [`file`](#types_file){.type}.
+
+All scanner functions assume that the first character to be processed is
+in `'bufferChar'` and after they are finished the next character which
+should be processed is also in `'bufferChar'`. To use scanner functions
+for a new opened file it is necessary to assign the first character to
+the `'bufferChar'` with:
+
+``` indent
+myFile.bufferChar := getc(myFile);
+```
+
+In most cases whole files are either processed with normal I/O functions
+or with scanner functions. If normal I/O functions need to be combined
+with scanner functions care has to be taken:
+
+- If the last function which read from a file was one of
+  [`read`]{.func}, [`readln`]{.func}, [`getwd`]{.func} or
+  [`getln`]{.func} the `'bufferChar'` already contains the character
+  which should be processed next and therefore subsequent scanner
+  functions can be used.
+- Other I/O functions like [`getc`]{.func} and [`gets`]{.func} do not
+  assign something to `'bufferChar'`. In this case something should be
+  assigned to `'bufferChar'`.
+- Switching back from scanner functions to normal I/O functions is best
+  done when the content of `'bufferChar'` is known. For example at the
+  end of the line.
+
+Scanner functions are helpful if it is necessary to read numeric input
+without failing if no digits are present:
+
+``` indent
+skipWhiteSpace(IN);
+if eoln(IN) then
+  writeln("empty input");
+elsif IN.bufferChar in {'0' .. '9'} then
+  number := integer parse getDigits(IN);
+  skipLine(IN);
+  writeln("number " <& number);
+else
+  stri := getLine(IN);
+  writeln("command " <& literal(stri));
+end if;
+```
+
+The function [`getSymbol`]{.func} is designed to read Seed7 symbols.
+When the end of the file is reached it returns [`""`]{.stri}. With
+[`getSymbol`]{.func} name-value pairs can be read:
+
+``` indent
+name := getSymbol(inFile);
+while name <> "" do
+  if name <> "#" and getSymbol(inFile) = "=" then
+    aValue = getSymbol(inFile);
+    if aValue <> "" then
+      if aValue[1] = '"' then
+        keyValueHash @:= [name] aValue[2 ..];
+      elsif aValue[1] in {'0' .. '9'} then
+        keyValueHash @:= [name] aValue;
+      end if;
+    end if;
+  end if;
+end while;
+```
+
+The following loop can be used to process the symbols of a Seed7
+program:
+
+``` indent
+inFile.bufferChar := getc(inFile);
+currSymbol := getSymbol(inFile);
+while currSymbol <> "" do
+  ... process currSymbol ...
+  currSymbol := getSymbol(inFile);
+end while;
+```
+
+Whitespace and comments are automatically skipped with the function
+[`getSymbol`]{.func}. If comments should also be returned the function
+[`getSymbolOrComment`]{.func} can be used. Together with the function
+[`getWhiteSpace`]{.func} it is even possible to get the whitespace
+between the symbols:
+
+``` indent
+const func string: processFile (in string: fileName) is func
+  result
+    var string: processed is "";
+  local
+    var file: inFile is STD_NULL;
+    var string: currSymbol is "";
+  begin
+    inFile := open(fileName, "r");
+    if inFile <> STD_NULL then
+      inFile.bufferChar := getc(inFile);
+      processed := getWhiteSpace(inFile);
+      currSymbol := getSymbolOrComment(inFile);
+      while currSymbol <> "" do
+        processed &:= currSymbol;
+        processed &:= getWhiteSpace(inFile);
+        currSymbol := getSymbolOrComment(inFile);
+      end while;
+    end if;
+  end func;
+```
+
+In the example above the function `'processFile'` gathers all symbols,
+whitespace and comments in the string it returns. The string returned by
+`'processFile'` is equivalent to the one returned by the function
+`'getf'`. That way it is easy to test the scanner functionality.
+
+The logic with [`getWhiteSpace`]{.func} and
+[`getSymbolOrComment`]{.func} can be used to add HTML tags to comments
+and literals. The following function colors comments with green, string
+and char literals with maroon and numeric literals with purple:
+
+``` indent
+const proc: sourceToHtml (inout file: inFile, inout file: outFile) is func
+  local
+    var string: currSymbol is "";
+  begin
+    inFile.bufferChar := getc(inFile);
+    write(outFile, "<pre>\n");
+    write(outFile, getWhiteSpace(inFile));
+    currSymbol := getSymbolOrComment(inFile);
+    while currSymbol <> "" do
+      currSymbol := replace(currSymbol, "&", "&amp;");
+      currSymbol := replace(currSymbol, "<", "&lt;");
+      if currSymbol[1] in {'"', '''} then
+        write(outFile, "<font color=\"maroon\">");
+        write(outFile, currSymbol);
+        write(outFile, "</font>");
+      elsif currSymbol[1] = '#' or startsWith(currSymbol, "(*") then
+        write(outFile, "<font color=\"green\">");
+        write(outFile, currSymbol);
+        write(outFile, "</font>");
+      elsif currSymbol[1] in digit_char then
+        write(outFile, "<font color=\"purple\">");
+        write(outFile, currSymbol);
+        write(outFile, "</font>");
+      else
+        write(outFile, currSymbol);
+      end if;
+      write(outFile, getWhiteSpace(inFile));
+      currSymbol := getSymbolOrComment(inFile);
+    end while;
+    write(outFile, "</pre>\n");
+  end func;
+```
+
+The functions [`skipSpace`]{.func} and [`skipWhiteSpace`]{.func} are
+defined in the [\"[scanfile.s7i]{.lib}\"]{.stri} library as follows:
+
+``` indent
+const proc: skipSpace (inout file: inFile) is func
+  local
+    var char: ch is ' ';
+  begin
+    ch := inFile.bufferChar;
+    while ch = ' ' do
+      ch := getc(inFile);
+    end while;
+    inFile.bufferChar := ch;
+  end func;
+
+const proc: skipWhiteSpace (inout file: inFile) is func
+  begin
+    while inFile.bufferChar in white_space_char do
+      inFile.bufferChar := getc(inFile);
+    end while;
+  end func;
+```
+
+The functions [`skipComment`]{.func} and [`skipLineComment`]{.func},
+which can be used to skip Seed7 comments, are defined as follows:
+
+``` indent
+const proc: skipComment (inout file: inFile) is func
+  local
+    var char: character is ' ';
+  begin
+    character := getc(inFile);
+    repeat
+      repeat
+        while character not in special_comment_char do
+          character := getc(inFile);
+        end while;
+        if character = '(' then
+          character := getc(inFile);
+          if character = '*' then
+            skipComment(inFile);
+            character := getc(inFile);
+          end if;
+        end if;
+      until character = '*' or character = EOF;
+      if character <> EOF then
+        character := getc(inFile);
+      end if;
+    until character = ')' or character = EOF;
+    if character = EOF then
+      inFile.bufferChar := EOF;
+    else
+      inFile.bufferChar := getc(inFile);
+    end if;
+  end func; # skipComment
+
+const proc: skipLineComment (inout file: inFile) is func
+  local
+    var char: character is ' ';
+  begin
+    repeat
+      character := getc(inFile);
+    until character = '\n' or character = EOF;
+    inFile.bufferChar := character;
+  end func; # skipLineComment
+```
+
+[]{#syntax_file_start}
+
+[]{#syntax_STRUCTURED_SYNTAX_DEFINITION}
+
+## 9. STRUCTURED SYNTAX DEFINITION
+
+Most programming languages have only predefined constructs like
+statements and operators. Seed7, on the other hand, additionally allows
+user defined constructs. This chapter introduces the Seed7 Structured
+Syntax Description (S7SSD) which is used to define the syntax of new
+constructs. The syntax of predefined constructs is also defined with
+S7SSD.
+
+The syntax descriptions used in manuals of conventional programming
+languages have no relationship to the approach used by the syntax
+analysis of the corresponding interpreters/compilers. S7SSD is a simple
+syntax description that can be used by humans and
+compilers/interpreters. Although compiler-compilers follow the path of
+machine readable syntax descriptions, they use much more complicated
+syntax and semantic descriptions and do not allow users of the language
+to define new constructs.
+
+There are different existing notations to specify the syntax of
+programming languages. Backus-Naur Form (BNF) and its variants like
+Extended Backus-Naur Form (EBNF) are examples of such syntax
+specifications. Since it is easier to understand new concepts if they
+are compared to well known concepts, EBNF will be used as a base to
+explain S7SSD.
+
+[]{#syntax_The_Extended_Backus-Naur_Form}
+
+### 9.1 The Extended Backus-Naur Form
+
+As the name says the Extended Backus-Naur Form is an extension of BNF.
+The extension allows the definition of repetitions and optional parts
+without the use of recursion. EBNF has the following elements:
+
+- Nonterminal symbols are described with identifiers. An identifier
+  consist of lower case letters and underline characters.
+- Terminal symbols are quoted strings or names in upper case characters,
+  which describe unprintable characters (control characters).
+- The concatenation of nonterminal and/or terminal symbols is described
+  by writing them in sequence.
+- With \| two alternatives can be separated.
+- Expressions of the extended Backus-Naur form can be put within
+  parentheses ( \... ) .
+- If an expression is optional it is enclosed in square brackets \[ \...
+  \] .
+- If an expression may be omitted or repeated it is enclosed in curly
+  braces { \... } .
+
+The syntax of the extended Backus-Naur form can be described in extended
+Backus-Naur form:
+
+syntax_description ::=
+:   { [ebnf_statement](#syntax_ebnf_ebnf_statement){.ebnf} } .
+
+\
+\
+[ebnf_statement]{#syntax_ebnf_ebnf_statement} ::=
+:   identifier \'::=\'
+    [ebnf_expression](#syntax_ebnf_ebnf_expression){.ebnf} \'.\' .
+
+\
+\
+[ebnf_expression]{#syntax_ebnf_ebnf_expression} ::=
+:   [term](#syntax_ebnf_ebnf_term){.ebnf} { \'\|\'
+    [term](#syntax_ebnf_ebnf_term){.ebnf} } .
+
+\
+\
+[term]{#syntax_ebnf_ebnf_term} ::=
+:   [factor](#syntax_ebnf_ebnf_factor){.ebnf} {
+    [factor](#syntax_ebnf_ebnf_factor){.ebnf} } .
+
+\
+\
+[factor]{#syntax_ebnf_ebnf_factor} ::=
+:   identifier \| string \| control_character_description \|\
+    \'(\' [ebnf_expression](#syntax_ebnf_ebnf_expression){.ebnf} \')\'
+    \| \'\[\' [ebnf_expression](#syntax_ebnf_ebnf_expression){.ebnf}
+    \'\]\' \|\
+    \'{\' [ebnf_expression](#syntax_ebnf_ebnf_expression){.ebnf} \'}\' .
+
+[]{#syntax_The_Seed7_Structured_Syntax_Description}
+
+### 9.2 The Seed7 Structured Syntax Description
+
+The Seed7 Structured Syntax Description is abbreviated with S7SSD. The
+S7SSD can describe most but not all of the syntax of a programming
+language. The syntax of identifiers, literals and comments is not
+described with S7SSD. S7SSD views a program as a big typeless
+expression. The syntax of this expression is described with prefix,
+infix and postfix operators. The operators have a priority and an
+associativity. Operators can have one or more operator symbols. The
+operator symbols of an operator can be adjacent or they can have
+parameters in between. The S7SSD of an infix `+` is:
+
+``` indent
+$ syntax expr: .(). + .()   is -> 7;
+```
+
+This defines the `+` as [left
+associative](#syntax_left_associative) infix operator with
+priority 7. The actual syntax is described with:
+
+``` indent
+. () . + . ()
+```
+
+The dots are used to create a list of elements. For the purpose of the
+syntax description we can just remove the dots, which gives:
+
+``` indent
+() + ()
+```
+
+The place of the parameters is specified with `()`. The `+` operator is
+an infix operator, because the `+` is preceded and succeeded by a `()`.
+Any expression can be used as `()` parameter. The type of the `()`
+parameters and the type of the result of `+` is not specified by the
+S7SSD. Checks for the correct type are not done at the syntactic level.
+This way S7SSD allows syntax that would not be allowed in a
+corresponding EBNF description. S7SSD considers just operator symbols
+and their priority and associativity.
+
+[]{#syntax_The_syntax_of_a_statement}
+
+### 9.3 The syntax of a statement
+
+To explain the Seed7 Structured Syntax Description we design a new
+statement, the
+[loop-statement](#syntax_The_syntax_of_a_statement). The
+[loop-statement](#syntax_The_syntax_of_a_statement) should be
+similar to [while-](#stats_while-statement) and
+[repeat-loops](#stats_repeat-statement) but instead of having the
+conditional exit at the beginning or at the end, it should have a
+conditional exit in the middle of the loop. This middle conditional exit
+should be part of the
+[loop-statement](#syntax_The_syntax_of_a_statement). Note that
+the break-statement, which exists in some programming languages, is a
+statement on its own and is not part of the loop which it leaves.
+Therefore the middle conditional exit should not be confused with a
+break-statement. An example of the new
+[loop-statement](#syntax_The_syntax_of_a_statement) is:
+
+``` indent
+loop
+  ch := getc(inFile);
+until ch = '\n' do
+  stri &:= ch;
+end loop;
+```
+
+The `'`[`loop`]{.keywd}`'` example above reads characters from a file
+and concatenates them to a string until the character [`'\n'`]{.stri} is
+read. The [`'\n'`]{.stri} ends the loop. Hence it is not added to the
+string. An equivalent solution without the usage of the
+[loop-statement](#syntax_The_syntax_of_a_statement) would be:
+
+``` indent
+repeat
+  ch := getc(inFile);
+  if ch <> '\n' then
+    stri &:= ch;
+  end if;
+until ch = '\n';
+```
+
+The S7SSD of the
+[loop-statement](#syntax_The_syntax_of_a_statement) is:
+
+``` indent
+$ syntax expr: .loop.().until.().do.().end.loop   is -> 25;
+```
+
+The details of the S7SSD `'`[`syntax`]{.keywd}`'` definition will be
+explained later. For now we concentrate at the heart of the S7SSD, the
+expression:
+
+``` indent
+.loop.().until.().do.().end.loop
+```
+
+For the purpose of the syntax description we can just remove the dots,
+which gives:
+
+``` indent
+ loop () until () do () end loop
+```
+
+This are the keywords used in a
+[loop-statement](#syntax_The_syntax_of_a_statement). The symbol
+`()` acts as placeholder for an expression. With EBNF the
+[loop-statement](#syntax_The_syntax_of_a_statement) can be
+described as:
+
+loop_statement ::=
+:   \'[loop]{.keywd}\'\
+      [statement](#stats_ebnf_statement){.ebnf}\
+    \'[until]{.keywd}\' [expression](#expr_ebnf_expression){.ebnf}
+    \'[do]{.keywd}\'\
+      [statement](#stats_ebnf_statement){.ebnf}\
+    \'[end]{.keywd}\' \'[loop]{.keywd}\' .
+
+An EBNF description may use many nonterminal symbols such as
+`'`[`statement`](#stats_ebnf_statement){.ebnf}`'` or
+`'`[`expression`](#expr_ebnf_expression){.ebnf}`'`. S7SSD does not
+distinguish between different nonterminal symbols. Instead S7SSD only
+knows one nonterminal symbol: `()`
+
+Therefore S7SSD cannot distinguish between
+`'`[`statement`](#stats_ebnf_statement){.ebnf}`'`,
+`'`[`expression`](#expr_ebnf_expression){.ebnf}`'` or something else. At
+the syntax level any kind of expression can by substituted for a S7SSD
+nonterminal symbol `()`. With EBNF it is possible to describe
+constraints such as the type of an expression. S7SSD relies on semantic
+checks to verify such constraints. Given the S7SSD of the
+[loop-statement](#syntax_The_syntax_of_a_statement) an expression
+like
+
+``` indent
+loop
+  "X"
+until 1+2 do
+  integer
+end loop
+```
+
+would be legal as it contains the required keywords
+
+``` indent
+loop  until  do  end  loop
+```
+
+and the expressions
+
+``` indent
+"X"  1+2  integer
+```
+
+at the places of the `()` symbols. This is exactly what the syntax
+definition specifies, but it would be not be considered correct given
+the description of the
+[loop-statement](#syntax_The_syntax_of_a_statement) at the
+beginning of the chapter. To determine which types of expressions are
+allowed at the places of the `()` symbol, a semantic definition of the
+[loop-statement](#syntax_The_syntax_of_a_statement) is necessary.
+A semantic definition is just a function definition which uses the
+keywords and parameters from the syntax definition. The definition of
+the `'`[`loop`]{.keywd}`'` function (semantic definition of the
+[loop-statement](#syntax_The_syntax_of_a_statement)) is:
+
+``` indent
+const proc: loop
+              (in proc: statements1)
+            until (in func boolean: condition) do
+              (in proc: statements2)
+            end loop is func
+  local
+    var boolean: exitLoop is FALSE;
+  begin
+    repeat
+      statements1;
+      if not condition then
+        statements2;
+      else
+        exitLoop := TRUE;
+      end if;
+    until exitLoop;
+  end func;
+```
+
+This definition determines the types of the expressions accepted between
+the keywords. Besides that the semantic definition of the
+[loop-statement](#syntax_The_syntax_of_a_statement) is just a
+normal function definition. Note that the sequence of keywords and
+parameters in the header of this function definition is determined by
+the corresponding syntax definition.
+
+The parameters `'statements1'`, `'condition'` and `'statements2'` are
+call-by-name parameters. A call-by-name parameter is a function without
+parameters. Function types such as [`proc`](#types_proc){.type} or
+[`func`](#types_func){.type}` `[`boolean`](#types_boolean){.type} are
+used as type of formal call-by-name parameters. An expression with the
+correct type is allowed as actual call-by-name parameter. This actual
+parameter expression is not evaluated when the function is called.
+Instead the expression is evaluated every time the formal call-by-name
+parameter is used. This way `'statements1'`, `'condition'` and
+`'statements2'` are not executed when the `'`[`loop`]{.keywd}`'`
+function is called. Inside the body of the `'`[`loop`]{.keywd}`'`
+function the call-by-name parameters are executed at some places.
+
+The `'`[`loop`]{.keywd}`'` function uses a
+[repeat-](#stats_repeat-statement) and an
+[if-statement](#stats_if-statement) to implement the desired
+behavior. If necessary the call-by-name parameters are executed several
+times.
+
+For the `'`[`loop`]{.keywd}`'` example with the semantic errors (see
+above) we would get an error message like:
+
+``` indent
+*** chkloop.sd7(35):57: Match for {loop "X" until {1 + 2 } do integer end loop } failed
+```
+
+[]{#syntax_Priority_and_associativity}
+
+### 9.4 Priority and associativity
+
+If a syntax construct has parameters before the first symbol or after
+the last symbol the priority and the associativity of the construct are
+significant. Constructs with stronger priority bind their parameters
+earlier than constructs with weaker priority. The priority is described
+by a natural number (inclusive 0). The strongest priority is 0. Weaker
+priorities are described by larger numbers. What bind means is can be
+explained with an example:
+
+``` box
+                                      =
+    A = B + C * D                    / \
+                                    A   +
+    * priority  6                      / \
+    + priority  7                     B   *
+    = priority 12                        / \
+                                        C   D
+```
+
+The \* operator has the strongest priority (6) of all operators
+involved. Therefore the [`*`]{.op} takes its parameters first. Then the
+[`+`]{.op} (with priority 7) and at last the [`=`]{.op} (with priority
+12) follows. This leads to the following interpretation of the
+expression:
+
+``` indent
+A = (B + (C * D))
+```
+
+The associativity describes, in which order constructs with equal
+priority bind their parameters. For example
+
+``` indent
+A - B - C
+```
+
+can be interpreted in two ways:
+
+``` indent
+(A - B) - C    or   A - (B - C)
+```
+
+The first interpretation is usually preferred by mathematicians and is
+described with the associativity
+[`->`](#syntax_left_associative){.op_no_ul} . Generally four
+associativities are possible:
+
+  Associativity                                                                                                            Symbol
+  -------------------------------------------------------------------------------------------------------------------- ---------------
+  [Binding from left to right]{#syntax_left_associative}                                                                 [`->`]{.op}
+  [Binding from right to left]{#syntax_right_associative}                                                                [`<-`]{.op}
+  Neither the left nor the right parameter are allowed to have the same priority                                        [`<->`]{.op}
+  At the left side there is a binding from left to right and at the right side there is a binding from right to left    [`-><-`]{.op}
+
+The last two possibilities give no legal interpretation in the
+subtraction example. The third kind of associativity ( [`<->`]{.op} ) is
+used by the equal operator ( [`=`]{.op} ) of Pascal because there an
+expression like
+
+``` indent
+A = B = C
+```
+
+is not legal.
+
+There is a second way to describe the associativity. The associativity
+describes, if an operand must have a stronger priority than the priority
+of the operator. For example:
+
+``` box
+                             -                     7
+    A - B - C              /   \                 /   \
+                          /     \           <=7 /     \ <7
+    - priority 7 ->      /       \             /       \
+                        -         C           7         0
+                      /   \                 /   \
+                     /     \           <=7 /     \ <7
+                    /       \             /       \
+                   A         B           0         0
+```
+
+The numbers in the nodes of the right tree show the priority of each sub
+expression (sub tree). With [`<`]{.op} and [`<=`]{.op} the required
+condition for the priority of an operand is described. An interpretation
+is legal if all this conditions are met. If there are more than one
+legal interpretations or no legal interpretation the expression is
+illegal.
+
+Table for the possibilities of associativity:
+
++----------------------------------------------+---------------------------------------+
+| associativity                                | The priority of the                   |
++:============================================:+:=====================:+==============:+
+| left operand must be                         | right operand must be |               |
++----------------------------------------------+-----------------------+---------------+
+| [`->`](#syntax_left_associative){.op_no_ul}  | [`<=`]{.op}           | [`<`]{.op}    |
++----------------------------------------------+-----------------------+---------------+
+| [`<-`](#syntax_right_associative){.op_no_ul} | [`<`]{.op}            | [`<=`]{.op}   |
++----------------------------------------------+-----------------------+---------------+
+| [`<->`]{.op}                                 | [`<`]{.op}            | [`<`]{.op}    |
++----------------------------------------------+-----------------------+---------------+
+| [`-><-`]{.op}                                | [`<=`]{.op}           | [`<=`]{.op}   |
++----------------------------------------------+-----------------------+---------------+
+|                                              | than that of the operator             |
++----------------------------------------------+---------------------------------------+
+
+The parameter before the operator symbol is called left operand. The
+parameter after the last symbol of a construct is called right operand.
+In case of normal operators the last symbol of a construct and the
+operator symbol are identical. If this is not the case there is a third
+kind of operand. Between the operator symbol and the last symbol of a
+construct are the middle operands. Middle operands can have any
+priority.
+
+[]{#syntax_The_syntax_of_operators}
+
+### 9.5 The syntax of operators
+
+A syntax definition specifies the way a usage of a statement or operator
+must be written. For example a call of the [`not`]{.keywd} operator
+looks like:
+
+``` indent
+not okay
+```
+
+To describe the syntax of the [`not`]{.keywd} operator we write:
+
+``` indent
+$ syntax expr: .not.() is <- 13;
+```
+
+This means that a [`not`]{.keywd} expression is constructed with the
+symbol [`not`]{.keywd} followed by a parameter. The place of the
+parameter is marked with the () sign. The syntax description contains no
+information about the types of the parameters. At the syntax level a
+parameter may be anything. With
+[`<-`](#syntax_right_associative){.op_no_ul} the associativity of the
+[`not`]{.keywd} operator is specified as right associative. This means
+that the right operand is allowed to have the same priority as the
+operator symbol. So the expression
+
+``` indent
+not not okay
+```
+
+is legal and means
+
+``` indent
+not (not okay)
+```
+
+If the associativity of the [`not`]{.keywd} operator is specified with
+[`->`](#syntax_left_associative){.op_no_ul} instead of
+[`<-`](#syntax_right_associative){.op_no_ul} the
+`'`[`not`]{.op}` `[`not`]{.op}`'` expression above is not legal. With 13
+the priority of the whole [`not`]{.keywd} operator is determined. As
+convention priorities from 1 to 20 are used by operators and priority 25
+is used by statements. Arithmetic operators have priorities from 1 to 11
+and comparisons have priority 12.
+
+To define the [`not`]{.keywd} operator completely there must be also a
+semantic definition which is as follows:
+
+``` indent
+const func boolean: not (in boolean: aBool) is func
+  result
+    var boolean: negation is TRUE;
+  begin
+    if aBool then
+      negation := FALSE;
+    end if;
+  end func;
+```
+
+In the declaration the [`not`]{.keywd} operator is written exactly in
+the same way it is written when it is called. The syntax definition is
+used at both places: declaration and call. The syntax and semantic
+declarations define precisely how the [`not`]{.keywd} operator works.
+
+As next example we try an infix operator like the [`and`]{.keywd}
+operator. A call of the [`and`]{.keywd} operator may look like:
+
+``` indent
+okay and not error
+```
+
+To describe the syntax of the [`and`]{.keywd} operator we write:
+
+``` indent
+$ syntax expr: .().and.() is    -> 14;
+```
+
+This means that an [`and`]{.keywd} expression is constructed with the
+symbol [`and`]{.keywd} surrounded by parameters. The [`->`]{.op} defines
+the [`and`]{.keywd} operator as left associative. This means that an
+expression like
+
+``` indent
+A and B and C
+```
+
+is interpreted as
+
+``` indent
+(A and B) and C
+```
+
+With 14 the priority of the whole [`and`]{.keywd} operator is
+determined. Since priority 14 is weaker than the priority of the
+[`not`]{.keywd} operator which is 13 the example expression is evaluated
+as:
+
+``` indent
+okay and (not error)
+```
+
+Note that the expression
+
+``` indent
+okay and not error
+```
+
+makes no sense if the [`and`]{.keywd} operator has priority 12 instead
+of 14.
+
+S7SSD treats everything as operator description. Operators have priority
+and associativity. The priority and associativity determine in which
+succession S7SSD syntax rules get applied. To explain priority and
+associativity we use the basic arithmetic operations (+,-,\*,/). To
+describe them with EBNF we can write:
+
+:   
+
+    factor ::=
+    :   number \| name .
+
+    expression_5 ::=
+    :   factor \| ( \'+\' expression_5 ) \|\
+        ( \'-\' expression_5 ) .
+
+    expression_6 ::=
+    :   expression_5 \|\
+        ( expression_6 \'\*\' expression_7 ) \|\
+        ( expression_6 \'/\' expression_7 ) .
+
+    expression_7 ::=
+    :   expression_6 \|\
+        ( expression_7 \'+\' expression_6 ) \|\
+        ( expression_7 \'-\' expression_6 ) .
+
+This describes the following things:
+
+- The operators have different priorities:
+  - Plus and minus signs are executed first
+  - Multiplication and division are executed second.
+  - Addition and subtraction are executed last.
+- These priorities are exactly what we expect from an arithmetic
+  expression.
+- Additionally we see that ++2 is allowed and interpreted as +(+(2))
+  which means that the plus sign is a right-associative operator.
+- We can also see that a\*b\*c is allowed and interpreted as (a\*b)\*c
+  which means that the multiplication is a left-associative operator.
+
+All this things can also be described with S7SSD:
+
+``` indent
+$ syntax expr: . + .()      is <-  5;
+$ syntax expr: . - .()      is <-  5;
+$ syntax expr: .(). * .()   is  -> 6;
+$ syntax expr: .(). / .()   is  -> 6;
+$ syntax expr: .(). + .()   is  -> 7;
+$ syntax expr: .(). - .()   is  -> 7;
+```
+
+As we can see S7SSD is shorter as the description with EBNF. A syntax
+statement is explained as follows:
+
+- The \$ is used to introduce all hard coded statements.
+- The keyword `'`[`syntax`]{.keywd}`'` introduces a structured syntax
+  description.
+- The result of the recognized expression will have the type
+  [`expr`](#types_expr){.type}. The type [`expr`](#types_expr){.type} is
+  used between the syntax and the semantic analysis. The type
+  [`expr`](#types_expr){.type} describes expressions which are
+  syntactically analyzed but not semantically analyzed. After the
+  semantic analysis (and during the runtime) the type
+  [`expr`](#types_expr){.type} is not used.
+- The colon \':\' is used as separator between type and syntax
+  description.
+- A dot expression like `'.(). * .()'` is introduced (as can probably be
+  guessed by the name) with a dot. For the purpose of the syntax
+  description we can just remove the dots in our mind: `'() * ()'`
+- The symbol `'`[`is`]{.keywd}`'` is used in all Seed7 declarations as
+  separator between the name and the value.
+- The associativity is described with one of the symbols `->`
+  (left-associative), `<-` (right-associative), `<->` (not associative)
+  and `-><-` (both associativities). If there are no left or right
+  operands, as it is the case for the
+  [loop-statement](#syntax_The_syntax_of_a_statement), the
+  associativity is irrelevant.
+- Finally the priority of the syntax construct is defined with a integer
+  literal like `'6'`. The priority `'6'` is used for the operators
+  [`*`]{.keywd}, [`/`]{.keywd}, [`div`]{.keywd}, [`rem`]{.keywd},
+  [`mdiv`]{.keywd} and [`mod`]{.keywd}.
+
+[]{#syntax_Syntax_of_predefined_statements}
+
+### 9.6 Syntax of predefined statements
+
+Predefined statements can also be defined with S7SSD. E.g.: The
+[while-statement](#stats_while-statement). A use of the
+[while-statement](#stats_while-statement) is:
+
+``` indent
+while element_index > 0 and okay do
+  processElement;
+  write(".");
+end while;
+```
+
+To describe the syntax of the
+[while-statement](#stats_while-statement) we write:
+
+``` indent
+$ syntax expr: .while.().do.().end.while is -> 25;
+```
+
+This means that the [while-statement](#stats_while-statement) is
+an expression with the symbols `'`[`while`]{.keywd}`'`,
+`'`[`do`]{.keywd}`'`, `'`[`end`]{.keywd}`'` and `'`[`while`]{.keywd}`'`.
+With [`->`]{.op} the associativity of the
+[while-statement](#stats_while-statement) is specified as left
+associative. The associativity has no meaning for the
+[while-statement](#stats_while-statement) since there is no
+parameter before the first symbol or after the last symbol. The priority
+of the whole [while-statement](#stats_while-statement) is 25.
+
+The semantic definition of the
+[while-statement](#stats_while-statement) is as follows:
+
+``` indent
+const proc: while (in func boolean: condition) do
+    (in proc: statement) end while is func
+  begin
+    if condition then
+      statement;
+      while condition do
+        statement;
+      end while;
+    end if;
+  end func;
+```
+
+The syntax definition is used for the declaration and for the call. This
+declaration defines precisely how the
+[while-statement](#stats_while-statement) works. It is based on
+the [if-statement](#stats_if-statement) and uses recursion to
+emulate the repetition of the loop body. Another example for a syntax
+description is the [repeat-statement](#stats_repeat-statement)
+
+``` indent
+repeat
+  processElement;
+  write(".");
+until element_index = 0 or not okay;
+```
+
+which has the following syntax description:
+
+``` indent
+$ syntax expr: .repeat.().until.() is -> 25;
+```
+
+This means that the [repeat-statement](#stats_repeat-statement)
+is an expression with the symbols `'`[`repeat`]{.keywd}`'` and
+`'`[`until`]{.keywd}`'` and a parameter between `'`[`repeat`]{.keywd}`'`
+and `'`[`until`]{.keywd}`'` and after `'`[`until`]{.keywd}`'`. With 25
+the priority of the whole
+[repeat-statement](#stats_repeat-statement) is determined. With
+[`->`]{.op} the associativity of the
+[repeat-statement](#stats_repeat-statement) is specified as left
+associative. This allows priorities from 0 to 24 for the parameter after
+`'`[`until`]{.keywd}`'`. Since statements have priority 25 it is not
+possible to write a statement direct behind `'`[`until`]{.keywd}`'`.
+
+A simple [if-statement](#stats_if-statement), without
+`'`[`elsif`]{.keywd}`'` part, is the next example. A usage of this
+[if-statement](#stats_if-statement) might be:
+
+``` indent
+if okay then
+  writeln("okay");
+else
+  writeln("not okay");
+end if;
+```
+
+As syntax description we use
+
+``` indent
+$ syntax expr: .if.().then.().end.if is            -> 25;
+$ syntax expr: .if.().then.().else.().end.if is    -> 25;
+```
+
+Note that this description allows
+[if-statements](#stats_if-statement) with and without
+`'`[`else`]{.keywd}`'` parts. As semantic description we use
+
+``` indent
+const proc: if (in boolean: condition) then
+              (in proc: statement)
+            end if is func
+  begin
+    case condition of
+      when {TRUE}: statement;
+    end case;
+  end func;
+
+const proc: if (in boolean: condition) then
+              (in proc: statement1)
+            else
+              (in proc: statement2)
+            end if is func
+  begin
+    case condition of
+      when {TRUE}:  statement1;
+      when {FALSE}: statement2;
+    end case;
+  end func;
+```
+
+The two forms of the [if-statement](#stats_if-statement) are
+based on the [case-statement](#stats_case-statement). A more
+complex [if-statement](#stats_if-statement) with
+`'`[`elsif`]{.keywd}`'` parts can be:
+
+``` indent
+if number < 0 then
+  write("less");
+elsif number = 0 then
+  write("equal");
+else
+  write("greater");
+end if;
+```
+
+How to define the syntax and the semantic for this statement is
+described in the next chapter.
+
+[]{#syntax_Advanced_syntax_definitions}
+
+### 9.7 Advanced syntax definitions
+
+If we want to use some special syntax which should be only allowed at
+some place we do the following:
+
+- Define the special syntax with S7SSD in a way that does not contradict
+  with the rest of the syntax definitions.
+- Use semantic definitions to make sure that this syntax construct can
+  only be used at the place desired.
+
+The EBNF of the [if-statement](#stats_if-statement) with
+`'`[`elsif`]{.keywd}`'` parts is:
+
+if_statement ::=
+:   \'[if]{.keywd}\' [expression](#expr_ebnf_expression){.ebnf}
+    \'[then]{.keywd}\'\
+      [statement](#stats_ebnf_statement){.ebnf}\
+    { \'[elsif]{.keywd}\' [expression](#expr_ebnf_expression){.ebnf}
+    \'[then]{.keywd}\'\
+      [statement](#stats_ebnf_statement){.ebnf} }\
+    \[ \'[else]{.keywd}\'\
+      [statement](#stats_ebnf_statement){.ebnf} \]\
+    \'[end]{.keywd}\' \'[if]{.keywd}\' .
+
+The S7SSD of this [if-statement](#stats_if-statement) is:
+
+``` indent
+$ syntax expr : .if.().then.().end.if           is -> 25;
+$ syntax expr : .if.().then.().().end.if        is -> 25;
+
+$ syntax expr : .elsif.().then.()               is <- 60;
+$ syntax expr : .elsif.().then.().()            is <- 60;
+$ syntax expr : .else.()                        is <- 60;
+```
+
+Instead of one rule (as EBNF does) the rule is broken into several S7SSD
+rules. This is necessary because S7SSD does not support the \[ \] and {
+} notations. They are not supported for good reasons: They complicate
+the parameter lists and they are also not so easy to implement. On the
+other hand, the BNF like rules of S7SSD lead to semantic constructs
+which are easy to parse and easy to compile. The broken down S7SSD rules
+of the [if-statement](#stats_if-statement) corresponds to the
+following EBNF description:
+
+if_statement ::=
+:   \'[if]{.keywd}\' [expression](#expr_ebnf_expression){.ebnf}
+    \'[then]{.keywd}\'\
+      [statement](#stats_ebnf_statement){.ebnf}\
+    \'[end]{.keywd}\' \'[if]{.keywd}\' .
+
+\
+\
+if_statement ::=
+:   \'[if]{.keywd}\' [expression](#expr_ebnf_expression){.ebnf}
+    \'[then]{.keywd}\'\
+      [statement](#stats_ebnf_statement){.ebnf}\
+      elseif_or_else_part\
+    \'[end]{.keywd}\' \'[if]{.keywd}\' .
+
+\
+\
+elseif_or_else_part ::=
+:   \'[elsif]{.keywd}\' [expression](#expr_ebnf_expression){.ebnf}
+    \'[then]{.keywd}\'\
+      [statement](#stats_ebnf_statement){.ebnf} .
+
+\
+\
+elseif_or_else_part ::=
+:   \'[elsif]{.keywd}\' [expression](#expr_ebnf_expression){.ebnf}
+    \'[then]{.keywd}\'\
+      [statement](#stats_ebnf_statement){.ebnf}\
+      elseif_or_else_part .
+
+\
+\
+elseif_or_else_part ::=
+:   \'[else]{.keywd}\'\
+      [statement](#stats_ebnf_statement){.ebnf} .
+
+Since S7SSD uses only one nonterminal symbol `'()'` it is the job of the
+semantic level to make sure that only the right nonterminal symbol can
+be used. This is done by introducing the type [`ELSIF_PROC`]{.type}
+(which corresponds to the nonterminal symbol `'elseif_or_else_part'` of
+the EBNF) and the type [`ELSIF_RESULT`]{.type} (which is the result of
+the [`ELSIF_PROC`]{.type}).
+
+Normally a syntax declaration can be used in many semantic declarations.
+E.g.: The syntax of the `'+'` operator is defined once and the semantic
+of the `'+'` operator is defined for the types
+[`integer`](#types_integer){.type},
+[`bigInteger`](#types_bigInteger){.type},
+[`float`](#types_float){.type}, [`complex`](#types_integer){.type}, \...
+This possibility is not needed for the
+[if-statement](#stats_if-statement). For each of the five S7SSD
+syntax rules of the [if-statement](#stats_if-statement) just one
+corresponding semantic declaration is done:
+
+``` indent
+# Semantic for the syntax: .if.().then.().end.if
+const proc: if (in boolean: condition) then
+              (in proc: statements)
+            end if                                    is func
+  begin
+    case condition of
+      when {TRUE}: statements;
+    end case;
+  end func;
+
+# Semantic for the syntax: .if.().then.().().end.if
+const proc: if (in boolean: condition) then
+              (in proc: statements)
+            (in ELSIF_PROC: elsifPart)
+            end if                                    is func
+  begin
+    case condition of
+      when {TRUE}: statements;
+      when {FALSE}: elsifPart;
+    end case;
+  end func;
+
+# Semantic for the syntax: .elsif.().then.()
+const ELSIF_PROC: elsif (in boolean: condition) then
+                    (in proc: statements)             is func
+  begin
+    case condition of
+      when {TRUE}: statements;
+    end case;
+  end func;
+
+# Semantic for the syntax: .elsif.().then.().()
+const ELSIF_PROC: elsif (in boolean: condition) then
+                    (in proc: statements)
+                  (in ELSIF_PROC: elsifPart)          is func
+  begin
+    case condition of
+      when {TRUE}: statements;
+      when {FALSE}: elsifPart;
+    end case;
+  end func;
+
+# Semantic for the syntax: .else.()
+const ELSIF_PROC: else
+                    (ref void: voidValue)        is ELSIF_EMPTY;
+```
+
+Since no other functions of type `'`[`ELSIF_PROC`]{.type}`'` are defined
+only legal [if-statements](#stats_if-statement) can be written.
+
+[]{#syntax_Comparison_of_EBNF_and_S7SSD}
+
+### 9.8 Comparison of EBNF and S7SSD
+
+In the S7SSD of the
+[loop-statement](#syntax_The_syntax_of_a_statement)
+
+``` indent
+$ syntax expr: .loop.().until.().do.().end.loop is -> 25;
+```
+
+are no nonterminal expressions `'()'` before the first keyword or after
+the last keyword. Therefore the associativity does not play any role.
+The nonterminal expressions `'()'` of the
+[loop-statement](#syntax_The_syntax_of_a_statement) are all
+surrounded by keywords and therefore they can have any priority. As
+priority of the `'`[`loop`]{.keywd}`'` 25 is chosen just because most
+other statements have also priority 25. The assignments (:= +:= \*:=
+\...) have priority 20 and all operators used in arithmetic, boolean and
+string expressions have priorities less than 20. BTW: The semicolon
+operator (;) is defined with the priority 50. Operators with a priority
+of 0 get their parameters before operators with priority 1 and so on.
+
+The corresponding EBNF description of the
+[loop-statement](#syntax_The_syntax_of_a_statement) would be:
+
+expression_25 ::=
+:   \'[loop]{.keywd}\'\
+      expression_127\
+    \'[until]{.keywd}\' expression_127 \'[do]{.keywd}\'\
+      expression_127\
+    \'[end]{.keywd}\' \'[loop]{.keywd}\' .
+
+We must keep in mind that alternative rules for expression_25 are also
+possible and that for every priority level a rule like
+
+expression_127 ::=
+:   expression_126 .
+
+is defined. Additionally the following rules are defined:
+
+expression_0 ::=
+:   token \| parentheses_expression \|\
+    call_expression \| dot_expression .
+
+\
+\
+token ::=
+:   identifier \| literal .
+
+\
+\
+parentheses_expression ::=
+:   \'(\' expression_127 \')\' .
+
+\
+\
+call_expression ::=
+:   expression_127 \[ \'(\'\
+    \[ expression_127 { \',\' expression_127 } \]\
+    \')\' \] .
+
+\
+\
+dot_expression ::=
+:   \[ \'.\' \] call_expression { \'.\' call_expression } .
+
+The EBNF description can become long if many priority levels exist, as
+it is the case in Seed7.
+
+There are some things which are out of the scope of S7SSD. The syntax of
+[comments](#tokens_Comments), tokens
+([identifiers](#tokens_Identifiers) and
+[literals](#tokens_Literals)) and expressions (parentheses,
+function calls and dot expressions) is hard coded. The hard coded
+constructs are described in [chapter 10
+(Tokens)](#tokens_file_start) and [chapter 11
+(Expressions)](#expr_file_start).
+
+For the reasons mentioned above it is not possible to transform every
+EBNF syntax description into S7SSD. Transforming S7SSD descriptions to
+EBNF is always possible.
+
+The advantage of S7SSD lies in its simplicity and that a fast automated
+syntax recognition algorithm can be easily implemented. It is exactly
+the combination of hard coded syntax recognition and flexible syntax
+rules that make it successful.
+
+[]{#tokens_file_start}
+
+[]{#tokens_TOKENS}
+
+## 10. TOKENS
+
+A program consists of a sequence of tokens which may be delimited by
+white space. There are two types of tokens:
+
+[identifier](#tokens_ebnf_identifier){.ebnf}s
+
+[literal](#tokens_ebnf_literal){.ebnf}s
+
+Syntax:
+
+:   
+
+    program ::=
+    :   { [white_space](#tokens_ebnf_white_space){.ebnf} \|
+        [token](#tokens_ebnf_token){.ebnf} } .
+
+    \
+    \
+    [token]{#tokens_ebnf_token} ::=
+    :   [identifier](#tokens_ebnf_identifier){.ebnf} \|
+        [literal](#tokens_ebnf_literal){.ebnf} .
+
+Characters that introduce neither white_space nor a token trigger a
+[parsing error](#errors_Parsing_errors):
+
+``` indent
+*** tst255.sd7(1):3: Illegal character in text "\8;" (U+0008)
+(* Illegal character *) \b
+------------------------^
+```
+
+[]{#tokens_White_space}
+
+### 10.1 White space
+
+There are three types of white space
+
+[space](#tokens_ebnf_space){.ebnf}s
+
+[comment](#tokens_ebnf_comment){.ebnf}s
+
+[line comment](#tokens_ebnf_line_comment){.ebnf}s
+
+White space always terminates a preceding
+[identifier](#tokens_Identifiers),
+[integer](#tokens_Integer_literals),
+[bigInteger](#tokens_BigInteger_literals) or
+[float](#tokens_Float_literals) literal. Some white space is
+required to separate otherwise adjacent tokens.
+
+Syntax:
+
+:   
+
+    [white_space]{#tokens_ebnf_white_space} ::=
+    :   ( [space](#tokens_ebnf_space){.ebnf} \|
+        [comment](#tokens_ebnf_comment){.ebnf} \|
+        [line_comment](#tokens_ebnf_line_comment){.ebnf} )\
+        { [space](#tokens_ebnf_space){.ebnf} \|
+        [comment](#tokens_ebnf_comment){.ebnf} \|
+        [line_comment](#tokens_ebnf_line_comment){.ebnf} } .
+
+[]{#tokens_Spaces}
+
+#### 10.1.1 Spaces
+
+There are several types of space characters which are ignored except as
+they separate tokens:
+
+blanks, horizontal tabs, carriage returns and new lines.
+
+Syntax:
+
+:   
+
+    [space]{#tokens_ebnf_space} ::=
+    :   \' \' \| TAB \| CR \| NL .
+
+[]{#tokens_Comments}
+
+#### 10.1.2 Comments
+
+Comments are introduced with the characters [(\* and are terminated with
+the characters \*)]{.comment} . For example:
+
+``` indent
+(* This is a comment *)
+```
+
+Comments can span over multiple lines and comment nesting is allowed:
+
+``` indent
+(* This is a comment that continues
+   in the next line (* and has a nesting comment inside *) *)
+```
+
+This allows commenting out a larger section of the program, which itself
+contains comments. Comments cannot occur within
+[string](#tokens_String_literals) and [character
+literals](#tokens_Character_literals).
+
+Syntax:
+
+:   
+
+    [comment]{#tokens_ebnf_comment} ::=
+    :   \'(\*\' { [any_character](#tokens_ebnf_any_character){.ebnf} }
+        \'\*)\' .
+
+    \
+    \
+    [any_character]{#tokens_ebnf_any_character} ::=
+    :   [simple_literal_character](#tokens_ebnf_simple_literal_character){.ebnf}
+        \| [apostrophe](#tokens_ebnf_apostrophe){.ebnf} \| \'\"\' \|
+        \'\\\' \|\
+        [control_character](#tokens_ebnf_control_character){.ebnf} .
+
+    \
+    \
+    [control_character]{#tokens_ebnf_control_character} ::=
+    :   NUL \| SOH \| STX \| ETX \| EOT \| ENQ \| ACK \| BEL \|\
+        BS  \| TAB \| LF  \| VT  \| FF  \| CR  \| SO  \| SI  \|\
+        DLE \| DC1 \| DC2 \| DC3 \| DC4 \| NAK \| SYN \| ETB \|\
+        CAN \| EM  \| SUB \| ESC \| FS  \| GS  \| RS  \| US  \|\
+        DEL .
+
+If a comment is not closed at the end of the main file a [parsing
+error](#errors_Parsing_errors) is triggered:
+
+``` indent
+*** tst256.sd7(2):4: Unclosed comment
+(* Unclosed comment
+```
+
+[]{#tokens_Line_comments}
+
+#### 10.1.3 Line comments
+
+Line comments are introduced with the character [\# and are terminated
+with the end of the line.]{.comment}\
+For example:
+
+``` indent
+# This is a comment
+```
+
+Comments cannot occur within [string](#tokens_String_literals),
+[character](#tokens_Character_literals) and numerical literals.
+
+Syntax:
+
+:   
+
+    [line_comment]{#tokens_ebnf_line_comment} ::=
+    :   \'#\' { [any_character](#tokens_ebnf_any_character){.ebnf} } NL
+        .
+
+[]{#tokens_Identifiers}
+
+### 10.2 Identifiers
+
+There are three types of identifiers
+
+[name identifier](#tokens_ebnf_name_identifier){.ebnf}s
+
+[special identifier](#tokens_ebnf_special_identifier){.ebnf}s
+
+[bracket](#tokens_ebnf_bracket){.ebnf}
+
+Identifiers can be written adjacent except that between two name
+identifiers and between two special identifiers white space must be used
+to separate them.
+
+Syntax:
+
+:   
+
+    [identifier]{#tokens_ebnf_identifier} ::=
+    :   [name_identifier](#tokens_ebnf_name_identifier){.ebnf} \|
+        [special_identifier](#tokens_ebnf_special_identifier){.ebnf} \|
+        [bracket](#tokens_ebnf_bracket){.ebnf} .
+
+[]{#tokens_Name_identifiers}
+
+#### 10.2.1 Name identifiers
+
+A name identifier is a sequence of letters, digits and underscores ( \_
+). The first character must be a letter or an underscore. Examples of
+name identifiers are:
+
+``` indent
+NUMBER  integer  const  if  UPPER_LIMIT  LowerLimit  x5  _end
+```
+
+Upper and lower case letters are different. Name identifiers may have
+any length and all characters are significant. The name identifier is
+terminated with a character which is neither a letter (or \_ ) nor a
+digit. The terminating character is not part of the name identifier.
+
+Syntax:
+
+:   
+
+    [name_identifier]{#tokens_ebnf_name_identifier} ::=
+    :   ( [letter](#tokens_ebnf_letter){.ebnf} \|
+        [underscore](#tokens_ebnf_underscore){.ebnf} ) {
+        [letter](#tokens_ebnf_letter){.ebnf} \|
+        [digit](#tokens_ebnf_digit){.ebnf} \|
+        [underscore](#tokens_ebnf_underscore){.ebnf} } .
+
+    \
+    \
+    [letter]{#tokens_ebnf_letter} ::=
+    :   [upper_case_letter](#tokens_ebnf_upper_case_letter){.ebnf} \|
+        [lower_case_letter](#tokens_ebnf_lower_case_letter){.ebnf} .
+
+    \
+    \
+    [upper_case_letter]{#tokens_ebnf_upper_case_letter} ::=
+    :   \'A\' \| \'B\' \| \'C\' \| \'D\' \| \'E\' \| \'F\' \| \'G\' \|
+        \'H\' \| \'I\' \| \'J\' \|\
+        \'K\' \| \'L\' \| \'M\' \| \'N\' \| \'O\' \| \'P\' \| \'Q\' \|
+        \'R\' \| \'S\' \| \'T\' \|\
+        \'U\' \| \'V\' \| \'W\' \| \'X\' \| \'Y\' \| \'Z\' .
+
+    \
+    \
+    [lower_case_letter]{#tokens_ebnf_lower_case_letter} ::=
+    :   \'a\' \| \'b\' \| \'c\' \| \'d\' \| \'e\' \| \'f\' \| \'g\' \|
+        \'h\' \| \'i\' \| \'j\' \|\
+        \'k\' \| \'l\' \| \'m\' \| \'n\' \| \'o\' \| \'p\' \| \'q\' \|
+        \'r\' \| \'s\' \| \'t\' \|\
+        \'u\' \| \'v\' \| \'w\' \| \'x\' \| \'y\' \| \'z\' .
+
+    \
+    \
+    [digit]{#tokens_ebnf_digit} ::=
+    :   \'0\' \| \'1\' \| \'2\' \| \'3\' \| \'4\' \| \'5\' \| \'6\' \|
+        \'7\' \| \'8\' \| \'9\' .
+
+    \
+    \
+    [underscore]{#tokens_ebnf_underscore} ::=
+    :   \'\_\' .
+
+[]{#tokens_Special_identifiers}
+
+#### 10.2.2 Special identifiers
+
+A special identifier is a sequence of special characters. Examples of
+special identifiers are:
+
+``` indent
++  :=  <=  *  ->  ,  &
+```
+
+Here is a list of all special characters:
+
+``` indent
+! $ % & * + , - . / : ; < = > ? @ \ ^ ` | ~
+```
+
+Special identifiers may have any length and all characters are
+significant. The special identifier is terminated with a character which
+is not a special character. The terminating character is not part of the
+special identifier.
+
+Syntax:
+
+:   
+
+    [special_identifier]{#tokens_ebnf_special_identifier} ::=
+    :   [special_character](#tokens_ebnf_special_character){.ebnf} {
+        [special_character](#tokens_ebnf_special_character){.ebnf} } .
+
+    \
+    \
+    [special_character]{#tokens_ebnf_special_character} ::=
+    :   \'!\' \| \'\$\' \| \'%\' \| \'&\' \| \'\*\' \| \'+\' \| \',\' \|
+        \'-\' \| \'.\' \| \'/\' \|\
+        \':\' \| \';\' \| \'\<\' \| \'=\' \| \'\>\' \| \'?\' \| \'@\' \|
+        \'\\\' \| \'\^\' \| \'\`\' \|\
+        \'\|\' \| \'\~\' .
+
+[]{#tokens_Brackets}
+
+#### 10.2.3 Brackets
+
+A bracket is one of the following characters:
+
+``` indent
+( ) [ ] { }
+```
+
+Note that a bracket consists of only one character. Except for the
+character sequence (\* (which introduces a comment) a bracket is
+terminated with the next character.
+
+Syntax:
+
+:   
+
+    [bracket]{#tokens_ebnf_bracket} ::=
+    :   \'(\' \| \')\' \| \'\[\' \| \'\]\' \| \'{\' \| \'}\' .
+
+[]{#tokens_Literals}
+
+### 10.3 Literals
+
+There are several types of literals
+
+[integer literal](#tokens_ebnf_integer_literal){.ebnf}s
+
+[biginteger literal](#tokens_ebnf_biginteger_literal){.ebnf}s
+
+[float literal](#tokens_ebnf_float_literal){.ebnf}s
+
+[character literal](#tokens_ebnf_character_literal){.ebnf}s
+
+[string literal](#tokens_ebnf_string_literal){.ebnf}s
+
+Syntax:
+
+:   
+
+    [literal]{#tokens_ebnf_literal} ::=
+    :   [integer_literal](#tokens_ebnf_integer_literal){.ebnf} \|
+        [biginteger_literal](#tokens_ebnf_biginteger_literal){.ebnf} \|
+        [float_literal](#tokens_ebnf_float_literal){.ebnf} \|\
+        [character_literal](#tokens_ebnf_character_literal){.ebnf} \|
+        [string_literal](#tokens_ebnf_string_literal){.ebnf} .
+
+[]{#tokens_Integer_literals}
+
+#### 10.3.1 Integer literals
+
+An integer literal is a sequence of digits which is taken to be decimal.
+The sequence of digits may be followed by the letter E or e an
+optional + sign and a decimal exponent. []{#tokens_based_integer}Based
+numbers can be specified when the sequence of digits is followed by the
+\# character and a sequence of extended digits. The decimal number in
+front of the \# character specifies the base of the number which follows
+the \# character. As base a number between 2 and 36 is allowed. As
+extended digits the letters A or a can be used for 10, B or b can be
+used for 11 and so on to Z or z which can be used as 35.
+
+Syntax:
+
+:   
+
+    [integer_literal]{#tokens_ebnf_integer_literal} ::=
+    :   [decimal_integer](#tokens_ebnf_decimal_integer){.ebnf} \[
+        [exponent](#tokens_ebnf_exponent){.ebnf} \|
+        [based_integer](#tokens_ebnf_based_integer){.ebnf} \] .
+
+    \
+    \
+    [decimal_integer]{#tokens_ebnf_decimal_integer} ::=
+    :   [digit](#tokens_ebnf_digit){.ebnf} {
+        [digit](#tokens_ebnf_digit){.ebnf} } .
+
+    \
+    \
+    [exponent]{#tokens_ebnf_exponent} ::=
+    :   ( \'E\' \| \'e\' ) \[ \'+\' \]
+        [decimal_integer](#tokens_ebnf_decimal_integer){.ebnf} .
+
+    \
+    \
+    [based_integer]{#tokens_ebnf_based_integer} ::=
+    :   \'#\' [extended_digit](#tokens_ebnf_extended_digit){.ebnf} {
+        [extended_digit](#tokens_ebnf_extended_digit){.ebnf} } .
+
+    \
+    \
+    [extended_digit]{#tokens_ebnf_extended_digit} ::=
+    :   [letter](#tokens_ebnf_letter){.ebnf} \|
+        [digit](#tokens_ebnf_digit){.ebnf} .
+
+If an integer literal cannot be read a [parsing
+error](#errors_Parsing_errors) is triggered:
+
+``` indent
+*** tst256.sd7(2):14: Integer "12345678901234567890" too big
+const integer: tooBig is 12345678901234567890;
+---------------------------------------------^
+*** tst256.sd7(3):15: Negative exponent in integer literal
+const integer: negativeExponent is 1e-1;
+-------------------------------------^
+*** tst256.sd7(4):16: Digit expected found ";"
+const integer: digitExpected is 1e;
+----------------------------------^
+*** tst256.sd7(5):17 Integer "1E20" too big
+const integer: integerWithExponentTooBig is 1e20;
+------------------------------------------------^
+*** tst256.sd7(6):18: Integer base "37" not between 2 and 36
+const integer: baseNotBetween2To36 is 37#0;
+----------------------------------------^
+*** tst256.sd7(7):19: Extended digit expected found ";"
+const integer: extendedDigitExpected is 16#;
+-------------------------------------------^
+*** tst256.sd7(8):20: Illegal digit "G" in based integer "16#G"
+const integer: illegalBasedDigit is 16#G;
+----------------------------------------^
+*** tst256.sd7(9):21: Based integer "16#ffffffffffffffff" too big
+const integer: basedIntegerTooBig is 16#ffffffffffffffff;
+--------------------------------------------------------^
+```
+
+[]{#tokens_BigInteger_literals}
+
+#### 10.3.2 BigInteger literals
+
+A bigInteger literal is a sequence of digits followed by the underline
+character. The sequence of digits is taken to be decimal. Based numbers
+can be specified when a sequence of digits is followed by the \#
+character, a sequence of extended digits and the underline character.
+The decimal number in front of the \# character specifies the base of
+the number which follows the \# character. As base a number between 2
+and 36 is allowed. As extended digits the letters A or a can be used for
+10, B or b can be used for 11 and so on to Z or z which can be used as
+35.
+
+Syntax:
+
+:   
+
+    [biginteger_literal]{#tokens_ebnf_biginteger_literal} ::=
+    :   [decimal_integer](#tokens_ebnf_decimal_integer){.ebnf} \[
+        [based_integer](#tokens_ebnf_based_integer){.ebnf} \] \'\_\' .
+
+[]{#tokens_Float_literals}
+
+#### 10.3.3 Float literals
+
+A float literal consists of two decimal integer literals separated by a
+decimal point. The basic float literal may be followed by the letter E
+or e an optional + or - sign and a decimal exponent.
+
+Syntax:
+
+:   
+
+    [float_literal]{#tokens_ebnf_float_literal} ::=
+    :   [decimal_integer](#tokens_ebnf_decimal_integer){.ebnf} \'.\'
+        [decimal_integer](#tokens_ebnf_decimal_integer){.ebnf} \[
+        [float_exponent](#tokens_ebnf_float_exponent){.ebnf} \] .
+
+    \
+    \
+    [float_exponent]{#tokens_ebnf_float_exponent} ::=
+    :   ( \'E\' \| \'e\' ) \[ \'+\' \| \'-\' \]
+        [decimal_integer](#tokens_ebnf_decimal_integer){.ebnf} .
+
+[]{#tokens_String_literals}
+
+#### 10.3.4 String literals
+
+A string literal is a sequence of UTF-8 encoded Unicode characters
+surrounded by double quotes. For example:
+
+``` indent
+""   " "   "\""   "'"   "\'"   "String"   "ch=\" "   "\n\n"
+"Euro: \8364;"   "\16#ff;"
+```
+
+In order to represent non-printable characters and certain printable
+characters the following escape sequences may be used.
+
+  ----------------- -- --------- -- ---------------
+  audible alert        BEL          [`\a`]{.stri}
+  backspace            BS           [`\b`]{.stri}
+  escape               ESC          [`\e`]{.stri}
+  formfeed             FF           [`\f`]{.stri}
+  newline              NL (LF)      [`\n`]{.stri}
+  carriage return      CR           [`\r`]{.stri}
+  horizontal tab       HT           [`\t`]{.stri}
+  vertical tab         VT           [`\v`]{.stri}
+  backslash            (\\)         [`\\`]{.stri}
+  apostrophe           (\')         [`\'`]{.stri}
+  double quote         (\")         [`\"`]{.stri}
+  control-A                         [`\A`]{.stri}
+  \...                              
+  control-Z                         [`\Z`]{.stri}
+  ----------------- -- --------- -- ---------------
+
+Additionally there are the following possibilities:
+
+- [Two backslashes with a sequence of blanks, horizontal tabs, carriage
+  returns, new lines and]{#tokens_string_continuation} [line
+  comments](#tokens_Line_comments) between them are completely
+  ignored. The ignored characters are not part of the string. This can
+  be used to continue a string in the following line. Note that in this
+  case the leading spaces in the new line are not part of the string. It
+  is an [error](#errors_WRONG_STRING_CONTINUATION) if a backslash
+  is followed by a sequence of white-space and there is not a second
+  backslash which ends the sequence.
+- A backslash followed by an integer literal and a semicolon is
+  interpreted as character with the specified ordinal number. Note that
+  the integer literal is interpreted decimal unless it is written as
+  [based integer](#tokens_based_integer).
+
+Strings are implemented with length field and UTF-32 encoding. Strings
+are not [`'\0;'`]{.stri} terminated and therefore can also contain
+binary data.
+
+Syntax:
+
+:   
+
+    [string_literal]{#tokens_ebnf_string_literal} ::=
+    :   \'\"\' {
+        [string_literal_element](#tokens_ebnf_string_literal_element){.ebnf}
+        } \'\"\' .
+
+    \
+    \
+    [string_literal_element]{#tokens_ebnf_string_literal_element} ::=
+    :   [simple_literal_character](#tokens_ebnf_simple_literal_character){.ebnf}
+        \| [escape_sequence](#tokens_ebnf_escape_sequence){.ebnf} \|
+        [apostrophe](#tokens_ebnf_apostrophe){.ebnf} .
+
+    \
+    \
+    [simple_literal_character]{#tokens_ebnf_simple_literal_character} ::=
+    :   [letter](#tokens_ebnf_letter){.ebnf} \|
+        [digit](#tokens_ebnf_digit){.ebnf} \|
+        [bracket](#tokens_ebnf_bracket){.ebnf} \|
+        [special_literal_character](#tokens_ebnf_special_literal_character){.ebnf}
+        \|\
+        utf8_encoded_character .
+
+    \
+    \
+    [special_literal_character]{#tokens_ebnf_special_literal_character} ::=
+    :   \' \' \| \'!\' \| \'#\' \| \'\$\' \| \'%\' \| \'&\' \| \'\*\' \|
+        \'+\' \| \',\' \| \'-\' \|\
+        \'.\' \| \'/\' \| \':\' \| \';\' \| \'\<\' \| \'=\' \| \'\>\' \|
+        \'?\' \| \'@\' \| \'\^\' \|\
+        \'\_\' \| \'\`\' \| \'\|\' \| \'\~\' .
+
+    \
+    \
+    [escape_sequence]{#tokens_ebnf_escape_sequence} ::=
+    :   \'\\a\' \| \'\\b\' \| \'\\e\' \| \'\\f\' \| \'\\n\' \| \'\\r\'
+        \| \'\\t\' \| \'\\v\' \|\
+        \'\\\\\' \| \'\\\'\'\' \| \'\\\"\' \| \'\\\'
+        [upper_case_letter](#tokens_ebnf_upper_case_letter){.ebnf} \|\
+        \'\\\' { [space](#tokens_ebnf_space){.ebnf} \|
+        [line_comment](#tokens_ebnf_line_comment){.ebnf} } \'\\\' \|
+        \'\\\' [integer_literal](#tokens_ebnf_integer_literal){.ebnf}
+        \';\' .
+
+    \
+    \
+    [apostrophe]{#tokens_ebnf_apostrophe} ::=
+    :   \'\'\' .
+
+If a string literal cannot be read a [parsing
+error](#errors_Parsing_errors) is triggered:
+
+``` indent
+*** tst256.sd7(2):24: Use \" instead of "" to represent " in a string
+const string: wrongQuotationRepresentation is "double "" quotations";
+-------------------------------------------------------^
+*** tst256.sd7(3):25: Illegal string escape "\z"
+const string: illegalStringEscape is "\z";
+---------------------------------------^
+*** tst256.sd7(4):26: Numerical escape sequences should end with ";" not "x"
+const string: wrongNumericEscape is "\1234xyz";
+------------------------------------------^
+*** tst256.sd7(5):27: The numerical escape sequence "\1234678123467892346;" is too big
+const string: numericEscapeTooBig is "asd\1234678123467892346;dfdfg";
+-------------------------------------------------------------^
+*** tst256.sd7(6):28: String continuations should end with "\" not "c"
+const string: backslashExpected is "string \      continuation";
+--------------------------------------------------^
+*** tst256.sd7(7):29: String literal exceeds source line
+const string: exceedsSourceLine is "abc
+---------------------------------------^
+*** tst256.sd7(8):31: Integer literal expected found "1.5"
+const string: integerExpected is "\1.5;";
+--------------------------------------^
+```
+
+[]{#tokens_Character_literals}
+
+#### 10.3.5 Character literals
+
+A character literal is an UTF-8 encoded Unicode character enclosed in
+apostrophes. For example:
+
+``` indent
+'a'   ' '   '\n'   '!'   '\\'   '2'   '"'   '\"'   '\''   '\8;'
+```
+
+To represent control characters and certain other characters in
+character literals the same escape sequences as for [string
+literals](#tokens_String_literals) may be used.
+
+Syntax:
+
+:   
+
+    [character_literal]{#tokens_ebnf_character_literal} ::=
+    :   [apostrophe](#tokens_ebnf_apostrophe){.ebnf}
+        [char_literal_element](#tokens_ebnf_char_literal_element){.ebnf}
+        [apostrophe](#tokens_ebnf_apostrophe){.ebnf} .
+
+    \
+    \
+    [char_literal_element]{#tokens_ebnf_char_literal_element} ::=
+    :   [simple_literal_character](#tokens_ebnf_simple_literal_character){.ebnf}
+        \| [escape_sequence](#tokens_ebnf_escape_sequence){.ebnf} \|
+        [apostrophe](#tokens_ebnf_apostrophe){.ebnf} \| \'\"\' .
+
+If a char literal cannot be read a [parsing
+error](#errors_Parsing_errors) is triggered:
+
+``` indent
+*** tst256.sd7(2):22: "'" expected found ";"
+const char: apostropheExpected is 'x;
+------------------------------------^
+*** tst256.sd7(3):23: Character literal exceeds source line
+const char: charExceeds is '
+----------------------------^
+```
+
+[]{#tokens_Unicode_characters}
+
+### 10.4 Unicode characters
+
+Seed7 source code may contain UTF-8 encoded Unicode characters. Unicode
+is allowed in [string](#tokens_String_literals) and
+[char](#tokens_Character_literals) literals. The
+[pragma](#decls_Pragmas) [`names`]{.keywd} can be used to allow
+Unicode in [name identifiers](#tokens_Name_identifiers):
+
+``` indent
+$ names unicode;
+```
+
+[Comments](#tokens_Comments) and [line
+comments](#tokens_Line_comments) may also contain Unicode, but
+they are not checked for valid UTF-8. This way code parts with invalid
+UTF-8 can be commented out. Invalid UTF-8 encodings in
+[identifiers](#tokens_Identifiers) and
+[literals](#tokens_Literals) trigger a [parsing
+error](#errors_Parsing_errors):
+
+``` indent
+*** err.sd7(90):61: Overlong UTF-8 encoding used for character "\0;" (U+0000)
+ignore("\0;");
+-----------^
+*** err.sd7(91):62: UTF-16 surrogate character found in UTF-8 encoding "\55296;" (U+d800)
+ignore("\55296;");
+---------------^
+*** err.sd7(92):63: Non Unicode character found "\1114112;" (U+110000)
+"\1114112;");
+----------^
+*** err.sd7(93):64: UTF-8 continuation byte expected found "A"
+ignore("í\128;A");
+--------------^
+*** err.sd7(94):65: Unexpected UTF-8 continuation byte found "\128;" (U+0080)
+ignore("\128;");
+--------^
+*** err.sd7(95):66: Solitary UTF-8 start byte found "\237;" (U+00ed)
+ignore("íA");
+---------^
+*** bom16(1):67: UTF-16 byte order mark found "\65279;" (U+feff)
+þÿ
+-^
+```
+
+[]{#expr_file_start}
+
+[]{#expr_EXPRESSIONS}
+
+## 11. EXPRESSIONS
+
+There are two types of expressions. On one side there so called simple
+expressions, which are constructed using fixed predefined syntax rules.
+On the other side there are expressions which are constructed according
+to syntax rules. Syntax rules are defined with syntax declarations. How
+syntax declarations work is described in [Chapter 3.2 (Syntax
+declarations)](#decls_Syntax_declarations) and [chapter 9
+(Structured syntax definition)](#syntax_file_start). The syntax
+declarations support the extensible syntax of Seed7. A simplified
+description of user defined expressions, which does not take priority
+levels into account, is:
+
+[expression]{#expr_ebnf_expression} ::=
+:   [prefix_expression](#expr_ebnf_prefix_expression){.ebnf} \|
+    [infix_expression](#expr_infix_expression){.ebnf} \|
+    [simple_expression](#expr_ebnf_simple_expression){.ebnf} .
+
+\
+\
+[prefix_expression]{#expr_ebnf_prefix_expression} ::=
+:   [identifier](#tokens_ebnf_identifier){.ebnf} {
+    [identifier](#tokens_ebnf_identifier){.ebnf} \|
+    [expression](#expr_ebnf_expression){.ebnf} } .
+
+\
+\
+[infix_expression]{#expr_infix_expression} ::=
+:   [expression](#expr_ebnf_expression){.ebnf}
+    [identifier](#tokens_ebnf_identifier){.ebnf} {
+    [identifier](#tokens_ebnf_identifier){.ebnf} \|
+    [expression](#expr_ebnf_expression){.ebnf} } .
+
+\
+\
+[simple_expression]{#expr_ebnf_simple_expression} ::=
+:   [dot_expression](#expr_ebnf_dot_expression){.ebnf} \|
+    [call_expression](#expr_ebnf_call_expression){.ebnf} .
+
+The chapters below describe the predefined syntax rules of simple
+expressions.
+
+[]{#expr_EXPRESSION_Parentheses}
+
+### 11.1 Parentheses
+
+Parentheses can be used to override any precedence rules of predefined
+and user defined syntax constructs. For example
+
+``` indent
+2 * (3 + 4)
+```
+
+specifies that the + operator gets his parameters first.
+
+Syntax:
+
+:   
+
+    [parentheses_expression]{#expr_ebnf_parentheses_expression} ::=
+    :   \'(\' [expression](#expr_ebnf_expression){.ebnf} \')\' .
+
+[]{#expr_Call_expressions}
+
+### 11.2 Call expressions
+
+Call expressions can also be used to form a list. For example
+
+``` indent
+writeln("hello world")
+```
+
+forms a list expression with the elements
+
+[`"hello world"`]{.stri}
+
+`writeln`
+
+The type of this list is specified with the
+[system-declaration](#decls_System_declarations) [\"system
+expr\"]{.stri}, which is defined in the include file
+[\"syntax.s7i\"]{.stri} included from [\"seed7_05.s7i\"]{.stri} as
+
+``` indent
+$ system "expr" is expr;
+```
+
+A call expression with two parameters as
+
+``` indent
+pos("Scotty! Beam me up.", "am")
+```
+
+forms a list expression with the elements
+
+[`"Scotty! Beam me up."`]{.stri}
+
+[`"am"`]{.stri}
+
+`pos`
+
+Syntax:
+
+:   
+
+    [call_expression]{#expr_ebnf_call_expression} ::=
+    :   [primary_expression](#expr_ebnf_primary_expression){.ebnf} \[
+        \'(\' [parameter_list](#expr_ebnf_parameter_list){.ebnf} \')\'
+        \] .
+
+    \
+    \
+    [primary_expression]{#expr_ebnf_primary_expression} ::=
+    :   [parentheses_expression](#expr_ebnf_parentheses_expression){.ebnf}
+        \| [token](#tokens_ebnf_token){.ebnf} .
+
+    \
+    \
+    [parameter_list]{#expr_ebnf_parameter_list} ::=
+    :   [expression](#expr_ebnf_expression){.ebnf} { \',\'
+        [expression](#expr_ebnf_expression){.ebnf} } .
+
+[]{#expr_Dot_expressions}
+
+### 11.3 Dot expressions
+
+Dot expressions start with a dot and have dots as separator between the
+elements of the list. For example
+
+``` indent
+.not.TRUE
+```
+
+and
+
+``` indent
+.OKAY.and.GO_ON
+```
+
+form list expressions with the elements
+
+[`not`]{.op}
+
+`TRUE`
+
+and
+
+`OKAY`
+
+[`and`]{.op}
+
+`GO_ON`
+
+The type of this list is specified with the
+[system-declaration](#decls_System_declarations) [\"system
+expr\"]{.stri}, which is defined in the include file
+[\"syntax.s7i\"]{.stri} included from [\"seed7_05.s7i\"]{.stri} as
+
+``` indent
+$ system "expr" is expr;
+```
+
+Dot expressions override the priority of the elements. Dot expressions
+are used in
+[syntax-declarations](#syntax_The_Seed7_Structured_Syntax_Description).
+
+Syntax:
+
+:   
+
+    [dot_expression]{#expr_ebnf_dot_expression} ::=
+    :   \'.\' [dot_subexpression](#expr_ebnf_dot_subexpression){.ebnf} {
+        \'.\' [dot_subexpression](#expr_ebnf_dot_subexpression){.ebnf} }
+        .
+
+    \
+    \
+    [dot_subexpression]{#expr_ebnf_dot_subexpression} ::=
+    :   [empty_parentheses](#expr_ebnf_empty_parentheses){.ebnf} \|
+        [parentheses_expression](#expr_ebnf_parentheses_expression){.ebnf}
+        \| [call_expression](#expr_ebnf_call_expression){.ebnf} .
+
+    \
+    \
+    [empty_parentheses]{#expr_ebnf_empty_parentheses} ::=
+    :   \'(\' \')\' .
+
+[]{#os_file_start}
+
+[]{#os_OPERATING_SYSTEM_ACCESS}
+
+## 12. OPERATING SYSTEM ACCESS
+
+Seed7 provides a portable access to the services provided by an
+operating system. This interface is oriented towards Posix and Unix. The
+functions in this chapter are defined in the libraries
+[\"[osfiles.s7i]{.lib}\"]{.stri}, [\"[dir.s7i]{.lib}\"]{.stri} and
+[\"[environment.s7i]{.lib}\"]{.stri}.
+
+[]{#os_Standard_path_representation}
+
+### 12.1 Standard path representation
+
+A path specifies the location of a file in a file system. Operating
+systems have different concepts how a path should look like. Seed7
+compensates this differences with a standard path representation.
+Standard paths are used by all Seed7 functions dealing with paths. The
+standard path representation uses [`string`](#types_string){.type}`s`
+with the following properties to describe paths:
+
+- The slash ([`'/'`]{.stri}) is used as path delimiter.
+- Drive letters are not allowed, but there is a solution to replace
+  them.
+- Except for the path [`"/"`]{.stri} a standard path is not allowed to
+  end with a slash.
+
+When a function like [`open`]{.func} is called with a path that is not
+[`"/"`]{.stri}, but ends with a slash, the exception
+[`RANGE_ERROR`](#errors_RANGE_ERROR){.exception} is raised. Under
+Windows a standard path like [`"/c"`]{.stri} is mapped to the drive
+[`"C:"`]{.stri}. Reading the directory [`"/"`]{.stri} under Windows
+returns a list of available drives. A path with a backslash or with a
+drive letter may raise the exception
+[`RANGE_ERROR`](#errors_RANGE_ERROR){.exception}, when a function like
+[`open`]{.func} is called.
+
+An absolute path specifies an unique location in the file system.
+Absolute paths always start with a slash. A relative path specifies a
+location relative to the current working directory of the program.
+Although standard paths are defined in a portable way, an absolute path
+will usually not be portable.
+
+[]{#os_File_properties}
+
+### 12.2 File properties
+
+Files have properties like type, size, mode (permissions), several
+timestamps, owner and group. Properties like type and size cannot be
+changed directly. Other properties may be changed. For these properties
+getters and setters are provided.
+
+  -----------------------------------------------------------------------------------------------------------------------------------------------
+  Property          Getter                                    Setter                                    Comment
+  ----------------- ----------------------------------------- ----------------------------------------- -----------------------------------------
+  file type         [`fileType`](#os_fileType){.func}\                                                  For possible values see function
+                    [`fileTypeSL`](#os_fileType){.func}                                                 [`fileType`](#os_fileType){.func}\
+                                                                                                        Among others
+                                                                                                        [`FILE_REGULAR`](#os_FILE_REGULAR) and
+                                                                                                        [`FILE_DIR`](#os_FILE_DIR) are file types
+
+  size              [`fileSize`](#os_fileSize){.func}\                                                  The size of a file in bytes
+                    [`bigFileSize`](#os_fileSize){.func}                                                
+
+  mode              [`getFileMode`](#os_getFileMode){.func}   [`setFileMode`](#os_setFileMode){.func}   Permissions. For possible values see
+                                                                                                        function
+                                                                                                        [`getFileMode`](#os_getFileMode){.func}
+
+  aTime             [`getATime`](#os_getATime){.func}         [`setATime`](#os_setATime){.func}         Time of last access
+
+  cTime             [`getCTime`](#os_getCTime){.func}                                                   Time of last status change
+
+  mTime             [`getMTime`](#os_getMTime){.func}         [`setMTime`](#os_setMTime){.func}         Time of last modification of content
+
+  owner             [`getOwner`](#os_getOwner){.func}         [`setOwner`](#os_setOwner){.func}         The user name of the file owner
+
+  group             [`getGroup`](#os_getGroup){.func}         [`setGroup`](#os_setGroup){.func}         The name of the group the file belongs to
+  -----------------------------------------------------------------------------------------------------------------------------------------------
+
+[]{#os_fileType}
+
+#### 12.2.1 fileType
+
+The type of a file can determined with [`fileType`]{.func} or
+[`fileTypeSL`]{.func}:
+
+``` indent
+const func integer: fileType (in string: filePath) is ...
+const func integer: fileTypeSL (in string: filePath) is ...
+```
+
+The function [`fileType`]{.func} does follow symbolic links. The
+function [`fileTypeSL`]{.func} does not follow symbolic links. A return
+value of [`FILE_ABSENT`](#os_FILE_ABSENT){.var} does not imply that a
+file with this name can be created, since missing directories and
+invalid file names will also cause
+[`FILE_ABSENT`](#os_FILE_ABSENT){.var}.
+
+<div>
+
+Returns:
+
+[FILE_ABSENT]{#os_FILE_ABSENT}
+:   A component of path does not exist.
+
+[FILE_UNKNOWN]{#os_FILE_UNKNOWN}
+:   The file exists but has an unknown type.
+
+[FILE_REGULAR]{#os_FILE_REGULAR}
+:   The file is a regular file.
+
+[FILE_DIR]{#os_FILE_DIR}
+:   The file is a directory.
+
+[FILE_CHAR]{#os_FILE_CHAR}
+:   The file is a character special file.
+
+[FILE_BLOCK]{#os_FILE_BLOCK}
+:   The file is a block special file.
+
+[FILE_FIFO]{#os_FILE_FIFO}
+:   The file is a pipe or FIFO special file.
+
+[FILE_SYMLINK]{#os_FILE_SYMLINK}
+:   The file is a symbolic link.
+
+[FILE_SOCKET]{#os_FILE_SOCKET}
+:   The file is a socket.
+
+</div>
+
+<div>
+
+Possible exceptions:
+
+[MEMORY_ERROR](#errors_MEMORY_ERROR){.exception}
+:   Not enough memory to convert `'filePath'` to the system path type.
+
+[RANGE_ERROR](#errors_RANGE_ERROR){.exception}
+:   `'filePath'` does not use the [standard path
+    representation](#os_Standard_path_representation).
+
+[FILE_ERROR](#errors_FILE_ERROR){.exception}
+:   The system function returns an error other than ENOENT, ENOTDIR,
+    ENAMETOOLONG or EACCES.
+
+</div>
+
+[]{#os_fileSize}
+
+#### 12.2.2 fileSize
+
+The size of a file can be determined with [`fileSize`]{.func} and
+[`bigFileSize`]{.func}:
+
+``` indent
+const func integer: fileSize (in string: filePath) is ...
+const func bigInteger: bigFileSize (in string: filePath) is ...
+```
+
+The functions follow symbolic links.
+
+<div>
+
+Returns:
+
+For directories a size of 0 is returned. For other file types the
+operating system functions `'stat()'` and `'seek()'` are used to
+determine the size of a file. The functions [`fileSize`]{.func} and
+[`bigFileSize`]{.func} succeed when at least one strategy to determine
+the file size succeeds.
+
+</div>
+
+<div>
+
+Possible exceptions:
+
+[MEMORY_ERROR](#errors_MEMORY_ERROR){.exception}
+:   Not enough memory to convert `'filePath'` to the system path type.
+
+[RANGE_ERROR](#errors_RANGE_ERROR){.exception}
+:   `'filePath'` does not use the [standard path
+    representation](#os_Standard_path_representation) or it
+    cannot be converted to the system path type.
+
+[RANGE_ERROR](#errors_RANGE_ERROR){.exception}
+:   The file size is not representable as
+    [`integer`](#types_integer){.type} (this exception is not raised by
+    [`bigFileSize`]{.func}).
+
+[FILE_ERROR](#errors_FILE_ERROR){.exception}
+:   It was not possible to determine the file size.
+
+</div>
+
+[]{#os_getFileMode}
+
+#### 12.2.3 getFileMode
+
+The file mode (permissions) of a file can determined with
+[`getFileMode`]{.func}:
+
+``` indent
+const func fileMode: getFileMode (in string: filePath) is ...
+```
+
+The function follows symbolic links. The type [`fileMode`]{.type} is
+defined as
+`'`[`set`](#types_set){.type}` `[`of`]{.type}` `[`filePermission`]{.type}`'`.
+
+<div>
+
+Returns:
+
+The [`fileMode`]{.type} which is defined as
+[`set`](#types_set){.type}` `[`of`]{.type}` `[`filePermission`]{.type}.
+
+</div>
+
+<div>
+
+The literal values of [`filePermission`]{.type} are:
+
+EXEC_OTHER
+:   others have execute permission
+
+WRITE_OTHER
+:   others have write permission
+
+READ_OTHER
+:   others have read permission
+
+EXEC_GROUP
+:   group has execute permission
+
+WRITE_GROUP
+:   group has write permission
+
+READ_GROUP
+:   group has read permission
+
+EXEC_USER
+:   owner has execute permission
+
+WRITE_USER
+:   owner has write permission
+
+READ_USER
+:   owner has read permission
+
+</div>
+
+<div>
+
+Possible exceptions:
+
+[MEMORY_ERROR](#errors_MEMORY_ERROR){.exception}
+:   Not enough memory to convert `'filePath'` to the system path type.
+
+[RANGE_ERROR](#errors_RANGE_ERROR){.exception}
+:   `'filePath'` does not use the [standard path
+    representation](#os_Standard_path_representation), or it
+    cannot be converted to the system path type.
+
+[FILE_ERROR](#errors_FILE_ERROR){.exception}
+:   The file described with `'filePath'` does not exist, or a system
+    function returns an error.
+
+</div>
+
+[]{#os_setFileMode}
+
+#### 12.2.4 setFileMode
+
+The permissions of a file can be changed with [`setFileMode`]{.func}:
+
+``` indent
+const proc: setFileMode (in string: filePath, in fileMode: newFileMode) is ...
+```
+
+The function follows symbolic links. The type [`fileMode`]{.type} is
+defined as
+`'`[`set`](#types_set){.type}` `[`of`]{.type}` `[`filePermission`]{.type}`'`.
+
+<div>
+
+The literal values of [`filePermission`]{.type} are:
+
+EXEC_OTHER
+:   others have execute permission
+
+WRITE_OTHER
+:   others have write permission
+
+READ_OTHER
+:   others have read permission
+
+EXEC_GROUP
+:   group has execute permission
+
+WRITE_GROUP
+:   group has write permission
+
+READ_GROUP
+:   group has read permission
+
+EXEC_USER
+:   owner has execute permission
+
+WRITE_USER
+:   owner has write permission
+
+READ_USER
+:   owner has read permission
+
+</div>
+
+<div>
+
+Possible exceptions:
+
+[MEMORY_ERROR](#errors_MEMORY_ERROR){.exception}
+:   Not enough memory to convert `'filePath'` to the system path type.
+
+[RANGE_ERROR](#errors_RANGE_ERROR){.exception}
+:   `'filePath'` does not use the [standard path
+    representation](#os_Standard_path_representation) or it
+    cannot be converted to the system path type.
+
+[FILE_ERROR](#errors_FILE_ERROR){.exception}
+:   The file described with `'filePath'` does not exist, or a system
+    function returns an error.
+
+</div>
+
+[]{#os_getATime}
+
+#### 12.2.5 getATime
+
+The access time of a file is returned by the function
+[`getATime`]{.func}:
+
+``` indent
+const func time: getATime (in string: filePath) is ...
+```
+
+The function follows symbolic links.
+
+<div>
+
+Possible exceptions:
+
+[MEMORY_ERROR](#errors_MEMORY_ERROR){.exception}
+:   Not enough memory to convert `'filePath'` to the system path type.
+
+[RANGE_ERROR](#errors_RANGE_ERROR){.exception}
+:   `'filePath'` does not use the [standard path
+    representation](#os_Standard_path_representation) or it
+    cannot be converted to the system path type.
+
+[FILE_ERROR](#errors_FILE_ERROR){.exception}
+:   The file described with `'filePath'` does not exist, or a system
+    function returns an error.
+
+</div>
+
+[]{#os_setATime}
+
+#### 12.2.6 setATime
+
+The function [`setATime`]{.func} sets the access time of a file:
+
+``` indent
+const proc: setATime (in string: filePath, in time: aTime) is ...
+```
+
+The function follows symbolic links.
+
+<div>
+
+Possible exceptions:
+
+[MEMORY_ERROR](#errors_MEMORY_ERROR){.exception}
+:   Not enough memory to convert `'filePath'` to the system path type.
+
+[RANGE_ERROR](#errors_RANGE_ERROR){.exception}
+:   `'filePath'` does not use the [standard path
+    representation](#os_Standard_path_representation) or it
+    cannot be converted to the system path type, or `'aTime'` is
+    invalid, or `'aTime'` cannot be converted to the system file time.
+
+[FILE_ERROR](#errors_FILE_ERROR){.exception}
+:   The file described with `'filePath'` does not exist, or a system
+    function returns an error.
+
+</div>
+
+[]{#os_getCTime}
+
+#### 12.2.7 getCTime
+
+The status change time of a file is returned by the function
+[`getCTime`]{.func}:
+
+``` indent
+const func time: getCTime (in string: filePath) is ...
+```
+
+The function follows symbolic links.
+
+<div>
+
+Possible exceptions:
+
+[MEMORY_ERROR](#errors_MEMORY_ERROR){.exception}
+:   Not enough memory to convert `'filePath'` to the system path type.
+
+[RANGE_ERROR](#errors_RANGE_ERROR){.exception}
+:   `'filePath'` does not use the [standard path
+    representation](#os_Standard_path_representation) or it
+    cannot be converted to the system path type.
+
+[FILE_ERROR](#errors_FILE_ERROR){.exception}
+:   The file described with `'filePath'` does not exist, or a system
+    function returns an error.
+
+</div>
+
+[]{#os_getMTime}
+
+#### 12.2.8 getMTime
+
+The modification time of a file is returned by the function
+[`getMTime`]{.func}:
+
+``` indent
+const func time: getMTime (in string: filePath) is ...
+```
+
+The function follows symbolic links.
+
+<div>
+
+Possible exceptions:
+
+[MEMORY_ERROR](#errors_MEMORY_ERROR){.exception}
+:   Not enough memory to convert `'filePath'` to the system path type.
+
+[RANGE_ERROR](#errors_RANGE_ERROR){.exception}
+:   `'filePath'` does not use the [standard path
+    representation](#os_Standard_path_representation) or it
+    cannot be converted to the system path type.
+
+[FILE_ERROR](#errors_FILE_ERROR){.exception}
+:   The file described with `'filePath'` does not exist, or a system
+    function returns an error.
+
+</div>
+
+[]{#os_setMTime}
+
+#### 12.2.9 setMTime
+
+The function [`setMTime`]{.func} sets the modification time of a file:
+
+``` indent
+const proc: setMTime (in string: filePath, in time: aTime) is ...
+```
+
+The function follows symbolic links.
+
+<div>
+
+Possible exceptions:
+
+[MEMORY_ERROR](#errors_MEMORY_ERROR){.exception}
+:   Not enough memory to convert `'filePath'` to the system path type.
+
+[RANGE_ERROR](#errors_RANGE_ERROR){.exception}
+:   `'filePath'` does not use the [standard path
+    representation](#os_Standard_path_representation) or it
+    cannot be converted to the system path type or `'aTime'` is invalid,
+    or `'aTime'` cannot be converted to the system file time.
+
+[FILE_ERROR](#errors_FILE_ERROR){.exception}
+:   The file described with `'filePath'` does not exist, or a system
+    function returns an error.
+
+</div>
+
+[]{#os_getOwner}
+
+#### 12.2.10 getOwner
+
+The owner of a file is returned by the function [`getOwner`]{.func}:
+
+``` indent
+const func string: getOwner (in string: filePath) is ...
+```
+
+The function follows symbolic links.
+
+<div>
+
+Possible exceptions:
+
+[MEMORY_ERROR](#errors_MEMORY_ERROR){.exception}
+:   Not enough memory to convert `'filePath'` to the system path type.
+
+[RANGE_ERROR](#errors_RANGE_ERROR){.exception}
+:   `'filePath'` does not use the [standard path
+    representation](#os_Standard_path_representation) or it
+    cannot be converted to the system path type.
+
+[FILE_ERROR](#errors_FILE_ERROR){.exception}
+:   The file described with `'filePath'` does not exist, or a system
+    function returns an error.
+
+</div>
+
+[]{#os_setOwner}
+
+#### 12.2.11 setOwner
+
+The function [`setOwner`]{.func} sets the owner of a file:
+
+``` indent
+const proc: setOwner (in string: filePath, in string: owner) is ...
+```
+
+The function follows symbolic links.
+
+<div>
+
+Possible exceptions:
+
+[MEMORY_ERROR](#errors_MEMORY_ERROR){.exception}
+:   Not enough memory to convert `'filePath'` to the system path type.
+
+[RANGE_ERROR](#errors_RANGE_ERROR){.exception}
+:   `'filePath'` does not use the [standard path
+    representation](#os_Standard_path_representation) or it
+    cannot be converted to the system path type or `'aTime'` is invalid,
+    or `'aTime'` cannot be converted to the system file time.
+
+[FILE_ERROR](#errors_FILE_ERROR){.exception}
+:   The file described with `'filePath'` does not exist, or a system
+    function returns an error.
+
+</div>
+
+[]{#os_getGroup}
+
+#### 12.2.12 getGroup
+
+The group of a file is returned by the function [`getGroup`]{.func}:
+
+``` indent
+const func string: getGroup (in string: filePath) is ...
+```
+
+The function follows symbolic links.
+
+<div>
+
+Possible exceptions:
+
+[MEMORY_ERROR](#errors_MEMORY_ERROR){.exception}
+:   Not enough memory to convert `'filePath'` to the system path type.
+
+[RANGE_ERROR](#errors_RANGE_ERROR){.exception}
+:   `'filePath'` does not use the [standard path
+    representation](#os_Standard_path_representation) or it
+    cannot be converted to the system path type.
+
+[FILE_ERROR](#errors_FILE_ERROR){.exception}
+:   The file described with `'filePath'` does not exist, or a system
+    function returns an error.
+
+</div>
+
+[]{#os_setGroup}
+
+#### 12.2.13 setGroup
+
+The function [`setGroup`]{.func} sets the group of a file:
+
+``` indent
+const proc: setGroup (in string: filePath, in string: group) is ...
+```
+
+The function follows symbolic links.
+
+<div>
+
+Possible exceptions:
+
+[MEMORY_ERROR](#errors_MEMORY_ERROR){.exception}
+:   Not enough memory to convert `'filePath'` to the system path type.
+
+[RANGE_ERROR](#errors_RANGE_ERROR){.exception}
+:   `'filePath'` does not use the [standard path
+    representation](#os_Standard_path_representation) or it
+    cannot be converted to the system path type or `'aTime'` is invalid,
+    or `'aTime'` cannot be converted to the system file time.
+
+[FILE_ERROR](#errors_FILE_ERROR){.exception}
+:   The file described with `'filePath'` does not exist, or a system
+    function returns an error.
+
+</div>
+
+[]{#os_Symbolic_links}
+
+### 12.3 Symbolic links
+
+Symbolic links (symlinks) are files pointing to a target file or
+directory. They specify a relative or absolute path to the target
+(destination). Relative symbolic links are relative to their location in
+the file system and not relative to the current working directory. The
+target of a symbolic link may not exist. In this case it is a dangling
+symbolic link. Many file functions follow symbolic links. Following
+means: For a symbolic link the function follows the symbolic link chain
+until the path is not a symbolic link again. Afterwards the function is
+applied to this final path.
+
++---------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------+
+| Functions that follow symlinks                                                                          | Functions that work only on symlinks and don\'t follow them                                                                         |
++=================================================+=======================================================+==================================================================+==================================================================+
+| A dangling symlink raises [`FILE_ERROR`](#errors_FILE_ERROR){.exception}.                               | [`FILE_ERROR`](#errors_FILE_ERROR){.exception} is raised if \'path\' is not a symlink.                                              |
++-------------------------------------------------+-------------------------------------------------------+------------------------------------------------------------------+------------------------------------------------------------------+
+| [`fileSize`](#os_fileSize){.func}`(path)`       |                                                       |                                                                  |                                                                  |
++-------------------------------------------------+-------------------------------------------------------+------------------------------------------------------------------+------------------------------------------------------------------+
+| [`bigFileSize`](#os_fileSize){.func}`(path)`    |                                                       |                                                                  |                                                                  |
++-------------------------------------------------+-------------------------------------------------------+------------------------------------------------------------------+------------------------------------------------------------------+
+| [`getFileMode`](#os_getFileMode){.func}`(path)` | [`setFileMode`](#os_setFileMode){.func}`(path, mode)` | [`getFileMode`](#os_getFileMode_SYMLINK){.func}`(path, SYMLINK)` |                                                                  |
++-------------------------------------------------+-------------------------------------------------------+------------------------------------------------------------------+------------------------------------------------------------------+
+| [`getATime`](#os_getATime){.func}`(path)`       | [`setATime`](#os_setATime){.func}`(path, time)`       | [`getATime`](#os_getATime_SYMLINK){.func}`(path, SYMLINK)`       |                                                                  |
++-------------------------------------------------+-------------------------------------------------------+------------------------------------------------------------------+------------------------------------------------------------------+
+| [`getCTime`](#os_getCTime){.func}`(path)`       |                                                       |                                                                  |                                                                  |
++-------------------------------------------------+-------------------------------------------------------+------------------------------------------------------------------+------------------------------------------------------------------+
+| [`getMTime`](#os_getMTime){.func}`(path)`       | [`setMTime`](#os_setMTime){.func}`(path, time)`       | [`getMTime`](#os_getMTime_SYMLINK){.func}`(path, SYMLINK)`       | [`setMTime`](#os_setMTime_SYMLINK){.func}`(path, time, SYMLINK)` |
++-------------------------------------------------+-------------------------------------------------------+------------------------------------------------------------------+------------------------------------------------------------------+
+| [`getOwner`](#os_getOwner){.func}`(path)`       | [`setOwner`](#os_setOwner){.func}`(path, name)`       | [`getOwner`](#os_getOwner_SYMLINK){.func}`(path, SYMLINK)`       | [`setOwner`](#os_setOwner_SYMLINK){.func}`(path, name, SYMLINK)` |
++-------------------------------------------------+-------------------------------------------------------+------------------------------------------------------------------+------------------------------------------------------------------+
+| [`getGroup`](#os_getGroup){.func}`(path)`       | [`setGroup`](#os_setGroup){.func}`(path, name)`       | [`getGroup`](#os_getGroup_SYMLINK){.func}`(path, SYMLINK)`       | [`setGroup`](#os_setGroup_SYMLINK){.func}`(path, name, SYMLINK)` |
++-------------------------------------------------+-------------------------------------------------------+------------------------------------------------------------------+------------------------------------------------------------------+
+|                                                 |                                                       | [`readLink`](#os_readLink){.func}`(path)`                        |                                                                  |
++-------------------------------------------------+-------------------------------------------------------+------------------------------------------------------------------+------------------------------------------------------------------+
+|                                                 |                                                       | [`readLink`](#os_readLink){.func}`(path, ABSOLUTE)`              |                                                                  |
++-------------------------------------------------+-------------------------------------------------------+------------------------------------------------------------------+------------------------------------------------------------------+
+
+Functions that do not follow symbolic links:
+
+  Function                                              Comment
+  ----------------------------------------------------- ---------------------------------------
+  [`removeFile`](#os_removeFile){.func}`(path)`         Can be used to remove a symbolic link
+  [`removeTree`](#os_removeTree){.func}`(path)`         Can be used to remove a symbolic link
+  [`cloneFile`](#os_cloneFile){.func}`(source, dest)`   Can be used to copy a symbolic link
+  [`moveFile`](#os_moveFile){.func}`(source, dest)`     Can be used to rename a symbolic link
+
+[]{#os_readLink}
+
+#### 12.3.1 readLink
+
+The functions [`readLink`]{.func}`(path)` and
+[`readLink`]{.func}`(path, ABSOLUTE)` read the destination of a symbolic
+link:
+
+``` indent
+const func string: readLink (in string: filePath) is ...
+const func string: readLink (in string: filePath, ABSOLUTE) is ...
+```
+
+The function [`readLink`]{.func}`(path)` reads the link destination
+stored in the file system. Symbolic links can be relative or absolute.
+Relative symbolic links are relative to their location in the file
+system and not relative to the current working directory. The function
+[`readLink`]{.func}`(path, ABSOLUTE)` always returns an absolute path.
+It leaves absolute symbolic links unchanged and converts relative
+symbolic links to an absolute path.
+
+<div>
+
+Returns:
+
+The symbolic link referred by `'filePath'`.
+
+</div>
+
+<div>
+
+Possible exceptions:
+
+[MEMORY_ERROR](#errors_MEMORY_ERROR){.exception}
+:   Not enough memory to convert `'filePath'` to the system path type or
+    not enough memory to represent the result
+    [`string`](#types_string){.type}.
+
+[RANGE_ERROR](#errors_RANGE_ERROR){.exception}
+:   `'filePath'` does not use the [standard path
+    representation](#os_Standard_path_representation) or it
+    cannot be converted to the system path type.
+
+[FILE_ERROR](#errors_FILE_ERROR){.exception}
+:   The file described with `'filePath'` does not exist, or it is not a
+    symbolic link, or a system function returns an error.
+
+</div>
+
+[]{#os_finalPath}
+
+#### 12.3.2 finalPath
+
+The function [`finalPath`]{.func} returns the final path that functions
+like [`getMTime`]{.func} and [`open`]{.func} would use. If `filePath` is
+not a symbolic link it is returned. For a symbolic link the function
+follows the symbolic link chain until the path is not a symbolic link
+again. The final path may refer to a non-existing file.
+
+``` indent
+const func string: finalPath (in string: filePath) is ...
+```
+
+<div>
+
+Parameters:
+
+filePath
+:   Relative or absolute path.
+
+</div>
+
+<div>
+
+Returns:
+
+The final path after possibly following a symbolic link chain.
+
+</div>
+
+<div>
+
+Possible exceptions:
+
+[MEMORY_ERROR](#errors_MEMORY_ERROR){.exception}
+:   Not enough memory to convert `'filePath'` to the system path type or
+    not enough memory to represent the result
+    [`string`](#types_string){.type}.
+
+[RANGE_ERROR](#errors_RANGE_ERROR){.exception}
+:   `'filePath'` does not use the [standard path
+    representation](#os_Standard_path_representation) or it
+    cannot be converted to the system path type.
+
+[FILE_ERROR](#errors_FILE_ERROR){.exception}
+:   The file described with `'filePath'` does not exist or a system
+    function returns an error.
+
+</div>
+
+[]{#os_makeLink}
+
+#### 12.3.3 makeLink
+
+The function [`makeLink`]{.func} creates a symbolic link at
+`symlinkPath` that contains the string referred by `targetPath`. The
+function does not follow symbolic links.
+
+``` indent
+const proc: makeLink (in string: symlinkPath, in string: targetPath) is ...
+```
+
+<div>
+
+Parameters:
+
+symlinkPath
+:   Name of the symbolic link to be created.
+
+targetPath
+:   String to be contained in the symbolic link.
+
+</div>
+
+<div>
+
+Possible exceptions:
+
+[MEMORY_ERROR](#errors_MEMORY_ERROR){.exception}
+:   Not enough memory to convert `'symlinkPath'` or `'targetPath'` to
+    the system path type.
+
+[RANGE_ERROR](#errors_RANGE_ERROR){.exception}
+:   `'symlinkPath'` or `'targetPath'` does not use the [standard path
+    representation](#os_Standard_path_representation), or one of
+    them cannot be converted to the system path type.
+
+[FILE_ERROR](#errors_FILE_ERROR){.exception}
+:   The file \'\'dirPath\'\' already exists, or a system function
+    returns an error.
+
+</div>
+
+[]{#os_getFileMode_SYMLINK}
+
+#### 12.3.4 Symbolic link getFileMode
+
+The file mode (permissions) of a symbolic link can determined with
+[`getFileMode`]{.func}`(path, SYMLINK)`:
+
+``` indent
+const func fileMode: getFileMode (in string: filePath, SYMLINK) is ...
+```
+
+The function only works for symbolic links and does not follow the
+symbolic link.
+
+<div>
+
+Possible exceptions:
+
+[MEMORY_ERROR](#errors_MEMORY_ERROR){.exception}
+:   Not enough memory to convert `'filePath'` to the system path type.
+
+[RANGE_ERROR](#errors_RANGE_ERROR){.exception}
+:   `'filePath'` does not use the [standard path
+    representation](#os_Standard_path_representation), or it
+    cannot be converted to the system path type.
+
+[FILE_ERROR](#errors_FILE_ERROR){.exception}
+:   The file described with `'filePath'` does not exist, or it is not a
+    symbolic link, or a system function returns an error.
+
+</div>
+
+[]{#os_getATime_SYMLINK}
+
+#### 12.3.5 Symbolic link getATime
+
+The access time of a symbolic link is returned by the function
+[`getATime`]{.func}`(path, SYMLINK)`:
+
+``` indent
+const func time: getATime (in string: filePath, SYMLINK) is ...
+```
+
+The function only works for symbolic links and does not follow the
+symbolic link.
+
+<div>
+
+Possible exceptions:
+
+[MEMORY_ERROR](#errors_MEMORY_ERROR){.exception}
+:   Not enough memory to convert `'filePath'` to the system path type.
+
+[RANGE_ERROR](#errors_RANGE_ERROR){.exception}
+:   `'filePath'` does not use the [standard path
+    representation](#os_Standard_path_representation), or it
+    cannot be converted to the system path type.
+
+[FILE_ERROR](#errors_FILE_ERROR){.exception}
+:   The file described with `'filePath'` does not exist, or it is not a
+    symbolic link, or a system function returns an error.
+
+</div>
+
+[]{#os_getMTime_SYMLINK}
+
+#### 12.3.6 Symbolic link getMTime
+
+The modification time of a symbolic link is returned by the function
+[`getMTime`]{.func}`(path, SYMLINK)`:
+
+``` indent
+const func time: getMTime (in string: filePath, SYMLINK) is ...
+```
+
+The function only works for symbolic links and does not follow the
+symbolic link.
+
+<div>
+
+Possible exceptions:
+
+[MEMORY_ERROR](#errors_MEMORY_ERROR){.exception}
+:   Not enough memory to convert `'filePath'` to the system path type.
+
+[RANGE_ERROR](#errors_RANGE_ERROR){.exception}
+:   `'filePath'` does not use the [standard path
+    representation](#os_Standard_path_representation), or it
+    cannot be converted to the system path type.
+
+[FILE_ERROR](#errors_FILE_ERROR){.exception}
+:   The file described with `'filePath'` does not exist, or it is not a
+    symbolic link, or a system function returns an error.
+
+</div>
+
+[]{#os_setMTime_SYMLINK}
+
+#### 12.3.7 Symbolic link setMTime
+
+The function [`setMTime`]{.func}`(path, time, SYMLINK)` sets the
+modification time of a symbolic link:
+
+``` indent
+const proc: setMTime (in string: filePath, in time: aTime, SYMLINK) is ...
+```
+
+The function only works for symbolic links and does not follow the
+symbolic link.
+
+<div>
+
+Possible exceptions:
+
+[MEMORY_ERROR](#errors_MEMORY_ERROR){.exception}
+:   Not enough memory to convert `'filePath'` to the system path type.
+
+[RANGE_ERROR](#errors_RANGE_ERROR){.exception}
+:   `'filePath'` does not use the [standard path
+    representation](#os_Standard_path_representation) or it
+    cannot be converted to the system path type or `'aTime'` is invalid,
+    or `'aTime'` cannot be converted to the system file time.
+
+[FILE_ERROR](#errors_FILE_ERROR){.exception}
+:   The file described with `'filePath'` does not exist, or it is not a
+    symbolic link, or a system function returns an error.
+
+</div>
+
+[]{#os_getOwner_SYMLINK}
+
+#### 12.3.8 Symbolic link getOwner
+
+The owner of a symbolic link is returned by the function
+[`getOwner`]{.func}`(path, SYMLINK)`:
+
+``` indent
+const func string: getOwner (in string: filePath, SYMLINK) is ...
+```
+
+The function only works for symbolic links and does not follow the
+symbolic link.
+
+<div>
+
+Possible exceptions:
+
+[MEMORY_ERROR](#errors_MEMORY_ERROR){.exception}
+:   Not enough memory to convert `'filePath'` to the system path type.
+
+[RANGE_ERROR](#errors_RANGE_ERROR){.exception}
+:   `'filePath'` does not use the [standard path
+    representation](#os_Standard_path_representation) or it
+    cannot be converted to the system path type.
+
+[FILE_ERROR](#errors_FILE_ERROR){.exception}
+:   The file described with `'filePath'` does not exist, or it is not a
+    symbolic link, or a system function returns an error.
+
+</div>
+
+[]{#os_setOwner_SYMLINK}
+
+#### 12.3.9 Symbolic link setOwner
+
+The function [`setOwner`]{.func}`(path, owner, SYMLINK)` sets the owner
+of a symbolic link:
+
+``` indent
+const proc: setOwner (in string: filePath, in string: owner, SYMLINK) is ...
+```
+
+The function only works for symbolic links and does not follow the
+symbolic link.
+
+<div>
+
+Possible exceptions:
+
+[MEMORY_ERROR](#errors_MEMORY_ERROR){.exception}
+:   Not enough memory to convert `'filePath'` to the system path type.
+
+[RANGE_ERROR](#errors_RANGE_ERROR){.exception}
+:   `'filePath'` does not use the [standard path
+    representation](#os_Standard_path_representation) or it
+    cannot be converted to the system path type or `'aTime'` is invalid,
+    or `'aTime'` cannot be converted to the system file time.
+
+[FILE_ERROR](#errors_FILE_ERROR){.exception}
+:   The file described with `'filePath'` does not exist, or it is not a
+    symbolic link, or a system function returns an error.
+
+</div>
+
+[]{#os_getGroup_SYMLINK}
+
+#### 12.3.10 Symbolic link getGroup
+
+The group of a symbolic link is returned by the function
+[`getGroup`]{.func}`(path, SYMLINK)`:
+
+``` indent
+const func string: getGroup (in string: filePath, SYMLINK) is ...
+```
+
+The function only works for symbolic links and does not follow the
+symbolic link.
+
+<div>
+
+Possible exceptions:
+
+[MEMORY_ERROR](#errors_MEMORY_ERROR){.exception}
+:   Not enough memory to convert `'filePath'` to the system path type.
+
+[RANGE_ERROR](#errors_RANGE_ERROR){.exception}
+:   `'filePath'` does not use the [standard path
+    representation](#os_Standard_path_representation) or it
+    cannot be converted to the system path type.
+
+[FILE_ERROR](#errors_FILE_ERROR){.exception}
+:   The file described with `'filePath'` does not exist, or it is not a
+    symbolic link, or a system function returns an error.
+
+</div>
+
+[]{#os_setGroup_SYMLINK}
+
+#### 12.3.11 Symbolic link setGroup
+
+The function [`setGroup`]{.func}`(path, group, SYMLINK)` sets the group
+of a symbolic link:
+
+``` indent
+const proc: setGroup (in string: filePath, in string: group, SYMLINK) is ...
+```
+
+The function only works for symbolic links and does not follow the
+symbolic link.
+
+<div>
+
+Possible exceptions:
+
+[MEMORY_ERROR](#errors_MEMORY_ERROR){.exception}
+:   Not enough memory to convert `'filePath'` to the system path type.
+
+[RANGE_ERROR](#errors_RANGE_ERROR){.exception}
+:   `'filePath'` does not use the [standard path
+    representation](#os_Standard_path_representation) or it
+    cannot be converted to the system path type or `'aTime'` is invalid,
+    or `'aTime'` cannot be converted to the system file time.
+
+[FILE_ERROR](#errors_FILE_ERROR){.exception}
+:   The file described with `'filePath'` does not exist, or it is not a
+    symbolic link, or a system function returns an error.
+
+</div>
+
+[]{#os_Directory_functions}
+
+### 12.4 Directory functions
+
+Directories are a special kind of file. They contain references to other
+files. Some functions work only on directories (e.g.:
+[`readDir`](#os_readDir){.func}) while other functions (e.g.:
+[`getMTime`](#os_getMTime){.func}) will work on any kind of file. Since
+directories are files they are not mentioned specifically in the
+description of such generic functions.
+
+[]{#os_readDir}
+
+#### 12.4.1 readDir
+
+The function [`readDir`]{.func} provides a portable access to the
+contents of directories in the file system. It reads the specified
+directory and the filenames are stored in the string-array result. The
+files [`"."`]{.stri} and [`".."`]{.stri} are excluded from the result.
+Note that the strings contain only the filenames. Additional information
+must be obtained using other calls.
+
+``` indent
+const func array string: readDir (in string: dirPath) is ...
+```
+
+<div>
+
+Returns:
+
+An array of strings containing the names of all files in the specified
+directory, except [`"."`]{.stri} and [`".."`]{.stri}
+
+</div>
+
+<div>
+
+Possible exceptions:
+
+[MEMORY_ERROR](#errors_MEMORY_ERROR){.exception}
+:   Not enough memory to convert `'dirPath'` to the system path type or
+    not enough memory to represent the result
+    [`array`](#types_array){.type}` `[`string`](#types_string){.type}.
+
+[RANGE_ERROR](#errors_RANGE_ERROR){.exception}
+:   `'dirPath'` does not use the [standard path
+    representation](#os_Standard_path_representation) or it
+    cannot be converted to the system path type.
+
+[FILE_ERROR](#errors_FILE_ERROR){.exception}
+:   The file described with `'dirPath'` does not exist, or it is not a
+    directory, or a system function returns an error.
+
+</div>
+
+<div>
+
+Examples:
+
+After the declaration
+
+``` indent
+var array string: dir_array is 0 times "";
+```
+
+the statement
+
+``` indent
+dir_array := readDir(".");
+```
+
+reads the current working directory and stores it into the string-array
+`'dir_array'`. The components of the directory can now be accessed via
+indexing:
+
+``` indent
+for index range 1 to length(dir_array) do
+  writeln(dir_array[index]);
+end for;
+```
+
+</div>
+
+[]{#os_openDir}
+
+#### 12.4.2 openDir
+
+The function [`openDir`]{.func} opens the specified directory as file.
+Each line in this directory file contains the filename of a file present
+in the directory. The files [`"."`]{.stri} and [`".."`]{.stri} are left
+out from the directory file. Note that only filenames can be read from
+the directory file. Additional information must be obtained with other
+calls.
+
+``` indent
+const func file: openDir (in string: dirPath) is ...
+```
+
+<div>
+
+Returns:
+
+The directory file of the specified directory.
+
+</div>
+
+<div>
+
+Possible exceptions:
+
+[MEMORY_ERROR](#errors_MEMORY_ERROR){.exception}
+:   Not enough memory to convert `'dirPath'` to the system path type or
+    not enough memory to represent the result
+    [`array`](#types_array){.type}` `[`string`](#types_string){.type}.
+
+[RANGE_ERROR](#errors_RANGE_ERROR){.exception}
+:   `'dirPath'` does not use the [standard path
+    representation](#os_Standard_path_representation) or it
+    cannot be converted to the system path type.
+
+[FILE_ERROR](#errors_FILE_ERROR){.exception}
+:   A system function returns an error.
+
+</div>
+
+<div>
+
+Examples:
+
+``` indent
+...
+
+include "dir.s7i";
+
+var file: aDirFile is STD_NULL;
+var string: fileName is "";
+
+...
+
+aDirFile := openDir(".");
+fileName := getln(aDirFile);
+while fileName <> "" do
+  writeln(fileName);
+  fileName := getln(aDirFile);
+end while;
+```
+
+</div>
+
+[]{#os_getcwd}
+
+#### 12.4.3 getcwd
+
+The function [`getcwd`]{.func} returns the current working directory of
+the calling process as absolute path.
+
+``` indent
+const func string: getcwd is ...
+```
+
+<div>
+
+Returns:
+
+The absolute path of the current working directory.
+
+</div>
+
+<div>
+
+Possible exceptions:
+
+[MEMORY_ERROR](#errors_MEMORY_ERROR){.exception}
+:   Not enough memory to represent the result
+    [`string`](#types_string){.type}.
+
+[FILE_ERROR](#errors_FILE_ERROR){.exception}
+:   The system function returns an error.
+
+</div>
+
+<div>
+
+Examples:
+
+The statement
+
+``` indent
+my_dir := getcwd;
+```
+
+assigns the full path of the current working directory to the
+[`string`](#types_string){.type} variable `'my_dir'`.
+
+</div>
+
+[]{#os_chdir}
+
+#### 12.4.4 chdir
+
+The function [`chdir`]{.func} changes the current working directory of
+the calling process to the specified directory.
+
+``` indent
+const proc: chdir (in string: name) is ...
+```
+
+<div>
+
+Possible exceptions:
+
+[MEMORY_ERROR](#errors_MEMORY_ERROR){.exception}
+:   Not enough memory to convert `'name'` to the system path type.
+
+[RANGE_ERROR](#errors_RANGE_ERROR){.exception}
+:   `'name'` does not use the [standard path
+    representation](#os_Standard_path_representation) or it
+    cannot be converted to the system path type.
+
+[FILE_ERROR](#errors_FILE_ERROR){.exception}
+:   A system function returns an error.
+
+</div>
+
+<div>
+
+Examples:
+
+The statement
+
+``` indent
+chdir("/usr/bin");
+```
+
+changes the current working directory to [`"/usr/bin"`]{.stri}.
+
+</div>
+
+[]{#os_makeDir}
+
+#### 12.4.5 makeDir
+
+The function [`makeDir`]{.func} creates a new directory. The function
+does not follow symbolic links.
+
+``` indent
+const proc: makeDir (in string: dirPath) is ...
+```
+
+<div>
+
+Possible exceptions:
+
+[MEMORY_ERROR](#errors_MEMORY_ERROR){.exception}
+:   Not enough memory to convert `'dirPath'` to the system path type.
+
+[RANGE_ERROR](#errors_RANGE_ERROR){.exception}
+:   `'dirPath'` does not use the [standard path
+    representation](#os_Standard_path_representation) or it
+    cannot be converted to the system path type.
+
+[FILE_ERROR](#errors_FILE_ERROR){.exception}
+:   The file \'\'dirPath\'\' already exists, or a system function
+    returns an error.
+
+</div>
+
+<div>
+
+Examples:
+
+The statement
+
+``` indent
+makeDir("my_dir");
+```
+
+creates the directory [`"my_dir"`]{.stri}.
+
+</div>
+
+[]{#os_homeDir}
+
+#### 12.4.6 homeDir
+
+The function [`homeDir`]{.func} returns the home directory of the user
+as absolute path.
+
+``` indent
+const func string: homeDir is ...
+```
+
+This function should be preferred over the use of an environment
+variable such as `$HOME`. `$HOME` is not supported under all operating
+systems and it is not guaranteed, that it uses the [standard path
+representation](#os_Standard_path_representation).
+
+<div>
+
+Returns:
+
+The absolute path of the home directory.
+
+</div>
+
+<div>
+
+Possible exceptions:
+
+[MEMORY_ERROR](#errors_MEMORY_ERROR){.exception}
+:   Not enough memory to represent the result
+    [`string`](#types_string){.type}.
+
+[FILE_ERROR](#errors_FILE_ERROR){.exception}
+:   Not able to determine the home directory.
+
+</div>
+
+<div>
+
+Examples:
+
+The statement
+
+``` indent
+my_dir := homeDir;
+```
+
+assigns the full path of the home directory to the
+[`string`](#types_string){.type} variable `'my_dir'`.
+
+</div>
+
+[]{#os_Maintenance_functions}
+
+### 12.5 Maintenance functions
+
+[]{#os_removeFile}
+
+#### 12.5.1 removeFile
+
+The function [`removeFile`]{.func} removes a file of any type unless it
+is a directory that is not empty. An attempt to remove a directory that
+is not empty triggers [FILE_ERROR](#errors_FILE_ERROR){.exception}.
+
+``` indent
+const proc: removeFile (in string: filePath) is ...
+```
+
+<div>
+
+Possible exceptions:
+
+[MEMORY_ERROR](#errors_MEMORY_ERROR){.exception}
+:   Not enough memory to convert `'filePath'` to the system path type.
+
+[RANGE_ERROR](#errors_RANGE_ERROR){.exception}
+:   `'filePath'` does not use the [standard path
+    representation](#os_Standard_path_representation), or it
+    cannot be converted to the system path type.
+
+[FILE_ERROR](#errors_FILE_ERROR){.exception}
+:   The file does not exist or a system function returns an error.
+
+</div>
+
+[]{#os_removeTree}
+
+#### 12.5.2 removeTree
+
+The function [`removeTree`]{.func} removes a file of any type inclusive
+a directory tree:
+
+``` indent
+const proc: removeTree (in string: filePath) is ...
+```
+
+<div>
+
+Possible exceptions:
+
+[MEMORY_ERROR](#errors_MEMORY_ERROR){.exception}
+:   Not enough memory to convert `'filePath'` to the system path type.
+
+[RANGE_ERROR](#errors_RANGE_ERROR){.exception}
+:   `'filePath'` does not use the [standard path
+    representation](#os_Standard_path_representation) or it
+    cannot be converted to the system path type.
+
+[FILE_ERROR](#errors_FILE_ERROR){.exception}
+:   The file does not exist or a system function returns an error.
+
+</div>
+
+[]{#os_copyFile}
+
+#### 12.5.3 copyFile
+
+The function [`copyFile`]{.func} copies a file or directory tree:
+
+``` indent
+const proc: copyFile (in string: sourcePath, in string: destPath) is ...
+```
+
+Permissions/mode, ownership and timestamps of the destination file are
+determined independent of the corresponding source properties. The
+destination file gets the permissions/mode defined by umask. The user
+executing the program is the owner of the destination file. The
+timestamps of the destination file are set to the current time. Symbolic
+links in `sourcePath` are always followed. Therefore [`copyFile`]{.func}
+will never create a symbolic link. Note that [`copyFile`]{.func} does
+not preserve hard links (they are resolved to distinct files).
+
+<div>
+
+Possible exceptions:
+
+[MEMORY_ERROR](#errors_MEMORY_ERROR){.exception}
+:   Not enough memory to convert `'sourcePath'` or `'destPath'` to the
+    system path type.
+
+[RANGE_ERROR](#errors_RANGE_ERROR){.exception}
+:   `'sourcePath'` or `'destPath'` does not use the [standard path
+    representation](#os_Standard_path_representation) or one of
+    them cannot be converted to the system path type.
+
+[FILE_ERROR](#errors_FILE_ERROR){.exception}
+:   Source file does not exist, destination file already exists or a
+    system function returns an error.
+
+</div>
+
+[]{#os_cloneFile}
+
+#### 12.5.4 cloneFile
+
+The function [`cloneFile`]{.func} clones a file or directory tree:
+
+``` indent
+const proc: cloneFile (in string: sourcePath, in string: destPath) is ...
+```
+
+Permissions/mode, ownership and timestamps of the original are
+preserved. Symlinks are not followed. Instead the symlink is copied.
+Note that [`cloneFile`]{.func} does not preserve hard links (they are
+resolved to distinct files).
+
+<div>
+
+Possible exceptions:
+
+[MEMORY_ERROR](#errors_MEMORY_ERROR){.exception}
+:   Not enough memory to convert `'sourcePath'` or `'destPath'` to the
+    system path type.
+
+[RANGE_ERROR](#errors_RANGE_ERROR){.exception}
+:   `'sourcePath'` or `'destPath'` does not use the [standard path
+    representation](#os_Standard_path_representation) or one of
+    them cannot be converted to the system path type.
+
+[FILE_ERROR](#errors_FILE_ERROR){.exception}
+:   Source file does not exist, destination file already exists or a
+    system function returns an error.
+
+</div>
+
+[]{#os_moveFile}
+
+#### 12.5.5 moveFile
+
+The function [`moveFile`]{.func} moves and/or renames a file or
+directory tree:
+
+``` indent
+const proc: moveFile (in string: sourcePath, in string: destPath) is ...
+```
+
+The function uses the C `'rename()'` function. When `'rename()'` fails
+the file (or directory tree) is cloned with
+[`cloneFile`](#os_cloneFile){.func} (which preserves permissions/mode,
+ownership and timestamps) to the new place and with the new name. When
+[`cloneFile`](#os_cloneFile){.func} succeeds the original file is
+deleted. When [`cloneFile`](#os_cloneFile){.func} fails (no space on
+device or other reason) all remains of the failed clone are removed.
+Note that [`cloneFile`](#os_cloneFile){.func} works for symbolic links
+but does not preserve hard links (they are resolved to distinct files).
+
+<div>
+
+Possible exceptions:
+
+[MEMORY_ERROR](#errors_MEMORY_ERROR){.exception}
+:   Not enough memory to convert `'sourcePath'` or `'destPath'` to the
+    system path type.
+
+[RANGE_ERROR](#errors_RANGE_ERROR){.exception}
+:   `'sourcePath'` or `'destPath'` does not use the [standard path
+    representation](#os_Standard_path_representation) or one of
+    them cannot be converted to the system path type.
+
+[FILE_ERROR](#errors_FILE_ERROR){.exception}
+:   Source file does not exist, destination file already exists or a
+    system function returns an error.
+
+</div>
+
+[]{#os_Environment}
+
+### 12.6 Environment
+
+[]{#os_argv_PROGRAM}
+
+#### 12.6.1 argv(PROGRAM)
+
+The function [`argv(PROGRAM)`]{.func} returns the argument vector of the
+program as array of strings. The name of the program is not part of the
+argument vector.
+
+``` indent
+const func array string: argv (PROGRAM) is ...
+```
+
+<div>
+
+Returns:
+
+An array of strings containing the argument vector.
+
+</div>
+
+[]{#os_name_PROGRAM}
+
+#### 12.6.2 name(PROGRAM)
+
+The function [`name(PROGRAM)`]{.func} returns the name of the program
+without path and extension. The name returned by
+[`name(PROGRAM)`]{.func} is the same for interpreted and compiled
+programs. The function [`name(PROGRAM)`]{.func} does not follow symbolic
+links. It determines, with which name a program was called. When several
+symbolic links refer to one program [`name(PROGRAM)`]{.func} returns the
+name of the symbolic link.
+
+``` indent
+const func string: name (PROGRAM) is ...
+```
+
+<div>
+
+Returns:
+
+The name of the program.
+
+</div>
+
+[]{#os_path_PROGRAM}
+
+#### 12.6.3 path(PROGRAM)
+
+The function [`path(PROGRAM)`]{.func} returns the absolute path of the
+program. For an interpreted program this is the absolute path of the
+source file. For a compiled program this is the absolute path of the
+executable. The function [`path(PROGRAM)`]{.func} does follow symbolic
+links.
+
+``` indent
+const func string: path (PROGRAM) is ...
+```
+
+<div>
+
+Returns:
+
+The absolute path of the program.
+
+</div>
+
+[]{#os_dir_PROGRAM}
+
+#### 12.6.4 dir(PROGRAM)
+
+The function [`dir(PROGRAM)`]{.func} returns the absolute path of the
+directory containing the program. The function [`dir(PROGRAM)`]{.func}
+allows placing configuration data in the directory of the program.
+[`dir(PROGRAM)`]{.func} is based on
+[`path(PROGRAM)`](#os_path_PROGRAM){.func}.
+
+``` indent
+const func string: dir (PROGRAM) is ...
+```
+
+<div>
+
+Returns:
+
+The absolute path of the directory containing the program.
+
+</div>
+
+[]{#os_file_PROGRAM}
+
+#### 12.6.5 file(PROGRAM)
+
+The function [`file(PROGRAM)`]{.func} returns the filename of the
+program without path. [`file(PROGRAM)`]{.func} is based on
+[`path(PROGRAM)`](#os_path_PROGRAM){.func}.
+
+``` indent
+const func string: file (PROGRAM) is ...
+```
+
+<div>
+
+Returns:
+
+The filename of the program.
+
+</div>
+
+[]{#os_getenv}
+
+#### 12.6.6 getenv
+
+The function [`getenv`]{.func} determines the value of an environment
+variable.
+
+``` indent
+const func string: getenv (in string: name) is ...
+```
+
+The function [`getenv`]{.func} searches the environment for an
+environment variable with the given `'name'`. When such an environment
+variable exists the corresponding [`string`](#types_string){.type} value
+is returned.
+
+<div>
+
+Returns:
+
+The value of an environment variable or [\"\"]{.stri} when the requested
+environment variable does not exist.
+
+</div>
+
+<div>
+
+Possible exceptions:
+
+[MEMORY_ERROR](#errors_MEMORY_ERROR){.exception}
+:   Not enough memory to convert `'name'` to the system string type or
+    not enough memory to represent the result
+    [`string`](#types_string){.type}.
+
+[RANGE_ERROR](#errors_RANGE_ERROR){.exception}
+:   \'name\' cannot be converted to the system string type or a system
+    function returns an error.
+
+</div>
+
+[]{#os_setenv}
+
+#### 12.6.7 setenv
+
+The function [`setenv`]{.func} adds or changes an environment variable.
+
+``` indent
+const proc: setenv (in string: name, in string: value) is ...
+```
+
+The function [`setenv`]{.func} searches the environment for an
+environment variable with the given `'name'`. When such an environment
+variable exists the corresponding value is changed to `'value'`. When no
+environment variable with the given `'name'` exists a new environment
+variable `'name'` with the value `'value'` is created.
+
+<div>
+
+Possible exceptions:
+
+[MEMORY_ERROR](#errors_MEMORY_ERROR){.exception}
+:   Not enough memory to convert `'name'` or `'value'` to the system
+    string type.
+
+[RANGE_ERROR](#errors_RANGE_ERROR){.exception}
+:   `'name'` or `'value'` cannot be converted to the system string type
+    or a system function returns an error.
+
+</div>
+
+[]{#os_unsetenv}
+
+#### 12.6.8 unsetenv
+
+The function [`unsetenv`]{.func} removes an environment variable.
+
+``` indent
+const proc: unsetenv (in string: name) is ...
+```
+
+The function [`unsetenv`]{.func} searches the environment for an
+environment variable with the given `'name'`. When such an environment
+variable exists it is removed from the environment. When no environment
+variable with the given `'name'` exists the function succeeds, and the
+environment is unchanged.
+
+<div>
+
+Possible exceptions:
+
+[MEMORY_ERROR](#errors_MEMORY_ERROR){.exception}
+:   Not enough memory to convert `'name'` to the system string type.
+
+[RANGE_ERROR](#errors_RANGE_ERROR){.exception}
+:   `'name'` cannot be converted to the system string type or a system
+    function returns an error.
+
+</div>
+
+[]{#os_environment}
+
+#### 12.6.9 environment
+
+The function [`environment`]{.func} returns the list of environment
+variable names as array of strings.
+
+``` indent
+const func array string: environment is ...
+```
+
+<div>
+
+Returns:
+
+The list of environment variable names.
+
+</div>
+
+<div>
+
+Possible exceptions:
+
+[MEMORY_ERROR](#errors_MEMORY_ERROR){.exception}
+:   Not enough memory to create the result.
+
+</div>
+
+[]{#database_file_start}
+
+[]{#database_DATABASE_ABSTRACTION_API}
+
+## 13. DATABASE ABSTRACTION API
+
+Seed7 provides an abstraction layer for database access. There is an
+application programming interface (API), which defines how a client may
+access a database. Seed7 accomplishes database independence by using
+database drivers as abstraction layers between the application and the
+database. There are database drivers for MySQL, MariaDB, SQLLite,
+PostgreSQL, Oracle, Firebird, Interbase, Db2, Informix and SQL Server
+databases. Databases can also be accessed via the ODBC interface. The
+following example uses the database abstraction API:
+
+``` indent
+const proc: dbDemo is func
+  local
+    var database: currDb is database.value;
+    var sqlStatement: statement is sqlStatement.value;
+    var integer: index is 0;
+  begin
+    currDb := openDatabase(DB_MYSQL, "testDb", "testUser", "testPassword");
+    if currDb <> database.value then
+      statement := prepare(currDb, "SELECT * FROM testTable");
+      execute(statement);
+      while fetch(statement) do
+        for index range 1 to columnCount(statement) do
+          write(column(statement, index, string) <& ", ");
+        end for;
+        writeln;
+      end while;
+      close(currDb);
+    end if;
+  end func;
+```
+
+[]{#database_Opening_a_database_connection}
+
+### 13.1 Opening a database connection
+
+To open a database connection you need to provide several things:
+
+- The database type used.
+- The `host` where the database is running. An empty `host` name
+  ([`""`]{.stri}) specifies the local machine ([`"localhost"`]{.stri}).
+- The `port` to access the database. A `port` of 0 specifies the default
+  port of the database.
+- The `name` of the database.
+- A database `user` name.
+- The `password` of the database user.
+
+Depending on the database a corresponding database driver must be used:
+
+  Database Type   Driver          Default port   Comment
+  --------------- --------------- -------------- ------------------------------------------------
+  MySQL           DB_MYSQL        3306           
+  MariaDB         DB_MYSQL        3306           
+  SQLLite         DB_SQLITE                      Host must be [`""`]{.stri} and port must be 0.
+  PostgreSQL      DB_POSTGRESQL   5432           
+  Oracle          DB_OCI          1521           
+  Firebird        DB_FIRE                        
+  Interbase       DB_FIRE                        
+  Db2             DB_DB2          50000          
+  Informix        DB_INFORMIX     1526           
+  SQL Server      DB_SQL_SERVER   1433           
+  various DBs     DB_ODBC                        Needs an ODBC driver to connect to a database.
+  Sybase based    DB_TDS          1433           Supports SQL Server and Sybase.
+
+A basic function to open a database is:
+
+``` indent
+const func database: openDatabase (in dbCategory: driver, in string: host,
+                                   in integer: port, in string: dbName,
+                                   in string: user, in string: password)
+```
+
+The following statements each open a database:
+
+``` indent
+currDb := openDatabase(DB_MYSQL, "www.example.org", 0, "testDb", "testUser", "testPassword");
+
+currDb := openDatabase(DB_MYSQL, "192.0.2.235", 0, "testDb", "testUser", "testPassword");
+
+currDb := openDatabase(DB_POSTGRESQL, "1234:feed::dead:beef", 0, "testDb", "testUser", "testPassword");
+
+currDb := openDatabase(DB_POSTGRESQL, "localhost", 0, "testDb", "testUser", "testPassword");
+
+currDb := openDatabase(DB_OCI, "", 0, "aServiceName", "testUser", "testPassword");
+
+currDb := openDatabase(DB_OCI, "www.example.org", 2345, "aServiceName", "testUser", "testPassword");
+
+currDb := openDatabase(DB_OCI, "192.0.2.235", 0, "aSid", "testUser", "testPassword");
+
+currDb := openDatabase(DB_DB2, "www.example.org", 0, "testDb", "testUser", "testPassword");
+
+currDb := openDatabase(DB_SQL_SERVER, "192.168.1.13", 0, "testDb", "testUser", "testPassword");
+
+currDb := openDatabase(DB_TDS, "192.168.1.13", 0, "testDb", "testUser", "testPassword");
+```
+
+The `host` can be specified by name (e.g.:
+[`"www.example.org"`]{.stri}), by an IPv4 address (e.g.:
+[`"192.0.2.235"`]{.stri}) or by an IPv6 address in colon notation (e.g.:
+[`"1234:feed::dead:beef"`]{.stri}). Specifying [`""`]{.stri} as `host`
+means [`"localhost"`]{.stri}.
+
+[]{#database_Opening_an_Oracle_database_connection}
+
+#### 13.1.1 Opening an Oracle database connection
+
+When using the [`DB_OCI`]{.var} driver you can either supply a
+`net_service_name` from [`tnsnames.ora`]{.stri} or a `service_name` or a
+`sid` as `dbName`. If [`tnsnames.ora`]{.stri} is used the parameter
+`host` must be [`""`]{.stri} and the parameter `port` must be 0.
+
+``` indent
+currDb := openDatabase(DB_OCI, "", 0, "tnsnamesOraEntryName", "testUser", "testPassword");
+```
+
+[]{#database_Opening_a_Db2_database_connection}
+
+#### 13.1.2 Opening a Db2 database connection
+
+When using the [`DB_DB2`]{.var} driver you can either supply a `DSN`
+(data source name) from [`db2cli.ini`]{.stri} (or
+[`db2dsdriver.cfg`]{.stri}) or a `database name` as `dbName`. If a `DSN`
+is used the parameter `host` must be [`""`]{.stri} and the parameter
+`port` must be 0.
+
+``` indent
+currDb := openDatabase(DB_DB2, "", 0, "databaseAlias", "testUser", "testPassword");
+```
+
+[]{#database_Opening_a_SQL_Server_database_connection}
+
+#### 13.1.3 Opening a SQL Server database connection
+
+When using the [`DB_SQL_SERVER`]{.var} driver you can either supply a
+`database name` from the local machine or a database that can be
+accessed via TCP/IP. To access a database at the local machine the
+parameter `host` must be [`""`]{.stri} and the parameter `port` must be
+0. If TCP/IP is used it must be enabled in the database.
+
+``` indent
+currDb := openDatabase(DB_SQL_SERVER, "", 0, "localDb", "testUser", "testPassword");
+```
+
+[]{#database_Opening_a_SQLite_database_connection}
+
+#### 13.1.4 Opening a SQLite database connection
+
+A SQLite database can be opened with:
+
+``` indent
+currDb := openDatabase(DB_SQLITE, "", 0, "aDir/dbName", "", "");
+
+currDb := openDatabase(DB_SQLITE, "", 0, "aDir/dbName.db", "", "");
+
+currDb := openDatabase(DB_SQLITE, "", 0, "/c/Users/JohnSmith/dbName", "", "");
+```
+
+The path to the database file (in the example above
+[`"aDir/dbName"`]{.stri}) must use the Seed7 [standard path
+representation](#os_Standard_path_representation). If the
+database file is specified with a relative path it is searched relative
+to the current working directory. The database file name can be
+specified with or without the extension [`".db"`]{.stri}. For a SQLite
+database `host` must be [`""`]{.stri} and `port` must be 0. Since SQLite
+works without `user` and `password` the parameters `user` and `password`
+are always ignored.
+
+[]{#database_Opening_an_Informix_database_connection}
+
+#### 13.1.5 Opening an Informix database connection
+
+When using the [`DB_INFORMIX`]{.var} driver you need to specify also a
+`server`:
+
+``` indent
+const func database: openDatabase (DB_INFORMIX, in string: host, in integer: port,
+                                   in string: server, in string: dbName,
+                                   in string: user, in string: password)
+```
+
+A Informix database can be opened with:
+
+``` indent
+currDb := openDatabase(DB_INFORMIX, "", 0, "serverName", "databaseName", "testUser", "testPassword");
+
+currDb := openDatabase(DB_INFORMIX, "www.example.org", 0, "testServer", "testDb", "testUser", "testPassword");
+```
+
+[]{#database_Opening_an_ODBC_database_connection}
+
+#### 13.1.6 Opening an ODBC database connection
+
+The Seed7 database driver [`DB_ODBC`]{.var} is special, as the ODBC
+interface itself allows connecting to several database types. The ODBC
+interface library accomplishes this by using ODBC drivers. Unfortunately
+these drivers do come in varying quality. Accessing a database directly
+via the Seed7 driver should be the preferred method. For SQL Server ODBC
+is the only connection interface. Opening an ODBC database can be done
+with the following function:
+
+``` indent
+const func database: openDatabase (DB_ODBC, in string: odbcDriver,
+                                   in string: server, in string: dbName,
+                                   in string: user, in string: password)
+```
+
+A SQL Server can be opened with:
+
+``` indent
+currDb := openDatabase(DB_ODBC, "sqlserver", "", "", "testUser", "testPassword");
+
+currDb := openDatabase(DB_ODBC, "sqlserver", "", "", "", "");
+```
+
+If `server` or `dbName` are empty ([`""`]{.stri}) the default values of
+the ODBC driver are used. The ODBC driver may provide also default
+values for `user` and `password`.
+
+ODBC uses also data source names (DSNs) to specify possible database
+connections. It is possible to open an ODBC database by specifying the
+data source name (DSN) in the parameter `dbName`. In this case the
+parameters `odbcDriver` and `server` must be [`""`]{.stri}.
+
+``` indent
+currDb := openDatabase(DB_ODBC, "", "", "dsnName", "testUser", "testPassword");
+
+currDb := openDatabase(DB_ODBC, "", "", "dsnName", "", "");
+```
+
+When opening using a DSN succeeds, the parameters `odbcDriver` and
+`server` are ignored. A DSN might also specify `user` and `password`. In
+this case this parameters can be left empty, when
+[`openDatabase`]{.func}`()` is called.
+
+When using windows the DSNs and the ODBC drivers can be managed with:
+
+Start -\> Control Panel -\> Administrative Tools -\> Data Sources
+(ODBC).
+
+The data source names (DSNs) of unixODBC are specified in the file
+[`odbc.ini`]{.stri}. The ODBC drivers of unixODBC are specified in the
+file [`odbcinst.ini`]{.stri}.
+
+[]{#database_Other_ways_to_open_a_database_connection}
+
+### 13.2 Other ways to open a database connection
+
+There is another variant of opening a database:
+
+``` indent
+const func database: openDatabase (in dbCategory: driver, in string: dbPath,
+                                   in string: user, in string: password)
+```
+
+The `dbPath` can be given in one of these forms:
+
+- host:port/dbName
+- host/dbName
+- dbName
+
+The `host` can be specified by name (e.g.:
+[`"www.example.org"`]{.stri}), or by IPv4 address (e.g.:
+[`"192.0.2.235"`]{.stri}) or by IPv6 address in colon notation (e.g.:
+[`"[1234:feed::dead:beef]"`]{.stri}). Note that an IPv6 address must be
+enclosed in brackets. If `host` is not specified the default host
+([`"localhost"`]{.stri}) will be used. If `port` is not specified the
+default port of the driver will be used. The following statements each
+open a database:
+
+``` indent
+currDb := openDatabase(DB_MYSQL, "www.example.org:1234/testDb", "testUser", "testPassword");
+
+currDb := openDatabase(DB_MYSQL, "[1234:feed::dead:beef]:1234/testDb", "testUser", "testPassword");
+
+currDb := openDatabase(DB_POSTGRESQL, "192.0.2.235/testDb", "testUser", "testPassword");
+
+currDb := openDatabase(DB_POSTGRESQL, "testDb", "testUser", "testPassword");
+
+currDb := openDatabase(DB_OCI, "sidOrServiceName", "testUser", "testPassword");
+
+currDb := openDatabase(DB_OCI, "tnsnamesOraEntryName", "testUser", "testPassword");
+```
+
+If `driver` is [`DB_ODBC`]{.var} the `dbPath` can be specified in one of
+these forms:
+
+- odbcDriver:dbServer/dbName
+- odbcDriver:dbServer
+- dbServer/dbName
+- odbcDataSourceName
+
+Use a value like [`"sqlserver"`]{.stri} for `odbcDriver`.
+
+If `driver` is [`DB_SQLITE`]{.var} then `dbPath` is the path of a
+database file:
+
+- sqlitePath
+
+The `sqlitePath` uses the Seed7 [standard path
+representation](#os_Standard_path_representation). If
+`sqlitePath` is a relative path the database file is searched relative
+to the current working directory. The database file name can be
+specified with or without the extension [`".db"`]{.stri}. The following
+statements each open a SQLite database:
+
+``` indent
+currDb := openDatabase(DB_SQLITE, "aDir/dbName", "", "");
+
+currDb := openDatabase(DB_SQLITE, "aDir/dbName.db", "", "");
+
+currDb := openDatabase(DB_SQLITE, "/c/Users/JohnSmith/dbName", "", "");
+```
+
+It is also possible ot open a database with a connect string:
+
+``` indent
+const func database: openDatabase (in dbCategory: driver, in string: connectStri)
+```
+
+The `connectStri` must be in one of the forms
+
+- user:password@dbPath
+- user@dbPath
+- dbPath
+
+If no `user` is specified the user [`"guest"`]{.stri} will be used. If
+no `password` is specified the password [`"guest"`]{.stri} will be used.
+The `dbPath` is specified as before.
+
+[]{#database_Prepared_statements}
+
+### 13.3 Prepared statements
+
+All SQL statements (e.g. SELECT, CREATE, INSERT, UPDATE) can be executed
+by using prepared statements. The database abstraction API does not
+provide a way to execute SQL without a prepared statement. After a
+prepared statement has been created it can be executed multiple times.
+Databases usually optimize prepared statements for fast execution.
+Prepared statements are created with the following function:
+
+``` indent
+const func sqlStatement: prepare (in database: db, in string: sqlStatementStri)
+```
+
+Regarding the parameter `sqlStatementStri` some things must be
+considered:
+
+- A question mark (`?`) will be used as placeholder for bind variables.
+- Strings in a SQL statement are enclosed in apostrophes (e.g. `'abc'`).
+  - A string consists of all characters between the enclosing
+    apostrophes.
+  - Apostrophe characters (`'`) in a string must be doubled to get one
+    apostrophe character in the string.
+- Comments in a SQL statement start with `/*` and end with `*/`.
+- Line comments in a SQL statement start with `--` and end with a
+  newline character (`'\n'`).
+- Table and field names can be enclosed in double quotes (e.g.
+  `"aTable"`).
+  - This way a table or field name may contain spaces or other
+    characters, that are normally not allowed.
+  - Double quotes in a quoted name must be doubled (be aware that
+    several databases do not allow double quotes in names).
+
+The following statements each create a prepared SQL statement:
+
+``` indent
+statement := prepare(currDb, "CREATE TABLE customers (name CHAR(128), area CHAR(128))");
+
+statement := prepare(currDb, "SELECT * FROM customers");
+
+statement := prepare(currDb, "SELECT * FROM customers /* comment */ WHERE name = 'adam'");
+
+statement := prepare(currDb, "SELECT * FROM customers -- Comment\n  WHERE name != 'adam'");
+
+statement := prepare(currDb, "SELECT * FROM customers WHERE name = ?");
+
+statement := prepare(currDb, "SELECT * FROM customers WHERE name LIKE '%''%'");
+
+statement := prepare(currDb, "SELECT \"a field\" FROM \"a table\"");
+```
+
+Preparing a statement fails with a
+[`RANGE_ERROR`](#errors_RANGE_ERROR){.exception}, if the database is not
+open. This is checked by the driver. Other things are checked by the
+database. The database might raise the exception
+[`DATABASE_ERROR`](#errors_DATABASE_ERROR){.exception}. Note that some
+databases do not check everything, when preparing the statement. So an
+invalid SQL statement might be accepted by [`prepare`]{.func}`()`, but
+executing the prepared statement later will fail.
+
+Executing a prepared statement that neither has bind variables nor
+returns a result is quite simple:
+
+``` indent
+statement := prepare(currDb, "CREATE TABLE customers (name CHAR(128), area CHAR(128))");
+execute(statement);
+```
+
+[]{#database_Bind_values_to_placeholders}
+
+### 13.4 Bind values to placeholders
+
+Question marks (`?`) in a prepared statement string are used as
+placeholder for bind variables. Before a prepared statement is executed
+it is necessary to bind values to the placeholders (`?`). Prepared
+statements without placeholders do not need a binding. It is possible to
+bind the same placeholder as often as you like. even with values from
+different types. This can be used to execute the same prepared statement
+multiple times with different values. The binding is done with a
+[`bind`]{.func}`()` function. For several types [`bind`]{.func}`()`
+functions are defined:
+
+``` indent
+const proc: bind (inout sqlStatement: statement, in integer: pos, in bigInteger: num)
+
+const proc: bind (inout sqlStatement: statement, in integer: pos, in bigRational: num)
+
+const proc: bind (inout sqlStatement: statement, in integer: pos, in boolean: flag)
+
+const proc: bind (inout sqlStatement: statement, in integer: pos, in bstring: bstri)
+
+const proc: bind (inout sqlStatement: statement, in integer: pos, in float: number)
+
+const proc: bind (inout sqlStatement: statement, in integer: pos, in integer: number)
+
+const proc: bind (inout sqlStatement: statement, in integer: pos, NULL)
+
+const proc: bind (inout sqlStatement: statement, in integer: pos, in string: stri)
+
+const proc: bind (inout sqlStatement: statement, in integer: pos, in time: timeData)
+
+const proc: bind (inout sqlStatement: statement, in integer: pos, in duration: durationData)
+```
+
+Binding fails with a [`RANGE_ERROR`](#errors_RANGE_ERROR){.exception},
+if the statement has not been
+[prepared](#database_Prepared_statements). Binding is done by
+position. Position numbers start with 1. To bind the
+[`integer`](#types_integer){.type} 12345 to the third placeholder (`?`)
+of a prepared statement do:
+
+``` indent
+bind(statement, 3, 12345);
+```
+
+The [`bind`]{.func}`()` functions check the given position (`pos`) and
+raise the exception [`RANGE_ERROR`](#errors_RANGE_ERROR){.exception}, if
+no corresponding placeholder (`?`) is found. This happens if `pos <= 0`
+holds or if `pos` is greater than the number of placeholders. The
+[`bind`]{.func}`()` functions check also, if the type of the given value
+fits to the database column. If the type does not fit the exception
+[`RANGE_ERROR`](#errors_RANGE_ERROR){.exception} is raised.
+
+Another example with binding is:
+
+``` indent
+write("name? ");
+readln(name);
+statement := prepare(currDb, "SELECT name, area FROM customers WHERE name = ?");
+bind(statement, 1, name);
+execute(statement);
+. . .  Write a list of names and areas.
+```
+
+Binding protects against SQL injection. SQL injection is a technique to
+attack applications. SQL injection is possible, if the SQL statement is
+build from user input. Suppose we do the example above without binding:
+
+``` indent
+write("name? ");
+readln(name);
+statement := prepare(currDb, "SELECT name, area FROM customers WHERE name = '" <& name <& "'");
+execute(statement);
+. . .  Write a list of names and areas.
+```
+
+Suppose the user enters (when asked for the `name`):
+
+``` indent
+' UNION SELECT login, password FROM user --
+```
+
+This would prepare and execute the SQL statement:
+
+``` indent
+SELECT name, area FROM customers WHERE name = '' UNION SELECT login, password FROM user --'
+```
+
+The result would additionally contain secret data you certainly would
+not like to be displayed.
+
+[]{#database_Execute_a_prepared_statement}
+
+### 13.5 Execute a prepared statement
+
+To make a prepared statement run it must be executed. Prepared
+statements are executed with the following function:
+
+``` indent
+const proc: execute (inout sqlStatement: statement)
+```
+
+The following statement executes a prepared SQL statement:
+
+``` indent
+execute(statement);
+```
+
+Executing fails with a [`RANGE_ERROR`](#errors_RANGE_ERROR){.exception},
+if the statement has not been prepared. Executing fails with a
+[`DATABASE_ERROR`](#errors_DATABASE_ERROR){.exception}, if not all
+parameters have been
+[bound](#database_Bind_values_to_placeholders). If the database
+returns an error the exception
+[`DATABASE_ERROR`](#errors_DATABASE_ERROR){.exception} gets also raised.
+Note that invalid SQL statements might raise a
+[`DATABASE_ERROR`](#errors_DATABASE_ERROR){.exception} in
+[`prepare`]{.func}`()` or in [`execute`]{.func}`()`. When the exception
+is raised depends on the database.
+
+There are prepared statements, that return a result set of records
+(e.g.: SELECT) and others that do not return data (e.g.: UPDATE). After
+[executing](#database_Execute_a_prepared_statement) a prepared
+statement the number of columns in a record (row) of the result set can
+be retrieved with the following function:
+
+``` indent
+const func integer: columnCount (in sqlStatement: statement)
+```
+
+If a prepared statement does not return data [`columnCount`]{.func}`()`
+returns 0. The names of the columns in a record (row) of the result set
+can be obtained with the function:
+
+``` indent
+const func string: columnName (in sqlStatement: statement, in integer: column)
+```
+
+These functions can be combined to write the column names of a prepared
+statement:
+
+``` indent
+execute(statement);
+for columnNum range 1 to columnCount(statement) do
+  write(columnName(statement, columnNum) <& " ");
+end for;
+writeln;
+```
+
+[]{#database_Fetch_records_from_the_result_set}
+
+### 13.6 Fetch records from the result set
+
+After [executing](#database_Execute_a_prepared_statement) a
+prepared statement that returns data (e.g.: SELECT), the records (rows)
+can be fetched one by one with [`fetch`]{.func}`()`. After
+[executing](#database_Execute_a_prepared_statement) a prepared
+statement returning no data fetching is not necessary. Fetching is done
+with the following function:
+
+``` indent
+const func boolean: fetch (in sqlStatement: statement)
+```
+
+The function returns [`TRUE`]{.var}, if a record of the result set could
+be fetched successfully. The function returns [`FALSE`]{.var}, if there
+is no data (e.g.: UPDATE) or no more row (record) to fetch. The
+following example shows how [`fetch`]{.func}`()` is usually used:
+
+``` indent
+execute(statement);
+while fetch(statement) do
+  . . .  Process a record from the result set.
+end while;
+```
+
+[]{#database_Get_columns_from_fetched_records}
+
+### 13.7 Get columns from fetched records
+
+After a record (row) has been
+[fetched](#database_Fetch_records_from_the_result_set) from a
+result set individual column data can be retrieved with a
+[`column`]{.func}`()` function. For several types [`column`]{.func}`()`
+functions are defined:
+
+``` indent
+const func bigInteger: column (in sqlStatement: statement, in integer: column, attr bigInteger)
+
+const func bigRational: column (in sqlStatement: statement, in integer: column, attr bigRational)
+
+const func boolean: column (in sqlStatement: statement, in integer: column, attr boolean)
+
+const func bstring: column (in sqlStatement: statement, in integer: column, attr bstring)
+
+const func duration: column (in sqlStatement: statement, in integer: column, attr duration)
+
+const func float: column (in sqlStatement: statement, in integer: column, attr float)
+
+const func integer: column (in sqlStatement: statement, in integer: column, attr integer)
+
+const func string: column (in sqlStatement: statement, in integer: column, attr string)
+
+const func time: column (in sqlStatement: statement, in integer: column, attr time)
+```
+
+Getting a column fails with a
+[`RANGE_ERROR`](#errors_RANGE_ERROR){.exception}, if no record has been
+[fetched](#database_Fetch_records_from_the_result_set) from the
+result set. Column numbers start with 1. To get column number four from
+the current result record (row) as [`integer`](#types_integer){.type}
+do:
+
+``` indent
+column(statement, 4, integer);
+```
+
+The [`column`]{.func}`()` functions check the given position (`column`)
+and raise the exception
+[`RANGE_ERROR`](#errors_RANGE_ERROR){.exception}, if no corresponding
+column exists in the result record. This happens if `column <= 0` is
+[`TRUE`]{.var} or if `column` is greater than the number of columns
+(which can be obtained with [`columnCount`]{.func}`()`). Database
+columns can be `NULL`. This can be checked with the following function:
+
+``` indent
+const func boolean: isNull (in sqlStatement: statement, in integer: column)
+```
+
+The function [`isNull`]{.func}`()` returns [`TRUE`]{.var}, if the
+specified column is `NULL`. Otherwise [`isNull`]{.func}`()` returns
+[`FALSE`]{.var}. The [`column`]{.func}`()` functions return a default
+value, if a column is `NULL`. The following default values are used:
+
+  Type                                         Default value
+  -------------------------------------------- ----------------------------------------------
+  [`bigInteger`](#types_bigInteger){.type}     `0_`
+  [`bigRational`](#types_bigRational){.type}   `0_/1_`
+  [`boolean`](#types_boolean){.type}           [`FALSE`]{.var}
+  [`bstring`]{.type}                           [bstring]{.func}([\"\"]{.stri})
+  [`duration`](#types_duration){.type}         [`duration`](#types_duration){.type}`.value`
+  [`float`](#types_float){.type}               `0.0`
+  [`integer`](#types_integer){.type}           `0`
+  [`string`](#types_string){.type}             [`""`]{.stri}
+  [`time`](#types_time){.type}                 [`time`](#types_time){.type}`.value`
+
+[]{#graphic_file_start}
+
+[]{#graphic_GRAPHIC_LIBRARY}
+
+## 14. GRAPHIC LIBRARY
+
+Seed7 provides a portable graphics library. [Below is the graphic
+\"hello world\" program]{#graphic_hello_world}:
+
+``` indent
+$ include "seed7_05.s7i";
+  include "dialog.s7i";
+
+const proc: main is func
+  begin
+    messageWindow("hello world");
+  end func;
+```
+
+This program displays a popup window with the message \"hello world\".
+In the popup window there is an OK button, which ends the program. A
+program that creates an empty window and a message popup is:
+
+``` indent
+$ include "seed7_05.s7i";
+  include "dialog.s7i";
+
+const proc: main is func
+  begin
+    screen(640, 480);
+    messageWindow("hello world");
+  end func;
+```
+
+The function [`screen`]{.func}`(640, 480)` opens window with a width of
+640 and a height of 480. The window is assigned to the variable
+[`curr_win`]{.var}, which is used as default window by drawing
+functions.
+
+Displaying an empty window without message box is done with:
+
+``` indent
+$ include "seed7_05.s7i";
+  include "draw.s7i";
+  include "keybd.s7i";
+
+const proc: main is func
+  begin
+    screen(640, 480);
+    ignore(getc(GRAPH_KEYBOARD));
+  end func;
+```
+
+This program waits until a key is pressed. The key is read from
+[`GRAPH_KEYBOARD`]{.var} Without reading from [`GRAPH_KEYBOARD`]{.var}
+the program would terminate immediately. Regarding the keyboard:
+
+- In graphic programs the keyboard is connected to
+  [`GRAPH_KEYBOARD`]{.var}.
+- In console programs the keyboard is connected to
+  [`CONSOLE_KEYBOARD`]{.var}.
+
+For that reason a graphic program should do the following assignment:
+
+``` indent
+KEYBOARD := GRAPH_KEYBOARD;
+```
+
+Afterwards it should just use the variable [`KEYBOARD`]{.var}.
+
+The program below clears the window with a color computed from the keys
+pressed:
+
+``` indent
+$ include "seed7_05.s7i";
+  include "draw.s7i";
+  include "keybd.s7i";
+
+const proc: main is func
+  local
+    var char: command is ' ';
+  begin
+    screen(640, 480);
+    KEYBOARD := GRAPH_KEYBOARD;
+    repeat
+      command := getc(KEYBOARD);
+      clear(color(1009 * ord(command) mod 65536,
+                  4999 * ord(command) mod 65536,
+                  9973 * ord(command) mod 65536));
+    until command = KEY_ESC;
+  end func;
+```
+
+The function [`color`]{.func} creates a [`color`](#types_color){.type}
+from red, green and blue lights in the additive color model. The red,
+green and blue lights are specified by integer values in the range 0 ..
+65535.
+
+[Below is a \"hello world\" program that uses a Seed7
+font]{#graphic_hello_world_with_font}:
+
+``` indent
+$ include "seed7_05.s7i";
+  include "draw.s7i";
+  include "keybd.s7i";
+  include "text.s7i";
+  include "stdfont24.s7i";
+
+const proc: main is func
+  local
+    var text: textWindow is text.value;
+  begin
+    screen(203, 45);
+    textWindow := openPixmapFontFile(curr_win);
+    setFont(textWindow, stdFont24);
+    writeln(textWindow, " hello world");
+    ignore(getc(GRAPH_KEYBOARD));
+  end func;
+```
+
+The function [`screen`]{.func} opens a window with a width of 203 pixels
+and a height of 45 pixels. The window is stored in the global variable
+`curr_win`. The function [`openPixmapFontFile`]{.func} opens a
+[`pixmapFontFile`]{.type} for `curr_win`. Everything written to
+`textWindow` is displayed in the current window. The function
+[`setFont`]{.func} defines which font should be used. The font
+`stdfont24.s7i` is a [`bitmapFont`]{.type} with a cap-height of 24
+pixels. The function [`writeln`]{.func} displays hello world to the
+current window with the specified font.
+
+Seed7 fonts are not as perfect as professional fonts. They have the
+following properties:
+
+- They are open source.
+- They are implemented in Seed7.
+- No external library is needed.
+- Seed7 programs can use them always.
+- There are bitmap and vector fonts.
+
+[Below is a \"hello world\" program which writes \"hello world\" at
+clicked positions]{#graphic_hello_world_at_clicked_positions}
+
+``` indent
+$ include "seed7_05.s7i";
+  include "draw.s7i";
+  include "keybd.s7i";
+  include "text.s7i";
+  include "stdfont24.s7i";
+
+const proc: main is func
+  local
+    var text: textWindow is text.value;
+    var char: command is ' ';
+  begin
+    screen(640, 480);
+    textWindow := openPixmapFontFile(curr_win);
+    setFont(textWindow, stdFont24);
+    KEYBOARD := GRAPH_KEYBOARD;
+    repeat
+      command := getc(KEYBOARD);
+      if command = KEY_MOUSE1 then
+        setPosXY(textWindow, clickedXPos(KEYBOARD),
+                             clickedYPos(KEYBOARD));
+        color(textWindow, color(rand(0, 65535),
+                                rand(0, 65535),
+                                rand(0, 65535)));
+        write(textWindow, "hello world");
+      end if;
+    until command <> KEY_MOUSE1;
+  end func;
+```
+
+The functions [`clickedXPos`]{.func} and [`clickedYPos`]{.func} return
+the X and Y coordinates of the mouse cursor at the last time when a
+mouse button was clicked. The function [`setPosXY`]{.func} sets the
+current position of a text window to the given X and Y coordinates.
+There are two functions named [`color`]{.func}. The inner function
+[`color`]{.func} creates a [`color`](#types_color){.type} from random
+red, green and blue lights. The outer function [`color`]{.func} sets the
+foreground color of a text.
+
+[Below is a program which draws an hourglass at the cursor
+position]{#graphic_hourglass_cursor}
+
+``` indent
+$ include "seed7_05.s7i";
+  include "draw.s7i";
+  include "keybd.s7i";
+  include "pic32.s7i";
+  include "time.s7i";
+  include "duration.s7i";
+
+const proc: main is func
+  local
+    var PRIMITIVE_WINDOW: hourglass is PRIMITIVE_WINDOW.value;
+  begin
+    screen(640, 480);
+    hourglass := openSubWindow(curr_win, 1000, 1000,
+                               length(hourglass_pic[1]),
+                               length(hourglass_pic));
+    put(hourglass, 0, 0, createPixmap(hourglass_pic, 1, black));
+    KEYBOARD := GRAPH_KEYBOARD;
+    setCursorVisible(curr_win, FALSE);
+    repeat
+      setPos(hourglass, pointerXPos(curr_win) - width(hourglass) div 2,
+                        pointerYPos(curr_win) - height(hourglass) div 2);
+      wait(30000 . MICRO_SECONDS);
+    until inputReady(KEYBOARD);
+  end func;
+```
+
+The variable `hourglass` is of type [`PRIMITIVE_WINDOW`]{.type}. A
+variable of this type can hold a window (which is on screen) or a pixmap
+(which is off-screen). The function [`openSubWindow`]{.func} creates a
+sub window inside the parent window [`curr_win`]{.var}. The window
+[`curr_win`]{.var} has a title bar. The window created by
+[`openSubWindow`]{.func} does not have a title bar or a border. The
+function [`createPixmap`]{.func} is used to create the pixmap of an
+hourglass by using a pattern from the library [`"pic32.s7i"`]{.lib}. The
+function [`setCursorVisible`]{.func} disables the visibility of the
+mouse cursor in [`curr_win`]{.var}. The functions [`pointerXPos`]{.func}
+and [`pointerYPos`]{.func} return the current X and Y coordinates of the
+mouse cursor. The function [`setPos`]{.func} is used to position the
+`hourglass` to the cursor position (minus half of the width and height
+of the hourglass).
+
+Besides other image formats Seed7 supports \"poor man\'s images\" where
+an array of strings is used to represent an image. E.g.:
+
+``` indent
+const array string: hourglass_pic is [](
+  " bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb ",       # Mapping from character to color:
+  " bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb ",       # char  | color
+  "   bb XWWWWWWWWWWWWWWWWWWX bb   ",       # ------+---------------
+  "   bbXWWWWWWWWWWWWWWWWWWWWXbb   ",       # space | background color
+  "   bbWWXXXXXXXXXXXXXXXXXXWWbb   ",       #   B   | light_blue
+  "   bbWWX                XWWbb   ",       #   G   | light_green
+  "   bbWWX      YYYY      XWWbb   ",       #   L   | lavender
+  "   bbWWX     YYYYYY     XWWbb   ",       #   M   | light_magenta
+  "   bbXWWX   YYYYYYYY   XWWXbb   ",       #   O   | orange
+  "   bb XWWX YYYYYYYYYY XWWX bb   ",       #   P   | light_pink
+  "   bb  XWWYYYYYYYYYYYYWWX  bb   ",       #   R   | light_red
+  "   bb   XWWYYYYYYYYYYWWX   bb   ",       #   W   | white
+  "   bb    XWWYYYYYYYYWWX    bb   ",       #   X   | black
+  "   bb     XWWYYYYYYWWX     bb   ",       #   Y   | yellow
+  "   bb      XWWYYYYWWX      bb   ",       #   b   | brown
+  "   bb       XWWYYWWX       bb   ",       #   c   | light_cyan
+  "   bb       XWWYYWWX       bb   ",       #   d   | dark_gray
+  "   bb      XWWXYYXWWX      bb   ",       #   f   | forestgreen
+  "   bb     XWWX YY XWWX     bb   ",       #   g   | dark_green
+  "   bb    XWWX  YY  XWWX    bb   ",       #   i   | mint
+  "   bb   XWWX   YY   XWWX   bb   ",       #   l   | middle_blue
+  "   bb  XWWX    YY    XWWX  bb   ",       #   m   | dark_magenta
+  "   bb XWWX     YY     XWWX bb   ",       #   n   | dark_blue
+  "   bbXWWX     YYYY     XWWXbb   ",       #   p   | pink
+  "   bbWWX     YYYYYY     XWWbb   ",       #   r   | dark_red
+  "   bbWWX    YYYYYYYY    XWWbb   ",       #   x   | light_gray
+  "   bbWWX   YYYYYYYYYY   XWWbb   ",       #   y   | middle_gray
+  "   bbWWXXXYYYYYYYYYYYYXXXWWbb   ",       # other | black
+  "   bbXWWWWWWWWWWWWWWWWWWWWXbb   ",
+  "   bb XWWWWWWWWWWWWWWWWWWX bb   ",
+  " bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb ",
+  " bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb ");
+```
+
+[]{#actions_file_start}
+
+[]{#actions_PRIMITIVE_ACTIONS}
+
+## 15. PRIMITIVE ACTIONS
+
+Not all functions can be described by calling other functions of the
+same language. For this reason and for performance reasons several
+functions are defined using a mechanism called action. For example: It
+is easy to define the [while-statement](#stats_while-statement)
+by using recursion. But this would hurt performance and it would also
+use a huge amount of memory for the runtime stack. In practice an
+implementation of the [while-statement](#stats_while-statement)
+can use a conditional jump instead of a subroutine call. Since Seed7 has
+no [`goto`]{.keywd} statement, this is not an option. Instead the
+primitive action [`PRC_WHILE`](#actions_PRC_WHILE) can be used.
+The [while-statement](#stats_while-statement) is defined in the
+basic Seed7 library [`"seed7_05.s7i"`]{.lib} with:
+
+``` indent
+const proc: while (in func boolean: condition) do
+              (in proc: statement)
+            end while                           is action "PRC_WHILE";
+```
+
+This declaration shows the types and the position of the parameters of a
+[while-statement](#stats_while-statement). Such an action
+declaration contains enough information to use the defined construct.
+The semantic of all primitive actions is hard coded in the interpreter
+and in the compiler. The parameters of the hard coded actions and the
+corresponding definitions in Seed7 must match. If you are interested in
+the Seed7 definitions of primitive actions just look into the file
+[`"seed7_05.s7i"`]{.lib}.
+
+Currently there are several hundred primitive actions predefined in the
+interpreter. They all have names in upper case characters which have the
+form:
+
+``` indent
+TYPE_ACTION
+```
+
+Which means that for example all [`integer`](#types_integer){.type}
+actions start with [INT\_](#actions_integer) and all assignment
+actions end with \_CPY . The following list shows actions which are used
+with more than one type:
+
+  ------------ -- -----------------------------------------------------------------------------------------------------------------------------
+  \_ABS           Absolute value
+  \_ADD           Addition
+  \_CAT           Concatenation
+  \_CMP           Compare
+  \_CPY           [Copy](#stats_Assignment) a new value to an existing object ([Assignment](#stats_Assignment))
+  \_CREATE        [Create](#types_creator) and initialize a new object ([creator](#types_creator){.type})
+  \_DESTR         [Destroy](#types_destroyer) an unused object ([destroyer](#types_destroyer){.type})
+  \_DECR          Decrement
+  \_DIV           Division
+  \_EQ            Equal
+  \_GE            Greater equal
+  \_GETC          Get one character from a [file]{.type}
+  \_GETS          Get [`string`](#types_string){.type} with maximum length from a [file]{.type}
+  \_GT            Greater than
+  \_HASHCODE      Compute a hashCode
+  \_HEAD          Head of [`string`](#types_string){.type}, [`array`](#types_array){.type} or [`ref_list`](#types_ref_list){.type}
+  \_ICONV         Conversion of [`integer`](#types_integer){.type} to another type
+  \_IDX           Index (Element) of [`string`](#types_string){.type}, [`array`](#types_array){.type} or [`ref_list`](#types_ref_list){.type}
+  \_INCR          Increment
+  \_IPOW          Power with [`integer`](#types_integer){.type} exponent
+  \_LE            Less equal
+  \_LNG           Length
+  \_LOG2          Base 2 logarithm
+  \_LOWER         Convert to lower case
+  \_LSHIFT        Shift left
+  \_LT            Less than
+  \_MDIV          Modulo division (Integer division truncated towards negative infinity)
+  \_MOD           Modulo (Reminder of \_MDIV integer division)
+  \_MULT          Multiply
+  \_NE            Not equal
+  \_NEGATE        Change sign
+  \_ODD           Odd number
+  \_ORD           Ordinal number
+  \_PARSE         Conversion of [`string`](#types_string){.type} to another type
+  \_PLUS          Positive sign (noop)
+  \_POW           Power
+  \_PRED          Predecessor
+  \_RAND          Random value
+  \_RANGE         Range of [`string`](#types_string){.type}, [`array`](#types_array){.type} or [`ref_list`](#types_ref_list){.type}
+  \_REM           Remainder (Reminder of \_DIV integer division)
+  \_RSHIFT        Arithmetic shift right
+  \_SBTR          Subtract
+  \_SCAN          Convert from [`string`](#types_string){.type} to another type
+  \_SEEK          Set actual file position of a [file]{.type}
+  \_SQRT          Square root
+  \_STR           Convert to [`string`](#types_string){.type}
+  \_SUCC          Successor
+  \_TAIL          Tail of [`string`](#types_string){.type}, [`array`](#types_array){.type} or [`ref_list`](#types_ref_list){.type}
+  \_TELL          Return the actual [file]{.type} position
+  \_UPPER         Convert to upper case
+  \_VALUE         Dereference a [`reference`](#types_reference){.type}
+  \_WRITE         Write [`string`](#types_string){.type} to [file]{.type}
+  ------------ -- -----------------------------------------------------------------------------------------------------------------------------
+
+Primitive actions are defined for many types. The functions which
+implement the primitive actions are grouped together in \*lib.c files.
+The following list contains the action prefix, the file containing the
+functions and a description:
+
+  ------------------------------------------- -- ---------- -- ----------------------------------------------------------------------------------
+  [ACT\_](#actions_ACTION)                actlib.c      [`ACTION`]{.type} operations
+  [ARR\_](#actions_array)                 arrlib.c      [`array`](#types_array){.type} operations
+  [BIG\_](#actions_bigInteger)            biglib.c      [`bigInteger`](#types_bigInteger){.type} operations
+  [BIN\_](#actions_binary)                binlib.c      [`bin32`](#types_bin32){.type} and [`bin64`](#types_bin64){.type} operations
+  [BLN\_](#actions_boolean)               blnlib.c      [`boolean`](#types_boolean){.type} operations
+  [BST\_](#actions_bstring)               bstlib.c      Operations for [`bstring`](#types_bstring){.type}
+  [CHR\_](#actions_char)                  chrlib.c      [`char`](#types_char){.type} operations
+  [CMD\_](#actions_commands)              cmdlib.c      Various directory, file and other commands
+  [CON\_](#actions_console_output)        conlib.c      [`console_file`]{.type} operations
+  [DCL\_](#actions_declarations)          dcllib.c      Declaration operations
+  [DRW\_](#actions_graphic_output)        drwlib.c      Drawing operations
+  [ENU\_](#actions_enumeration)           enulib.c      Enumeration operations
+  [FIL\_](#actions_clib_file)             fillib.c      [`clib_file`]{.type} operations
+  [FLT\_](#actions_float)                 fltlib.c      [`float`](#types_float){.type} operations
+  [GKB\_](#actions_graphic_keyboard)      gkblib.c      Graphic keyboard operations
+  [HSH\_](#actions_hash)                  hshlib.c      [`hash`](#types_hash){.type} operations
+  [INT\_](#actions_integer)               intlib.c      [`integer`](#types_integer){.type} operations
+  [ITF\_](#actions_interface)             itflib.c      Operations for interface types
+  [KBD\_](#actions_console_keyboard)      kbdlib.c      Keyboard operations
+  [LST\_](#actions_list)                  lstlib.c      List operations
+  [PCS\_](#actions_process)               pcslib.c      [`process`](#types_process){.type} operations
+  [PTL\_](#actions_pointList)             drwlib.c      pointList operations
+  [POL\_](#actions_pollData)              pollib.c      [`pollData`](#types_pollData){.type} operations
+  [PRC\_](#actions_proc)                  prclib.c      [`proc`](#types_proc){.type} operations and statements
+  [PRG\_](#actions_program)               prglib.c      [`program`](#types_program){.type} operations
+  [REF\_](#actions_reference)             reflib.c      [`reference`](#types_reference){.type} operations
+  [RFL\_](#actions_ref_list)              rfllib.c      [`ref_list`](#types_ref_list){.type} operations
+  [SCT\_](#actions_struct)                sctlib.c      [`struct`](#types_struct){.type} operations
+  [SEL\_](#actions_structElement)         sellib.c      [`structElement`](#types_structElement){.type} operations
+  [SET\_](#actions_set)                   setlib.c      [`set`](#types_set){.type} operations
+  [SOC\_](#actions_PRIMITIVE_SOCKET)      soclib.c      [`PRIMITIVE_SOCKET`]{.type} operations
+  [SQL\_](#actions_database)              sqllib.c      [`database`](#types_database){.type} operations
+  [STR\_](#actions_string)                strlib.c      [`string`](#types_string){.type} operations
+  [TIM\_](#actions_time)                  timlib.c      [`time`](#types_time){.type} and [`duration`](#types_duration){.type} operations
+  [TYP\_](#actions_type)                  typlib.c      [`type`](#types_type){.type} operations
+  [UT8\_](#actions_utf8File)              ut8lib.c      [`utf8File`]{.type} operations
+  ------------------------------------------- -- ---------- -- ----------------------------------------------------------------------------------
+
+The C functions which implement primitive actions have lowercase names.
+E.g.: The action [`PRC_WHILE`](#actions_PRC_WHILE) is implemented
+with the C function `'prc_while()'` in the file [`"prclib.c"`]{.lib}.
+The parameter list for all C action functions is identical. Every
+\*lib.c file has a corresponding \*lib.h file which contains the
+prototypes for the action functions.
+
+In a Seed7 program the operator [`+`]{.op_no_ul} is used to add two
+[`integer`](#types_integer){.type} values. The primitive action, which
+describes the addition of two integers, is
+[`INT_ADD`](#actions_INT_ADD). The connection between [`+`]{.op}
+and [`INT_ADD`](#actions_INT_ADD) is done in the library
+[`"`[`integer.s7i`]{.lib}`"`]{.stri} with the definition:
+
+``` indent
+const func integer: (in integer: summand1) + (in integer: summand2) is action "INT_ADD";
+```
+
+To execute an action a corresponding C function must be present in the
+s7 interpreter. The function for the action
+[`INT_ADD`](#actions_INT_ADD) is
+[`int_add`](#actions_int_add){.func}`()`. The function
+[`int_add`](#actions_int_add){.func}`()` is defined in the file
+[`"intlib.c"`]{.lib} with:
+
+``` indent
+objectType int_add (listType arguments)
+
+  { /* int_add */
+    isit_int(arg_1(arguments));
+    isit_int(arg_3(arguments));
+    return bld_int_temp(
+        take_int(arg_1(arguments)) +
+        take_int(arg_3(arguments)));
+  } /* int_add */
+```
+
+The function [`int_add`](#actions_int_add){.func}`()` adds the first and
+the third argument (the second argument contains the + symbol. The file
+[`"objutl.h"`]{.lib} contains several macros and functions which help to
+handle the arguments (parameter list) of a C primitive action function.
+
+- The macros [`arg_1`](#ffi_arg_1){.func}, [`arg_2`](#ffi_arg_2){.func},
+  [`arg_3`](#ffi_arg_3){.func}, etc. can be used to get an individual
+  argument (E.g.: [`arg_3`](#ffi_arg_3){.func}`(arguments)` ).
+- The macros [`isit_int`](#ffi_isit_int){.func},
+  [`isit_stri`](#ffi_isit_stri){.func},
+  [`isit_file`](#ffi_isit_file){.func}, etc. can be used to check for
+  the correct [`category`](#types_category){.type} of an argument (E.g.:
+  [`isit_int`](#ffi_isit_int){.func}`(`[`arg_1`](#ffi_arg_1){.func}`(arguments))`
+  ).
+- The macros [`take_char`](#ffi_take_char){.func},
+  [`take_float`](#ffi_take_float){.func},
+  [`take_bigint`](#ffi_take_bigint){.func}, etc. can be used to get the
+  corresponding value of an argument (E.g.:
+  [`take_int`](#ffi_take_int){.func}`(`[`arg_1`](#ffi_arg_1){.func}`(arguments))`
+  ).
+- The functions [`bld_int_temp`](#ffi_bld_int_temp){.func},
+  [`bld_array_temp`](#ffi_bld_array_temp){.func},
+  [`bld_win_temp`](#ffi_bld_win_temp){.func}, etc. can be used to create
+  the ([`objectType`](#ffi_objectType){.type}) result of a primitive
+  action (E.g.:
+  `return `[`bld_int_temp`](#ffi_bld_int_temp){.func}`(0);` ).
+
+The file [`"intlib.h"`]{.lib} contains the prototype for the
+[`int_add`](#actions_int_add){.func}`()` function:
+
+``` indent
+objectType int_add (listType arguments);
+```
+
+Additionally every primitive action is registered in the file
+[`"primitive.c"`]{.lib}. The line which incorporates
+[`INT_ADD`](#actions_INT_ADD) is:
+
+``` indent
+{ "INT_ADD",             int_add,             },
+```
+
+The entries of the primitive action in the file [`"primitive.c"`]{.lib}
+are sorted alphabetically. With this definitions the s7 interpreter
+understands a primitive action.
+
+To allow a primitive function in a compiled Seed7 program the Seed7
+compiler (s7c) needs to know the action also. The compiler function
+which creates code for the [`INT_ADD`](#actions_INT_ADD) action
+is:
+
+``` indent
+const proc: process (INT_ADD, in reference: function,
+    in ref_list: params, inout expr_type: c_expr) is func
+
+  begin
+    c_expr.expr &:= "(";
+    process_expr(params[1], c_expr);
+    c_expr.expr &:= ") + (";
+    process_expr(params[3], c_expr);
+    c_expr.expr &:= ")";
+  end func;
+```
+
+This function is defined in
+[`"`[`seed7/lib/comp/int_act.s7i`]{.lib}`"`]{.lib} and called from the
+function [`process_action`]{.func} with:
+
+``` indent
+elsif action_name = "INT_ADD" then
+  process(INT_ADD, function, params, c_expr);
+```
+
+Some primitive actions are more complicated and inline code would not be
+the best solution for it. In this case an additional helper function is
+used. The action [`INT_LOG2`](#actions_INT_LOG2) is such an
+action. The definition of the function [`int_log2`]{.func}`()` in the
+file [`"intlib.c"`]{.lib} is:
+
+``` indent
+objectType int_log2 (listType arguments)
+
+  { /* int_log2 */
+    isit_int(arg_1(arguments));
+    return bld_int_temp(
+        intLog2(take_int(arg_1(arguments))));
+  } /* int_log2 */
+```
+
+The main work for the primitive action
+[`INT_LOG2`](#actions_INT_LOG2) is done in the helper function
+[`intLog2`](#actions_intLog2){.func}`()`. The helper function
+[`intLog2`](#actions_intLog2){.func}`()` can be found in the file
+[`"int_rtl.c"`]{.lib}:
+
+``` indent
+/**
+ *  Compute the truncated base 2 logarithm of an integer number.
+ *  @return the truncated base 2 logarithm.
+ *  @exception NUMERIC_ERROR The number is negative.
+ */
+intType intLog2 (intType number)
+
+  {
+    int result;
+
+  /* intLog2 */
+    if (unlikely(number < 0)) {
+      raise_error(NUMERIC_ERROR);
+      result = 0;
+    } else {
+      result = uintMostSignificantBit((uintType) number);
+    } /* if */
+    return result;
+  } /* intLog2 */
+```
+
+The file [`"int_rtl.h"`]{.lib} contains a prototype definition for the
+[`intLog2`](#actions_intLog2){.func}`()` helper function:
+
+``` indent
+intType intLog2 (intType number);
+```
+
+The helper functions are also used in the code generated by the Seed7
+compiler:
+
+``` indent
+const proc: process (INT_LOG2, in reference: function,
+    in ref_list: params, inout expr_type: c_expr) is func
+
+  begin
+    c_expr.expr &:= "intLog2(";
+    process_expr(params[1], c_expr);
+    c_expr.expr &:= ")";
+  end func;
+```
+
+The compiler writes a prototype of
+[`intLog2`](#actions_intLog2){.func}`()` in the function
+[`write_prototypes`]{.func}:
+
+``` indent
+declareExtern("intType     intLog2 (intType);");
+```
+
+All the \*lib.c files containing primitive actions and various other
+files with their functions are grouped together in the
+[`"s7_comp.a"`]{.lib} library (Licensed under GPL). Furthermore the C
+primitive action functions (E.g.: int_parse) of the \*lib.c files may
+use corresponding functions (E.g.: intParse) which can be found in
+\*\_rtl.c files (E.g.: [`"int_rtl.c"`]{.lib}). The \*\_rtl.c files are
+grouped together in the [`"seed7_05.a"`]{.lib} library (Licensed under
+LGPL). When a Seed7 program is compiled with the Seed7 compiler (s7c)
+inline code is generated for many primitive actions. To implement the
+remaining primitive actions the functions of the [`"seed7_05.a"`]{.lib}
+library are used.
+
+[]{#actions_ACTION}
+
+### 15.1 Actions for the type ACTION
+
+  Action name   actlib.c function   act_comp.c function
+  ------------- ------------------- ---------------------
+  ACT_ILLEGAL   act_illegal          
+  ACT_CPY       act_cpy             =
+  ACT_CREATE    act_create           
+  ACT_EQ        act_eq              ==
+  ACT_GEN       act_gen              
+  ACT_ICONV1    act_iconv1          actIConv
+  ACT_ICONV3    act_iconv3          actIConv
+  ACT_NE        act_ne              !=
+  ACT_ORD       act_ord             actOrd
+  ACT_STR       act_str             actStr
+  ACT_VALUE     act_value           actValue
+
+[]{#actions_array}
+
+### 15.2 Actions for array types
+
+  Action name        arrlib.c function   arr_rtl.c function
+  ------------------ ------------------- ---------------------------------------
+  ARR_APPEND         arr_append          arrAppend
+  ARR_ARRLIT         arr_arrlit          arrArrlit
+  ARR_ARRLIT2        arr_arrlit2         arrArrlit2
+  ARR_BASELIT        arr_baselit         arrBaselit
+  ARR_BASELIT2       arr_baselit2        arrBaselit2
+  ARR_CAT            arr_cat             arrCat
+  ARR_CONV           arr_conv            (noop)
+  ARR_CPY            arr_cpy             cpy\_ \...
+  ARR_CREATE         arr_create          create\_ \...
+  ARR_DESTR          arr_destr           destr\_ \...
+  ARR_EMPTY          arr_empty            
+  ARR_EXTEND         arr_extend          arrExtend
+  ARR_GEN            arr_gen             arrGen
+  ARR_HEAD           arr_head            arrHead
+  ARR_IDX            arr_idx             a-\>arr\[b-a-\>min_position\]
+  ARR_INSERT         arr_insert          arrInsert
+  ARR_INSERT_ARRAY   arr_insert_array    arrInsertArray
+  ARR_LNG            arr_lng             a-\>max_position-a-\>min_position + 1
+  ARR_MAXIDX         arr_maxidx          a-\>max_position
+  ARR_MINIDX         arr_minidx          a-\>min_position
+  ARR_PUSH           arr_push            arrPush
+  ARR_RANGE          arr_range           arrRange
+  ARR_REMOVE         arr_remove          arrRemove
+  ARR_REMOVE_ARRAY   arr_remove_array    arrRemoveArray
+  ARR_SORT           arr_sort            arrSort
+  ARR_SORT_REVERSE   arr_sort_reverse    arrSortReverse
+  ARR_SUBARR         arr_subarr          arrSubarr, arrSubarrTemp
+  ARR_TAIL           arr_tail            arrTail
+  ARR_TIMES          arr_times           times\_ \...
+
+[]{#actions_bigInteger}
+
+### 15.3 Actions for the type bigInteger
+
+  Action name          biglib.c function    big_rtl.c function
+  -------------------- -------------------- ----------------------------------------
+  BIG_ABS              big_abs              bigAbs
+  BIG_ADD              big_add              bigAdd, bigAddTemp
+  BIG_ADD_ASSIGN       big_add_assign       bigAddAssign, bigAddAssignSignedDigit
+  BIG_BIT_LENGTH       big_bit_length       bigBitLength
+  BIG_CMP              big_cmp              bigCmp
+  BIG_CONV             big_conv             (noop)
+  BIG_CPY              big_cpy              bigCpy
+  BIG_CREATE           big_create           bigCreate
+  BIG_DECR             big_decr             bigDecr
+  BIG_DESTR            big_destr            bigDestr
+  BIG_DIV              big_div              bigDiv
+  BIG_DIV_REM          big_div_rem          bigDivRem
+  BIG_EQ               big_eq               bigEq
+  BIG_FROM_BSTRI_BE    big_from_bstri_be    bigFromBStriBe
+  BIG_FROM_BSTRI_LE    big_from_bstri_le    bigFromBStriLe
+  BIG_GCD              big_gcd              bigGcd
+  BIG_GE               big_ge               bigCmp \>= 0
+  BIG_GT               big_gt               bigCmp \> 0
+  BIG_HASHCODE         big_hashcode         bigHashCode
+  BIG_ICONV1           big_iconv1           bigIConv
+  BIG_ICONV3           big_iconv3           bigIConv
+  BIG_INCR             big_incr             bigIncr
+  BIG_IPOW             big_ipow             bigIPow
+  BIG_LE               big_le               bigCmp \<= 0
+  BIG_LOG10            big_log10            bigLog10
+  BIG_LOG2             big_log2             bigLog2
+  BIG_LOWEST_SET_BIT   big_lowest_set_bit   bigLowestSetBit
+  BIG_LSHIFT           big_lshift           bigLShift
+  BIG_LSHIFT_ASSIGN    big_lshift_assign    bigLShiftAssign
+  BIG_LT               big_lt               bigCmp \< 0
+  BIG_MDIV             big_mdiv             bigMDiv
+  BIG_MOD              big_mod              bigMod
+  BIG_MULT             big_mult             bigMult
+  BIG_MULT_ASSIGN      big_mult_assign      bigMultAssign
+  BIG_NE               big_ne               bigNe
+  BIG_NEGATE           big_negate           bigNegate
+  BIG_ODD              big_odd              bigOdd
+  BIG_ORD              big_ord              bigOrd
+  BIG_PARSE1           big_parse1           bigParse
+  BIG_PARSE_BASED      big_parse_based      bigParseBased
+  BIG_PLUS             big_plus             (noop)
+  BIG_PRED             big_pred             bigPred
+  BIG_RADIX            big_RADIX            bigRadix
+  BIG_RAND             big_rand             bigRand
+  BIG_REM              big_rem              bigRem
+  BIG_RSHIFT           big_rshift           bigRShift
+  BIG_RSHIFT_ASSIGN    big_rshift_assign    bigRShiftAssign
+  BIG_SBTR             big_sbtr             bigSbtr, bigSbtrTemp
+  BIG_SBTR_ASSIGN      big_sbtr_assign      bigSbtrAssign, bigAddAssignSignedDigit
+  BIG_STR              big_str              bigStr
+  BIG_SUCC             big_succ             bigSucc
+  BIG_TO_BSTRI_BE      big_to_bstri_be      bigToBStriBe
+  BIG_TO_BSTRI_LE      big_to_bstri_le      bigToBStriLe
+  BIG_VALUE            big_value            bigValue
+  BIG_radix            big_radix            bigRadix
+
+[]{#actions_binary}
+
+### 15.4 Actions for the types bin32 and bin64
+
+  Action name               binlib.c function         big_rtl.c or int_rtl.c function
+  ------------------------- ------------------------- -------------------------------------------------------
+  BIN_AND                   bin_and                   &
+  BIN_AND_ASSIGN            bin_and_assign            &=
+  BIN_BIG                   bin_big                   bigFromUInt64
+  BIN_BINARY                bin_binary                bigToUInt64
+  BIN_BIT_LENGTH            bin_bit_length            uint64MostSignificantBit
+  BIN_BYTES_BE_2_UINT       bin_bytes_be_2_uint       uintBytesBe2UInt
+  BIN_BYTES_LE_2_UINT       bin_bytes_le_2_uint       uintBytesLe2UInt
+  BIN_CARD                  bin_card                  uintCard
+  BIN_CMP                   bin_cmp                   uintCmp
+  BIN_GET_BINARY_FROM_SET   bin_get_binary_from_set   setToUInt
+  BIN_LOWEST_SET_BIT        bin_lowest_set_bit        (intType)(bits==0?-1:uint64LeastSignificantBit(bits))
+  BIN_LSHIFT                bin_lshift                (intType)((uintType)(a\<&ltb))
+  BIN_LSHIFT_ASSIGN         bin_lshift_assign         a=(intType)((uintType)(a\<&ltb))
+  BIN_N_BYTES_BE            bin_n_bytes_be            uintNBytesBe
+  BIN_N_BYTES_LE            bin_n_bytes_le            uintNBytesLe
+  BIN_OR                    bin_or                    \|
+  BIN_OR_ASSIGN             bin_or_assign             \|=
+  BIN_RADIX                 bin_RADIX                 uintRadix
+  BIN_RSHIFT                bin_rshift                (intType)((uintType)(a\>\>b))
+  BIN_RSHIFT_ASSIGN         bin_rshift_assign         a=(intType)((uintType)(a\>\>b))
+  BIN_STR                   bin_str                   uintStr
+  BIN_XOR                   bin_xor                   \^
+  BIN_XOR_ASSIGN            bin_xor_assign            \^=
+  BIN_radix                 bin_radix                 uintRadix
+
+[]{#actions_boolean}
+
+### 15.5 Actions for the type boolean
+
+  Action name   blnlib.c function   bln_rtl.c function
+  ------------- ------------------- --------------------------------
+  BLN_AND       bln_and             &&
+  BLN_CPY       bln_cpy             blnCpy
+  BLN_CREATE    bln_create          = or genericCreate
+  BLN_EQ        bln_eq              ==
+  BLN_GE        bln_ge              \>=
+  BLN_GT        bln_gt              \>
+  BLN_ICONV1    bln_iconv1          & 1
+  BLN_ICONV3    bln_iconv3          & 1
+  BLN_LE        bln_le              \<=
+  BLN_LT        bln_lt              \<
+  BLN_NE        bln_ne              !=
+  BLN_NOT       bln_not             !
+  BLN_OR        bln_or              \|\|
+  BLN_ORD       bln_ord             (intType)
+  BLN_PRED      bln_pred            -1
+  BLN_SUCC      bln_succ            +1
+  BLN_TERNARY   bln_ternary         ((cond)?(thenExpr):(elseExpr))
+  BLN_VALUE     bln_value           blnValue
+
+[]{#actions_bstring}
+
+### 15.6 Actions for byte strings
+
+  Action name    bstlib.c function   bst_rtl.c function
+  -------------- ------------------- ------------------------------------------------------------------------
+  BST_APPEND     bst_append          bstAppend
+  BST_CAT        bst_cat             bstCat
+  BST_CMP        bst_cmp             bstCmp
+  BST_CPY        bst_cpy             bstCpy
+  BST_CREATE     bst_create          bstCreate
+  BST_DESTR      bst_destr           bstDestr
+  BST_EMPTY      bst_empty            
+  BST_EQ         bst_eq              a-\>size==b-\>size && memcmp(a,b,a-\>size\*sizeof(unsigned char))==0
+  BST_HASHCODE   bst_hashcode        bstHashCode
+  BST_IDX        bst_idx             a-\>mem\[b-1\]
+  BST_LNG        bst_lng             a-\>size
+  BST_NE         bst_ne              a-\>size!=b-\>size \|\| memcmp(a,b,a-\>size\*sizeof(unsigned char))!=0
+  BST_PARSE1     bst_parse1          bstParse
+  BST_STR        bst_str             bstStr
+  BST_VALUE      bst_value           bstValue
+
+[]{#actions_char}
+
+### 15.7 Actions for the type char
+
+  Action name     chrlib.c function   chr_rtl.c function
+  --------------- ------------------- -------------------------
+  CHR_CLIT        chr_clit            chrCLit
+  CHR_CMP         chr_cmp             chrCmp
+  CHR_CPY         chr_cpy             chrCpy
+  CHR_CREATE      chr_create          = or genericCreate
+  CHR_DECR        chr_decr            \--
+  CHR_EQ          chr_eq              ==
+  CHR_GE          chr_ge              \>=
+  CHR_GT          chr_gt              \>
+  CHR_HASHCODE    chr_hashcode        (intType)((scharType)a)
+  CHR_ICONV1      chr_iconv1          (charType)
+  CHR_ICONV3      chr_iconv3          (charType)
+  CHR_INCR        chr_incr            ++
+  CHR_IS_LETTER   chr_is_letter       chrIsLetter
+  CHR_LE          chr_le              \<=
+  CHR_LOW         chr_low             chrLow
+  CHR_LT          chr_lt              \<
+  CHR_NE          chr_ne              !=
+  CHR_ORD         chr_ord             (intType)
+  CHR_PRED        chr_pred            -1
+  CHR_STR         chr_str             chrStr
+  CHR_SUCC        chr_succ            +1
+  CHR_UP          chr_up              chrUp
+  CHR_VALUE       chr_value           chrValue
+  CHR_WIDTH       chr_width           chrWidth
+
+[]{#actions_commands}
+
+### 15.8 Actions for various directory, file and other commands
+
+  Action name                    cmdlib.c function              cmd_rtl.c function
+  ------------------------------ ------------------------------ -------------------------
+  CMD_BIG_FILESIZE               cmd_big_filesize               cmdBigFileSize
+  CMD_CHDIR                      cmd_chdir                      cmdChdir
+  CMD_CLONE_FILE                 cmd_clone_file                 cmdCloneFile
+  CMD_CONFIG_VALUE               cmd_config_value               cmdConfigValue
+  CMD_COPY_FILE                  cmd_copy_file                  cmdCopyFile
+  CMD_ENVIRONMENT                cmd_environment                cmdEnvironment
+  CMD_FILESIZE                   cmd_filesize                   cmdFileSize
+  CMD_FILETYPE                   cmd_filetype                   cmdFileType
+  CMD_FILETYPE_SL                cmd_filetype_sl                cmdFileTypeSL
+  CMD_FINAL_PATH                 cmd_final_path                 cmdFinalPath
+  CMD_GETCWD                     cmd_getcwd                     cmdGetcwd
+  CMD_GETENV                     cmd_getenv                     cmdGetenv
+  CMD_GET_ATIME                  cmd_get_atime                  cmdGetATime
+  CMD_GET_ATIME_OF_SYMLINK       cmd_get_atime_of_symlink       cmdGetATimeOfSymlink
+  CMD_GET_CTIME                  cmd_get_ctime                  cmdGetCTime
+  CMD_GET_FILE_MODE              cmd_get_file_mode              cmdGetFileMode
+  CMD_GET_FILE_MODE_OF_SYMLINK   cmd_get_file_mode_of_symlink   cmdGetFileModeOfSymlink
+  CMD_GET_GROUP                  cmd_get_group                  cmdGetGroup
+  CMD_GET_GROUP_OF_SYMLINK       cmd_get_group_of_symlink       cmdGetGroupOfSymlink
+  CMD_GET_MTIME                  cmd_get_mtime                  cmdGetMTime
+  CMD_GET_MTIME_OF_SYMLINK       cmd_get_mtime_of_symlink       cmdGetMTimeOfSymlink
+  CMD_GET_OWNER                  cmd_get_owner                  cmdGetOwner
+  CMD_GET_OWNER_OF_SYMLINK       cmd_get_owner_of_symlink       cmdGetOwnerOfSymlink
+  CMD_GET_SEARCH_PATH            cmd_get_search_path            cmdGetSearchPath
+  CMD_HOME_DIR                   cmd_home_dir                   cmdHomeDir
+  CMD_MAKE_DIR                   cmd_make_dir                   cmdMakeDir
+  CMD_MAKE_LINK                  cmd_make_link                  cmdMakeLink
+  CMD_MOVE                       cmd_move                       cmdMove
+  CMD_READ_DIR                   cmd_read_dir                   cmdReadDir
+  CMD_READ_LINK                  cmd_read_link                  cmdReadLink
+  CMD_READ_LINK_ABSOLUTE         cmd_read_link_absolute         cmdReadLinkAbsolute
+  CMD_REMOVE_FILE                cmd_remove_file                cmdRemoveFile
+  CMD_REMOVE_TREE                cmd_remove_tree                cmdRemoveTree
+  CMD_SETENV                     cmd_setenv                     cmdSetenv
+  CMD_SET_ATIME                  cmd_set_atime                  cmdSetATime
+  CMD_SET_FILEMODE               cmd_set_filemode               cmdSetFileMode
+  CMD_SET_GROUP                  cmd_set_group                  cmdSetGroup
+  CMD_SET_GROUP_OF_SYMLINK       cmd_set_group_of_symlink       cmdSetGroupOfSymlink
+  CMD_SET_MTIME                  cmd_set_mtime                  cmdSetMTime
+  CMD_SET_MTIME_OF_SYMLINK       cmd_set_mtime_of_symlink       cmdSetMTimeOfSymlink
+  CMD_SET_OWNER                  cmd_set_owner                  cmdSetOwner
+  CMD_SET_OWNER_OF_SYMLINK       cmd_set_owner_of_symlink       cmdSetOwnerOfSymlink
+  CMD_SET_SEARCH_PATH            cmd_set_search_path            cmdSetSearchPath
+  CMD_SHELL                      cmd_shell                      cmdShell
+  CMD_SHELL_ESCAPE               cmd_shell_escape               cmdShellEscape
+  CMD_TO_OS_PATH                 cmd_to_os_path                 cmdToOsPath
+  CMD_UNSETENV                   cmd_unsetenv                   cmdUnsetenv
+
+[]{#actions_console_output}
+
+### 15.9 Actions for text (console) screen output
+
+  Action name   scrlib.c function   con_inf.c/con_rtl.c/con_win.c function
+  ------------- ------------------- ----------------------------------------
+  CON_CLEAR     con_clear           conClear
+  CON_COLUMN    con_column          conColumn
+  CON_CURSOR    con_cursor          conCursor
+  CON_FLUSH     con_flush           conFlush
+  CON_HEIGHT    con_height          conHeight
+  CON_H_SCL     con_h_scl           conHScroll
+  CON_LINE      con_line            conLine
+  CON_OPEN      con_open            conOpen
+  CON_SETPOS    con_setpos          conSetpos
+  CON_V_SCL     con_v_scl           conVScroll
+  CON_WIDTH     con_width           conWidth
+  CON_WRITE     con_write           conWrite
+
+[]{#actions_declarations}
+
+### 15.10 Actions for declarations
+
+  Action name      dcllib.c function
+  ---------------- -------------------
+  DCL_ATTR         dcl_attr
+  DCL_CONST        dcl_const
+  DCL_ELEMENTS     dcl_elements
+  DCL_FWD          dcl_fwd
+  DCL_FWDVAR       dcl_fwdvar
+  DCL_GETFUNC      dcl_getfunc
+  DCL_GETOBJ       dcl_getobj
+  DCL_GLOBAL       dcl_global
+  DCL_IN1          dcl_in1
+  DCL_IN1VAR       dcl_in1var
+  DCL_IN2          dcl_in2
+  DCL_IN2VAR       dcl_in2var
+  DCL_INOUT1       dcl_inout1
+  DCL_INOUT2       dcl_inout2
+  DCL_PARAM_ATTR   dcl_param_attr
+  DCL_REF1         dcl_ref1
+  DCL_REF2         dcl_ref2
+  DCL_SYMB         dcl_symb
+  DCL_SYNTAX       dcl_syntax
+  DCL_VAL1         dcl_val1
+  DCL_VAL2         dcl_val2
+  DCL_VAR          dcl_var
+
+[]{#actions_graphic_output}
+
+### 15.11 Actions to do graphic output
+
+  Action name                     drwlib.c function               drw_rtl.c/drw_x11.c/drw_win.c function
+  ------------------------------- ------------------------------- ----------------------------------------
+  DRW_BORDER                      drw_border                      drwBorder
+  DRW_CAPTURE                     drw_capture                     drwCapture
+  DRW_CLEAR                       drw_clear                       drwClear
+  DRW_CMP                         drw_cmp                         ptrCmp / ptrCmpGeneric
+  DRW_CONV_POINT_LIST             drw_conv_point_list             drwConvPointList
+  DRW_COPYAREA                    drw_copyarea                    drwCopyArea
+  DRW_CPY                         drw_cpy                         drwCpy
+  DRW_CREATE                      drw_create                      drwCreate
+  DRW_DESTR                       drw_destr                       drwDestr
+  DRW_EMPTY                       drw_empty                        
+  DRW_EQ                          drw_eq                          ==
+  DRW_FLUSH                       drw_flush                       drwFlush
+  DRW_FPOLY_LINE                  drw_fpoly_line                  drwFPolyLine
+  DRW_GEN_POINT_LIST              drw_gen_point_list              drwGenPointList
+  DRW_GET_IMAGE_PIXEL             drw_get_image_pixel             drwGetImagePixel
+  DRW_GET_PIXEL                   drw_get_pixel                   drwGetPixel
+  DRW_GET_PIXEL_ARRAY             drw_get_pixel_array             drwGetPixelArray
+  DRW_GET_PIXEL_DATA              drw_get_pixel_data              drwGetPixelData
+  DRW_GET_PIXEL_DATA_FROM_ARRAY   drw_get_pixel_data_from_array   drwGetPixelDataFromArray
+  DRW_GET_PIXMAP                  drw_get_pixmap                  drwGetPixmap
+  DRW_GET_PIXMAP_FROM_PIXELS      drw_get_pixmap_from_pixels      drwGetPixmapFromPixels
+  DRW_HASHCODE                    drw_hashcode                    (intType)(((memSizeType)a)\>\>6)
+  DRW_HEIGHT                      drw_height                      drwHeight
+  DRW_NE                          drw_ne                          !=
+  DRW_NEW_PIXMAP                  drw_new_pixmap                  drwNewPixmap
+  DRW_OPEN                        drw_open                        drwOpen
+  DRW_OPEN_SUB_WINDOW             drw_open_sub_window             drwOpenSubWindow
+  DRW_PARC                        drw_parc                        drwPArc
+  DRW_PCIRCLE                     drw_pcircle                     drwPCircle
+  DRW_PFARC                       drw_pfarc                       drwPFArc
+  DRW_PFARCCHORD                  drw_pfarcchord                  drwPFArcChord
+  DRW_PFARCPIESLICE               drw_pfarcpieslice               drwFArcPieSlice
+  DRW_PFCIRCLE                    drw_pfcircle                    drwPFCircle
+  DRW_PFELLIPSE                   drw_pfellipse                   drwPFEllipse
+  DRW_PIXEL_TO_RGB                drw_pixel_to_rgb                drwPixelToRgb
+  DRW_PLINE                       drw_pline                       drwPLine
+  DRW_POINTER_XPOS                drw_pointer_xpos                drwPointerXpos
+  DRW_POINTER_YPOS                drw_pointer_ypos                drwPointerYpos
+  DRW_POLY_LINE                   drw_poly_line                   drwPolyLine
+  DRW_PPOINT                      drw_ppoint                      drwPPoint
+  DRW_PRECT                       drw_prect                       drwPRect
+  DRW_PUT                         drw_put                         drwPut
+  DRW_PUT_SCALED                  drw_put_scaled                  drwPutScaled
+  DRW_RGBCOL                      drw_rgbcol                      drwRgbColor
+  DRW_SCREEN_HEIGHT               drw_screen_height               drwScreenHeight
+  DRW_SCREEN_WIDTH                drw_screen_width                drwScreenWidth
+  DRW_SET_CLOSE_ACTION            drw_set_close_action            drwSetCloseAction
+  DRW_SET_CONTENT                 drw_set_content                 drwSetContent
+  DRW_SET_CURSOR_VISIBLE          drw_set_cursor_visible          drwSetCursorVisible
+  DRW_SET_POINTER_POS             drw_set_pointer_pos             drwSetPointerPos
+  DRW_SET_POS                     drw_set_pos                     drwSetPos
+  DRW_SET_TRANSPARENT_COLOR       drw_set_transparent_color       drwSetTransparentColor
+  DRW_SET_WINDOW_NAME             drw_set_window_name             drwSetWindowName
+  DRW_TEXT                        drw_text                        drwText
+  DRW_TO_BOTTOM                   drw_to_bottom                   drwToBottom
+  DRW_TO_TOP                      drw_to_top                      drwToTop
+  DRW_VALUE                       drw_value                       drwValue
+  DRW_WIDTH                       drw_width                       drwWidth
+  DRW_XPOS                        drw_xpos                        drwXPos
+  DRW_YPOS                        drw_ypos                        drwYPos
+
+[]{#actions_enumeration}
+
+### 15.12 Actions for enumeration types
+
+  Action name   enulib.c function    
+  ------------- ------------------- --------------------
+  ENU_CONV      enu_conv            (noop)
+  ENU_CPY       enu_cpy             =
+  ENU_CREATE    enu_create          = or genericCreate
+  ENU_EQ        enu_eq              ==
+  ENU_GENLIT    enu_genlit           
+  ENU_ICONV2    enu_iconv2          (noop)
+  ENU_LIT       enu_lit              
+  ENU_NE        enu_ne              !=
+  ENU_ORD2      enu_ord2            (noop)
+  ENU_VALUE     enu_value           enuValue
+
+[]{#actions_clib_file}
+
+### 15.13 Actions for the type clib_file
+
+  Action name            fillib.c function      fil_rtl.c function
+  ---------------------- ---------------------- --------------------
+  FIL_BIG_LNG            fil_big_lng            filBigLng
+  FIL_BIG_SEEK           fil_big_seek           filBigSeek
+  FIL_BIG_TELL           fil_big_tell           filBigTell
+  FIL_CLOSE              fil_close              fclose
+  FIL_CPY                fil_cpy                fltCpy
+  FIL_CREATE             fil_create             fltCreate
+  FIL_DESTR              fil_destr              filDestr
+  FIL_EMPTY              fil_empty               
+  FIL_EOF                fil_eof                feof
+  FIL_EQ                 fil_eq                 ==
+  FIL_ERR                fil_err                stderr
+  FIL_FLUSH              fil_flush              fflush
+  FIL_GETC               fil_getc               fgetc
+  FIL_GETS               fil_gets               filGets
+  FIL_HAS_NEXT           fil_has_next           filHasNext
+  FIL_IN                 fil_in                 stdin
+  FIL_INPUT_READY        fil_input_ready        filInputReady
+  FIL_LINE_READ          fil_line_read          filLineRead
+  FIL_LIT                fil_lit                filLit
+  FIL_LNG                fil_lng                filLng
+  FIL_NE                 fil_ne                 !=
+  FIL_OPEN               fil_open               filOpen
+  FIL_OPEN_NULL_DEVICE   fil_open_null_device   filOpenNullDevice
+  FIL_OUT                fil_out                stdout
+  FIL_PCLOSE             fil_pclose             filPclose
+  FIL_PIPE               fil_pipe               filPipe
+  FIL_POPEN              fil_popen              filPopen
+  FIL_PRINT              fil_print              filPrint
+  FIL_SEEK               fil_seek               filSeek
+  FIL_SEEKABLE           fil_seekable           filSeekable
+  FIL_SETBUF             fil_setbuf             filSetbuf
+  FIL_TELL               fil_tell               filTell
+  FIL_TERMINATED_READ    fil_terminated_read    filTerminatedRead
+  FIL_TRUNCATE           fil_truncate           filTruncate
+  FIL_VALUE              fil_value              filValue
+  FIL_WORD_READ          fil_word_read          filWordRead
+  FIL_WRITE              fil_write              filWrite
+
+[]{#actions_float}
+
+### 15.14 Actions for the type float
+
+  Action name          fltlib.c function    flt_rtl.c function
+  -------------------- -------------------- ---------------------------------------------
+  FLT_ABS              flt_abs              fabs
+  FLT_ACOS             flt_acos             acos
+  FLT_ADD              flt_add              \+
+  FLT_ADD_ASSIGN       flt_add_assign       +=
+  FLT_ASIN             flt_asin             asin
+  FLT_ATAN             flt_atan             atan
+  FLT_ATAN2            flt_atan2            atan2
+  FLT_BITS2DOUBLE      flt_bits2double      (x.bits=a, x.aDouble)
+  FLT_BITS2SINGLE      flt_bits2single      (x.bits=a, x.aSingle)
+  FLT_CEIL             flt_ceil             ceil
+  FLT_CMP              flt_cmp              fltCmp
+  FLT_COS              flt_cos              cos
+  FLT_COSH             flt_cosh             cosh
+  FLT_CPY              flt_cpy              fltCpy
+  FLT_CREATE           flt_create           = or genericCreate
+  FLT_DECOMPOSE        flt_decompose        frexp
+  FLT_DGTS             flt_dgts             fltDgts
+  FLT_DIV              flt_div              /
+  FLT_DIV_ASSIGN       flt_div_assign       /=
+  FLT_DOUBLE2BITS      flt_double2bits      (x.aDouble=a, x.bits)
+  FLT_EQ               flt_eq               ==
+  FLT_EXP              flt_exp              exp
+  FLT_EXPM1            flt_expm1            expm1
+  FLT_FLOOR            flt_floor            floor
+  FLT_GE               flt_ge               \>=
+  FLT_GT               flt_gt               \>
+  FLT_HASHCODE         flt_hashcode         (x.floatValue=a, x.intValue)
+  FLT_ICONV1           flt_iconv1           (float)
+  FLT_ICONV3           flt_iconv3           (float)
+  FLT_IPOW             flt_ipow             fltIPow
+  FLT_ISNAN            flt_isnan            isnan
+  FLT_ISNEGATIVEZERO   flt_isnegativezero   fltIsNegativeZero
+  FLT_LE               flt_le               \<=
+  FLT_LOG              flt_log              log
+  FLT_LOG10            flt_log10            log10
+  FLT_LOG1P            flt_log1p            log1p
+  FLT_LOG2             flt_log2             log2
+  FLT_LSHIFT           flt_lshift           ldexp
+  FLT_LT               flt_lt               \<
+  FLT_MOD              flt_mod              fltMod
+  FLT_MULT             flt_mult             \*
+  FLT_MULT_ASSIGN      flt_mult_assign      \*=
+  FLT_NE               flt_ne               !=
+  FLT_NEGATE           flt_negate           \-
+  FLT_PARSE1           flt_parse1           fltParse
+  FLT_PLUS             flt_plus             (noop)
+  FLT_POW              flt_pow              pow
+  FLT_RAND             flt_rand             fltRand
+  FLT_REM              flt_rem              fmod
+  FLT_ROUND            flt_round            a\<0.0?-((intType)(0.5-a)):(intType)(0.5+a)
+  FLT_RSHIFT           flt_rshift           ldexp
+  FLT_SBTR             flt_sbtr             \-
+  FLT_SBTR_ASSIGN      flt_sbtr_assign      -=
+  FLT_SCI              flt_sci              fltSci
+  FLT_SIN              flt_sin              sin
+  FLT_SINGLE2BITS      flt_single2bits      (x.aSingle=a, x.bits)
+  FLT_SINH             flt_sinh             sinh
+  FLT_SQRT             flt_sqrt             sqrt
+  FLT_STR              flt_str              fltStr
+  FLT_STR_SCIENTIFIC   flt_str_scientific   fltStrScientific
+  FLT_TAN              flt_tan              tan
+  FLT_TANH             flt_tanh             tanh
+  FLT_TRUNC            flt_trunc            (intType)
+  FLT_VALUE            flt_value            fltValue
+
+[]{#actions_graphic_keyboard}
+
+### 15.15 Actions to support the graphic keyboard
+
+  Action name          drwlib.c function    kbd_rtl.c/drw_x11.c/drw_win.c function
+  -------------------- -------------------- ----------------------------------------
+  GKB_BUTTON_PRESSED   gkb_button_pressed   gkbButtonPressed
+  GKB_CLICKED_XPOS     gkb_clicked_xpos     gkbClickedXpos
+  GKB_CLICKED_YPOS     gkb_clicked_ypos     gkbClickedYpos
+  GKB_GETC             gkb_getc             gkbGetc
+  GKB_GETS             gkb_gets             gkbGets
+  GKB_INPUT_READY      gkb_input_ready      gkbInputReady
+  GKB_LINE_READ        gkb_line_read        gkbLineRead
+  GKB_RAW_GETC         gkb_raw_getc         gkbRawGetc
+  GKB_SELECT_INPUT     gkb_select_input     gkbSelectInput
+  GKB_WINDOW           gkb_window           gkbWindow
+  GKB_WORD_READ        gkb_word_read        gkbWordRead
+
+[]{#actions_hash}
+
+### 15.16 Actions for hash types
+
+  Action name            hshlib.c function      hsh_rtl.c function
+  ---------------------- ---------------------- --------------------
+  HSH_CONCAT_KEY_VALUE   hsh_concat_key_value   hshConcatKeyValue
+  HSH_CONTAINS           hsh_contains           hshContains
+  HSH_CPY                hsh_cpy                hshCpy
+  HSH_CREATE             hsh_create             hshCreate
+  HSH_DESTR              hsh_destr              hshDestr
+  HSH_EMPTY              hsh_empty              hshEmpty
+  HSH_EXCL               hsh_excl               hshExcl
+  HSH_FOR                hsh_for                for
+  HSH_FOR_DATA_KEY       hsh_for_data_key       for
+  HSH_FOR_KEY            hsh_for_key            for
+  HSH_GEN_HASH           hsh_gen_hash           hshGenHash
+  HSH_GEN_KEY_VALUE      hsh_gen_key_value      hshGenKeyValue
+  HSH_IDX                hsh_idx                hshIdx, hshIdxAddr
+  HSH_IDX2               hsh_idx2                
+  HSH_INCL               hsh_incl               hshIncl
+  HSH_KEYS               hsh_keys               hshKeys
+  HSH_LNG                hsh_lng                a-\>size
+  HSH_RAND_KEY           hsh_rand_key           hshRand
+  HSH_REFIDX             hsh_refidx              
+  HSH_UPDATE             hsh_update             hshUpdate
+  HSH_VALUES             hsh_values             hshValues
+
+[]{#actions_integer}
+
+### 15.17 Actions for the type integer
+
+  --------------------------------------------------------------------------------------
+  Action name                       intlib.c function         int_rtl.c function
+  --------------------------------- ------------------------- --------------------------
+  INT_ABS                           int_abs                   labs
+
+  [INT_ADD]{#actions_INT_ADD}       int_add                   \+
+
+  INT_ADD_ASSIGN                    int_add_assign            +=
+
+  INT_BINOM                         int_binom                 intBinom
+
+  INT_BIT_LENGTH                    int_bit_length            intBitLength
+
+  INT_BYTES_BE_2_INT                int_bytes_be_2_int        intBytesBe2Int
+
+  INT_BYTES_BE_2_UINT               int_bytes_be_2_uint       intBytesBe2UInt
+
+  INT_BYTES_BE_SIGNED               int_bytes_be_signed       intBytesBe
+
+  INT_BYTES_BE_UNSIGNED             int_bytes_be_unsigned     intBytesBe
+
+  INT_BYTES_LE_2_INT                int_bytes_le_2_int        intBytesLe2Int
+
+  INT_BYTES_LE_2_UINT               int_bytes_le_2_uint       intBytesLe2UInt
+
+  INT_BYTES_LE_SIGNED               int_bytes_le_signed       intBytesLe
+
+  INT_BYTES_LE_UNSIGNED             int_bytes_le_unsigned     intBytesLe
+
+  INT_CMP                           int_cmp                   intCmp
+
+  INT_CPY                           int_cpy                   intCpy
+
+  INT_CREATE                        int_create                = or genericCreate
+
+  INT_DECR                          int_decr                  \--
+
+  INT_DIV                           int_div                   /
+
+  INT_EQ                            int_eq                    ==
+
+  INT_FACT                          int_fact                  fact\[a\]
+
+  INT_GE                            int_ge                    \>=
+
+  INT_GT                            int_gt                    \>
+
+  INT_HASHCODE                      int_hashcode              (noop)
+
+  INT_ICONV1                        int_iconv1                (noop)
+
+  INT_ICONV3                        int_iconv3                (noop)
+
+  INT_INCR                          int_incr                  ++
+
+  INT_LE                            int_le                    \<=
+
+  [INT_LOG10]{#actions_INT_LOG10}   int_log10                 intLog10
+
+  [INT_LOG2]{#actions_INT_LOG2}     int_log2                  intLog2
+
+  INT_LOWEST_SET_BIT                int_lowest_set_bit        intLowestSetBit
+
+  INT_LPAD0                         int_lpad0                 intLpad0
+
+  INT_LSHIFT                        int_lshift                \<\<
+
+  INT_LSHIFT_ASSIGN                 int_lshift_assign         \<\<=
+
+  INT_LT                            int_lt                    \<
+
+  INT_MDIV                          int_mdiv                  a\>0&&b\<0 ? (a-1)/b-1 :
+                                                              a\<0&&b\>0 ? (a+1)/b-1 :
+                                                              a/b
+
+  INT_MOD                           int_mod                   c=a%b, ((a\>0&&b\<0) \|\|
+                                                              (a\<0&&b\>0)) && c!=0 ?
+                                                              c+b : c
+
+  INT_MULT                          int_mult                  \*
+
+  INT_MULT_ASSIGN                   int_mult_assign           \*=
+
+  INT_NE                            int_ne                    !=
+
+  INT_NEGATE                        int_negate                \-
+
+  INT_N_BYTES_BE_SIGNED             int_n_bytes_be_signed     intNBytesBeSigned
+
+  INT_N_BYTES_BE_UNSIGNED           int_n_bytes_be_unsigned   intNBytesBeUnsigned
+
+  INT_N_BYTES_LE_SIGNED             int_n_bytes_le_signed     intNBytesLeSigned
+
+  INT_N_BYTES_LE_UNSIGNED           int_n_bytes_le_unsigned   intNBytesLeUnsigned
+
+  INT_ODD                           int_odd                   &1
+
+  INT_PARSE1                        int_parse1                intParse
+
+  INT_PLUS                          int_plus                  (noop)
+
+  INT_POW                           int_pow                   intPow
+
+  INT_PRED                          int_pred                  \--
+
+  INT_RADIX                         int_RADIX                 intRadix
+
+  INT_RAND                          int_rand                  intRand
+
+  INT_REM                           int_rem                   \%
+
+  INT_RSHIFT                        int_rshift                a\>\>b [/\* C with
+                                                              arithmetic shift
+                                                              \*/]{.comment}\
+                                                              a\<0?\~(\~a\>\>b):a\>\>b
+                                                              [/\* C with logical shift
+                                                              \*/]{.comment}
+
+  INT_RSHIFT_ASSIGN                 int_rshift_assign         a\>\>=b [/\* C with
+                                                              arithmetic shift
+                                                              \*/]{.comment}\
+                                                              if (a\<0) a= \~(\~a\>\>b);
+                                                              else a\>\>=b; [/\* C with
+                                                              logical shift
+                                                              \*/]{.comment}
+
+  INT_SBTR                          int_sbtr                  \-
+
+  INT_SBTR_ASSIGN                   int_sbtr_assign           -=
+
+  INT_SQRT                          int_sqrt                  intSqrt
+
+  INT_STR                           int_str                   intStr
+
+  INT_SUCC                          int_succ                  +1
+
+  INT_VALUE                         int_value                 intValue
+
+  INT_radix                         int_radix                 intRadix
+  --------------------------------------------------------------------------------------
+
+[]{#actions_interface}
+
+### 15.18 Actions for interface types
+
+  Action name        itflib.c function    
+  ------------------ ------------------- ----------------------------------
+  ITF_CMP            itf_cmp             ptrCmp / ptrCmpGeneric
+  ITF_CONV2          itf_conv2           (noop)
+  ITF_CPY            itf_cpy             =
+  ITF_CPY2           itf_cpy2            =
+  ITF_CREATE         itf_create           
+  ITF_CREATE2        itf_create2          
+  ITF_DESTR          itf_destr           itfDestr
+  ITF_EQ             itf_eq              ==
+  ITF_HASHCODE       itf_hashcode        (intType)(((memSizeType)a)\>\>6)
+  ITF_NE             itf_ne              !=
+  ITF_SELECT         itf_select           
+  ITF_TO_INTERFACE   itf_to_interface     
+
+[]{#actions_console_keyboard}
+
+### 15.19 Actions to support the text (console) screen keyboard
+
+  Action name       kbdlib.c function   kbd_rtl.c/kbd_inf.c function
+  ----------------- ------------------- ------------------------------
+  KBD_GETC          kbd_getc            kbdGetc
+  KBD_GETS          kbd_gets            kbdGets
+  KBD_INPUT_READY   kbd_input_ready     kbdInputReady
+  KBD_LINE_READ     kbd_line_read       kbdLineRead
+  KBD_RAW_GETC      kbd_raw_getc        kbdRawGetc
+  KBD_WORD_READ     kbd_word_read       kbdWordRead
+
+[]{#actions_list}
+
+### 15.20 Actions for the list type
+
+  Action name   lstlib.c function
+  ------------- -------------------
+  LST_CAT       lst_cat
+  LST_CPY       lst_cpy
+  LST_CREATE    lst_create
+  LST_DESTR     lst_destr
+  LST_EMPTY     lst_empty
+  LST_EXCL      lst_excl
+  LST_HEAD      lst_head
+  LST_IDX       lst_idx
+  LST_INCL      lst_incl
+  LST_LNG       lst_lng
+  LST_RANGE     lst_range
+  LST_TAIL      lst_tail
+
+[]{#actions_process}
+
+### 15.21 Actions for the type process
+
+  Action name        pcslib.c function   pcs_rtl.c function
+  ------------------ ------------------- --------------------
+  PCS_CHILD_STDERR   pcs_child_stderr    pcsChildStdErr
+  PCS_CHILD_STDIN    pcs_child_stdin     pcsChildStdIn
+  PCS_CHILD_STDOUT   pcs_child_stdout    pcsChildStdOut
+  PCS_CMP            pcs_cmp             pcsCmp
+  PCS_CPY            pcs_cpy             pcsCpy
+  PCS_CREATE         pcs_create          pcsCreate
+  PCS_DESTR          pcs_destr           pcsDestr
+  PCS_EMPTY          pcs_empty            
+  PCS_EQ             pcs_eq              pcsEq
+  PCS_EXIT_VALUE     pcs_exit_value      pcsExitValue
+  PCS_HASHCODE       pcs_hashcode        pcsHashCode
+  PCS_IS_ALIVE       pcs_is_alive        pcsIsAlive
+  PCS_KILL           pcs_kill            pcsKill
+  PCS_NE             pcs_ne              !pcsEq
+  PCS_PIPE2          pcs_pipe2           pcsPipe2
+  PCS_PTY            pcs_pty             pcsPty
+  PCS_START          pcs_start           pcsStart
+  PCS_START_PIPE     pcs_start_pipe      pcsStartPipe
+  PCS_STR            pcs_str             pcsStr
+  PCS_VALUE          pcs_value           pcsValue
+  PCS_WAIT_FOR       pcs_wait_for        pcsWaitFor
+
+[]{#actions_pointList}
+
+### 15.22 Actions for the type pointList
+
+  Action name      drwlib.c function   bst_rtl.c function
+  ---------------- ------------------- ------------------------------------------------------------------------
+  PLT_BSTRING      plt_bstring         (noop)
+  PLT_CMP          plt_cmp             bstCmp
+  PLT_CPY          plt_cpy             bstCpy
+  PLT_CREATE       plt_create          bstCreate
+  PLT_DESTR        plt_destr           bstDestr
+  PLT_EMPTY        plt_empty            
+  PLT_EQ           plt_eq              a-\>size==b-\>size && memcmp(a,b,a-\>size\*sizeof(unsigned char))==0
+  PLT_HASHCODE     plt_hashcode        bstHashCode
+  PLT_NE           plt_ne              a-\>size!=b-\>size \|\| memcmp(a,b,a-\>size\*sizeof(unsigned char))!=0
+  PLT_POINT_LIST   plt_point_list      (noop)
+  PLT_VALUE        plt_value           pltValue
+
+[]{#actions_pollData}
+
+### 15.23 Actions for the type pollData
+
+  Action name         pollib.c function   pol_unx.c/pol_sel.c function
+  ------------------- ------------------- ------------------------------
+  POL_ADD_CHECK       pol_add_check       polAddCheck
+  POL_CLEAR           pol_clear           polClear
+  POL_CPY             pol_cpy             polCpy
+  POL_CREATE          pol_create          polCreate
+  POL_DESTR           pol_destr           polDestr
+  POL_EMPTY           pol_empty           polEmpty
+  POL_GET_CHECK       pol_get_check       polGetCheck
+  POL_GET_FINDING     pol_get_finding     polGetFinding
+  POL_HAS_NEXT        pol_has_next        polHasNext
+  POL_ITER_CHECKS     pol_iter_checks     polIterChecks
+  POL_ITER_FINDINGS   pol_iter_findings   polIterFindings
+  POL_NEXT_FILE       pol_next_file       polNextFile
+  POL_POLL            pol_poll            polPoll
+  POL_REMOVE_CHECK    pol_remove_check    polRemoveCheck
+  POL_VALUE           pol_value           polValue
+
+[]{#actions_proc}
+
+### 15.24 Actions for proc operations and statements
+
+  Action name                                   prclib.c function       
+  --------------------------------------------- ---------------------- ------------------------------
+  PRC_ARGS                                      prc_args               arg_v
+  [PRC_BEGIN]{#actions_PRC_BEGIN}               prc_begin              Executed at compile-time
+  [PRC_BEGIN_NOOP]{#actions_PRC_BEGIN_NOOP}     prc_begin_noop         Executed at compile-time
+  PRC_BLOCK                                     prc_block               
+  PRC_BLOCK_CATCH_ALL                           prc_block_catch_all     
+  PRC_BLOCK_OTHERWISE                           prc_block_otherwise     
+  PRC_CASE                                      prc_case               switch
+  PRC_CASE_DEF                                  prc_case_def           switch
+  PRC_CASE_HASHSET                              prc_case_hashset       switch (hshIdxDefault0(\...)
+  PRC_CASE_HASHSET_DEF                          prc_case_hashset_def   switch (hshIdxDefault0(\...)
+  PRC_CPY                                       prc_cpy                 
+  PRC_CREATE                                    prc_create              
+  PRC_DECLS                                     prc_decls               
+  PRC_DESTR                                     prc_destr               
+  PRC_DYNAMIC                                   prc_dynamic             
+  PRC_EXIT                                      prc_exit               exit
+  PRC_FOR_DOWNTO                                prc_for_downto         for
+  PRC_FOR_DOWNTO_STEP                           prc_for_downto_step    for
+  PRC_FOR_TO                                    prc_for_to             for
+  PRC_FOR_TO_STEP                               prc_for_to_step        for
+  PRC_HEAPSTAT                                  prc_heapstat            
+  PRC_HSIZE                                     prc_hsize              heapsize
+  PRC_IF                                        prc_if                 if
+  PRC_IF_ELSIF                                  prc_if_elsif           if
+  PRC_IF_NOOP                                   prc_if_noop            if
+  [PRC_INCLUDE]{#actions_PRC_INCLUDE}           prc_include            Executed at compile-time
+  PRC_LINE                                      prc_line                
+  [PRC_LOCAL]{#actions_PRC_LOCAL}               prc_local              Executed at compile-time
+  PRC_NOOP                                      prc_noop               prcNoop
+  PRC_RAISE                                     prc_raise              raise_error
+  [PRC_REPEAT]{#actions_PRC_REPEAT}             prc_repeat             do {stmts} while (!(cond));
+  [PRC_REPEAT_NOOP]{#actions_PRC_REPEAT_NOOP}   prc_repeat_noop        do {} while (!(cond));
+  [PRC_RES_BEGIN]{#actions_PRC_RES_BEGIN}       prc_res_begin          Executed at compile-time
+  [PRC_RES_LOCAL]{#actions_PRC_RES_LOCAL}       prc_res_local          Executed at compile-time
+  [PRC_RETURN]{#actions_PRC_RETURN}             prc_return             Executed at compile-time
+  [PRC_RETURN2]{#actions_PRC_RETURN2}           prc_return2            Executed at compile-time
+  [PRC_RETURN_VAR]{#actions_PRC_RETURN_VAR}     prc_return_var         Executed at compile-time
+  [PRC_RETURN_VAR2]{#actions_PRC_RETURN_VAR2}   prc_return_var2        Executed at compile-time
+  [PRC_SEMICOLON]{#actions_PRC_SEMICOLON}       prc_semicolon          statement1;statement2;
+  PRC_SETTRACE                                  prc_settrace            
+  PRC_TRACE                                     prc_trace               
+  [PRC_WHILE]{#actions_PRC_WHILE}               prc_while              while (cond) {stmts}
+  [PRC_WHILE_NOOP]{#actions_PRC_WHILE_NOOP}     prc_while_noop         while (cond) {}
+
+[]{#actions_program}
+
+### 15.25 Actions for the type program
+
+  Action name          prglib.c function    prg_comp.c function
+  -------------------- -------------------- ----------------------------------
+  PRG_BSTRI_PARSE      prg_bstri_parse      prgBStriParse
+  PRG_CMP              prg_cmp              ptrCmp / ptrCmpGeneric
+  PRG_CPY              prg_cpy              prgCpy
+  PRG_CREATE           prg_create            
+  PRG_DESTR            prg_destr             
+  PRG_EMPTY            prg_empty             
+  PRG_EQ               prg_eq               ==
+  PRG_ERROR_COUNT      prg_error_count      prgErrorCount
+  PRG_EVAL             prg_eval             prgEval
+  PRG_EVAL_WITH_ARGS   prg_eval_with_args   prgEvalWithArgs
+  PRG_EXEC             prg_exec             prgExec
+  PRG_FIL_PARSE        prg_fil_parse        prgFilParse
+  PRG_GET_ERROR        prg_get_error        prgGetError
+  PRG_GLOBAL_OBJECTS   prg_global_objects   prgGlobalObjects
+  PRG_HASHCODE         prg_hashcode         (intType)(((memSizeType)a)\>\>6)
+  PRG_MATCH            prg_match            prgMatch
+  PRG_MATCH_EXPR       prg_match_expr       prgMatchExpr
+  PRG_NAME             prg_name             arg_0
+  PRG_NE               prg_ne               !=
+  PRG_OWN_NAME         prg_own_name         programName
+  PRG_OWN_PATH         prg_own_path         programPath
+  PRG_PATH             prg_path             programPath
+  PRG_STRUCT_SYMBOLS   prg_struct_symbols   prgStructSymbols
+  PRG_STR_PARSE        prg_str_parse        prgStrParse
+  PRG_SYOBJECT         prg_syobject         prgSyobject
+  PRG_SYSVAR           prg_sysvar           prgSysvar
+  PRG_VALUE            prg_value            prgValue
+
+[]{#actions_reference}
+
+### 15.26 Actions for the type reference
+
+  Action name         reflib.c function   ref_data.c function
+  ------------------- ------------------- ----------------------------------
+  REF_ADDR            ref_addr            &
+  REF_ALLOC           ref_alloc           refAlloc
+  REF_ALLOC_INT       ref_alloc_int       refAllocInt
+  REF_ALLOC_STRI      ref_alloc_stri      refAllocStri
+  REF_ALLOC_VAR       ref_alloc_var       refAllocVar
+  REF_APPEND_PARAMS   ref_append_params   refAppendParams
+  REF_ARRMAXIDX       ref_arrmaxidx       refArrmaxidx
+  REF_ARRMINIDX       ref_arrminidx       refArrminidx
+  REF_ARRTOLIST       ref_arrtolist       refArrtolist
+  REF_BODY            ref_body            refBody
+  REF_CAST            ref_cast             
+  REF_CATEGORY        ref_category        refCategory
+  REF_CAT_PARSE       ref_cat_parse       refCatParse
+  REF_CAT_STR         ref_cat_str         refCatStr
+  REF_CMP             ref_cmp             ptrCmp / ptrCmpGeneric
+  REF_CONTENT         ref_content          
+  REF_CPY             ref_cpy             =
+  REF_CREATE          ref_create          = or ptrCreateGeneric
+  REF_DEREF           ref_deref            
+  REF_EQ              ref_eq              ==
+  REF_FILE            ref_file            refFile
+  REF_GETREF          ref_getref          refGetRef
+  REF_HASHCODE        ref_hashcode        (intType)(((memSizeType)a)\>\>6)
+  REF_HSHDATATOLIST   ref_hshdatatolist   refHshDataToList
+  REF_HSHKEYSTOLIST   ref_hshkeystolist   refHshKeysToList
+  REF_HSHLENGTH       ref_hshlength       refHshLength
+  REF_ISSYMB          ref_issymb           
+  REF_ISTEMP          ref_istemp          refIsTemp
+  REF_ISVAR           ref_isvar           refIsvar
+  REF_ITFTOSCT        ref_itftosct        refItftosct
+  REF_LINE            ref_line            refLine
+  REF_LOCAL_CONSTS    ref_local_consts    refLocalConsts
+  REF_LOCAL_VARS      ref_local_vars      refLocalVars
+  REF_MKREF           ref_mkref            
+  REF_NE              ref_ne              !=
+  REF_NIL             ref_nil              
+  REF_NUM             ref_num             refNum
+  REF_PARAMS          ref_params          refParams
+  REF_PATH            ref_path            refPath
+  REF_PROG            ref_prog             
+  REF_RESINI          ref_resini          refResini
+  REF_RESULT          ref_result          refResult
+  REF_SCAN            ref_scan             
+  REF_SCTTOLIST       ref_scttolist       refScttolist
+  REF_SELECT          ref_select          a-\>stru\[b\]
+  REF_SETCATEGORY     ref_setcategory     refSetCategory
+  REF_SETPARAMS       ref_setparams       refSetParams
+  REF_SETTYPE         ref_settype         refSetType
+  REF_SETVAR          ref_setvar          refSetVar
+  REF_STR             ref_str             refStr
+  REF_SYMB            ref_symb             
+  REF_TRACE           ref_trace           printf
+  REF_TYPE            ref_type            refType
+  REF_VALUE           ref_value           refValue
+
+[]{#actions_ref_list}
+
+### 15.27 Actions for the type ref_list
+
+  Action name     rfllib.c function   rfl_data.c function
+  --------------- ------------------- ---------------------
+  RFL_APPEND      rfl_append          rflAppend
+  RFL_CAT         rfl_cat             rflCat
+  RFL_CPY         rfl_cpy             rflCpy
+  RFL_CREATE      rfl_create          rflCreate
+  RFL_DESTR       rfl_destr           rflDestr
+  RFL_ELEM        rfl_elem            rflElem
+  RFL_ELEMCPY     rfl_elemcpy         rflElemcpy
+  RFL_EMPTY       rfl_empty            
+  RFL_EQ          rfl_eq              rflEq
+  RFL_EXCL        rfl_excl             
+  RFL_EXPR        rfl_expr             
+  RFL_FOR         rfl_for             for
+  RFL_FOR_UNTIL   rfl_for_until       for
+  RFL_HEAD        rfl_head            rflHead
+  RFL_IDX         rfl_idx             rflIdx
+  RFL_INCL        rfl_incl            rflIncl
+  RFL_IPOS        rfl_ipos            rflIpos
+  RFL_LNG         rfl_lng             rflLng
+  RFL_MKLIST      rfl_mklist          rflMklist
+  RFL_NE          rfl_ne              rflNe
+  RFL_NOT_ELEM    rfl_not_elem        !rflElem
+  RFL_POS         rfl_pos             rflPos
+  RFL_RANGE       rfl_range           rflRange
+  RFL_SET_VALUE   rfl_set_value       rflSetValue
+  RFL_TAIL        rfl_tail            rflTail
+  RFL_TRACE       rfl_trace            
+  RFL_VALUE       rfl_value           rflValue
+
+[]{#actions_struct}
+
+### 15.28 Actions for struct types
+
+  Action name   sctlib.c function    
+  ------------- ------------------- ---------------
+  SCT_ALLOC     sct_alloc            
+  SCT_CAT       sct_cat              
+  SCT_CONV      sct_conv             
+  SCT_CPY       sct_cpy             cpy\_ \...
+  SCT_CREATE    sct_create          create\_ \...
+  SCT_DESTR     sct_destr           destr\_ \...
+  SCT_EMPTY     sct_empty            
+  SCT_INCL      sct_incl             
+  SCT_LNG       sct_lng              
+  SCT_REFIDX    sct_refidx           
+  SCT_SELECT    sct_select          a-\>stru\[b\]
+
+[]{#actions_structElement}
+
+### 15.29 Actions for the type structElement
+
+  Action name    sctlib.c function    
+  -------------- ------------------- ----------------------------------
+  SEL_CMP        sel_cmp             ptrCmp / ptrCmpGeneric
+  SEL_CONV1      sel_conv1            
+  SEL_CPY        sel_cpy             =
+  SEL_CREATE     sel_create          =
+  SEL_EQ         sel_eq              ==
+  SEL_HASHCODE   sel_hashcode        (intType)(((memSizeType)a)\>\>6)
+  SEL_NAME       sel_name            refStr
+  SEL_NE         sel_ne              !=
+  SEL_SYMB       sel_symb            refSymb
+  SEL_TYPE       sel_type            refType
+
+[]{#actions_set}
+
+### 15.30 Actions for set types
+
+  Action name            setlib.c function      set_rtl.c function
+  ---------------------- ---------------------- -------------------------
+  SET_ARRLIT             set_arrlit             setArrlit
+  SET_BASELIT            set_baselit            setBaselit
+  SET_CARD               set_card               setCard
+  SET_CMP                set_cmp                setCmp
+  SET_CONV1              set_conv1              (noop)
+  SET_CONV3              set_conv3              (noop)
+  SET_CPY                set_cpy                setCpy
+  SET_CREATE             set_create             setCreate
+  SET_DESTR              set_destr              setDestr
+  SET_DIFF               set_diff               setDiff
+  SET_DIFF_ASSIGN        set_diff_assign        setDiffAssign
+  SET_ELEM               set_elem               setElem
+  SET_EMPTY              set_empty               
+  SET_EQ                 set_eq                 setEq
+  SET_EXCL               set_excl               setExcl
+  SET_GE                 set_ge                 setIsSubset(b, a)
+  SET_GT                 set_gt                 setIsProperSubset(b, a)
+  SET_HASHCODE           set_hashcode           setHashCode
+  SET_ICONV1             set_iconv1             setIConv
+  SET_ICONV3             set_iconv3             setIConv
+  SET_INCL               set_incl               setIncl
+  SET_INTERSECT          set_intersect          setIntersect
+  SET_INTERSECT_ASSIGN   set_intersect_assign   setIntersectAssign
+  SET_LE                 set_le                 setIsSubset
+  SET_LT                 set_lt                 setIsProperSubset
+  SET_MAX                set_max                setMax
+  SET_MIN                set_min                setMin
+  SET_NE                 set_ne                 setNe
+  SET_NEXT               set_next               setNext
+  SET_NOT_ELEM           set_not_elem           !setElem
+  SET_RAND               set_rand               setRand
+  SET_RANGELIT           set_rangelit           setRangelit
+  SET_SCONV1             set_sconv1             setSConv
+  SET_SCONV3             set_sconv3             setSConv
+  SET_SYMDIFF            set_symdiff            setSymdiff
+  SET_UNION              set_union              setUnion
+  SET_UNION_ASSIGN       set_union_assign       setUnionAssign
+  SET_VALUE              set_value              setValue
+
+[]{#actions_PRIMITIVE_SOCKET}
+
+### 15.31 Actions for the type PRIMITIVE_SOCKET
+
+  Action name           strlib.c function     str_rtl.c function
+  --------------------- --------------------- --------------------
+  SOC_ACCEPT            soc_accept            socAccept
+  SOC_ADDR_FAMILY       soc_addr_family       socAddrFamily
+  SOC_ADDR_NUMERIC      soc_addr_numeric      socAddrNumeric
+  SOC_ADDR_SERVICE      soc_addr_service      socAddrService
+  SOC_BIND              soc_bind              socBind
+  SOC_CLOSE             soc_close             socClose
+  SOC_CONNECT           soc_connect           socConnect
+  SOC_CPY               soc_cpy               =
+  SOC_CREATE            soc_create             
+  SOC_EMPTY             soc_empty              
+  SOC_EQ                soc_eq                ==
+  SOC_GETC              soc_getc              socGetc
+  SOC_GETS              soc_gets              socGets
+  SOC_GET_HOSTNAME      soc_get_hostname      socGetHostname
+  SOC_GET_LOCAL_ADDR    soc_get_local_addr    socGetLocalAddr
+  SOC_GET_PEER_ADDR     soc_get_peer_addr     socGetPeerAddr
+  SOC_HAS_NEXT          soc_has_next          socHasNext
+  SOC_INET_ADDR         soc_inet_addr         socInetAddr
+  SOC_INET_LOCAL_ADDR   soc_inet_local_addr   socInetLocalAddr
+  SOC_INET_SERV_ADDR    soc_inet_serv_addr    socInetServAddr
+  SOC_INPUT_READY       soc_input_ready       socInputReady
+  SOC_LINE_READ         soc_line_read         socLineRead
+  SOC_LISTEN            soc_listen            socListen
+  SOC_NE                soc_ne                !=
+  SOC_ORD               soc_ord               (intType)
+  SOC_RECV              soc_recv              socRecv
+  SOC_RECVFROM          soc_recvfrom          socRecvfrom
+  SOC_SEND              soc_send              socSend
+  SOC_SENDTO            soc_sendto            socSendto
+  SOC_SET_OPT_BOOL      soc_set_opt_bool      socSetOptBool
+  SOC_SOCKET            soc_socket            socSocket
+  SOC_WORD_READ         soc_word_read         socWordRead
+  SOC_WRITE             soc_write             socWrite
+
+[]{#actions_database}
+
+### 15.32 Actions for the types database and sqlStatement
+
+  Action name             sqllib.c function       sql_rtl.c function
+  ----------------------- ----------------------- ------------------------
+  SQL_BIND_BIGINT         sql_bind_bigint         sqlBindBigInt
+  SQL_BIND_BIGRAT         sql_bind_bigrat         sqlBindBigRat
+  SQL_BIND_BOOL           sql_bind_bool           sqlBindBool
+  SQL_BIND_BSTRI          sql_bind_bstri          sqlBindBStri
+  SQL_BIND_DURATION       sql_bind_duration       sqlBindDuration
+  SQL_BIND_FLOAT          sql_bind_float          sqlBindFloat
+  SQL_BIND_INT            sql_bind_int            sqlBindInt
+  SQL_BIND_NULL           sql_bind_null           sqlBindNull
+  SQL_BIND_STRI           sql_bind_stri           sqlBindStri
+  SQL_BIND_TIME           sql_bind_time           sqlBindTime
+  SQL_CLOSE               sql_close               sqlClose
+  SQL_CMP_DB              sql_cmp_db              ptrCmp / ptrCmpGeneric
+  SQL_CMP_STMT            sql_cmp_stmt            ptrCmp / ptrCmpGeneric
+  SQL_COLUMN_BIGINT       sql_column_bigint       sqlColumnBigInt
+  SQL_COLUMN_BIGRAT       sql_column_bigrat       sqlColumnBigRat
+  SQL_COLUMN_BOOL         sql_column_bool         sqlColumnBool
+  SQL_COLUMN_BSTRI        sql_column_bstri        sqlColumnBStri
+  SQL_COLUMN_DURATION     sql_column_duration     sqlColumnDuration
+  SQL_COLUMN_FLOAT        sql_column_float        sqlColumnFloat
+  SQL_COLUMN_INT          sql_column_int          sqlColumnInt
+  SQL_COLUMN_STRI         sql_column_stri         sqlColumnStri
+  SQL_COLUMN_TIME         sql_column_time         sqlColumnTime
+  SQL_COMMIT              sql_commit              sqlCommit
+  SQL_CPY_DB              sql_cpy_db              sqlCpyDb
+  SQL_CPY_STMT            sql_cpy_stmt            sqlCpyStmt
+  SQL_CREATE_DB           sql_create_db           sqlCreateDb
+  SQL_CREATE_STMT         sql_create_stmt         sqlCreateStmt
+  SQL_DESTR_DB            sql_destr_db            sqlDestrDb
+  SQL_DESTR_STMT          sql_destr_stmt          sqlDestrStmt
+  SQL_DRIVER              sql_driver              sqlDriver
+  SQL_EMPTY_DB            sql_empty_db             
+  SQL_EMPTY_STMT          sql_empty_stmt           
+  SQL_EQ_DB               sql_eq_db               ==
+  SQL_EQ_STMT             sql_eq_stmt             ==
+  SQL_ERR_CODE            sql_err_code            sqlErrCode
+  SQL_ERR_DB_FUNC         sql_err_db_func         sqlErrDbFunc
+  SQL_ERR_LIB_FUNC        sql_err_lib_func        sqlErrLibFunc
+  SQL_ERR_MESSAGE         sql_err_message         sqlErrMessage
+  SQL_EXECUTE             sql_execute             sqlExecute
+  SQL_FETCH               sql_fetch               sqlFetch
+  SQL_GET_AUTO_COMMIT     sql_get_auto_commit     sqlGetAutoCommit
+  SQL_IS_NULL             sql_is_null             sqlIsNull
+  SQL_NE_DB               sql_ne_db               !=
+  SQL_NE_STMT             sql_ne_stmt             !=
+  SQL_OPEN_DB2            sql_open_db2            sqlOpenDb2
+  SQL_OPEN_FIRE           sql_open_fire           sqlOpenFire
+  SQL_OPEN_INFORMIX       sql_open_informix       sqlOpenInformix
+  SQL_OPEN_LITE           sql_open_lite           sqlOpenLite
+  SQL_OPEN_MY             sql_open_my             sqlOpenMy
+  SQL_OPEN_OCI            sql_open_oci            sqlOpenOci
+  SQL_OPEN_ODBC           sql_open_odbc           sqlOpenOdbc
+  SQL_OPEN_POST           sql_open_post           sqlOpenPost
+  SQL_OPEN_SQLSRV         sql_open_sqlsrv         sqlOpenSqlServer
+  SQL_OPEN_TDS            sql_open_tds            sqlOpenTds
+  SQL_PREPARE             sql_prepare             sqlPrepare
+  SQL_ROLLBACK            sql_rollback            sqlRollback
+  SQL_SET_AUTO_COMMIT     sql_set_auto_commit     sqlSetAutoCommit
+  SQL_STMT_COLUMN_COUNT   sql_stmt_column_count   sqlStmtColumnCount
+  SQL_STMT_COLUMN_NAME    sql_stmt_column_name    sqlStmtColumnName
+
+[]{#actions_string}
+
+### 15.33 Actions for the type string
+
+  Action name         strlib.c function   str_rtl.c function
+  ------------------- ------------------- ----------------------------------------------------------------------
+  STR_APPEND          str_append          strAppend
+  STR_CAT             str_cat             strConcat, strConcatTemp
+  STR_CHIPOS          str_chipos          strChIpos
+  STR_CHPOS           str_chpos           strChPos
+  STR_CHSPLIT         str_chsplit         strChSplit
+  STR_CLIT            str_clit            strCLit
+  STR_CMP             str_cmp             strCompare
+  STR_CPY             str_cpy             strCopy
+  STR_CREATE          str_create          strCreate
+  STR_DESTR           str_destr           strDestr
+  STR_ELEMCPY         str_elemcpy         a-\>mem\[b-1\]=c
+  STR_EQ              str_eq              a-\>size==b-\>size && memcmp(a,b,a-\>size\*sizeof(strElemType))==0
+  STR_FOR             str_for             for
+  STR_FOR_KEY         str_for_key         for
+  STR_FOR_VAR_KEY     str_for_var_key     for
+  STR_FROM_UTF8       str_from_utf8       strFromUtf8
+  STR_GE              str_ge              strGe
+  STR_GT              str_gt              strGt
+  STR_HASHCODE        str_hashcode        strHashCode
+  STR_HEAD            str_head            strHead
+  STR_IDX             str_idx             a-\>mem\[b-1\]
+  STR_IPOS            str_ipos            strIpos
+  STR_LE              str_le              strLe
+  STR_LIT             str_lit             strLit
+  STR_LNG             str_lng             a-\>size
+  STR_LOW             str_low             strLow, strLowTemp
+  STR_LPAD            str_lpad            strLpad
+  STR_LPAD0           str_lpad0           strLpad0, strLpad0Temp
+  STR_LT              str_lt              strLt
+  STR_LTRIM           str_ltrim           strLtrim
+  STR_MULT            str_mult            strMult
+  STR_NE              str_ne              a-\>size!=b-\>size \|\| memcmp(a,b,a-\>size\*sizeof(strElemType))!=0
+  STR_POS             str_pos             strPos
+  STR_POSCPY          str_poscpy          memcpy
+  STR_PUSH            str_push            strPush
+  STR_RANGE           str_range           strRange
+  STR_RCHIPOS         str_rchipos         strRChIpos
+  STR_RCHPOS          str_rchpos          strRChPos
+  STR_REPL            str_repl            strRepl
+  STR_RIPOS           str_ripos           strRIPos
+  STR_RPAD            str_rpad            strRpad
+  STR_RPOS            str_rpos            strRpos
+  STR_RTRIM           str_rtrim           strRtrim
+  STR_SPLIT           str_split           strSplit
+  STR_STR             str_str             (noop)
+  STR_SUBSTR          str_substr          strSubstr
+  STR_SUBSTR_FIXLEN   str_substr_fixlen   strSubstrFixLen
+  STR_TAIL            str_tail            strTail
+  STR_TO_UTF8         str_to_utf8         strToUtf8
+  STR_TRIM            str_trim            strTrim
+  STR_UP              str_up              strUp, strUpTemp
+  STR_VALUE           str_value           strValue
+
+[]{#actions_time}
+
+### 15.34 Actions for the type time
+
+  Action name          timlib.c function    tim_unx.c/tim_win.c function
+  -------------------- -------------------- ------------------------------
+  TIM_AWAIT            tim_await            timAwait
+  TIM_FROM_TIMESTAMP   tim_from_timestamp   timFromTimestamp
+  TIM_NOW              tim_now              timNow
+  TIM_SET_LOCAL_TZ     tim_set_local_tz     timSetLocalTZ
+
+[]{#actions_type}
+
+### 15.35 Actions for the type type
+
+  Action name              typlib.c function        typ_data.c function
+  ------------------------ ------------------------ ----------------------------------
+  TYP_ADDINTERFACE         typ_addinterface          
+  TYP_CMP                  typ_cmp                  typCmp
+  TYP_CPY                  typ_cpy                  typCpy
+  TYP_CREATE               typ_create               typCreate
+  TYP_DESTR                typ_destr                typDestr
+  TYP_EQ                   typ_eq                   ==
+  TYP_FUNC                 typ_func                 typFunc
+  TYP_GENSUB               typ_gensub                
+  TYP_GENTYPE              typ_gentype               
+  TYP_HASHCODE             typ_hashcode             (intType)(((memSizeType)a)\>\>6)
+  TYP_ISDECLARED           typ_isdeclared            
+  TYP_ISDERIVED            typ_isderived            typIsDerived
+  TYP_ISFORWARD            typ_isforward             
+  TYP_ISFUNC               typ_isfunc               typIsFunc
+  TYP_ISVARFUNC            typ_isvarfunc            typIsVarfunc
+  TYP_MATCHOBJ             typ_matchobj             typMatchobj
+  TYP_META                 typ_meta                 typMeta
+  TYP_NE                   typ_ne                   !=
+  TYP_NUM                  typ_num                  typNum
+  TYP_RESULT               typ_result               typResult
+  TYP_SET_IN_PARAM_REF     typ_set_in_param_ref      
+  TYP_SET_IN_PARAM_VALUE   typ_set_in_param_value    
+  TYP_STR                  typ_str                  typStr
+  TYP_VALUE                typ_value                typValue
+  TYP_VARCONV              typ_varconv               
+  TYP_VARFUNC              typ_varfunc              typVarfunc
+
+[]{#actions_utf8File}
+
+### 15.36 Actions for the type utf8File
+
+  Action name     ut8lib.c function   ut8_rtl.c function
+  --------------- ------------------- --------------------
+  UT8_GETC        ut8_getc            ut8Getc
+  UT8_GETS        ut8_gets            ut8Gets
+  UT8_LINE_READ   ut8_line_read       ut8LineRead
+  UT8_SEEK        ut8_seek            ut8Seek
+  UT8_WORD_READ   ut8_word_read       ut8WordRead
+  UT8_WRITE       ut8_write           ut8Write
+
+[]{#ffi_file_start}
+
+[]{#ffi_FOREIGN_FUNCTION_INTERFACE}
+
+## 16. FOREIGN FUNCTION INTERFACE
+
+Foreign functions cannot be called directly. It is necessary to write
+wrapper functions. Several things must be done to call a foreign
+function:
+
+- The [C types used by
+  Seed7](#ffi_C_types_used_by_the_implementation) must be
+  [converted to the C types](#ffi_String_conversions) used by the
+  foreign function (E.g.: [`string`](#types_string){.type} and
+  [path](#os_Standard_path_representation) conversions). The
+  result of the foreign function and parameters, which return a value,
+  must be converted back. This conversions are usually done in a wrapper
+  function.
+- A function with the [action](#actions_file_start) prototype (a
+  function with a [`listType`](#ffi_listType){.type} parameter and an
+  [`objectType`](#ffi_objectType){.type} result) must be defined.
+  Predefined macros help to [access the action
+  arguments](#ffi_Macros_to_access_the_action_parameters) and to
+  [create result
+  values](#ffi_Functions_to_create_action_results). The action
+  function must be registered in the file [`"primitiv.c"`]{.lib}.
+- The new action must be introduced to Seed7. This is usually done in an
+  `*.s7i` library file, which introduces an action definition.
+
+In general two functions are needed: A wrapper function and an action
+function. The corresponding function definitions can be placed in two
+`*.c` files. Corresponding `*.h` files contain prototypes. Assume, we
+have the library [`"superlib"`]{.lib} and the function
+[`doWurx1`](#ffi_doWurx1){.func} from [`"superlib"`]{.lib} should be
+called from a Seed7 program. The three letter abbreviation **`sup`** is
+used to determine the file and function names for wrapper and action.
+The following files and functions are used:
+
+  File           Function                                   Comment
+  -------------- ------------------------------------------ ----------------------------------------------------------
+  superlib.a     [`doWurx1`](#ffi_doWurx1){.func}           External library (the extension may vary)
+  superlib.h     [`doWurx1`](#ffi_doWurx1){.func}           Prototype of the external C function
+  sup_rtl.c      [`supDoWurx1`](#ffi_supDoWurx1){.func}     Wrapper function
+  sup_rtl.h      [`supDoWurx1`](#ffi_supDoWurx1){.func}     Prototype of the wrapper function
+  suplib.c       [`sup_doWurx1`](#ffi_sup_doWurx1){.func}   Action function
+  suplib.h       [`sup_doWurx1`](#ffi_sup_doWurx1){.func}   Prototype of the action function
+  primitiv.c                                                Alphabetical list of all primitive actions
+  makefile                                                  Makefile name depends on operating system and C compiler
+  superlib.s7i   `doWurx1`                                  Introduces the external function to a Seed7 program
+
+The C prototype of [`doWurx1`](#ffi_doWurx1){.func} is defined in the
+file [`"superlib.h"`]{.lib}:
+
+``` indent
+int doWurx1 (char *name);
+```
+
+This function accepts an UTF-8 `'name'` and it returns 0 on success.
+Every other return value indicates that the string is too long. In this
+case the exception [`RANGE_ERROR`](#errors_RANGE_ERROR){.exception}
+should be raised. The wrapper function is defined in the file
+[`"sup_rtl.c"`]{.lib} with:
+
+``` indent
+#include "version.h"
+#include "stdio.h"
+#include "superlib.h"
+#include "common.h"
+#include "striutl.h"
+#include "rtl_err.h"
+
+void supDoWurx1 (const striType name)
+  {
+    cstriType cName;
+    errInfoType err_info = OKAY_NO_ERROR;
+    int wurxResult;
+
+    cName = stri_to_cstri8(name, &err_info);
+    if (cName == NULL) {
+      raise_error(err_info);
+    } else {
+      wurxResult = doWurx1(cName);
+      free_cstri8(cName, name);
+      if (wurxResult != 0) {
+        raise_error(RANGE_ERROR);
+      }
+    }
+  }
+```
+
+The prototype of [`supDoWurx1`](#ffi_supDoWurx1){.func} is defined in
+the file [`"sup_rtl.h"`]{.lib} with:
+
+``` indent
+void supDoWurx1 (const striType name);
+```
+
+The action function for [`supDoWurx1`](#ffi_supDoWurx1){.func} is
+defined in the file [`"suplib.c"`]{.lib} with:
+
+``` indent
+#include "version.h"
+#include "stdio.h"
+#include "common.h"
+#include "data.h"
+#include "syvarutl.h"
+#include "objutl.h"
+#include "sup_rtl.h"
+
+objectType sup_doWurx1 (listType arguments)
+  {
+    isit_stri(arg_1(arguments));
+    supDoWurx1(take_stri(arg_1(arguments)));
+    return SYS_EMPTY_OBJECT;
+  }
+```
+
+The prototype of [`sup_doWurx1`](#ffi_sup_doWurx1){.func} is defined in
+the file [`"suplib.h"`]{.lib} with:
+
+``` indent
+objectType sup_doWurx1 (listType arguments);
+```
+
+The action is introduced to the interpreter, by changing the file
+[`"primitiv.c"`]{.lib}. An include directive for [`"suplib.h"`]{.lib}
+must be added:
+
+``` indent
+#include "strlib.h"
+#include "suplib.h"
+#include "timlib.h"
+```
+
+The file [`"primitiv.c"`]{.lib} contains a list of alphabetically sorted
+primitive actions. Each action entry takes a line. It is important to
+add the new action [`"SUP_DO_WURX"`]{.stri} at the correct place:
+
+``` indent
+{ "STR_VALUE",               str_value,               },
+
+{ "SUP_DO_WURX",             sup_doWurx1,             },
+
+{ "TIM_AWAIT",               tim_await,               },
+```
+
+The new files must be added to the makefile. Depending on C compiler and
+operating system Seed7 uses several makefiles. In the correct
+`"makefile"` `suplib` and `sup_rtl` must be added to lists of source and
+object files. Adding the `suplib` object file results in:
+
+``` indent
+LOBJ = actlib.o arrlib.o biglib.o blnlib.o bstlib.o chrlib.o cmdlib.o conlib.o dcllib.o drwlib.o \
+       enulib.o fillib.o fltlib.o hshlib.o intlib.o itflib.o kbdlib.o lstlib.o pollib.o prclib.o \
+       prglib.o reflib.o rfllib.o sctlib.o setlib.o soclib.o strlib.o suplib.o timlib.o typlib.o ut8lib.o
+```
+
+Adding the `"suplib"` source file results in:
+
+``` indent
+LSRC = actlib.c arrlib.c biglib.c blnlib.c bstlib.c chrlib.c cmdlib.c conlib.c dcllib.c drwlib.c \
+       enulib.c fillib.c fltlib.c hshlib.c intlib.c itflib.c kbdlib.c lstlib.c pollib.c prclib.c \
+       prglib.c reflib.c rfllib.c sctlib.c setlib.c soclib.c strlib.c suplib.c timlib.c typlib.c ut8lib.c
+```
+
+and object files. Adding the `sup_rtl` object file results in:
+
+``` indent
+ROBJ = arr_rtl.o bln_rtl.o bst_rtl.o chr_rtl.o cmd_rtl.o con_rtl.o dir_rtl.o drw_rtl.o fil_rtl.o \
+       flt_rtl.o hsh_rtl.o int_rtl.o set_rtl.o soc_rtl.o str_rtl.o sup_rtl.o tim_rtl.o ut8_rtl.o \
+       heaputl.o striutl.o
+```
+
+Adding the `"sup_rtl"` source file results in:
+
+``` indent
+RSRC = arr_rtl.c bln_rtl.c bst_rtl.c chr_rtl.c cmd_rtl.c con_rtl.c dir_rtl.c drw_rtl.c fil_rtl.c \
+       flt_rtl.c hsh_rtl.c int_rtl.c set_rtl.c soc_rtl.c str_rtl.c sup_rtl.c tim_rtl.c ut8_rtl.c \
+       heaputl.c striutl.c
+```
+
+The external library `"superlib"` itself is added with:
+
+``` indent
+SYSTEM_LIBS = -lm superlib.a
+```
+
+The interpreter must be compiled, so the changes can take effect. To
+actually call the new function it must be introduced in a Seed7 library.
+This is done with the library [`"super.s7i"`]{.lib}:
+
+``` indent
+const proc: doWurx1 (in string: name) is action "SUP_DO_WURX";
+```
+
+[]{#ffi_C_types_used_by_the_implementation}
+
+### 16.1 C types used by the implementation
+
+Several Seed7 types correspond to simple C types, which are defined in
+[`"common.h"`]{.lib}:
+
+  Seed7 type                           C type                          C definition                                          Comment
+  ------------------------------------ ------------------------------- ----------------------------------------------------- ------------------------------------
+  [`boolean`](#types_boolean){.type}   [boolType]{#ffi_boolType}       [`_Bool`]{.type}, [`bool`]{.type} or [`int`]{.type}   Determined by chkccomp.c
+  [`integer`](#types_integer){.type}   [intType]{#ffi_intType}         int64Type                                             64-bit signed int
+  [`float`](#types_float){.type}       [floatType]{#ffi_floatType}     [`double`]{.type}                                     64-bit double precision
+  [`char`](#types_char){.type}         [charType]{#ffi_charType}       [`uint32Type`](#ffi_uint32Type){.type}                32-bit unsigned int
+  [`PRIMITIVE_SOCKET`]{.type}          [socketType]{#ffi_socketType}   [`int`]{.type}                                        Cast from [`os_socketType`]{.type}
+
+Other Seed7 types correspond to C pointers, which point to a struct.
+Some of these structs are used in all situations: In the interpreter and
+in the compiler and under different operation systems and with different
+runtime libraries. This invariant structs are defined in
+[`"common.h"`]{.lib} and in [`"data.h"`]{.lib}:
+
+  Seed7 type                               C type                          C struct              Comment
+  ---------------------------------------- ------------------------------- --------------------- ---------------------------------------------
+  [`string`](#types_string){.type}         [striType]{#ffi_striType}       struct striStruct     UTF-32 encoded, can contain null chars
+  [`set`](#types_set){.type}               [setType]{#ffi_setType}         struct setStruct       
+  [`bstring`](#types_bstring){.type}       [bstriType]{#ffi_bstriType}     struct bstriStruct    Byte sequence, can contain null bytes
+  [`clib_file`]{.type}                     [fileType]{#ffi_fileType}       struct fileStruct     C `FILE *` plus usage count and permissions
+  [`reference`](#types_reference){.type}   [objectType]{#ffi_objectType}   struct objectStruct   Interpreter type for Seed7 objects
+  [`ref_list`](#types_ref_list){.type}     [listType]{#ffi_listType}       struct listStruct     Interpreter type for Seed7 object lists
+
+Other Seed7 types also correspond to struct pointers, but the structs
+are different in interpreted and compiled Seed7 programs. The structs
+for interpreted programs are defined in [`"data.h"`]{.lib} and the
+structs for compiled programs are defined in [`"data_rtl.h"`]{.lib}:
+
+  Seed7 type                         C type (interpreted)            C struct (interpreted)   C type (compiled)   C struct (compiled)
+  ---------------------------------- ------------------------------- ------------------------ ------------------- ------------------------
+  [`array`](#types_array){.type}     [arrayType]{#ffi_arrayType}     struct arrayStruct       rtlArrayType        struct rtlArrayStruct
+  [`hash`](#types_hash){.type}       [hashType]{#ffi_hashType}       struct hashStruct        rtlHashType         struct rtlHashStruct
+  [`struct`](#types_struct){.type}   [structType]{#ffi_structType}   struct structStruct      rtlStructType       struct rtlStructStruct
+
+Because interpreter and compiler use different structs the functions
+from e.g. [`"arrlib.c"`]{.lib} cannot use functions from
+[`"arr_rtl.c"`]{.lib}.
+
+Some Seed7 types depend on the operating system or runtime library used:
+
++------------------------------------------------------+-----------------------------------+-------------------------+------------+------------------------+
+| Seed7 type                                           | C type                            | Defined as              | Sourcefile | Comment                |
++======================================================+===================================+=========================+============+========================+
+| [`bigInteger`](#types_bigInteger){.type}             | [bigIntType]{#ffi_bigIntType}     | struct bigIntStruct \*  | big_rtl.c  | The built-in           |
+|                                                      |                                   |                         |            | bigInteger library     |
+|                                                      |                                   +-------------------------+------------+------------------------+
+|                                                      |                                   | mpz_ptr                 | big_gmp.c  | The GNU Multiple       |
+|                                                      |                                   |                         |            | Precision Arithmetic   |
+|                                                      |                                   |                         |            | Library                |
++------------------------------------------------------+-----------------------------------+-------------------------+------------+------------------------+
+| [`pollData`](#types_pollData){.type}                 | [pollType]{#ffi_pollType}         | struct                  | pol_sel.c  | Functions cast it to   |
+|                                                      |                                   | select_based_pollStruct |            | implementation         |
+|                                                      |                                   | \*                      |            | dependent struct       |
+|                                                      |                                   +-------------------------+------------+------------------------+
+|                                                      |                                   | struct                  | pol_unx.c  | Functions cast it to   |
+|                                                      |                                   | poll_based_pollStruct   |            | implementation         |
+|                                                      |                                   | \*                      |            | dependent struct       |
++------------------------------------------------------+-----------------------------------+-------------------------+------------+------------------------+
+| []{#ffi_PRIMITIVE_WINDOW}[`PRIMITIVE_WINDOW`]{.type} | [winType]{#ffi_winType}           | x11_winRecord \*        | drw_x11.c  | Functions cast from    |
+|                                                      |                                   |                         |            | winType to             |
+|                                                      |                                   |                         |            | x11_winRecord \*       |
+|                                                      |                                   +-------------------------+------------+------------------------+
+|                                                      |                                   | win_winRecord \*        | drw_win.c  | Functions cast from    |
+|                                                      |                                   |                         |            | winType to             |
+|                                                      |                                   |                         |            | win_winRecord \*       |
+|                                                      |                                   +-------------------------+------------+------------------------+
+|                                                      |                                   | emc_winRecord \*        | drw_emc.c  | Functions cast from    |
+|                                                      |                                   |                         |            | winType to             |
+|                                                      |                                   |                         |            | emc_winRecord \*       |
++------------------------------------------------------+-----------------------------------+-------------------------+------------+------------------------+
+| [`process`](#types_process){.type}                   | [processType]{#ffi_processType}   | unx_processRecord \*    | pcs_unx.c  | Functions cast from    |
+|                                                      |                                   |                         |            | processType to         |
+|                                                      |                                   |                         |            | unx_processRecord \*   |
+|                                                      |                                   +-------------------------+------------+------------------------+
+|                                                      |                                   | win_processRecord \*    | pcs_win.c  | Functions cast from    |
+|                                                      |                                   |                         |            | processType to         |
+|                                                      |                                   |                         |            | win_processRecord \*   |
++------------------------------------------------------+-----------------------------------+-------------------------+------------+------------------------+
+| [`database`](#types_database){.type}                 | [databaseType]{#ffi_databaseType} | dbRecordCli \*          | sql_cli.c  | Functions cast from    |
+|                                                      |                                   |                         |            | databaseType to        |
+|                                                      |                                   |                         |            | dbRecordCli \*         |
+|                                                      |                                   +-------------------------+------------+------------------------+
+|                                                      |                                   | dbRecordFire \*         | sql_fire.c | Functions cast from    |
+|                                                      |                                   |                         |            | databaseType to        |
+|                                                      |                                   |                         |            | dbRecordFire \*        |
+|                                                      |                                   +-------------------------+------------+------------------------+
+|                                                      |                                   | dbRecordLite \*         | sql_lite.c | Functions cast from    |
+|                                                      |                                   |                         |            | databaseType to        |
+|                                                      |                                   |                         |            | dbRecordLite \*        |
+|                                                      |                                   +-------------------------+------------+------------------------+
+|                                                      |                                   | dbRecordMy \*           | sql_my.c   | Functions cast from    |
+|                                                      |                                   |                         |            | databaseType to        |
+|                                                      |                                   |                         |            | dbRecordMy \*          |
+|                                                      |                                   +-------------------------+------------+------------------------+
+|                                                      |                                   | dbRecordOci \*          | sql_oci.c  | Functions cast from    |
+|                                                      |                                   |                         |            | databaseType to        |
+|                                                      |                                   |                         |            | dbRecordOci \*         |
+|                                                      |                                   +-------------------------+------------+------------------------+
+|                                                      |                                   | dbRecordPost \*         | sql_post.c | Functions cast from    |
+|                                                      |                                   |                         |            | databaseType to        |
+|                                                      |                                   |                         |            | dbRecordPost \*        |
+|                                                      |                                   +-------------------------+------------+------------------------+
+|                                                      |                                   | dbRecordTds \*          | sql_tds.c  | Functions cast from    |
+|                                                      |                                   |                         |            | databaseType to        |
+|                                                      |                                   |                         |            | dbRecordTds \*         |
++------------------------------------------------------+-----------------------------------+-------------------------+------------+------------------------+
+| [`sqlStatement`](#types_sqlStatement){.type}         | [sqlStmtType]{#ffi_sqlStmtType}   | preparedStmtRecordCli   | sql_cli.c  | Functions cast from    |
+|                                                      |                                   | \*                      |            | sqlStmtType to         |
+|                                                      |                                   |                         |            | preparedStmtRecordCli  |
+|                                                      |                                   |                         |            | \*                     |
+|                                                      |                                   +-------------------------+------------+------------------------+
+|                                                      |                                   | preparedStmtRecordFire  | sql_fire.c | Functions cast from    |
+|                                                      |                                   | \*                      |            | sqlStmtType to         |
+|                                                      |                                   |                         |            | preparedStmtRecordFire |
+|                                                      |                                   |                         |            | \*                     |
+|                                                      |                                   +-------------------------+------------+------------------------+
+|                                                      |                                   | preparedStmtRecordLite  | sql_lite.c | Functions cast from    |
+|                                                      |                                   | \*                      |            | sqlStmtType to         |
+|                                                      |                                   |                         |            | preparedStmtRecordLite |
+|                                                      |                                   |                         |            | \*                     |
+|                                                      |                                   +-------------------------+------------+------------------------+
+|                                                      |                                   | preparedStmtRecordMy \* | sql_my.c   | Functions cast from    |
+|                                                      |                                   |                         |            | sqlStmtType to         |
+|                                                      |                                   |                         |            | preparedStmtRecordMy   |
+|                                                      |                                   |                         |            | \*                     |
+|                                                      |                                   +-------------------------+------------+------------------------+
+|                                                      |                                   | preparedStmtRecordOci   | sql_oci.c  | Functions cast from    |
+|                                                      |                                   | \*                      |            | sqlStmtType to         |
+|                                                      |                                   |                         |            | preparedStmtRecordOci  |
+|                                                      |                                   |                         |            | \*                     |
+|                                                      |                                   +-------------------------+------------+------------------------+
+|                                                      |                                   | preparedStmtRecordPost  | sql_post.c | Functions cast from    |
+|                                                      |                                   | \*                      |            | sqlStmtType to         |
+|                                                      |                                   |                         |            | preparedStmtRecordPost |
+|                                                      |                                   |                         |            | \*                     |
+|                                                      |                                   +-------------------------+------------+------------------------+
+|                                                      |                                   | preparedStmtRecordTds   | sql_tds.c  | Functions cast from    |
+|                                                      |                                   | \*                      |            | sqlStmtType to         |
+|                                                      |                                   |                         |            | preparedStmtRecordTds  |
+|                                                      |                                   |                         |            | \*                     |
++------------------------------------------------------+-----------------------------------+-------------------------+------------+------------------------+
+
+There are also C types without corresponding Seed7 type. They are
+defined in [`"common.h"`]{.lib}:
+
++--------------------------------------+---------------------+-------------------------------------------+
+| C type                               | C definition        | Comment                                   |
++======================================+=====================+===========================================+
+| [`int8Type`]{#ffi_int8Type .type}    | signed char         | It is assumed that a char consists of 8   |
+|                                      |                     | Bits                                      |
++--------------------------------------+---------------------+-------------------------------------------+
+| [`uint8Type`]{#ffi_uint8Type .type}  | unsigned char       | Unsigned integer type with the size of    |
+|                                      |                     | [`int8Type`](#ffi_int8Type){.type}        |
++--------------------------------------+---------------------+-------------------------------------------+
+| [`int16Type`]{#ffi_int16Type .type}  | short int           | It is assumed that sizeof(short int) == 2 |
++--------------------------------------+---------------------+-------------------------------------------+
+| [`uint16Type`]{#ffi_uint16Type       | unsigned short int  | Unsigned integer type with the size of    |
+| .type}                               |                     | [`int16Type`](#ffi_int16Type){.type}      |
++--------------------------------------+---------------------+-------------------------------------------+
+| [`int32Type`]{#ffi_int32Type .type}  | int                 | If sizeof(int) == 4                       |
+|                                      +---------------------+-------------------------------------------+
+|                                      | long                | If sizeof(long) == 4                      |
++--------------------------------------+---------------------+-------------------------------------------+
+| [`uint32Type`]{#ffi_uint32Type       | unsigned int32Type  | Unsigned integer type with the size of    |
+| .type}                               |                     | [`int32Type`](#ffi_int32Type){.type}      |
++--------------------------------------+---------------------+-------------------------------------------+
+| [`int64Type`]{#ffi_int64Type .type}  | long                | If sizeof(long) == 8                      |
+|                                      +---------------------+-------------------------------------------+
+|                                      | long long           | If sizeof(long long) == 8                 |
+|                                      +---------------------+-------------------------------------------+
+|                                      | \_\_int64           | If sizeof(\_\_int64) == 8                 |
++--------------------------------------+---------------------+-------------------------------------------+
+| [`uint64Type`]{#ffi_uint64Type       | unsigned int64Type  | Unsigned integer type with the size of    |
+| .type}                               |                     | [`int64Type`](#ffi_int64Type){.type}      |
++--------------------------------------+---------------------+-------------------------------------------+
+| [`int128Type`]{#ffi_int128Type       | \_\_int128          | If sizeof(\_\_int128) == 16               |
+| .type}                               |                     |                                           |
+|                                      +---------------------+-------------------------------------------+
+|                                      | \_\_int128_t        | If sizeof(\_\_int128_t) == 16             |
++--------------------------------------+---------------------+-------------------------------------------+
+| [`uint128Type`]{#ffi_uint128Type     | unsigned \_\_int128 | If sizeof(unsigned \_\_int128) == 16      |
+| .type}                               |                     |                                           |
+|                                      +---------------------+-------------------------------------------+
+|                                      | \_\_uint128_t       | If sizeof(\_\_uint128_t) == 16            |
++--------------------------------------+---------------------+-------------------------------------------+
+| [`uintType`]{#ffi_uintType .type}    | unsigned intType    | Unsigned integer type with the size of    |
+|                                      |                     | [`intType`](#ffi_intType){.type}          |
++--------------------------------------+---------------------+-------------------------------------------+
+| [`bitSetType`]{#ffi_bitSetType       | uint64Type          | Used in                                   |
+| .type}                               |                     | [`struct setStruct`](#ffi_setType){.type} |
++--------------------------------------+---------------------+-------------------------------------------+
+| [`timeStampType`]{#ffi_timeStampType | int64Type           | Used for 64-bit timestamps                |
+| .type}                               |                     |                                           |
++--------------------------------------+---------------------+-------------------------------------------+
+| [`cstriType`]{#ffi_cstriType .type}  | char \*             | String type of the C compiler             |
++--------------------------------------+---------------------+-------------------------------------------+
+| [`ustriType`]{#ffi_ustriType .type}  | unsigned char \*    | Helpful for unsigned comparisons          |
++--------------------------------------+---------------------+-------------------------------------------+
+| [`utf16striType`]{#ffi_utf16striType | uint16Type \*       | UTF-16 string                             |
+| .type}                               |                     |                                           |
++--------------------------------------+---------------------+-------------------------------------------+
+| [`utf32striType`]{#ffi_utf32striType | uint32Type \*       | UTF-32 string                             |
+| .type}                               |                     |                                           |
++--------------------------------------+---------------------+-------------------------------------------+
+| [`strElemType`]{#ffi_strElemType     | charType            | UTF-32 character element of               |
+| .type}                               |                     | [`string`](#ffi_striType){.type}          |
++--------------------------------------+---------------------+-------------------------------------------+
+| [`scharType`]{#ffi_scharType .type}  | int32Type           | Signed [`charType`](#ffi_charType){.type} |
++--------------------------------------+---------------------+-------------------------------------------+
+| cFileType                            | FILE \*             | The file type used by the C run-tme       |
+|                                      |                     | library                                   |
++--------------------------------------+---------------------+-------------------------------------------+
+| [`os_striType`]{#ffi_os_striType     | char \*             | If the OS uses UTF-8 chars                |
+| .type}                               |                     |                                           |
+|                                      +---------------------+-------------------------------------------+
+|                                      | wchar_t \*          | If the OS uses UTF-16 chars               |
++--------------------------------------+---------------------+-------------------------------------------+
+| [`memSizeType`]{#ffi_memSizeType     | uint32Type          | If C uses 32-bit pointers                 |
+| .type}                               |                     |                                           |
+|                                      +---------------------+-------------------------------------------+
+|                                      | uint64Type          | If C uses 64-bit pointers                 |
++--------------------------------------+---------------------+-------------------------------------------+
+| [`errInfoType`]{#ffi_errInfoType     | int                 | Represents predefined Exceptions          |
+| .type}                               |                     |                                           |
++--------------------------------------+---------------------+-------------------------------------------+
+
+[]{#ffi_System_variables}
+
+### 16.2 System variables
+
+The interpreter uses several system variables which are initialized from
+[system declarations](#decls_System_declarations).
+
+  [System declaration](#decls_System_declarations)   Seed7 name                                               C [objectType](#ffi_objectType){.type_no_ul} macro              [objectType](#ffi_objectType){.type_no_ul} macro with argument
+  --------------------------------------------------------- -------------------------------------------------------- --------------------------------------------------------------- ----------------------------------------------------------------
+  [`"empty"`](#decls_empty)                          [`empty`](#types_empty){.var_no_ul}                      [`SYS_EMPTY_OBJECT`]{#ffi_SYS_EMPTY_OBJECT}                     `EMPTY_OBJECT(prog)`
+  [`"memory_error"`](#decls_memory_error)            [`MEMORY_ERROR`](#errors_MEMORY_ERROR){.exception}       [`SYS_MEM_EXCEPTION`]{#ffi_SYS_MEM_EXCEPTION}                   `MEM_EXCEPTION(prog)`
+  [`"numeric_error"`](#decls_numeric_error)          [`NUMERIC_ERROR`](#errors_NUMERIC_ERROR){.exception}     [`SYS_NUM_EXCEPTION`]{#ffi_SYS_NUM_EXCEPTION}                   `NUM_EXCEPTION(prog)`
+  [`"overflow_error"`](#decls_overflow_error)        [`OVERFLOW_ERROR`](#errors_OVERFLOW_ERROR){.exception}   [`SYS_OVF_EXCEPTION`]{#ffi_SYS_OVF_EXCEPTION}                   `OVF_EXCEPTION(prog)`
+  [`"range_error"`](#decls_range_error)              [`RANGE_ERROR`](#errors_RANGE_ERROR){.exception}         [`SYS_RNG_EXCEPTION`]{#ffi_SYS_RNG_EXCEPTION}                   `RNG_EXCEPTION(prog)`
+  [`"index_error"`](#decls_index_error)              [`INDEX_ERROR`](#errors_INDEX_ERROR){.exception}         [`SYS_IDX_EXCEPTION`]{#ffi_SYS_IDX_EXCEPTION}                   `IDX_EXCEPTION(prog)`
+  [`"file_error"`](#decls_file_error)                [`FILE_ERROR`](#errors_FILE_ERROR){.exception}           [`SYS_FIL_EXCEPTION`]{#ffi_SYS_FIL_EXCEPTION}                   `FIL_EXCEPTION(prog)`
+  [`"database_error"`](#decls_database_error)        [`DATABASE_ERROR`](#errors_DATABASE_ERROR){.exception}   [`SYS_DB_EXCEPTION`]{#ffi_SYS_DB_EXCEPTION}                     `DB_EXCEPTION(prog)`
+  [`"graphic_error"`](#decls_graphic_error)          [`GRAPHIC_ERROR`](#errors_GRAPHIC_ERROR){.exception}     [`SYS_GRAPHIC_EXCEPTION`]{#ffi_SYS_GRAPHIC_EXCEPTION}           `GRAPHIC_EXCEPTION(prog)`
+  [`"illegal_action"`](#decls_illegal_action)        [`ILLEGAL_ACTION`](#errors_ILLEGAL_ACTION){.exception}   [`SYS_ACT_ILLEGAL_EXCEPTION`]{#ffi_SYS_ACT_ILLEGAL_EXCEPTION}   `ACT_ILLEGAL_EXCEPTION(prog)`
+  [`"false"`](#decls_false)                          [`FALSE`]{.var_no_ul}                                    [`SYS_FALSE_OBJECT`]{#ffi_SYS_FALSE_OBJECT}                     `FALSE_OBJECT(prog)`
+  [`"true"`](#decls_true)                            [`TRUE`]{.var_no_ul}                                     [`SYS_TRUE_OBJECT`]{#ffi_SYS_TRUE_OBJECT}                       `TRUE_OBJECT(prog)`
+  [`"expr"`](#decls_expr)                            [`expr`](#types_expr){.type}                             [`SYS_EXPR_TYPE`]{#ffi_SYS_EXPR_TYPE}                           `EXPR_TYPE(prog)`
+  [`"f_param"`](#decls_f_param)                      [`f_param`]{.type}                                       [`SYS_F_PARAM_TYPE`]{#ffi_SYS_F_PARAM_TYPE}                     `F_PARAM_TYPE(prog)`
+  [`"integer"`](#decls_integer)                      [`integer`](#types_integer){.type}                       [`SYS_INT_TYPE`]{#ffi_SYS_INT_TYPE}                             `INT_TYPE(prog)`
+  [`"bigInteger"`](#decls_bigInteger)                [`bigInteger`](#types_bigInteger){.type}                 [`SYS_BIGINT_TYPE`]{#ffi_SYS_BIGINT_TYPE}                       `BIGINT_TYPE(prog)`
+  [`"char"`](#decls_char)                            [`char`](#types_char){.type}                             [`SYS_CHAR_TYPE`]{#ffi_SYS_CHAR_TYPE}                           `CHAR_TYPE(prog)`
+  [`"string"`](#decls_string)                        [`string`](#types_string){.type}                         [`SYS_STRI_TYPE`]{#ffi_SYS_STRI_TYPE}                           `STRI_TYPE(prog)`
+  [`"proc"`](#decls_proc)                            [`proc`](#types_proc){.type}                             [`SYS_PROC_TYPE`]{#ffi_SYS_PROC_TYPE}                           `PROC_TYPE(prog)`
+  [`"float"`](#decls_float)                          [`float`](#types_float){.type}                           [`SYS_FLT_TYPE`]{#ffi_SYS_FLT_TYPE}                             `FLT_TYPE(prog)`
+
+[]{#ffi_String_conversions}
+
+### 16.3 String conversions
+
+Seed7 strings are UTF-32 encoded and C strings are zero terminated byte
+sequences. C uses also byte sequences with a length. The byte sequences
+can be encoded with ISO-8859-1 or UTF-8. To convert between the
+different representations, [`"striutl.h"`]{.lib} defines conversion
+functions between the types [`striType`](#ffi_striType){.type},
+[`cstriType`](#ffi_cstriType){.type},
+[`bstriType`](#ffi_bstriType){.type},
+[`utf16striType`](#ffi_utf16striType){.type} and
+[`utf32striType`](#ffi_utf32striType){.type}. The types
+[`utf16striType`](#ffi_utf16striType){.type} and
+[`utf32striType`](#ffi_utf32striType){.type} are independent of the size
+of [`wchar_t`]{.type}. Strings with
+[`utf16striType`](#ffi_utf16striType){.type} and
+[`utf32striType`](#ffi_utf32striType){.type} can be zero terminated or a
+buffer with a length, that is specified with a parameter.
+
+<div>
+
++--------------------------------------------+---------------------------------------------------------------------------+
+| Function Summary                                                                                                       |
++--------------------------------------------+---------------------------------------------------------------------------+
+| [cstriType](#ffi_cstriType){.type}         | +----------------------------------+----------------------------------+   |
+|                                            | | **[stri_to_cstri](#ffi_stri_to_cstri)** ([const]{.keywd}     |   |
+|                                            | | [const_striType](#ffi_striType){.type} stri,                        |   |
+|                                            | | [errInfoType](#ffi_errInfoType){.type} \*err_info)                  |   |
+|                                            | +----------------------------------+----------------------------------+   |
+|                                            | |                                  | Create an ISO-8859-1 encoded C   |   |
+|                                            | |                                  | string from a Seed7 UTF-32       |   |
+|                                            | |                                  | string.                          |   |
+|                                            | +----------------------------------+----------------------------------+   |
++--------------------------------------------+---------------------------------------------------------------------------+
+| [cstriType](#ffi_cstriType){.type}         | +----------------------------------+----------------------------------+   |
+|                                            | | **[stri_to_cstri8](#ffi_stri_to_cstri8)** ([const]{.keywd}   |   |
+|                                            | | [const_striType](#ffi_striType){.type} stri,                        |   |
+|                                            | | [errInfoType](#ffi_errInfoType){.type} \*err_info)                  |   |
+|                                            | +----------------------------------+----------------------------------+   |
+|                                            | |                                  | Create an UTF-8 encoded C string |   |
+|                                            | |                                  | from a Seed7 UTF-32 string.      |   |
+|                                            | +----------------------------------+----------------------------------+   |
++--------------------------------------------+---------------------------------------------------------------------------+
+| [cstriType](#ffi_cstriType){.type}         | +----------------------------------+----------------------------------+   |
+|                                            | | **[stri_to_cstri8_buf](#ffi_stri_to_cstri8_buf)**            |   |
+|                                            | | ([const]{.keywd} [const_striType](#ffi_striType){.type} stri,       |   |
+|                                            | | [memSizeType](#ffi_memSizeType){.type} \*length)                    |   |
+|                                            | +----------------------------------+----------------------------------+   |
+|                                            | |                                  | Create an UTF-8 encoded C string |   |
+|                                            | |                                  | buffer from a Seed7 UTF-32       |   |
+|                                            | |                                  | string.                          |   |
+|                                            | +----------------------------------+----------------------------------+   |
++--------------------------------------------+---------------------------------------------------------------------------+
+| [bstriType](#ffi_bstriType){.type}         | +----------------------------------+----------------------------------+   |
+|                                            | | **[stri_to_bstri](#ffi_stri_to_bstri)** ([const]{.keywd}     |   |
+|                                            | | [const_striType](#ffi_striType){.type} stri,                        |   |
+|                                            | | [errInfoType](#ffi_errInfoType){.type} \*err_info)                  |   |
+|                                            | +----------------------------------+----------------------------------+   |
+|                                            | |                                  | Create an ISO-8859-1 encoded     |   |
+|                                            | |                                  | bstring from a Seed7 UTF-32      |   |
+|                                            | |                                  | string.                          |   |
+|                                            | +----------------------------------+----------------------------------+   |
++--------------------------------------------+---------------------------------------------------------------------------+
+| [bstriType](#ffi_bstriType){.type}         | +----------------------------------+----------------------------------+   |
+|                                            | | **[stri_to_bstri8](#ffi_stri_to_bstri8)**                    |   |
+|                                            | | ([const_striType](#ffi_striType){.type} stri)                       |   |
+|                                            | +----------------------------------+----------------------------------+   |
+|                                            | |                                  | Create an UTF-8 encoded bstring  |   |
+|                                            | |                                  | from a Seed7 UTF-32 string.      |   |
+|                                            | +----------------------------------+----------------------------------+   |
++--------------------------------------------+---------------------------------------------------------------------------+
+| [utf16striType](#ffi_utf16striType){.type} | +----------------------------------+----------------------------------+   |
+|                                            | | **[stri_to_wstri16](#ffi_stri_to_wstri16)** ([const]{.keywd} |   |
+|                                            | | [const_striType](#ffi_striType){.type} stri,                        |   |
+|                                            | | [memSizeType](#ffi_memSizeType){.type} \*length,                    |   |
+|                                            | | [errInfoType](#ffi_errInfoType){.type} \*err_info)                  |   |
+|                                            | +----------------------------------+----------------------------------+   |
+|                                            | |                                  | Create an UTF-16 encoded wide    |   |
+|                                            | |                                  | string buffer from a Seed7       |   |
+|                                            | |                                  | UTF-32 string.                   |   |
+|                                            | +----------------------------------+----------------------------------+   |
++--------------------------------------------+---------------------------------------------------------------------------+
+| [utf32striType](#ffi_utf32striType){.type} | +----------------------------------+----------------------------------+   |
+|                                            | | **[stri_to_wstri32](#ffi_stri_to_wstri32)** ([const]{.keywd} |   |
+|                                            | | [const_striType](#ffi_striType){.type} stri,                        |   |
+|                                            | | [memSizeType](#ffi_memSizeType){.type} \*length,                    |   |
+|                                            | | [errInfoType](#ffi_errInfoType){.type} \*err_info)                  |   |
+|                                            | +----------------------------------+----------------------------------+   |
+|                                            | |                                  | Create an UTF-32 encoded wide    |   |
+|                                            | |                                  | string buffer from a Seed7       |   |
+|                                            | |                                  | UTF-32 string.                   |   |
+|                                            | +----------------------------------+----------------------------------+   |
++--------------------------------------------+---------------------------------------------------------------------------+
+| [striType](#ffi_striType){.type}           | +----------------------------------+----------------------------------+   |
+|                                            | | **[cstri_to_stri](#ffi_cstri_to_stri)**                      |   |
+|                                            | | ([const_cstriType](#ffi_cstriType){.type} cstri)                    |   |
+|                                            | +----------------------------------+----------------------------------+   |
+|                                            | |                                  | Copy an ISO-8859-1 (Latin-1)     |   |
+|                                            | |                                  | encoded C string to a Seed7      |   |
+|                                            | |                                  | string.                          |   |
+|                                            | +----------------------------------+----------------------------------+   |
++--------------------------------------------+---------------------------------------------------------------------------+
+| [striType](#ffi_striType){.type}           | +----------------------------------+----------------------------------+   |
+|                                            | | **[cstri_buf_to_stri](#ffi_cstri_buf_to_stri)**              |   |
+|                                            | | ([const_cstriType](#ffi_cstriType){.type} cstri,                    |   |
+|                                            | | [memSizeType](#ffi_memSizeType){.type} length)                      |   |
+|                                            | +----------------------------------+----------------------------------+   |
+|                                            | |                                  | Copy an ISO-8859-1 (Latin-1)     |   |
+|                                            | |                                  | encoded C string buffer to a     |   |
+|                                            | |                                  | Seed7 string.                    |   |
+|                                            | +----------------------------------+----------------------------------+   |
++--------------------------------------------+---------------------------------------------------------------------------+
+| [striType](#ffi_striType){.type}           | +----------------------------------+----------------------------------+   |
+|                                            | | **[cstri8_to_stri](#ffi_cstri8_to_stri)**                    |   |
+|                                            | | ([const_cstriType](#ffi_cstriType){.type} cstri,                    |   |
+|                                            | | [errInfoType](#ffi_errInfoType){.type} \*err_info)                  |   |
+|                                            | +----------------------------------+----------------------------------+   |
+|                                            | |                                  | Copy an UTF-8 encoded C string   |   |
+|                                            | |                                  | to a Seed7 string.               |   |
+|                                            | +----------------------------------+----------------------------------+   |
++--------------------------------------------+---------------------------------------------------------------------------+
+| [striType](#ffi_striType){.type}           | +----------------------------------+----------------------------------+   |
+|                                            | | **[cstri8_buf_to_stri](#ffi_cstri8_buf_to_stri)**            |   |
+|                                            | | ([const_cstriType](#ffi_cstriType){.type} cstri,                    |   |
+|                                            | | [memSizeType](#ffi_memSizeType){.type} length,                      |   |
+|                                            | | [errInfoType](#ffi_errInfoType){.type} \*err_info)                  |   |
+|                                            | +----------------------------------+----------------------------------+   |
+|                                            | |                                  | Copy an UTF-8 encoded C string   |   |
+|                                            | |                                  | buffer to a Seed7 string.        |   |
+|                                            | +----------------------------------+----------------------------------+   |
++--------------------------------------------+---------------------------------------------------------------------------+
+| [striType](#ffi_striType){.type}           | +-----------------------------------+-----------------------------------+ |
+|                                            | | **[cstri8_or_cstri_to_stri](#ffi_cstri8_or_cstri_to_stri)**    | |
+|                                            | | ([const_cstriType](#ffi_cstriType){.type} cstri)                      | |
+|                                            | +-----------------------------------+-----------------------------------+ |
+|                                            | |                                   | Copy an UTF-8 or ISO-8859-1       | |
+|                                            | |                                   | encoded C string to a Seed7       | |
+|                                            | |                                   | string.                           | |
+|                                            | +-----------------------------------+-----------------------------------+ |
++--------------------------------------------+---------------------------------------------------------------------------+
+| [striType](#ffi_striType){.type}           | +----------------------------------+----------------------------------+   |
+|                                            | | **[wstri16_to_stri](#ffi_wstri16_to_stri)**                  |   |
+|                                            | | ([const_utf16striType](#ffi_utf16striType){.type} wstri,            |   |
+|                                            | | [memSizeType](#ffi_memSizeType){.type} length,                      |   |
+|                                            | | [errInfoType](#ffi_errInfoType){.type} \*err_info)                  |   |
+|                                            | +----------------------------------+----------------------------------+   |
+|                                            | |                                  | Copy an UTF-16 encoded wide      |   |
+|                                            | |                                  | string buffer to a Seed7 string. |   |
+|                                            | +----------------------------------+----------------------------------+   |
++--------------------------------------------+---------------------------------------------------------------------------+
+| [striType](#ffi_striType){.type}           | +----------------------------------+----------------------------------+   |
+|                                            | | **[wstri32_to_stri](#ffi_wstri32_to_stri)**                  |   |
+|                                            | | ([const_utf32striType](#ffi_utf32striType){.type} wstri,            |   |
+|                                            | | [memSizeType](#ffi_memSizeType){.type} length,                      |   |
+|                                            | | [errInfoType](#ffi_errInfoType){.type} \*err_info)                  |   |
+|                                            | +----------------------------------+----------------------------------+   |
+|                                            | |                                  | Copy an UTF-32 encoded wide      |   |
+|                                            | |                                  | string buffer to a Seed7 string. |   |
+|                                            | +----------------------------------+----------------------------------+   |
++--------------------------------------------+---------------------------------------------------------------------------+
+
+</div>
+
+\
+
+<div>
+
+  -----------------
+  Function Detail
+  -----------------
+
+<div>
+
+[]{#ffi_stri_to_cstri}
+
+### stri_to_cstri
+
+[cstriType](#ffi_cstriType){.type} **stri_to_cstri** ([const]{.keywd}
+[const_striType](#ffi_striType){.type} stri,
+[errInfoType](#ffi_errInfoType){.type} \*err_info)
+
+Create an ISO-8859-1 encoded C string from a Seed7 UTF-32 string. The
+memory for the zero byte terminated C string is allocated. The C string
+result must be freed with the macro
+[free_cstri](#ffi_free_cstri){.func}().
+
+**Parameters:**
+:   `stri` - Seed7 UTF-32 string to be converted.
+:   `err_info` - Unchanged if the function succeeds, and
+    [MEMORY_ERROR](#ffi_errInfoType_MEMORY_ERROR){.exception} if the
+    memory allocation failed, and
+    [RANGE_ERROR](#ffi_errInfoType_RANGE_ERROR){.exception} if stri
+    contains a null character or a character that is higher than the
+    highest allowed ISO-8859-1 character (255).
+
+<!-- -->
+
+**Returns:**
+:   an ISO-8859-1 encoded null terminated C string, or NULL if the
+    memory allocation failed or the conversion failed (the error is
+    indicated by err_info).
+
+</div>
+
+------------------------------------------------------------------------
+
+<div>
+
+[]{#ffi_stri_to_cstri8}
+
+### stri_to_cstri8
+
+[cstriType](#ffi_cstriType){.type} **stri_to_cstri8** ([const]{.keywd}
+[const_striType](#ffi_striType){.type} stri,
+[errInfoType](#ffi_errInfoType){.type} \*err_info)
+
+Create an UTF-8 encoded C string from a Seed7 UTF-32 string. The memory
+for the zero byte terminated C string is allocated. The C string result
+must be freed with the macro [free_cstri8](#ffi_free_cstri8){.func}().
+This function is intended to create temporary strings, that are used as
+parameters. To get good performance the allocated memory for the C
+string is oversized.
+
+**Parameters:**
+:   `stri` - Seed7 UTF-32 string to be converted.
+:   `err_info` - Unchanged if the function succeeds, and
+    [MEMORY_ERROR](#ffi_errInfoType_MEMORY_ERROR){.exception} if the
+    memory allocation failed, and
+    [RANGE_ERROR](#ffi_errInfoType_RANGE_ERROR){.exception} if stri
+    contains a null character or a character that is higher than the
+    highest allowed Unicode character (U+10FFFF).
+
+<!-- -->
+
+**Returns:**
+:   an UTF-8 encoded null terminated C string, or NULL if the memory
+    allocation failed or the conversion failed (the error is indicated
+    by err_info).
+
+</div>
+
+------------------------------------------------------------------------
+
+<div>
+
+[]{#ffi_stri_to_cstri8_buf}
+
+### stri_to_cstri8_buf
+
+[cstriType](#ffi_cstriType){.type} **stri_to_cstri8_buf**
+([const]{.keywd} [const_striType](#ffi_striType){.type} stri,
+[memSizeType](#ffi_memSizeType){.type} \*length)
+
+Create an UTF-8 encoded C string buffer from a Seed7 UTF-32 string. The
+memory for the zero byte terminated C string is allocated. Zero bytes
+inside the string are copied to the C string. The C string result must
+be freed with the macro [free_cstri8](#ffi_free_cstri8){.func}(). This
+function is intended to create temporary strings, that are used as
+parameters. To get good performance the allocated memory for the C
+string is oversized.
+
+**Parameters:**
+:   `stri` - Seed7 UTF-32 string to be converted.
+:   `length` - Place to return the length of the result (without
+    \'\\0\').
+
+<!-- -->
+
+**Returns:**
+:   an UTF-8 encoded null terminated C string, or NULL if the memory
+    allocation failed.
+
+</div>
+
+------------------------------------------------------------------------
+
+<div>
+
+[]{#ffi_stri_to_bstri}
+
+### stri_to_bstri
+
+[bstriType](#ffi_bstriType){.type} **stri_to_bstri** ([const]{.keywd}
+[const_striType](#ffi_striType){.type} stri,
+[errInfoType](#ffi_errInfoType){.type} \*err_info)
+
+Create an ISO-8859-1 encoded bstring from a Seed7 UTF-32 string. The
+memory for the bstring is allocated. No zero byte is added to the end of
+the bstring. No special action is done, if the UTF-32 string contains a
+null character.
+
+**Parameters:**
+:   `stri` - Seed7 UTF-32 string to be converted.
+:   `err_info` - Unchanged if the function succeeds, and
+    [MEMORY_ERROR](#ffi_errInfoType_MEMORY_ERROR){.exception} if the
+    memory allocation failed, and
+    [RANGE_ERROR](#ffi_errInfoType_RANGE_ERROR){.exception} if stri
+    contains a character that is higher than the highest allowed
+    ISO-8859-1 character (255).
+
+<!-- -->
+
+**Returns:**
+:   an ISO-8859-1 encoded bstring, or NULL if the memory allocation
+    failed or the conversion failed (the error is indicated by
+    err_info).
+
+</div>
+
+------------------------------------------------------------------------
+
+<div>
+
+[]{#ffi_stri_to_bstri8}
+
+### stri_to_bstri8
+
+[bstriType](#ffi_bstriType){.type} **stri_to_bstri8**
+([const_striType](#ffi_striType){.type} stri)
+
+Create an UTF-8 encoded bstring from a Seed7 UTF-32 string. The memory
+for the bstring is allocated. No zero byte is added to the end of the
+bstring. No special action is done, if the original string contains a
+null character.
+
+**Parameters:**
+:   `stri` - Seed7 UTF-32 string to be converted.
+
+<!-- -->
+
+**Returns:**
+:   an UTF-8 encoded bstring, or NULL if the memory allocation failed.
+
+</div>
+
+------------------------------------------------------------------------
+
+<div>
+
+[]{#ffi_stri_to_wstri16}
+
+### stri_to_wstri16
+
+[utf16striType](#ffi_utf16striType){.type} **stri_to_wstri16**
+([const]{.keywd} [const_striType](#ffi_striType){.type} stri,
+[memSizeType](#ffi_memSizeType){.type} \*length,
+[errInfoType](#ffi_errInfoType){.type} \*err_info)
+
+Create an UTF-16 encoded wide string buffer from a Seed7 UTF-32 string.
+The memory for the zero byte terminated wide string is allocated. This
+function is intended to create temporary strings, that are used as
+parameters. To get good performance the allocated memory for the wide
+string is oversized.
+
+**Parameters:**
+:   `stri` - Seed7 UTF-32 string to be converted.
+:   `length` - Place to return the character length of the result
+    (without \'\\0\').
+:   `err_info` - Unchanged if the function succeeds, and
+    [MEMORY_ERROR](#ffi_errInfoType_MEMORY_ERROR){.exception} if the
+    memory allocation failed, and
+    [RANGE_ERROR](#ffi_errInfoType_RANGE_ERROR){.exception} if stri
+    contains a character that is higher than the highest allowed Unicode
+    character (U+10FFFF).
+
+<!-- -->
+
+**Returns:**
+:   an UTF-16 encoded null terminated wide string, or NULL if the memory
+    allocation failed or the conversion failed (the error is indicated
+    by err_info).
+
+</div>
+
+------------------------------------------------------------------------
+
+<div>
+
+[]{#ffi_stri_to_wstri32}
+
+### stri_to_wstri32
+
+[utf32striType](#ffi_utf32striType){.type} **stri_to_wstri32**
+([const]{.keywd} [const_striType](#ffi_striType){.type} stri,
+[memSizeType](#ffi_memSizeType){.type} \*length,
+[errInfoType](#ffi_errInfoType){.type} \*err_info)
+
+Create an UTF-32 encoded wide string buffer from a Seed7 UTF-32 string.
+The memory for the zero byte terminated wide string is allocated. This
+function is intended to create temporary strings, that are used as
+parameters. To get good performance the allocated memory for the wide
+string is oversized.
+
+**Parameters:**
+:   `stri` - Seed7 UTF-32 string to be converted.
+:   `length` - Place to return the character length of the result
+    (without \'\\0\').
+:   `err_info` - Unchanged if the function succeeds, and
+    [MEMORY_ERROR](#ffi_errInfoType_MEMORY_ERROR){.exception} if the
+    memory allocation failed, and
+    [RANGE_ERROR](#ffi_errInfoType_RANGE_ERROR){.exception} if stri
+    contains a character that is higher than the highest allowed Unicode
+    character (U+10FFFF).
+
+<!-- -->
+
+**Returns:**
+:   an UTF-32 encoded null terminated wide string, or NULL if the memory
+    allocation failed or the conversion failed (the error is indicated
+    by err_info).
+
+</div>
+
+------------------------------------------------------------------------
+
+<div>
+
+[]{#ffi_cstri_to_stri}
+
+### cstri_to_stri
+
+[striType](#ffi_striType){.type} **cstri_to_stri**
+([const_cstriType](#ffi_cstriType){.type} cstri)
+
+Copy an ISO-8859-1 (Latin-1) encoded C string to a Seed7 string. The
+memory for the UTF-32 encoded Seed7 string is allocated.
+
+**Parameters:**
+:   `cstri` - Null terminated ISO-8859-1 encoded C string.
+
+<!-- -->
+
+**Returns:**
+:   an UTF-32 encoded Seed7 string, or NULL if the memory allocation
+    failed.
+
+</div>
+
+------------------------------------------------------------------------
+
+<div>
+
+[]{#ffi_cstri_buf_to_stri}
+
+### cstri_buf_to_stri
+
+[striType](#ffi_striType){.type} **cstri_buf_to_stri**
+([const_cstriType](#ffi_cstriType){.type} cstri,
+[memSizeType](#ffi_memSizeType){.type} length)
+
+Copy an ISO-8859-1 (Latin-1) encoded C string buffer to a Seed7 string.
+The memory for the UTF-32 encoded Seed7 string is allocated.
+
+**Parameters:**
+:   `cstri` - ISO-8859-1 encoded C string buffer (not null terminated).
+:   `length` - Byte length of the ISO-8859-1 encoded C string buffer.
+
+<!-- -->
+
+**Returns:**
+:   an UTF-32 encoded Seed7 string, or NULL if the memory allocation
+    failed.
+
+</div>
+
+------------------------------------------------------------------------
+
+<div>
+
+[]{#ffi_cstri8_to_stri}
+
+### cstri8_to_stri
+
+[striType](#ffi_striType){.type} **cstri8_to_stri**
+([const_cstriType](#ffi_cstriType){.type} cstri,
+[errInfoType](#ffi_errInfoType){.type} \*err_info)
+
+Copy an UTF-8 encoded C string to a Seed7 string. The memory for the
+UTF-32 encoded Seed7 string is allocated.
+
+**Parameters:**
+:   `cstri` - Null terminated UTF-8 encoded C string.
+:   `err_info` - Unchanged if the function succeeds, and
+    [MEMORY_ERROR](#ffi_errInfoType_MEMORY_ERROR){.exception} if the
+    memory allocation failed, and
+    [RANGE_ERROR](#ffi_errInfoType_RANGE_ERROR){.exception} if the
+    conversion failed.
+
+<!-- -->
+
+**Returns:**
+:   an UTF-32 encoded Seed7 string, or NULL if the memory allocation
+    failed or invalid UTF-8 encodings are used.
+
+</div>
+
+------------------------------------------------------------------------
+
+<div>
+
+[]{#ffi_cstri8_buf_to_stri}
+
+### cstri8_buf_to_stri
+
+[striType](#ffi_striType){.type} **cstri8_buf_to_stri**
+([const_cstriType](#ffi_cstriType){.type} cstri,
+[memSizeType](#ffi_memSizeType){.type} length,
+[errInfoType](#ffi_errInfoType){.type} \*err_info)
+
+Copy an UTF-8 encoded C string buffer to a Seed7 string. The memory for
+the UTF-32 encoded Seed7 string is allocated.
+
+**Parameters:**
+:   `cstri` - UTF-8 encoded C string buffer (not null terminated).
+:   `length` - Byte length of the UTF-8 encoded C string buffer.
+:   `err_info` - Unchanged if the function succeeds, and
+    [MEMORY_ERROR](#ffi_errInfoType_MEMORY_ERROR){.exception} if the
+    memory allocation failed, and
+    [RANGE_ERROR](#ffi_errInfoType_RANGE_ERROR){.exception} if the
+    conversion failed.
+
+<!-- -->
+
+**Returns:**
+:   an UTF-32 encoded Seed7 string, or NULL if the memory allocation
+    failed or invalid UTF-8 encodings are used.
+
+</div>
+
+------------------------------------------------------------------------
+
+<div>
+
+[]{#ffi_cstri8_or_cstri_to_stri}
+
+### cstri8_or_cstri_to_stri
+
+[striType](#ffi_striType){.type} **cstri8_or_cstri_to_stri**
+([const_cstriType](#ffi_cstriType){.type} cstri)
+
+Copy an UTF-8 or ISO-8859-1 encoded C string to a Seed7 string. The
+memory for the UTF-32 encoded Seed7 string is allocated.
+
+**Parameters:**
+:   `cstri` - Null terminated UTF-8 or ISO-8859-1 encoded C string.
+
+<!-- -->
+
+**Returns:**
+:   an UTF-32 encoded Seed7 string, or NULL if the memory allocation
+    failed.
+
+</div>
+
+------------------------------------------------------------------------
+
+<div>
+
+[]{#ffi_wstri16_to_stri}
+
+### wstri16_to_stri
+
+[striType](#ffi_striType){.type} **wstri16_to_stri**
+([const_utf16striType](#ffi_utf16striType){.type} wstri,
+[memSizeType](#ffi_memSizeType){.type} length,
+[errInfoType](#ffi_errInfoType){.type} \*err_info)
+
+Copy an UTF-16 encoded wide string buffer to a Seed7 string. The memory
+for the UTF-32 encoded Seed7 string is allocated.
+
+**Parameters:**
+:   `wstri` - UTF-16 encoded wide string buffer (not null terminated).
+:   `length` - Character length of the UTF-16 encoded wide string
+    buffer.
+:   `err_info` - Unchanged if the function succeeds, and
+    [MEMORY_ERROR](#ffi_errInfoType_MEMORY_ERROR){.exception} if the
+    memory allocation failed.
+
+<!-- -->
+
+**Returns:**
+:   an UTF-32 encoded Seed7 string, or NULL if the memory allocation
+    failed.
+
+</div>
+
+------------------------------------------------------------------------
+
+<div>
+
+[]{#ffi_wstri32_to_stri}
+
+### wstri32_to_stri
+
+[striType](#ffi_striType){.type} **wstri32_to_stri**
+([const_utf32striType](#ffi_utf32striType){.type} wstri,
+[memSizeType](#ffi_memSizeType){.type} length,
+[errInfoType](#ffi_errInfoType){.type} \*err_info)
+
+Copy an UTF-32 encoded wide string buffer to a Seed7 string. The memory
+for the UTF-32 encoded Seed7 string is allocated.
+
+**Parameters:**
+:   `wstri` - UTF-32 encoded wide string buffer (not null terminated).
+:   `length` - Character length of the UTF-32 encoded wide string
+    buffer.
+:   `err_info` - Unchanged if the function succeeds, and
+    [MEMORY_ERROR](#ffi_errInfoType_MEMORY_ERROR){.exception} if the
+    memory allocation failed.
+
+<!-- -->
+
+**Returns:**
+:   an UTF-32 encoded Seed7 string, or NULL if the memory allocation
+    failed.
+
+</div>
+
+</div>
+
+[]{#ffi_Operating_system_string_and_path_conversions}
+
+### 16.4 Operating system string and path conversions
+
+Operating systems disagree in their Unicode encoding (UTF-8 or UTF-16).
+To cope with this, [`"striutl.h"`]{.lib} defines the type
+[`os_striType`](#ffi_os_striType){.type} and functions to convert to and
+from [`os_striType`](#ffi_os_striType){.type}. The different concepts to
+represent a file path (path delimiter and drive letter) are handled with
+[`cp_to_os_path`](#ffi_cp_to_os_path){.func} and
+[`cp_from_os_path`](#ffi_cp_from_os_path){.func}.
+
+<div>
+
++----------------------------------------+-------------------------------------------------------------------------+
+| Function Summary                                                                                                 |
++----------------------------------------+-------------------------------------------------------------------------+
+| [striType](#ffi_striType){.type}       | +----------------------------------+----------------------------------+ |
+|                                        | | **[conv_from_os_stri](#ffi_conv_from_os_stri)**              | |
+|                                        | | ([const]{.keywd} [const_os_striType](#ffi_os_striType){.type}       | |
+|                                        | | os_stri, [memSizeType](#ffi_memSizeType){.type} length)             | |
+|                                        | +----------------------------------+----------------------------------+ |
+|                                        | |                                  | Convert an os_striType string    | |
+|                                        | |                                  | with length to a Seed7 UTF-32    | |
+|                                        | |                                  | string.                          | |
+|                                        | +----------------------------------+----------------------------------+ |
++----------------------------------------+-------------------------------------------------------------------------+
+| [os_striType](#ffi_os_striType){.type} | +----------------------------------+----------------------------------+ |
+|                                        | | **[stri_to_os_stri](#ffi_stri_to_os_stri)**                  | |
+|                                        | | ([const_striType](#ffi_striType){.type} stri,                       | |
+|                                        | | [errInfoType](#ffi_errInfoType){.type} \*err_info)                  | |
+|                                        | +----------------------------------+----------------------------------+ |
+|                                        | |                                  | Convert a Seed7 UTF-32 string to | |
+|                                        | |                                  | a null terminated os_striType    | |
+|                                        | |                                  | string.                          | |
+|                                        | +----------------------------------+----------------------------------+ |
++----------------------------------------+-------------------------------------------------------------------------+
+| [striType](#ffi_striType){.type}       | +----------------------------------+----------------------------------+ |
+|                                        | | **[os_stri_to_stri](#ffi_os_stri_to_stri)**                  | |
+|                                        | | ([const_os_striType](#ffi_os_striType){.type} os_stri,              | |
+|                                        | | [errInfoType](#ffi_errInfoType){.type} \*err_info)                  | |
+|                                        | +----------------------------------+----------------------------------+ |
+|                                        | |                                  | Convert a null terminated        | |
+|                                        | |                                  | os_striType string to a Seed7    | |
+|                                        | |                                  | UTF-32 string.                   | |
+|                                        | +----------------------------------+----------------------------------+ |
++----------------------------------------+-------------------------------------------------------------------------+
+| [os_striType](#ffi_os_striType){.type} | +----------------------------------+----------------------------------+ |
+|                                        | | **[cp_to_os_path](#ffi_cp_to_os_path)**                      | |
+|                                        | | ([const_striType](#ffi_striType){.type} std_path, [int]{.type}      | |
+|                                        | | \*path_info, [errInfoType](#ffi_errInfoType){.type} \*err_info)     | |
+|                                        | +----------------------------------+----------------------------------+ |
+|                                        | |                                  | Convert a Seed7 standard path to | |
+|                                        | |                                  | a path used by system calls.     | |
+|                                        | +----------------------------------+----------------------------------+ |
++----------------------------------------+-------------------------------------------------------------------------+
+| [striType](#ffi_striType){.type}       | +----------------------------------+----------------------------------+ |
+|                                        | | **[cp_from_os_path](#ffi_cp_from_os_path)**                  | |
+|                                        | | ([const_os_striType](#ffi_os_striType){.type} os_path,              | |
+|                                        | | [errInfoType](#ffi_errInfoType){.type} \*err_info)                  | |
+|                                        | +----------------------------------+----------------------------------+ |
+|                                        | |                                  | Convert a path returned by a     | |
+|                                        | |                                  | system call to a Seed7 standard  | |
+|                                        | |                                  | path.                            | |
+|                                        | +----------------------------------+----------------------------------+ |
++----------------------------------------+-------------------------------------------------------------------------+
+
+</div>
+
+\
+
+<div>
+
+  -----------------
+  Function Detail
+  -----------------
+
+<div>
+
+[]{#ffi_conv_from_os_stri}
+
+### conv_from_os_stri
+
+[striType](#ffi_striType){.type} **conv_from_os_stri** ([const]{.keywd}
+[const_os_striType](#ffi_os_striType){.type} os_stri,
+[memSizeType](#ffi_memSizeType){.type} length)
+
+Convert an os_striType string with length to a Seed7 UTF-32 string. Many
+system calls return os_striType data with length. System calls are
+defined in \"version.h\" and \"os_decls.h\". They are prefixed with os\_
+and use strings of the type os_striType. Depending on the operating
+system os_striType can describe byte or wide char strings. The encoding
+can be Latin-1, UTF-8, UTF-16 or it can use a code page.
+
+**Parameters:**
+:   `os_stri` - Possibly binary string (may contain null characters).
+:   `length` - Length of os_stri in characters.
+
+<!-- -->
+
+**Returns:**
+:   a Seed7 UTF-32 string, or NULL if an error occurred.
+
+</div>
+
+------------------------------------------------------------------------
+
+<div>
+
+[]{#ffi_stri_to_os_stri}
+
+### stri_to_os_stri
+
+[os_striType](#ffi_os_striType){.type} **stri_to_os_stri**
+([const_striType](#ffi_striType){.type} stri,
+[errInfoType](#ffi_errInfoType){.type} \*err_info)
+
+Convert a Seed7 UTF-32 string to a null terminated os_striType string.
+The memory for the null terminated os_striType string is allocated. The
+os_striType result is allocated with the macro
+[os_stri_alloc](#ffi_os_stri_alloc){.func}() and it must be freed with
+the macro [os_stri_free](#ffi_os_stri_free){.func}(). Strings allocated
+with [os_stri_alloc](#ffi_os_stri_alloc){.func}() must be freed in the
+reverse order of their creation. This allows that allocations work in a
+stack like manner. Many system calls have parameters with null
+terminated os_striType strings. System calls are defined in
+\"version.h\" and \"os_decls.h\". They are prefixed with os\_ and use
+strings of the type os_striType. Depending on the operating system
+os_striType can describe byte or wide char strings. The encoding can be
+Latin-1, UTF-8, UTF-16 or it can use a code page.
+
+**Parameters:**
+:   `stri` - Seed7 UTF-32 string to be converted.
+:   `err_info` - Unchanged if the function succeeds, and
+    [MEMORY_ERROR](#ffi_errInfoType_MEMORY_ERROR){.exception} if the
+    memory allocation failed, and
+    [RANGE_ERROR](#ffi_errInfoType_RANGE_ERROR){.exception} if the
+    conversion failed.
+
+<!-- -->
+
+**Returns:**
+:   a null terminated os_striType value used by system calls, or NULL if
+    an error occurred.
+
+</div>
+
+------------------------------------------------------------------------
+
+<div>
+
+[]{#ffi_os_stri_to_stri}
+
+### os_stri_to_stri
+
+[striType](#ffi_striType){.type} **os_stri_to_stri**
+([const_os_striType](#ffi_os_striType){.type} os_stri,
+[errInfoType](#ffi_errInfoType){.type} \*err_info)
+
+Convert a null terminated os_striType string to a Seed7 UTF-32 string.
+Many system calls return null terminated os_striType strings. System
+calls are defined in \"version.h\" and \"os_decls.h\". They are prefixed
+with os\_ and use strings of the type os_striType. Depending on the
+operating system os_striType can describe byte or wide char strings. The
+encoding can be Latin-1, UTF-8, UTF-16 or it can use a code page.
+
+**Parameters:**
+:   `os_stri` - Null terminated os_striType string to be converted.
+:   `err_info` - Unchanged if the function succeeds, and
+    [MEMORY_ERROR](#ffi_errInfoType_MEMORY_ERROR){.exception} if the
+    memory allocation failed.
+
+<!-- -->
+
+**Returns:**
+:   a Seed7 UTF-32 string, or NULL if an error occurred.
+
+</div>
+
+------------------------------------------------------------------------
+
+<div>
+
+[]{#ffi_cp_to_os_path}
+
+### cp_to_os_path
+
+[os_striType](#ffi_os_striType){.type} **cp_to_os_path**
+([const_striType](#ffi_striType){.type} std_path, [int]{.type}
+\*path_info, [errInfoType](#ffi_errInfoType){.type} \*err_info)
+
+Convert a Seed7 standard path to a path used by system calls. The memory
+for the null terminated os_striType path is allocated. The os_striType
+result is allocated with the macro
+[os_stri_alloc](#ffi_os_stri_alloc){.func}() and it must be freed with
+the macro [os_stri_free](#ffi_os_stri_free){.func}(). Strings allocated
+with [os_stri_alloc](#ffi_os_stri_alloc){.func}() must be freed in the
+reverse order of their creation. This allows that allocations work in a
+stack like manner. System calls are defined in \"version.h\" and
+\"os_decls.h\". They are prefixed with os\_ and use system paths of the
+type os_striType. Depending on the operating system os_striType can
+describe byte or wide char strings. The encoding can be Latin-1, UTF-8,
+UTF-16 or it can use a code page. Beyond the conversion to os_striType a
+mapping to drive letters might take place on some operating systems.
+
+**Parameters:**
+:   `std_path` - UTF-32 encoded Seed7 standard path to be converted.
+:   `path_info` - Unchanged if the function succeeds, and
+    PATH_IS_EMULATED_ROOT if the path is \"/\", and PATH_NOT_MAPPED if
+    the path cannot be mapped.
+:   `err_info` - Unchanged if the function succeeds, and
+    [MEMORY_ERROR](#ffi_errInfoType_MEMORY_ERROR){.exception} if the
+    memory allocation failed, and
+    [RANGE_ERROR](#ffi_errInfoType_RANGE_ERROR){.exception} if the path
+    is not a standard path.
+
+<!-- -->
+
+**Returns:**
+:   a null terminated os_striType path used by system calls, or NULL if
+    an error occurred.
+
+</div>
+
+------------------------------------------------------------------------
+
+<div>
+
+[]{#ffi_cp_from_os_path}
+
+### cp_from_os_path
+
+[striType](#ffi_striType){.type} **cp_from_os_path**
+([const_os_striType](#ffi_os_striType){.type} os_path,
+[errInfoType](#ffi_errInfoType){.type} \*err_info)
+
+Convert a path returned by a system call to a Seed7 standard path.
+System calls are defined in \"version.h\" and \"os_decls.h\". They are
+prefixed with os\_ and use system paths of the type os_striType.
+Depending on the operating system os_striType can describe byte or wide
+char strings. The encoding can be Latin-1, UTF-8, UTF-16 or it can use a
+code page. Beyond the conversion from os_striType a mapping from drive
+letters might take place on some operating systems.
+
+**Parameters:**
+:   `os_path` - Null terminated os_striType path to be converted.
+:   `err_info` - Unchanged if the function succeeds, and
+    [MEMORY_ERROR](#ffi_errInfoType_MEMORY_ERROR){.exception} if the
+    memory allocation failed.
+
+<!-- -->
+
+**Returns:**
+:   an UTF-32 encoded Seed7 standard path, or NULL if the memory
+    allocation failed.
+
+</div>
+
+</div>
+
+[]{#ffi_Macros_to_access_the_action_parameters}
+
+### 16.5 Macros to access the action parameters
+
+A primitive action function has one parameter named `'arguments'`. The
+`'arguments'` parameter has the type [`listType`](#ffi_listType){.type}
+and contains a list of objects. The header file [`"objutl.h"`]{.lib}
+defines macros like [`arg_1`](#ffi_arg_1){.func},
+[`arg_2`](#ffi_arg_2){.func}, [`arg_3`](#ffi_arg_3){.func}, etc. to get
+a specific object from the `'arguments'`.
+
+<div>
+
++--------------------------------------+-------------------------------------------------------------------------+
+| Functions (macros) to get a Seed7 object from a list                                                           |
++--------------------------------------+-------------------------------------------------------------------------+
+| [objectType](#ffi_objectType){.type} | +----------------------------------+----------------------------------+ |
+|                                      | | **[arg_1]{#ffi_arg_1}** ([listType](#ffi_listType){.type}           | |
+|                                      | | arguments)                                                          | |
+|                                      | +----------------------------------+----------------------------------+ |
+|                                      | |                                  | Take the first object from the   | |
+|                                      | |                                  | list.                            | |
+|                                      | +----------------------------------+----------------------------------+ |
++--------------------------------------+-------------------------------------------------------------------------+
+| [objectType](#ffi_objectType){.type} | +----------------------------------+----------------------------------+ |
+|                                      | | **[arg_2]{#ffi_arg_2}** ([listType](#ffi_listType){.type}           | |
+|                                      | | arguments)                                                          | |
+|                                      | +----------------------------------+----------------------------------+ |
+|                                      | |                                  | Take the second object from the  | |
+|                                      | |                                  | list.                            | |
+|                                      | +----------------------------------+----------------------------------+ |
++--------------------------------------+-------------------------------------------------------------------------+
+| [objectType](#ffi_objectType){.type} | +----------------------------------+----------------------------------+ |
+|                                      | | **[arg_3]{#ffi_arg_3}** ([listType](#ffi_listType){.type}           | |
+|                                      | | arguments)                                                          | |
+|                                      | +----------------------------------+----------------------------------+ |
+|                                      | |                                  | Take the third object from the   | |
+|                                      | |                                  | list.                            | |
+|                                      | +----------------------------------+----------------------------------+ |
++--------------------------------------+-------------------------------------------------------------------------+
+| **. . .**                            | +---------------+                                                       |
+|                                      | | **. . .**     |                                                       |
+|                                      | +---------------+                                                       |
++--------------------------------------+-------------------------------------------------------------------------+
+| [objectType](#ffi_objectType){.type} | +----------------------------------+----------------------------------+ |
+|                                      | | **[arg_12]{#ffi_arg_12}** ([listType](#ffi_listType){.type}         | |
+|                                      | | arguments)                                                          | |
+|                                      | +----------------------------------+----------------------------------+ |
+|                                      | |                                  | Take the twelfth object from the | |
+|                                      | |                                  | list.                            | |
+|                                      | +----------------------------------+----------------------------------+ |
++--------------------------------------+-------------------------------------------------------------------------+
+
+</div>
+
+An object value contains a specific C implementation type. The header
+file [`"objutl.h"`]{.lib} defines macros like
+[`isit_char`](#ffi_isit_char){.func} and
+[`isit_set`](#ffi_isit_set){.func} to check, if an object has the
+requested type. If the object has not the requested C implementation
+type and error message is written.
+
+<div>
+
++-------------------------------------+----------------------------------------------------------------------------------+
+| Functions (macros) to check the C type of Seed7 objects                                                                |
++-------------------------------------+----------------------------------------------------------------------------------+
+| [void]{.type}                       | +----------------------------------+-------------------------------------+       |
+|                                     | | **[isit_array]{#ffi_isit_array}**                                      |       |
+|                                     | | ([objectType](#ffi_objectType){.type} arg)                             |       |
+|                                     | +----------------------------------+-------------------------------------+       |
+|                                     | |                                  | Check if the object type is         |       |
+|                                     | |                                  | [arrayType](#ffi_arrayType){.type}. |       |
+|                                     | +----------------------------------+-------------------------------------+       |
++-------------------------------------+----------------------------------------------------------------------------------+
+| [void]{.type}                       | +----------------------------------+---------------------------------------+     |
+|                                     | | **[isit_bigint]{#ffi_isit_bigint}**                                      |     |
+|                                     | | ([objectType](#ffi_objectType){.type} arg)                               |     |
+|                                     | +----------------------------------+---------------------------------------+     |
+|                                     | |                                  | Check if the object type is           |     |
+|                                     | |                                  | [bigIntType](#ffi_bigIntType){.type}. |     |
+|                                     | +----------------------------------+---------------------------------------+     |
++-------------------------------------+----------------------------------------------------------------------------------+
+| [void]{.type}                       | +----------------------------------+-----------------------------------+         |
+|                                     | | **[isit_bool]{#ffi_isit_bool}**                                      |         |
+|                                     | | ([objectType](#ffi_objectType){.type} arg)                           |         |
+|                                     | +----------------------------------+-----------------------------------+         |
+|                                     | |                                  | Check if the object type is       |         |
+|                                     | |                                  | [boolType](#ffi_boolType){.type}. |         |
+|                                     | +----------------------------------+-----------------------------------+         |
++-------------------------------------+----------------------------------------------------------------------------------+
+| [void]{.type}                       | +----------------------------------+-------------------------------------+       |
+|                                     | | **[isit_bstri]{#ffi_isit_bstri}**                                      |       |
+|                                     | | ([objectType](#ffi_objectType){.type} arg)                             |       |
+|                                     | +----------------------------------+-------------------------------------+       |
+|                                     | |                                  | Check if the object type is         |       |
+|                                     | |                                  | [bstriType](#ffi_bstriType){.type}. |       |
+|                                     | +----------------------------------+-------------------------------------+       |
++-------------------------------------+----------------------------------------------------------------------------------+
+| [void]{.type}                       | +----------------------------------+-----------------------------------+         |
+|                                     | | **[isit_char]{#ffi_isit_char}**                                      |         |
+|                                     | | ([objectType](#ffi_objectType){.type} arg)                           |         |
+|                                     | +----------------------------------+-----------------------------------+         |
+|                                     | |                                  | Check if the object type is       |         |
+|                                     | |                                  | [charType](#ffi_charType){.type}. |         |
+|                                     | +----------------------------------+-----------------------------------+         |
++-------------------------------------+----------------------------------------------------------------------------------+
+| [void]{.type}                       | +----------------------------------+-------------------------------------------+ |
+|                                     | | **[isit_database]{#ffi_isit_database}**                                      | |
+|                                     | | ([objectType](#ffi_objectType){.type} arg)                                   | |
+|                                     | +----------------------------------+-------------------------------------------+ |
+|                                     | |                                  | Check if the object type is               | |
+|                                     | |                                  | [databaseType](#ffi_databaseType){.type}. | |
+|                                     | +----------------------------------+-------------------------------------------+ |
++-------------------------------------+----------------------------------------------------------------------------------+
+| [void]{.type}                       | +----------------------------------+-----------------------------------+         |
+|                                     | | **[isit_file]{#ffi_isit_file}**                                      |         |
+|                                     | | ([objectType](#ffi_objectType){.type} arg)                           |         |
+|                                     | +----------------------------------+-----------------------------------+         |
+|                                     | |                                  | Check if the object type is       |         |
+|                                     | |                                  | [fileType](#ffi_fileType){.type}. |         |
+|                                     | +----------------------------------+-----------------------------------+         |
++-------------------------------------+----------------------------------------------------------------------------------+
+| [void]{.type}                       | +----------------------------------+-------------------------------------+       |
+|                                     | | **[isit_float]{#ffi_isit_float}**                                      |       |
+|                                     | | ([objectType](#ffi_objectType){.type} arg)                             |       |
+|                                     | +----------------------------------+-------------------------------------+       |
+|                                     | |                                  | Check if the object type is         |       |
+|                                     | |                                  | [floatType](#ffi_floatType){.type}. |       |
+|                                     | +----------------------------------+-------------------------------------+       |
++-------------------------------------+----------------------------------------------------------------------------------+
+| [void]{.type}                       | +----------------------------------+-----------------------------------+         |
+|                                     | | **[isit_hash]{#ffi_isit_hash}**                                      |         |
+|                                     | | ([objectType](#ffi_objectType){.type} arg)                           |         |
+|                                     | +----------------------------------+-----------------------------------+         |
+|                                     | |                                  | Check if the object type is       |         |
+|                                     | |                                  | [hashType](#ffi_hashType){.type}. |         |
+|                                     | +----------------------------------+-----------------------------------+         |
++-------------------------------------+----------------------------------------------------------------------------------+
+| [void]{.type}                       | +----------------------------------+----------------------------------+          |
+|                                     | | **[isit_int]{#ffi_isit_int}** ([objectType](#ffi_objectType){.type} |          |
+|                                     | | arg)                                                                |          |
+|                                     | +----------------------------------+----------------------------------+          |
+|                                     | |                                  | Check if the object type is      |          |
+|                                     | |                                  | [intType](#ffi_intType){.type}.  |          |
+|                                     | +----------------------------------+----------------------------------+          |
++-------------------------------------+----------------------------------------------------------------------------------+
+| [void]{.type}                       | +----------------------------------+-----------------------------------+         |
+|                                     | | **[isit_poll]{#ffi_isit_poll}**                                      |         |
+|                                     | | ([objectType](#ffi_objectType){.type} arg)                           |         |
+|                                     | +----------------------------------+-----------------------------------+         |
+|                                     | |                                  | Check if the object type is       |         |
+|                                     | |                                  | [pollType](#ffi_pollType){.type}. |         |
+|                                     | +----------------------------------+-----------------------------------+         |
++-------------------------------------+----------------------------------------------------------------------------------+
+| [void]{.type}                       | +----------------------------------+----------------------------------+          |
+|                                     | | **[isit_set]{#ffi_isit_set}** ([objectType](#ffi_objectType){.type} |          |
+|                                     | | arg)                                                                |          |
+|                                     | +----------------------------------+----------------------------------+          |
+|                                     | |                                  | Check if the object type is      |          |
+|                                     | |                                  | [setType](#ffi_setType){.type}.  |          |
+|                                     | +----------------------------------+----------------------------------+          |
++-------------------------------------+----------------------------------------------------------------------------------+
+| [void]{.type}                       | +----------------------------------+---------------------------------------+     |
+|                                     | | **[isit_socket]{#ffi_isit_socket}**                                      |     |
+|                                     | | ([objectType](#ffi_objectType){.type} arg)                               |     |
+|                                     | +----------------------------------+---------------------------------------+     |
+|                                     | |                                  | Check if the object type is           |     |
+|                                     | |                                  | [socketType](#ffi_socketType){.type}. |     |
+|                                     | +----------------------------------+---------------------------------------+     |
++-------------------------------------+----------------------------------------------------------------------------------+
+| [void]{.type}                       | +----------------------------------+-----------------------------------------+   |
+|                                     | | **[isit_sqlstmt]{#ffi_isit_sqlstmt}**                                      |   |
+|                                     | | ([objectType](#ffi_objectType){.type} arg)                                 |   |
+|                                     | +----------------------------------+-----------------------------------------+   |
+|                                     | |                                  | Check if the object type is             |   |
+|                                     | |                                  | [sqlStmtType](#ffi_sqlStmtType){.type}. |   |
+|                                     | +----------------------------------+-----------------------------------------+   |
++-------------------------------------+----------------------------------------------------------------------------------+
+| [void]{.type}                       | +----------------------------------+-----------------------------------+         |
+|                                     | | **[isit_stri]{#ffi_isit_stri}**                                      |         |
+|                                     | | ([objectType](#ffi_objectType){.type} arg)                           |         |
+|                                     | +----------------------------------+-----------------------------------+         |
+|                                     | |                                  | Check if the object type is       |         |
+|                                     | |                                  | [striType](#ffi_striType){.type}. |         |
+|                                     | +----------------------------------+-----------------------------------+         |
++-------------------------------------+----------------------------------------------------------------------------------+
+| [void]{.type}                       | +----------------------------------+---------------------------------------+     |
+|                                     | | **[isit_struct]{#ffi_isit_struct}**                                      |     |
+|                                     | | ([objectType](#ffi_objectType){.type} arg)                               |     |
+|                                     | +----------------------------------+---------------------------------------+     |
+|                                     | |                                  | Check if the object type is           |     |
+|                                     | |                                  | [structType](#ffi_structType){.type}. |     |
+|                                     | +----------------------------------+---------------------------------------+     |
++-------------------------------------+----------------------------------------------------------------------------------+
+| [void]{.type}                       | +----------------------------------+----------------------------------+          |
+|                                     | | **[isit_win]{#ffi_isit_win}** ([objectType](#ffi_objectType){.type} |          |
+|                                     | | arg)                                                                |          |
+|                                     | +----------------------------------+----------------------------------+          |
+|                                     | |                                  | Check if the object type is      |          |
+|                                     | |                                  | [winType](#ffi_winType){.type}.  |          |
+|                                     | +----------------------------------+----------------------------------+          |
++-------------------------------------+----------------------------------------------------------------------------------+
+
+</div>
+
+The header file [`"objutl.h"`]{.lib} defines macros like
+[`take_bool`](#ffi_take_bool){.func} and
+[`take_file`](#ffi_take_file){.func}. These macros return a value with
+the requested C implementation type.
+
+<div>
+
++------------------------------------------+-------------------------------------------------------------------------+
+| Functions (macros) to get the C values of Seed7 objects                                                            |
++------------------------------------------+-------------------------------------------------------------------------+
+| [arrayType](#ffi_arrayType){.type}       | +----------------------------------+----------------------------------+ |
+|                                          | | **[take_array]{#ffi_take_array}**                                   | |
+|                                          | | ([objectType](#ffi_objectType){.type} arg)                          | |
+|                                          | +----------------------------------+----------------------------------+ |
+|                                          | |                                  | Take the array value from an     | |
+|                                          | |                                  | object.                          | |
+|                                          | +----------------------------------+----------------------------------+ |
++------------------------------------------+-------------------------------------------------------------------------+
+| [bigIntType](#ffi_bigIntType){.type}     | +----------------------------------+----------------------------------+ |
+|                                          | | **[take_bigint]{#ffi_take_bigint}**                                 | |
+|                                          | | ([objectType](#ffi_objectType){.type} arg)                          | |
+|                                          | +----------------------------------+----------------------------------+ |
+|                                          | |                                  | Take the bigInteger value from   | |
+|                                          | |                                  | an object.                       | |
+|                                          | +----------------------------------+----------------------------------+ |
++------------------------------------------+-------------------------------------------------------------------------+
+| [boolType](#ffi_boolType){.type}         | +----------------------------------+----------------------------------+ |
+|                                          | | **[take_bool]{#ffi_take_bool}**                                     | |
+|                                          | | ([objectType](#ffi_objectType){.type} arg)                          | |
+|                                          | +----------------------------------+----------------------------------+ |
+|                                          | |                                  | Take the boolean value from an   | |
+|                                          | |                                  | object.                          | |
+|                                          | +----------------------------------+----------------------------------+ |
++------------------------------------------+-------------------------------------------------------------------------+
+| [bstriType](#ffi_bstriType){.type}       | +----------------------------------+----------------------------------+ |
+|                                          | | **[take_bstri]{#ffi_take_bstri}**                                   | |
+|                                          | | ([objectType](#ffi_objectType){.type} arg)                          | |
+|                                          | +----------------------------------+----------------------------------+ |
+|                                          | |                                  | Take the bstring value from an   | |
+|                                          | |                                  | object.                          | |
+|                                          | +----------------------------------+----------------------------------+ |
++------------------------------------------+-------------------------------------------------------------------------+
+| [charType](#ffi_charType){.type}         | +----------------------------------+----------------------------------+ |
+|                                          | | **[take_char]{#ffi_take_char}**                                     | |
+|                                          | | ([objectType](#ffi_objectType){.type} arg)                          | |
+|                                          | +----------------------------------+----------------------------------+ |
+|                                          | |                                  | Take the char value from an      | |
+|                                          | |                                  | object.                          | |
+|                                          | +----------------------------------+----------------------------------+ |
++------------------------------------------+-------------------------------------------------------------------------+
+| [databaseType](#ffi_databaseType){.type} | +----------------------------------+----------------------------------+ |
+|                                          | | **[take_database]{#ffi_take_database}**                             | |
+|                                          | | ([objectType](#ffi_objectType){.type} arg)                          | |
+|                                          | +----------------------------------+----------------------------------+ |
+|                                          | |                                  | Take the database value from an  | |
+|                                          | |                                  | object.                          | |
+|                                          | +----------------------------------+----------------------------------+ |
++------------------------------------------+-------------------------------------------------------------------------+
+| [fileType](#ffi_fileType){.type}         | +----------------------------------+----------------------------------+ |
+|                                          | | **[take_file]{#ffi_take_file}**                                     | |
+|                                          | | ([objectType](#ffi_objectType){.type} arg)                          | |
+|                                          | +----------------------------------+----------------------------------+ |
+|                                          | |                                  | Take the file value from an      | |
+|                                          | |                                  | object.                          | |
+|                                          | +----------------------------------+----------------------------------+ |
++------------------------------------------+-------------------------------------------------------------------------+
+| [floatType](#ffi_floatType){.type}       | +----------------------------------+----------------------------------+ |
+|                                          | | **[take_float]{#ffi_take_float}**                                   | |
+|                                          | | ([objectType](#ffi_objectType){.type} arg)                          | |
+|                                          | +----------------------------------+----------------------------------+ |
+|                                          | |                                  | Take the float value from an     | |
+|                                          | |                                  | object.                          | |
+|                                          | +----------------------------------+----------------------------------+ |
++------------------------------------------+-------------------------------------------------------------------------+
+| [hashType](#ffi_hashType){.type}         | +----------------------------------+----------------------------------+ |
+|                                          | | **[take_hash]{#ffi_take_hash}**                                     | |
+|                                          | | ([objectType](#ffi_objectType){.type} arg)                          | |
+|                                          | +----------------------------------+----------------------------------+ |
+|                                          | |                                  | Take the hash table value from   | |
+|                                          | |                                  | an object.                       | |
+|                                          | +----------------------------------+----------------------------------+ |
++------------------------------------------+-------------------------------------------------------------------------+
+| [intType](#ffi_intType){.type}           | +----------------------------------+----------------------------------+ |
+|                                          | | **[take_int]{#ffi_take_int}** ([objectType](#ffi_objectType){.type} | |
+|                                          | | arg)                                                                | |
+|                                          | +----------------------------------+----------------------------------+ |
+|                                          | |                                  | Take the integer value from an   | |
+|                                          | |                                  | object.                          | |
+|                                          | +----------------------------------+----------------------------------+ |
++------------------------------------------+-------------------------------------------------------------------------+
+| [pollType](#ffi_pollType){.type}         | +----------------------------------+----------------------------------+ |
+|                                          | | **[take_poll]{#ffi_take_poll}**                                     | |
+|                                          | | ([objectType](#ffi_objectType){.type} arg)                          | |
+|                                          | +----------------------------------+----------------------------------+ |
+|                                          | |                                  | Take the poll data value from an | |
+|                                          | |                                  | object.                          | |
+|                                          | +----------------------------------+----------------------------------+ |
++------------------------------------------+-------------------------------------------------------------------------+
+| [setType](#ffi_setType){.type}           | +----------------------------------+----------------------------------+ |
+|                                          | | **[take_set]{#ffi_take_set}** ([objectType](#ffi_objectType){.type} | |
+|                                          | | arg)                                                                | |
+|                                          | +----------------------------------+----------------------------------+ |
+|                                          | |                                  | Take the set value from an       | |
+|                                          | |                                  | object.                          | |
+|                                          | +----------------------------------+----------------------------------+ |
++------------------------------------------+-------------------------------------------------------------------------+
+| [socketType](#ffi_socketType){.type}     | +----------------------------------+----------------------------------+ |
+|                                          | | **[take_socket]{#ffi_take_socket}**                                 | |
+|                                          | | ([objectType](#ffi_objectType){.type} arg)                          | |
+|                                          | +----------------------------------+----------------------------------+ |
+|                                          | |                                  | Take the socket value from an    | |
+|                                          | |                                  | object.                          | |
+|                                          | +----------------------------------+----------------------------------+ |
++------------------------------------------+-------------------------------------------------------------------------+
+| [sqlStmtType](#ffi_sqlStmtType){.type}   | +----------------------------------+----------------------------------+ |
+|                                          | | **[take_sqlstmt]{#ffi_take_sqlstmt}**                               | |
+|                                          | | ([objectType](#ffi_objectType){.type} arg)                          | |
+|                                          | +----------------------------------+----------------------------------+ |
+|                                          | |                                  | Take the SQL prepared statement  | |
+|                                          | |                                  | value from an object.            | |
+|                                          | +----------------------------------+----------------------------------+ |
++------------------------------------------+-------------------------------------------------------------------------+
+| [striType](#ffi_striType){.type}         | +----------------------------------+----------------------------------+ |
+|                                          | | **[take_stri]{#ffi_take_stri}**                                     | |
+|                                          | | ([objectType](#ffi_objectType){.type} arg)                          | |
+|                                          | +----------------------------------+----------------------------------+ |
+|                                          | |                                  | Take the string value from an    | |
+|                                          | |                                  | object.                          | |
+|                                          | +----------------------------------+----------------------------------+ |
++------------------------------------------+-------------------------------------------------------------------------+
+| [structType](#ffi_structType){.type}     | +----------------------------------+----------------------------------+ |
+|                                          | | **[take_struct]{#ffi_take_struct}**                                 | |
+|                                          | | ([objectType](#ffi_objectType){.type} arg)                          | |
+|                                          | +----------------------------------+----------------------------------+ |
+|                                          | |                                  | Take the struct value from an    | |
+|                                          | |                                  | object.                          | |
+|                                          | +----------------------------------+----------------------------------+ |
++------------------------------------------+-------------------------------------------------------------------------+
+| [winType](#ffi_winType){.type}           | +----------------------------------+----------------------------------+ |
+|                                          | | **[take_win]{#ffi_take_win}** ([objectType](#ffi_objectType){.type} | |
+|                                          | | arg)                                                                | |
+|                                          | +----------------------------------+----------------------------------+ |
+|                                          | |                                  | Take the struct value from an    | |
+|                                          | |                                  | object.                          | |
+|                                          | +----------------------------------+----------------------------------+ |
++------------------------------------------+-------------------------------------------------------------------------+
+
+</div>
+
+[]{#ffi_Functions_to_create_action_results}
+
+### 16.6 Functions to create action results
+
+A primitive action function has a result of type
+[`objectType`](#ffi_objectType){.type}. The header file
+[`"objutl.h"`]{.lib} defines macros like
+[`bld_bigint_temp`](#ffi_bld_bigint_temp){.func} and
+[`bld_stri_temp`](#ffi_bld_stri_temp){.func} to create an object with
+the specified type.
+
+<div>
+
++--------------------------------------+---------------------------------------------------------------------------------+
+| Functions to create Seed7 objects with a C value                                                                       |
++--------------------------------------+---------------------------------------------------------------------------------+
+| [objectType](#ffi_objectType){.type} | +----------------------------------+------------------------------------+       |
+|                                      | | **[bld_array_temp]{#ffi_bld_array_temp}**                             |       |
+|                                      | | ([arrayType](#ffi_arrayType){.type} temp_array)                       |       |
+|                                      | +----------------------------------+------------------------------------+       |
+|                                      | |                                  | Create an object with an           |       |
+|                                      | |                                  | [arrayType](#ffi_arrayType){.type} |       |
+|                                      | |                                  | value.                             |       |
+|                                      | +----------------------------------+------------------------------------+       |
++--------------------------------------+---------------------------------------------------------------------------------+
+| [objectType](#ffi_objectType){.type} | +----------------------------------+--------------------------------------+     |
+|                                      | | **[bld_bigint_temp]{#ffi_bld_bigint_temp}**                             |     |
+|                                      | | ([bigIntType](#ffi_bigIntType){.type} temp_bigint)                      |     |
+|                                      | +----------------------------------+--------------------------------------+     |
+|                                      | |                                  | Create an object with a              |     |
+|                                      | |                                  | [bigIntType](#ffi_bigIntType){.type} |     |
+|                                      | |                                  | value.                               |     |
+|                                      | +----------------------------------+--------------------------------------+     |
++--------------------------------------+---------------------------------------------------------------------------------+
+| [objectType](#ffi_objectType){.type} | +----------------------------------+------------------------------------+       |
+|                                      | | **[bld_bstri_temp]{#ffi_bld_bstri_temp}**                             |       |
+|                                      | | ([bstriType](#ffi_bstriType){.type} temp_bstri)                       |       |
+|                                      | +----------------------------------+------------------------------------+       |
+|                                      | |                                  | Create an object with a            |       |
+|                                      | |                                  | [bstriType](#ffi_bstriType){.type} |       |
+|                                      | |                                  | value.                             |       |
+|                                      | +----------------------------------+------------------------------------+       |
++--------------------------------------+---------------------------------------------------------------------------------+
+| [objectType](#ffi_objectType){.type} | +----------------------------------+----------------------------------+         |
+|                                      | | **[bld_char_temp]{#ffi_bld_char_temp}**                             |         |
+|                                      | | ([charType](#ffi_charType){.type} temp_char)                        |         |
+|                                      | +----------------------------------+----------------------------------+         |
+|                                      | |                                  | Create an object with a          |         |
+|                                      | |                                  | [charType](#ffi_charType){.type} |         |
+|                                      | |                                  | value.                           |         |
+|                                      | +----------------------------------+----------------------------------+         |
++--------------------------------------+---------------------------------------------------------------------------------+
+| [objectType](#ffi_objectType){.type} | +----------------------------------+------------------------------------------+ |
+|                                      | | **[bld_database_temp]{#ffi_bld_database_temp}**                             | |
+|                                      | | ([databaseType](#ffi_databaseType){.type} temp_database)                    | |
+|                                      | +----------------------------------+------------------------------------------+ |
+|                                      | |                                  | Create an object with a                  | |
+|                                      | |                                  | [databaseType](#ffi_databaseType){.type} | |
+|                                      | |                                  | value.                                   | |
+|                                      | +----------------------------------+------------------------------------------+ |
++--------------------------------------+---------------------------------------------------------------------------------+
+| [objectType](#ffi_objectType){.type} | +----------------------------------+----------------------------------+         |
+|                                      | | **[bld_file_temp]{#ffi_bld_file_temp}**                             |         |
+|                                      | | ([fileType](#ffi_fileType){.type} temp_file)                        |         |
+|                                      | +----------------------------------+----------------------------------+         |
+|                                      | |                                  | Create an object with a          |         |
+|                                      | |                                  | [fileType](#ffi_fileType){.type} |         |
+|                                      | |                                  | value.                           |         |
+|                                      | +----------------------------------+----------------------------------+         |
++--------------------------------------+---------------------------------------------------------------------------------+
+| [objectType](#ffi_objectType){.type} | +----------------------------------+------------------------------------+       |
+|                                      | | **[bld_float_temp]{#ffi_bld_float_temp}**                             |       |
+|                                      | | ([floatType](#ffi_floatType){.type} temp_float)                       |       |
+|                                      | +----------------------------------+------------------------------------+       |
+|                                      | |                                  | Create an object with a            |       |
+|                                      | |                                  | [floatType](#ffi_floatType){.type} |       |
+|                                      | |                                  | value.                             |       |
+|                                      | +----------------------------------+------------------------------------+       |
++--------------------------------------+---------------------------------------------------------------------------------+
+| [objectType](#ffi_objectType){.type} | +----------------------------------+----------------------------------+         |
+|                                      | | **[bld_hash_temp]{#ffi_bld_hash_temp}**                             |         |
+|                                      | | ([hashType](#ffi_hashType){.type} temp_hash)                        |         |
+|                                      | +----------------------------------+----------------------------------+         |
+|                                      | |                                  | Create an object with a          |         |
+|                                      | |                                  | [hashType](#ffi_hashType){.type} |         |
+|                                      | |                                  | value.                           |         |
+|                                      | +----------------------------------+----------------------------------+         |
++--------------------------------------+---------------------------------------------------------------------------------+
+| [objectType](#ffi_objectType){.type} | +----------------------------------+----------------------------------+         |
+|                                      | | **[bld_int_temp]{#ffi_bld_int_temp}**                               |         |
+|                                      | | ([intType](#ffi_intType){.type} temp_int)                           |         |
+|                                      | +----------------------------------+----------------------------------+         |
+|                                      | |                                  | Create an object with an         |         |
+|                                      | |                                  | [intType](#ffi_intType){.type}   |         |
+|                                      | |                                  | value.                           |         |
+|                                      | +----------------------------------+----------------------------------+         |
++--------------------------------------+---------------------------------------------------------------------------------+
+| [objectType](#ffi_objectType){.type} | +----------------------------------+----------------------------------+         |
+|                                      | | **[bld_poll_temp]{#ffi_bld_poll_temp}**                             |         |
+|                                      | | ([pollType](#ffi_pollType){.type} temp_poll)                        |         |
+|                                      | +----------------------------------+----------------------------------+         |
+|                                      | |                                  | Create an object with a          |         |
+|                                      | |                                  | [pollType](#ffi_pollType){.type} |         |
+|                                      | |                                  | value.                           |         |
+|                                      | +----------------------------------+----------------------------------+         |
++--------------------------------------+---------------------------------------------------------------------------------+
+| [objectType](#ffi_objectType){.type} | +----------------------------------+----------------------------------+         |
+|                                      | | **[bld_set_temp]{#ffi_bld_set_temp}**                               |         |
+|                                      | | ([setType](#ffi_setType){.type} temp_set)                           |         |
+|                                      | +----------------------------------+----------------------------------+         |
+|                                      | |                                  | Create an object with a          |         |
+|                                      | |                                  | [setType](#ffi_setType){.type}   |         |
+|                                      | |                                  | value.                           |         |
+|                                      | +----------------------------------+----------------------------------+         |
++--------------------------------------+---------------------------------------------------------------------------------+
+| [objectType](#ffi_objectType){.type} | +----------------------------------+--------------------------------------+     |
+|                                      | | **[bld_socket_temp]{#ffi_bld_socket_temp}**                             |     |
+|                                      | | ([socketType](#ffi_socketType){.type} temp_socket)                      |     |
+|                                      | +----------------------------------+--------------------------------------+     |
+|                                      | |                                  | Create an object with a              |     |
+|                                      | |                                  | [socketType](#ffi_socketType){.type} |     |
+|                                      | |                                  | value.                               |     |
+|                                      | +----------------------------------+--------------------------------------+     |
++--------------------------------------+---------------------------------------------------------------------------------+
+| [objectType](#ffi_objectType){.type} | +----------------------------------+----------------------------------------+   |
+|                                      | | **[bld_sqlstmt_temp]{#ffi_bld_sqlstmt_temp}**                             |   |
+|                                      | | ([sqlStmtType](#ffi_sqlStmtType){.type} temp_sqlstmt)                     |   |
+|                                      | +----------------------------------+----------------------------------------+   |
+|                                      | |                                  | Create an object with a                |   |
+|                                      | |                                  | [sqlStmtType](#ffi_sqlStmtType){.type} |   |
+|                                      | |                                  | value.                                 |   |
+|                                      | +----------------------------------+----------------------------------------+   |
++--------------------------------------+---------------------------------------------------------------------------------+
+| [objectType](#ffi_objectType){.type} | +----------------------------------+----------------------------------+         |
+|                                      | | **[bld_stri_temp]{#ffi_bld_stri_temp}**                             |         |
+|                                      | | ([striType](#ffi_striType){.type} temp_stri)                        |         |
+|                                      | +----------------------------------+----------------------------------+         |
+|                                      | |                                  | Create an object with a          |         |
+|                                      | |                                  | [striType](#ffi_striType){.type} |         |
+|                                      | |                                  | value.                           |         |
+|                                      | +----------------------------------+----------------------------------+         |
++--------------------------------------+---------------------------------------------------------------------------------+
+| [objectType](#ffi_objectType){.type} | +----------------------------------+--------------------------------------+     |
+|                                      | | **[bld_struct_temp]{#ffi_bld_struct_temp}**                             |     |
+|                                      | | ([structType](#ffi_structType){.type} temp_struct)                      |     |
+|                                      | +----------------------------------+--------------------------------------+     |
+|                                      | |                                  | Create an object with a              |     |
+|                                      | |                                  | [structType](#ffi_structType){.type} |     |
+|                                      | |                                  | value.                               |     |
+|                                      | +----------------------------------+--------------------------------------+     |
++--------------------------------------+---------------------------------------------------------------------------------+
+| [objectType](#ffi_objectType){.type} | +----------------------------------+----------------------------------+         |
+|                                      | | **[bld_win_temp]{#ffi_bld_win_temp}**                               |         |
+|                                      | | ([winType](#ffi_winType){.type} temp_win)                           |         |
+|                                      | +----------------------------------+----------------------------------+         |
+|                                      | |                                  | Create an object with a          |         |
+|                                      | |                                  | [winType](#ffi_winType){.type}   |         |
+|                                      | |                                  | value.                           |         |
+|                                      | +----------------------------------+----------------------------------+         |
++--------------------------------------+---------------------------------------------------------------------------------+
+
+</div>
+
+[]{#ffi_Memory_management_macros}
+
+### 16.7 Memory management macros
+
+The conversion functions mentioned above use macros to do the memory
+management. Some of these macros are not based on malloc() but manage
+the memory in a stack. Therefore it is important to use the correct
+macro to allocate and free memory. The macros below are defined in the
+header file [`"striutl.h"`]{.lib}.
+
+<div>
+
++-------------------------------------+------------------------------------------------------------------------------------------------+
+| Macro Summary                                                                                                                        |
++-------------------------------------+------------------------------------------------------------------------------------------------+
+| [void]{.type}                       | +----------------------------------+-----------------------------------------------+           |
+|                                     | | **[free_cstri](#ffi_free_cstri)** ([cstriType](#ffi_cstriType){.type}     |           |
+|                                     | | cstri, [striType](#ffi_striType){.type} stri)                                    |           |
+|                                     | +----------------------------------+-----------------------------------------------+           |
+|                                     | |                                  | Macro to free memory that has been allocated  |           |
+|                                     | |                                  | by                                            |           |
+|                                     | |                                  | [stri_to_cstri](#ffi_stri_to_cstri){.func}(). |           |
+|                                     | +----------------------------------+-----------------------------------------------+           |
++-------------------------------------+------------------------------------------------------------------------------------------------+
+| [void]{.type}                       | +----------------------------------+---------------------------------------------------------+ |
+|                                     | | **[free_cstri8](#ffi_free_cstri8)** ([cstriType](#ffi_cstriType){.type} cstri,      | |
+|                                     | | [striType](#ffi_striType){.type} stri)                                                     | |
+|                                     | +----------------------------------+---------------------------------------------------------+ |
+|                                     | |                                  | Macro to free memory that has been allocated by         | |
+|                                     | |                                  | [stri_to_cstri8](#ffi_stri_to_cstri8){.func}() or       | |
+|                                     | |                                  | [stri_to_cstri8_buf](#ffi_stri_to_cstri8_buf){.func}(). | |
+|                                     | +----------------------------------+---------------------------------------------------------+ |
++-------------------------------------+------------------------------------------------------------------------------------------------+
+| [boolType](#ffi_boolType){.type}    | +----------------------------------+----------------------------------------+                  |
+|                                     | | **[os_stri_alloc](#ffi_os_stri_alloc)**                            |                  |
+|                                     | | ([os_striType](#ffi_os_striType){.type} &var,                             |                  |
+|                                     | | [memSizeType](#ffi_memSizeType){.type} len)                               |                  |
+|                                     | +----------------------------------+----------------------------------------+                  |
+|                                     | |                                  | Macro to allocate memory for an        |                  |
+|                                     | |                                  | [os_striType](#ffi_os_striType){.type} |                  |
+|                                     | |                                  | string.                                |                  |
+|                                     | +----------------------------------+----------------------------------------+                  |
++-------------------------------------+------------------------------------------------------------------------------------------------+
+| [void]{.type}                       | +----------------------------------+---------------------------------------------+             |
+|                                     | | **[os_stri_free](#ffi_os_stri_free)**                                   |             |
+|                                     | | ([os_striType](#ffi_os_striType){.type} var)                                   |             |
+|                                     | +----------------------------------+---------------------------------------------+             |
+|                                     | |                                  | Macro to free memory that has been          |             |
+|                                     | |                                  | allocated with                              |             |
+|                                     | |                                  | [os_stri_alloc](#ffi_os_stri_alloc){.func}. |             |
+|                                     | +----------------------------------+---------------------------------------------+             |
++-------------------------------------+------------------------------------------------------------------------------------------------+
+
+</div>
+
+\
+
+<div>
+
+  --------------
+  Macro Detail
+  --------------
+
+<div>
+
+[]{#ffi_free_cstri}
+
+### free_cstri
+
+[void]{.type} **free_cstri** ([cstriType](#ffi_cstriType){.type} cstri,
+[striType](#ffi_striType){.type} stri)
+
+Macro to free memory that has been allocated by
+[stri_to_cstri](#ffi_stri_to_cstri){.func}().
+
+**Parameters:**
+:   `cstri` - The string to be freed.
+:   `stri` - The parameter that was used when
+    [stri_to_cstri](#ffi_stri_to_cstri){.func}() was called.
+
+</div>
+
+------------------------------------------------------------------------
+
+<div>
+
+[]{#ffi_free_cstri8}
+
+### free_cstri8
+
+[void]{.type} **free_cstri8** ([cstriType](#ffi_cstriType){.type} cstri,
+[striType](#ffi_striType){.type} stri)
+
+Macro to free memory that has been allocated by
+[stri_to_cstri8](#ffi_stri_to_cstri8){.func}() or
+[stri_to_cstri8_buf](#ffi_stri_to_cstri8_buf){.func}().
+
+**Parameters:**
+:   `cstri` - The string to be freed.
+:   `stri` - The parameter that was used when
+    [stri_to_cstri8](#ffi_stri_to_cstri8){.func}() or
+    [stri_to_cstri8_buf](#ffi_stri_to_cstri8_buf){.func}() was called.
+
+</div>
+
+------------------------------------------------------------------------
+
+<div>
+
+[]{#ffi_os_stri_alloc}
+
+### os_stri_alloc
+
+[boolType](#ffi_boolType){.type} **os_stri_alloc**
+([os_striType](#ffi_os_striType){.type} &var,
+[memSizeType](#ffi_memSizeType){.type} len)
+
+Macro to allocate memory for an [os_striType](#ffi_os_striType){.type}
+string. Strings allocated with
+[os_stri_alloc](#ffi_os_stri_alloc){.func}() must be freed with
+[os_stri_free](#ffi_os_stri_free){.func}() in the reverse order of their
+creation. This allows that allocations work in a stack like manner.
+
+**Parameters:**
+:   `var` - Reference to a variable to which the allocated memory is
+    assigned.
+:   `len` - Size of the allocated memory in characters.
+
+<!-- -->
+
+**Returns:**
+:   TRUE if the allocation succeeds, and FALSE if the memory allocation
+    failed.
+
+</div>
+
+------------------------------------------------------------------------
+
+<div>
+
+[]{#ffi_os_stri_free}
+
+### os_stri_free
+
+[void]{.type} **os_stri_free** ([os_striType](#ffi_os_striType){.type}
+var)
+
+Macro to free memory that has been allocated with
+[os_stri_alloc](#ffi_os_stri_alloc){.func}. Strings allocated with
+[os_stri_alloc](#ffi_os_stri_alloc){.func}() must be freed with
+[os_stri_free](#ffi_os_stri_free){.func}() in the reverse order of their
+creation. This allows that allocations work in a stack like manner. The
+strings returned by [stri_to_os_stri](#ffi_stri_to_os_stri){.func} and
+[cp_to_os_path](#ffi_cp_to_os_path){.func} are also allocated with
+[os_stri_alloc](#ffi_os_stri_alloc){.func}. Therefore they must also be
+freed with [os_stri_free](#ffi_os_stri_free){.func}() in the reverse
+order of their creation.
+
+**Parameters:**
+:   `var` - The string to be freed.
+
+</div>
+
+</div>
+
+[]{#ffi_Basic_conversion_functions}
+
+### 16.8 Basic conversion functions
+
+The conversion functions mentioned above are implemented with basic
+conversion functions. In some situations it might make sense to use the
+basic conversion functions directly. This functions are optimized for
+performance. Some functions use loop unrolling inspired by Duff\'s
+device. The basic conversion functions below are defined in the header
+file [`"striutl.h"`]{.lib}.
+
+<div>
+
++----------------------------------------+-------------------------------------------------------------------------+
+| Function Summary                                                                                                 |
++----------------------------------------+-------------------------------------------------------------------------+
+| [void]{.type}                          | +----------------------------------+----------------------------------+ |
+|                                        | | **[memcpy_to_strelem](#ffi_memcpy_to_strelem)**              | |
+|                                        | | ([register]{.keywd} [strElemType](#ffi_strElemType){.type}          | |
+|                                        | | \*[const]{.keywd} dest, [register]{.keywd} [const]{.keywd}          | |
+|                                        | | [const_ustriType](#ffi_ustriType){.type} src,                       | |
+|                                        | | [memSizeType](#ffi_memSizeType){.type} len)                         | |
+|                                        | +----------------------------------+----------------------------------+ |
+|                                        | |                                  | Copy len bytes to Seed7          | |
+|                                        | |                                  | characters in a string.          | |
+|                                        | +----------------------------------+----------------------------------+ |
++----------------------------------------+-------------------------------------------------------------------------+
+| [void]{.type}                          | +----------------------------------+----------------------------------+ |
+|                                        | | **[memset_to_strelem](#ffi_memset_to_strelem)**              | |
+|                                        | | ([register]{.keywd} [strElemType](#ffi_strElemType){.type}          | |
+|                                        | | \*[const]{.keywd} dest, [register]{.keywd} [const]{.keywd}          | |
+|                                        | | [strElemType](#ffi_strElemType){.type} ch,                          | |
+|                                        | | [memSizeType](#ffi_memSizeType){.type} len)                         | |
+|                                        | +----------------------------------+----------------------------------+ |
+|                                        | |                                  | Fill len Seed7 characters with   | |
+|                                        | |                                  | the character ch.                | |
+|                                        | +----------------------------------+----------------------------------+ |
++----------------------------------------+-------------------------------------------------------------------------+
+| [boolType](#ffi_boolType){.type}       | +----------------------------------+----------------------------------+ |
+|                                        | | **[memcpy_from_strelem](#ffi_memcpy_from_strelem)**          | |
+|                                        | | ([register]{.keywd} [const]{.keywd}                                 | |
+|                                        | | [const_ustriType](#ffi_ustriType){.type} dest, [register]{.keywd}   | |
+|                                        | | [const]{.keywd} [strElemType](#ffi_strElemType){.type}              | |
+|                                        | | \*[const]{.keywd} src, [memSizeType](#ffi_memSizeType){.type} len)  | |
+|                                        | +----------------------------------+----------------------------------+ |
+|                                        | |                                  | Copy len Seed7 characters to a   | |
+|                                        | |                                  | byte string.                     | |
+|                                        | +----------------------------------+----------------------------------+ |
++----------------------------------------+-------------------------------------------------------------------------+
+| [const]{.keywd}                        | +----------------------------------+----------------------------------+ |
+| [strElemType](#ffi_strElemType){.type} | | **[memchr_strelem](#ffi_memchr_strelem)**                    | |
+| \*                                     | | ([register]{.keywd} [const]{.keywd}                                 | |
+|                                        | | [strElemType](#ffi_strElemType){.type} \*mem, [const]{.keywd}       | |
+|                                        | | [strElemType](#ffi_strElemType){.type} ch,                          | |
+|                                        | | [memSizeType](#ffi_memSizeType){.type} len)                         | |
+|                                        | +----------------------------------+----------------------------------+ |
+|                                        | |                                  | Scan the first len Seed7         | |
+|                                        | |                                  | characters for the character ch. | |
+|                                        | +----------------------------------+----------------------------------+ |
++----------------------------------------+-------------------------------------------------------------------------+
+| [memSizeType](#ffi_memSizeType){.type} | +----------------------------------+----------------------------------+ |
+|                                        | | **[utf8_to_stri](#ffi_utf8_to_stri)**                        | |
+|                                        | | ([strElemType](#ffi_strElemType){.type} \*[const]{.keywd}           | |
+|                                        | | dest_stri, [memSizeType](#ffi_memSizeType){.type} \*[const]{.keywd} | |
+|                                        | | dest_len, [const_ustriType](#ffi_ustriType){.type} ustri,           | |
+|                                        | | [memSizeType](#ffi_memSizeType){.type} len)                         | |
+|                                        | +----------------------------------+----------------------------------+ |
+|                                        | |                                  | Convert an UTF-8 encoded string  | |
+|                                        | |                                  | to an UTF-32 encoded string.     | |
+|                                        | +----------------------------------+----------------------------------+ |
++----------------------------------------+-------------------------------------------------------------------------+
+| [memSizeType](#ffi_memSizeType){.type} | +----------------------------------+----------------------------------+ |
+|                                        | | **[stri_to_utf8](#ffi_stri_to_utf8)** ([const]{.keywd}       | |
+|                                        | | [ustriType](#ffi_ustriType){.type} out_stri, [const]{.keywd}        | |
+|                                        | | [strElemType](#ffi_strElemType){.type} \*strelem,                   | |
+|                                        | | [memSizeType](#ffi_memSizeType){.type} len)                         | |
+|                                        | +----------------------------------+----------------------------------+ |
+|                                        | |                                  | Convert an UTF-32 encoded string | |
+|                                        | |                                  | to an UTF-8 encoded string.      | |
+|                                        | +----------------------------------+----------------------------------+ |
++----------------------------------------+-------------------------------------------------------------------------+
+| [memSizeType](#ffi_memSizeType){.type} | +----------------------------------+----------------------------------+ |
+|                                        | | **[stri_to_utf16](#ffi_stri_to_utf16)** ([const]{.keywd}     | |
+|                                        | | [utf16striType](#ffi_utf16striType){.type} out_wstri,               | |
+|                                        | | [register]{.keywd} [const]{.keywd}                                  | |
+|                                        | | [strElemType](#ffi_strElemType){.type} \*strelem,                   | |
+|                                        | | [memSizeType](#ffi_memSizeType){.type} len,                         | |
+|                                        | | [errInfoType](#ffi_errInfoType){.type} \*[const]{.keywd} err_info)  | |
+|                                        | +----------------------------------+----------------------------------+ |
+|                                        | |                                  | Convert an UTF-32 encoded string | |
+|                                        | |                                  | to an UTF-16 encoded string.     | |
+|                                        | +----------------------------------+----------------------------------+ |
++----------------------------------------+-------------------------------------------------------------------------+
+
+</div>
+
+\
+
+<div>
+
+  -----------------
+  Function Detail
+  -----------------
+
+<div>
+
+[]{#ffi_memcpy_to_strelem}
+
+### memcpy_to_strelem
+
+[void]{.type} **memcpy_to_strelem** ([register]{.keywd}
+[strElemType](#ffi_strElemType){.type} \*[const]{.keywd} dest,
+[register]{.keywd} [const]{.keywd}
+[const_ustriType](#ffi_ustriType){.type} src,
+[memSizeType](#ffi_memSizeType){.type} len)
+
+Copy len bytes to Seed7 characters in a string. This function works also
+correct if \'src\' and \'dest\' point to the same address. In other
+words it works correct for:
+
+           memcpy_to_strelem(mem, (ustriType) mem, num);
+
+**Parameters:**
+:   `dest` - Destination array with UTF-32 encoded characters.
+:   `src` - Source array with ISO-8859-1 encoded bytes.
+:   `len` - Number of bytes in \'src\' and UTF-32 characters in
+    \'dest\'.
+
+</div>
+
+------------------------------------------------------------------------
+
+<div>
+
+[]{#ffi_memset_to_strelem}
+
+### memset_to_strelem
+
+[void]{.type} **memset_to_strelem** ([register]{.keywd}
+[strElemType](#ffi_strElemType){.type} \*[const]{.keywd} dest,
+[register]{.keywd} [const]{.keywd}
+[strElemType](#ffi_strElemType){.type} ch,
+[memSizeType](#ffi_memSizeType){.type} len)
+
+Fill len Seed7 characters with the character ch.
+
+**Parameters:**
+:   `dest` - Destination array with UTF-32 encoded characters.
+:   `ch` - UTF-32 encoded character to be filled into \'dest\'.
+:   `len` - Specifies how often \'ch\' is filled into \'dest\'.
+
+</div>
+
+------------------------------------------------------------------------
+
+<div>
+
+[]{#ffi_memcpy_from_strelem}
+
+### memcpy_from_strelem
+
+[boolType](#ffi_boolType){.type} **memcpy_from_strelem**
+([register]{.keywd} [const]{.keywd}
+[const_ustriType](#ffi_ustriType){.type} dest, [register]{.keywd}
+[const]{.keywd} [strElemType](#ffi_strElemType){.type} \*[const]{.keywd}
+src, [memSizeType](#ffi_memSizeType){.type} len)
+
+Copy len Seed7 characters to a byte string. This function uses loop
+unrolling inspired by Duff\'s device and a trick with a binary or (\|=)
+to check for allowed values.
+
+**Parameters:**
+:   `dest` - Destination array with ISO-8859-1 encoded bytes.
+:   `src` - Source array with UTF-32 encoded characters.
+:   `len` - Number of UTF-32 characters in \'src\' and bytes in
+    \'dest\'.
+
+<!-- -->
+
+**Returns:**
+:   TRUE if one of the characters does not fit into a byte, FALSE
+    otherwise.
+
+</div>
+
+------------------------------------------------------------------------
+
+<div>
+
+[]{#ffi_memchr_strelem}
+
+### memchr_strelem
+
+[const]{.keywd} [strElemType](#ffi_strElemType){.type}
+\***memchr_strelem** ([register]{.keywd} [const]{.keywd}
+[strElemType](#ffi_strElemType){.type} \*mem, [const]{.keywd}
+[strElemType](#ffi_strElemType){.type} ch,
+[memSizeType](#ffi_memSizeType){.type} len)
+
+Scan the first len Seed7 characters for the character ch.
+
+**Parameters:**
+:   `mem` - Array with UTF-32 characters.
+:   `ch` - UTF-32 character to be searched in \'mem\'.
+:   `len` - Number of UTF-32 characters in \'mem\'.
+
+<!-- -->
+
+**Returns:**
+:   a pointer to the matching character, or NULL if the character does
+    not occur in the given string area.
+
+</div>
+
+------------------------------------------------------------------------
+
+<div>
+
+[]{#ffi_utf8_to_stri}
+
+### utf8_to_stri
+
+[memSizeType](#ffi_memSizeType){.type} **utf8_to_stri**
+([strElemType](#ffi_strElemType){.type} \*[const]{.keywd} dest_stri,
+[memSizeType](#ffi_memSizeType){.type} \*[const]{.keywd} dest_len,
+[const_ustriType](#ffi_ustriType){.type} ustri,
+[memSizeType](#ffi_memSizeType){.type} len)
+
+Convert an UTF-8 encoded string to an UTF-32 encoded string. The source
+and destination strings are not \'\\0\' terminated. The memory for the
+destination dest_stri is not allocated.
+
+**Parameters:**
+:   `dest_stri` - Destination of the UTF-32 encoded string.
+:   `dest_len` - Place to return the length of dest_stri.
+:   `ustri` - UTF-8 encoded string to be converted.
+:   `len` - Number of bytes in ustri.
+
+<!-- -->
+
+**Returns:**
+:   the number of bytes in ustri that are left unconverted, or 0 if
+    ustri has been successfully converted.
+
+</div>
+
+------------------------------------------------------------------------
+
+<div>
+
+[]{#ffi_stri_to_utf8}
+
+### stri_to_utf8
+
+[memSizeType](#ffi_memSizeType){.type} **stri_to_utf8** ([const]{.keywd}
+[ustriType](#ffi_ustriType){.type} out_stri, [const]{.keywd}
+[strElemType](#ffi_strElemType){.type} \*strelem,
+[memSizeType](#ffi_memSizeType){.type} len)
+
+Convert an UTF-32 encoded string to an UTF-8 encoded string. The source
+and destination strings are not \'\\0\' terminated. The memory for the
+destination out_stri is not allocated.
+
+**Parameters:**
+:   `out_stri` - Destination of the UTF-8 encoded string.
+:   `strelem` - UTF-32 encoded string to be converted.
+:   `len` - Number of UTF-32 characters in strelem.
+
+<!-- -->
+
+**Returns:**
+:   the length of the converted UTF-8 string.
+
+</div>
+
+------------------------------------------------------------------------
+
+<div>
+
+[]{#ffi_stri_to_utf16}
+
+### stri_to_utf16
+
+[memSizeType](#ffi_memSizeType){.type} **stri_to_utf16**
+([const]{.keywd} [utf16striType](#ffi_utf16striType){.type} out_wstri,
+[register]{.keywd} [const]{.keywd}
+[strElemType](#ffi_strElemType){.type} \*strelem,
+[memSizeType](#ffi_memSizeType){.type} len,
+[errInfoType](#ffi_errInfoType){.type} \*[const]{.keywd} err_info)
+
+Convert an UTF-32 encoded string to an UTF-16 encoded string. The source
+and destination strings are not \'\\0\' terminated. The memory for the
+destination out_wstri is not allocated.
+
+**Parameters:**
+:   `out_wstri` - Destination of the UTF-16 encoded string.
+:   `strelem` - UTF-32 encoded string to be converted.
+:   `len` - Number of UTF-32 characters in strelem.
+:   `err_info` - Unchanged if the function succeeds, and
+    [MEMORY_ERROR](#ffi_errInfoType_MEMORY_ERROR){.exception} if
+    \*strelem contains a character that is higher than the highest
+    allowed Unicode character (U+10FFFF).
+
+<!-- -->
+
+**Returns:**
+:   the length of the converted UTF-16 string in characters.
+
+</div>
+
+</div>
+
+[]{#ffi_Error_handling}
+
+### 16.9 Error handling
+
+The C programming language does not provide exceptions. Seed7 uses
+several methods to provide error handling. Before an actual exception is
+raised an error state can be handled in different ways:
+
+- The integer type [`errInfoType`](#ffi_errInfoType){.type} is used to
+  describe an error state. Usually a variable or parameter named
+  [`err_info`]{.var} is used to store the error state. The value
+  [`OKAY_NO_ERROR`](#ffi_errInfoType_OKAY_NO_ERROR){.exception} is used
+  to describe that no error occurred. Other values (see below) describe
+  errors that occurred.
+- In some situations a function has only one possible error situation
+  (e.g. a [`MEMORY_ERROR`]{.exception}). This is handled with functions
+  that return NULL in case of a [`MEMORY_ERROR`]{.exception}.
+
+Error state constants for [`errInfoType`](#ffi_errInfoType){.type} are
+defined in [`"common.h"`]{.lib}:
+
+``` indent
+#define OKAY_NO_ERROR   0
+#define MEMORY_ERROR    1
+#define NUMERIC_ERROR   2
+#define OVERFLOW_ERROR  3
+#define RANGE_ERROR     4
+#define INDEX_ERROR     5
+#define FILE_ERROR      6
+#define DATABASE_ERROR  7
+#define GRAPHIC_ERROR   8
+#define ACTION_ERROR    9
+```
+
+C code can check the value of the [`err_info`]{.var} variable, or check
+if a function returns NULL. In case of error it is possible to do some
+cleaning up. An error situation can be propagated this way over several
+function levels. It is important to assure that an existing error
+situation ([`err_info`]{.var} has a value not equal to
+[`OKAY_NO_ERROR`](#ffi_errInfoType_OKAY_NO_ERROR){.exception}) is not
+reset to a situation that no error occurred.
+
+An actual exception can be triggered with the macro
+[`raise_error`](#ffi_raise_error){.func}. This macro takes an
+[`errInfoType`](#ffi_errInfoType){.type} parameter to describe the
+actual exception. Note that all cleaning up must be done before
+[`raise_error`](#ffi_raise_error){.func} is called. This macro calls the
+function [`raise_error2`]{.func} with the additional parameters
+\_\_FILE\_\_ and \_\_LINE\_\_. The function [`raise_error2`]{.func} has
+different implementations for interpreted and compiled programs:
+
+- In the interpreter [`raise_error2`]{.func} sets a fail flag and the
+  function is left normally.
+- In compiled code [`raise_error2`]{.func} uses a [`longjmp`]{.func} to
+  continue executing at the handler code of the exception.
+
+That means that [`raise_error`](#ffi_raise_error){.func} also returns
+normally in the interpreter. Therefore a function that calls
+[`raise_error`](#ffi_raise_error){.func} must return after it has called
+this function. Surrounding functions must also return. This must be done
+up to the current action function. So either all these functions always
+return immediate or a special return value (e.g. NULL) signals them to
+return. Doing some clean up, when the special return value is received,
+will not work in compiled code. If cleaning up is necessary the call of
+[`raise_error`](#ffi_raise_error){.func} should be done in the outer
+function.
+
+<div>
+
++-------------------------------------+-------------------------------------------------------------------------+
+| Function Summary                                                                                              |
++-------------------------------------+-------------------------------------------------------------------------+
+| [void]{.type}                       | +----------------------------------+----------------------------------+ |
+|                                     | | **[raise_error](#ffi_raise_error)**                          | |
+|                                     | | ([errInfoType](#ffi_errInfoType){.type} err_info)                   | |
+|                                     | +----------------------------------+----------------------------------+ |
+|                                     | |                                  | Macro to raise an exception.     | |
+|                                     | +----------------------------------+----------------------------------+ |
++-------------------------------------+-------------------------------------------------------------------------+
+
+</div>
+
+\
+
+<div>
+
+  -----------------
+  Function Detail
+  -----------------
+
+<div>
+
+[]{#ffi_raise_error}
+
+### raise_error
+
+[void]{.type} **raise_error** ([errInfoType](#ffi_errInfoType){.type}
+err_info)
+
+Macro to raise an exception. This macro calls the function
+[raise_error2]{.func} with the additional parameters \_\_FILE\_\_ and
+\_\_LINE\_\_. The function [raise_error2]{.func} has different
+implementations for interpreted and compiled programs.
+
+**Parameters:**
+:   `err_info` - The exception to be raised.
+
+</div>
+
+</div>
+
+[]{#errors_file_start}
+
+[]{#errors_ERRORS}
+
+## 17. ERRORS
+
+[]{#errors_Parsing_errors}
+
+### 17.1 Parsing errors
+
+Parsing errors are triggered by interpreter and compiler. The checks for
+these errors are done before the program is executed respectively
+compiled. The errors do not terminate parsing except for error 1 (Out of
+heap space). If there are errors the program cannot be interpreted
+respectively compiled. The interpreter option [**`-x`**] can be
+used to execute even if the program contains errors. The following
+parsing errors exist:
+
+  ----- -- -------------------------------------------------------------------------------------------------------------------------------------------------------------------
+     1:    [Fatal Error: Out of heap space]{#errors_OUT_OF_HEAP_SPACE}
+     2:    [\"END OF FILE\" encountered]{#errors_EOF_ENCOUNTERED}
+     3:    []{#errors_CHAR_ILLEGAL}[Illegal character in text \"%s\" (U+%04x)](#tokens_CHAR_ILLEGAL_example)
+     4:    []{#errors_UNCLOSED_COMMENT}[Unclosed comment](#tokens_UNCLOSED_COMMENT_example)
+     5:    [Include file \"%s\" not found]{#errors_INCLUDE_FILE_NOT_FOUND}
+     6:    [Use / instead of \\\\ as path delimiter]{#errors_WRONG_PATH_DELIMITER}
+     7:    [Failed to include essential file. Parsing terminated.]{#errors_ESSENTIAL_INCLUDE_FAILED}
+     8:    []{#errors_ILLEGALPRAGMA}[Illegal pragma \"%s\"](#decls_ILLEGALPRAGMA_example)
+     9:    [Undefined action \"%s\"]{#errors_UNDEFINED_ACTION}
+    10:    [Illegal system declaration \"%s\"]{#errors_WRONGSYSTEM}
+    11:    [\"newtype\", \"subtype\", \"func\", \"enumlit\" or \"action\" expected found \"%s\"]{#errors_DOLLAR_VALUE_WRONG}
+    12:    [\"func\" or \"type\" expected found \"%s\"]{#errors_DOLLAR_TYPE_WRONG}
+    13:    [System declaration for main missing]{#errors_SYSTEM_MAIN_MISSING}
+    14:    []{#errors_INTEGER_TOO_BIG}[Integer \"%s\" too big](#tokens_INTEGER_TOO_BIG_example)
+    15:    []{#errors_NEGATIVE_EXPONENT}[Negative exponent in integer literal](#tokens_NEGATIVE_EXPONENT_example)
+    16:    []{#errors_DIGIT_EXPECTED}[Digit expected found \"%s\"](#tokens_DIGIT_EXPECTED_example)
+    17:    []{#errors_INTEGER_WITH_EXPONENT_TOO_BIG}[Integer \"%dE%s\" too big](#tokens_INTEGER_WITH_EXPONENT_TOO_BIG_example)
+    18:    []{#errors_BASE2TO36ALLOWED}[Integer base \"%ld\" not between 2 and 36](#tokens_BASE2TO36ALLOWED_example)
+    19:    []{#errors_EXTENDED_DIGIT_EXPECTED}[Extended digit expected found \"%s\"](#tokens_EXTENDED_DIGIT_EXPECTED_example)
+    20:    []{#errors_ILLEGAL_BASED_DIGIT}[Illegal digit \"%c\" in based integer \"%d#%s\"](#tokens_ILLEGAL_BASED_DIGIT_example)
+    21:    []{#errors_BASED_INTEGER_TOO_BIG}[Based integer \"%d#%s\" too big](#tokens_BASED_INTEGER_TOO_BIG_example)
+    22:    []{#errors_APOSTROPHE_EXPECTED}[\"\'\" expected found \"%s\"](#tokens_APOSTROPHE_EXPECTED_example)
+    23:    []{#errors_CHAR_EXCEEDS}[Character literal exceeds source line](#tokens_CHAR_EXCEEDS_example)
+    24:    []{#errors_WRONG_QUOTATION_REPRESENTATION}[Use \\\" instead of \"\" to represent \" in a string](#tokens_WRONG_QUOTATION_REPRESENTATION_example)
+    25:    []{#errors_ILLEGAL_STRING_ESCAPE}[Illegal string escape \"\\%s\"](#tokens_ILLEGAL_STRING_ESCAPE_example)
+    26:    []{#errors_WRONG_NUMERICAL_ESCAPE}[Numerical escape sequences should end with \";\" not \"%s\"](#tokens_WRONG_NUMERICAL_ESCAPE_example)
+    27:    []{#errors_NUMERICAL_ESCAPE_TOO_BIG}[The numerical escape sequence \"\\%u;\" is too big](#tokens_NUMERICAL_ESCAPE_TOO_BIG_example)
+    28:    []{#errors_WRONG_STRING_CONTINUATION}[String continuations should end with \"\\\" not \"%s\"](#tokens_WRONG_STRING_CONTINUATION_example)
+    29:    []{#errors_STRING_EXCEEDS}[String literal exceeds source line](#tokens_STRING_EXCEEDS_example)
+    30:    [Name expected found \"%s\"]{#errors_NAME_EXPECTED}
+    31:    []{#errors_INTEGER_EXPECTED}[Integer literal expected found \"%s\"](#tokens_INTEGER_EXPECTED_example)
+    32:    [String literal expected found \"%s\"]{#errors_STRING_EXPECTED}
+    33:    [Identifier expected found \"%s\"]{#errors_IDENT_EXPECTED}
+    34:    [Type expected found %s]{#errors_TYPE_EXPECTED}
+    35:    []{#errors_PROC_EXPECTED}[Procedure expected found \"%s\" expression]
+    36:    [Parameter specifier expected found \"%s\"]{#errors_PARAM_SPECIFIER_EXPECTED}
+    37:    [Parameter declaration or symbol expected found %s]{#errors_PARAM_DECL_OR_SYMBOL_EXPECTED}
+    38:    [Exception expected found %s]{#errors_EXCEPTION_EXPECTED}
+    39:    [Expression expected found \"%s\"]{#errors_EXPR_EXPECTED}
+    40:    []{#errors_EXPECTED_SYMBOL}[\"%s\" expected found \"%s\"]
+    41:    [Declaration of parameter %s failed]{#errors_PARAM_DECL_FAILED}
+    42:    []{#errors_DECL_FAILED}[Declaration of \"%s\" failed](#decls_DECL_FAILED_example)
+    43:    []{#errors_REDECLARATION}[Redeclaration of \"%s\"]
+    44:    []{#errors_PREVIOUS_DECLARATION}[Previous declaration of \"%s\"]
+    45:    [Exception \"%s\" raised]{#errors_EXCEPTION_RAISED}
+    46:    [Associativity expected found \"%s\"]{#errors_ILLEGAL_ASSOCIATIVITY}
+    47:    [Statement priority \"%s\" too big]{#errors_ILLEGAL_PRIORITY}
+    48:    [Syntax with two parameters before operator is illegal]{#errors_TWO_PARAMETER_SYNTAX}
+    49:    [Empty syntax declaration]{#errors_EMPTY_SYNTAX}
+    50:    [Syntax %s declared twice]{#errors_SYNTAX_DECLARED_TWICE}
+    51:    [Dot expression expected as syntax description, found %s]{#errors_DOT_EXPR_EXPECTED}
+    52:    []{#errors_REDECLARED_INFIX_PRIORITY}[\"%s\" redeclared with infix priority %d not %d]
+    53:    [\"%s\" redeclared with prefix priority %d not %d]{#errors_REDECLARED_PREFIX_PRIORITY}
+    54:    [Priority %d required for parameter after \"%s\" not %d]{#errors_WRONG_EXPR_PARAM_PRIORITY}
+    55:    [Priority \<= %d expected found \"%s\" with priority %d]{#errors_WRONG_PREFIX_PRIORITY}
+    56:    [\"%s\" must have priority %d not %d for dot expression]{#errors_DOT_EXPR_ILLEGAL}
+    57:    []{#errors_NO_MATCH}[Match for %s failed](#decls_NO_MATCH_example)
+    58:    []{#errors_WRONGACCESSRIGHT}[Variable expected in %s found %s](#tutorial_WRONGACCESSRIGHT_example)
+    59:    [Undefined type for literal \"%s\"]{#errors_LITERAL_TYPE_UNDEFINED}
+    60:    [Kind of in-parameter (val or ref) unspecified for type \"%s\"]{#errors_KIND_OF_IN_PARAM_UNDEFINED}
+    61:    []{#errors_OVERLONG_UTF8_ENCODING}[Overlong UTF-8 encoding used for character \"%s\" (U+%04x)](#tokens_OVERLONG_UTF8_ENCODING_example)
+    62:    []{#errors_UTF16_SURROGATE_CHAR_FOUND}[UTF-16 surrogate character found in UTF-8 encoding \"%s\" (U+%04x)](#tokens_UTF16_SURROGATE_CHAR_FOUND_example)
+    63:    []{#errors_CHAR_NOT_UNICODE}[Non Unicode character found \"%s\" (U+%04x)](#tokens_CHAR_NOT_UNICODE_example)
+    64:    []{#errors_UTF8_CONTINUATION_BYTE_EXPECTED}[UTF-8 continuation byte expected found \"%s\" (U+%04x)](#tokens_UTF8_CONTINUATION_BYTE_EXPECTED_example)
+    65:    []{#errors_UNEXPECTED_UTF8_CONTINUATION_BYTE}[Unexpected UTF-8 continuation byte found \"%s\" (U+%04x)](#tokens_UNEXPECTED_UTF8_CONTINUATION_BYTE_example)
+    66:    []{#errors_SOLITARY_UTF8_START_BYTE}[Solitary UTF-8 start byte found \"%s\" (U+%04x)](#tokens_SOLITARY_UTF8_START_BYTE_example)
+    67:    []{#errors_UTF16_BYTE_ORDER_MARK_FOUND}[UTF-16 byte order mark found \"%s\" (U+%04x)](#tokens_UTF16_BYTE_ORDER_MARK_FOUND_example)
+           Undefined error
+  ----- -- -------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+A program can parse another program and examine the parsing errors of
+the other program. Below is the source code of the program
+[s7check.sd7]{.lib} which is used by the seed7-mode of Emacs to do a
+static check of a Seed7 source file or library:
+
+``` indent
+$ include "seed7_05.s7i";
+  include "progs.s7i";
+
+const proc: main is func
+  local
+    var string: fileName is "";
+    var program: aProgram is program.value;
+    var integer: index is 0;
+    var parseError: anError is parseError.value;
+  begin
+    if length(argv(PROGRAM)) >= 1 then
+      fileName := argv(PROGRAM)[1];
+      if endsWith(fileName, ".s7i") then
+        aProgram := parseStri("$ include \"seed7_05.s7i\";\n\
+                              \  include " <& literal(fileName) <& ";\n\
+                              \const proc: main is func begin noop; end func;\n");
+      else
+        aProgram := parseFile(fileName);
+      end if;
+      if errorCount(aProgram) = 0 then
+        writeln("No errors found");
+      else
+        for index range 1 to errorCount(aProgram) do
+          anError := getError(aProgram, index);
+          writeln(anError.fileName <&
+                  "(" <& anError.lineNumber <& "): " <&
+                  anError.error <& ": " <&
+                  anError.message);
+          writeln(anError.errorLine);
+          if anError.columnNumber <> 0 then
+            writeln("-" mult pred(anError.columnNumber) <& "^");
+          end if;
+        end for;
+      end if;
+    end if;
+  end func;
+```
+
+[]{#errors_Compilation_errors}
+
+### 17.2 Compilation errors
+
+The compiler does checks when generating code. As a result of the checks
+some warnings might be written. The warning level can be specified with
+the option [**`-w`**[`n`]{.keywd}]
+
+  Level   Warning
+  ------- -------------------------------------------------------------------------
+  2       Comparison with %s always evaluates to %s.
+  2       Expression raises \"%s\".
+  1       Catch of \"%s\" although the checks are suppressed.
+  2       Catch of otherwise although the checks for %s are suppressed.
+  1       Duplicate when values %s.
+  1       Previous usage of %s.
+  1       When set is empty.
+  1       When value must be constant.
+  2       The variable %s is used for two or more inout-parameters (%s).
+  2       The variable %s is used as inout-parameter (%s) and ref-parameter (%s).
+  1       Forward defined function called.
+  1       Forward definition of the called function.
+  2       Endless recursion in interface function.
+
+[]{#errors_Exceptions}
+
+### 17.3 Exceptions
+
+An exception is an anomalous event that arises during program execution.
+Exceptions change the normal flow of program execution. An exception
+transfers the execution to a corresponding exception
+[handler](#errors_Handlers). If no corresponding exception
+[handler](#errors_Handlers) exists the program is terminated.
+There are various exceptions, which can be raised:
+[`MEMORY_ERROR`](#errors_MEMORY_ERROR){.exception},
+[`NUMERIC_ERROR`](#errors_NUMERIC_ERROR){.exception},
+[`OVERFLOW_ERROR`](#errors_OVERFLOW_ERROR){.exception},
+[`INDEX_ERROR`](#errors_INDEX_ERROR){.exception},
+[`RANGE_ERROR`](#errors_RANGE_ERROR){.exception},
+[`FILE_ERROR`](#errors_FILE_ERROR){.exception},
+[`DATABASE_ERROR`](#errors_DATABASE_ERROR){.exception},
+[`GRAPHIC_ERROR`](#errors_GRAPHIC_ERROR){.exception} and
+[`ILLEGAL_ACTION`](#errors_ILLEGAL_ACTION){.exception}. A program can
+raise an exception with the [`raise`]{.keywd} statement. For example:
+
+``` indent
+raise RANGE_ERROR;
+```
+
+Additional exceptions can be declared with:
+
+``` indent
+const EXCEPTION: MY_ERROR is enumlit;
+```
+
+[]{#errors_MEMORY_ERROR}
+
+#### 17.3.1 MEMORY_ERROR
+
+The exception [`MEMORY_ERROR`]{.exception} is raised if there is not
+enough memory to store some data. This error can be raised from the
+run-time library or from the interpreter kernel. Catching a
+[`MEMORY_ERROR`]{.exception} is possible, but it must be done with care.
+Variables involved in a [`MEMORY_ERROR`]{.exception} may have an illegal
+value. A [`MEMORY_ERROR`]{.exception} may be raised by various
+operations of the following types:
+
+:   [`array`](#types_array){.type}, [`struct`](#types_struct){.type},
+    [`hash`](#types_hash){.type}, [`file`](#types_file){.type},
+    [`func`](#types_func){.type}, [`proc`](#types_proc){.type},
+    [`reference`](#types_reference){.type},
+    [`string`](#types_string){.type}.
+
+:   Additionally the interpreter kernel may raise this exception also.
+
+[]{#errors_NUMERIC_ERROR}
+
+#### 17.3.2 NUMERIC_ERROR
+
+The exception [`NUMERIC_ERROR`]{.exception} is raised if a numeric
+operation cannot deliver a correct result. This includes several things
+that are mathematically undefined such as division by zero, integer
+exponentiation with a negative exponent, square root of a negative
+number and logarithm of a negative number. [`NUMERIC_ERROR`]{.exception}
+can be raised by operations of several types:
+
+It may be raised from the following [`integer`](#types_integer){.type} operations:
+:   [!]{.op}, [\*\*]{.op}, [div]{.op}, [rem]{.op}, [mdiv]{.op},
+    [mod]{.op}, [sqrt]{.func}, [log2]{.func}, [log10]{.func}.
+
+It may be raised from the following [`bigInteger`](#types_bigInteger){.type} operations:
+:   [!]{.op}, [\*\*]{.op}, [div]{.op}, [rem]{.op}, [mdiv]{.op},
+    [mod]{.op}, [sqrt]{.func}, [log2]{.func}, [log10]{.func}.
+
+It may be raised from the following [`rational`](#types_rational){.type} operation:
+:   [/]{.op}.
+
+It may be raised from the following [`bigRational`](#types_bigRational){.type} operation:
+:   [/]{.op}.
+
+In detail the following conditions can cause a numeric error:
+
+- Division ([div]{.op}, [rem]{.op}, [mdiv]{.op}, [mod]{.op}, [/]{.op})
+  by zero. E.g.: `1 `[`div`]{.op}` 0` raises
+  [`NUMERIC_ERROR`]{.exception}. Note that a
+  [`float`](#types_float){.type} division by zero does not raise
+  [`NUMERIC_ERROR`]{.exception} but returns [`Infinity`]{.var} or
+  [`-`]{.op}[`Infinity`]{.var} instead.
+- [Exponentiation]{.op} ([\*\*]{.op}) if the exponent is a negative
+  [`integer`](#types_integer){.type}. E.g.: `2 `[`**`]{.op}` (-1)`
+  raises [`NUMERIC_ERROR`]{.exception}.
+- Functions ([sqrt]{.func}, [log2]{.func}, [log10]{.func}, [!]{.op})
+  that are only defined for positive arguments. E.g.:
+  [`sqrt`]{.func}`(-1)` raises [`NUMERIC_ERROR`]{.exception}.
+
+[]{#errors_OVERFLOW_ERROR}
+
+#### 17.3.3 OVERFLOW_ERROR
+
+An integer overflow occurs if a calculation produces a result that
+cannot be stored in an [`integer`](#types_integer){.type} variable. This
+happens if the result is less than
+[`integer`](#types_integer){.type}`.`[`first`]{.var} or greater than
+[`integer`](#types_integer){.type}`.`[`last`]{.var}.
+
+It may be raised from the following [`integer`](#types_integer){.type} operations:
+:   [-]{.op} (sign), [+]{.op}, [-]{.op}, [\*]{.op}, [\*\*]{.op},
+    [div]{.op}, [rem]{.op}, [mdiv]{.op}, [mod]{.op}, [\<\<]{.op},
+    [\>\>]{.op}, [+:=]{.op}, [-:=]{.op}, [\*:=]{.op}, [\<\<:=]{.op},
+    [\>\>:=]{.op}, [!]{.op}, [abs]{.func}, [succ]{.func}, [pred]{.func},
+    [incr]{.func}, [decr]{.func}.
+
+In detail the following conditions can cause an overflow:
+
+- [Negating] can overflow because in a two\'s complement
+  representation there is no corresponding positive value for the [most
+  negative integer]. E.g.:
+  [`-`]{.op}[`integer`](#types_integer){.type}`.`[`first`]{.var} raises
+  [`OVERFLOW_ERROR`]{.exception}.
+- [Addition]{.op}, [subtraction]{.op}, [multiplication]{.op} and
+  [exponentiation]{.op} ([+]{.op}, [-]{.op}, [\*]{.op}, [\*\*]{.op},
+  [succ]{.func}, [pred]{.func}) trigger an overflow if the result would
+  be less than [`integer`](#types_integer){.type}`.`[`first`]{.var} or
+  greater than [`integer`](#types_integer){.type}`.`[`last`]{.var}.
+- Arithmetic operations that change a variable ([+:=]{.op}, [-:=]{.op},
+  [\*:=]{.op}, [incr]{.func}, [decr]{.func}) trigger an overflow if the
+  variable would get a value that is less than
+  [`integer`](#types_integer){.type}`.`[`first`]{.var} or greater than
+  [`integer`](#types_integer){.type}`.`[`last`]{.var}.
+- Division with [`div`]{.op} and [`mdiv`]{.op} can overflow because a
+  division by `-1` is the same as negating the dividend. E.g.:
+  [`integer`](#types_integer){.type}`.`[`first`]{.var}` `[`div`]{.op}` -1`
+  raises [`OVERFLOW_ERROR`]{.exception}.
+- [Remainder] and [modulo] are defined to raise
+  [`OVERFLOW_ERROR`]{.exception} if the dividend is the [most negative
+  integer] and the divisor is `-1`. E.g.:
+  [`integer`](#types_integer){.type}`.`[`first`]{.var}` `[`rem`]{.op}` -1`
+  raises [`OVERFLOW_ERROR`]{.exception}. This has been defined as
+  overflow because it can trigger so called undefined behavior of the
+  underlying C code.
+- All shift operations ([`<<`]{.op}, [`>>`]{.op}, [\<\<:=]{.op} and
+  [`>>:=`]{.op}) trigger an overflow if the shift amount is negative or
+  greater equal `64`.
+- Left shift operations ([`<<`]{.op} and [\<\<:=]{.op}) can also trigger
+  an overflow if the shift result would be less than
+  [`integer`](#types_integer){.type}`.`[`first`]{.var} or greater than
+  [`integer`](#types_integer){.type}`.`[`last`]{.var}.
+- Binomial coefficient ([`!`]{.op}) triggers an overflow if the result
+  would be less than
+  [`integer`](#types_integer){.type}`.`[`first`]{.var} or greater than
+  [`integer`](#types_integer){.type}`.`[`last`]{.var}.
+- Computing the absolute value with [abs]{.func} can overflow, if it is
+  called with the [most negative integer]. E.g.:
+  [`abs`]{.func}`(`[`integer`](#types_integer){.type}`.`[`first`]{.var}`)`
+  raises [`OVERFLOW_ERROR`]{.exception}.
+
+The interpreter checks always for an integer overflow. By default the
+[compiler] generates code to check for an integer overflow. The
+option [**`-so`**] can be used to suppress the generation of
+integer overflow checks. If an overflow situation occurs, although
+overflow checking has been switched off (with [**`-so`**]), the
+behavior is undefined (see chapter [17.6 Suppressing exception
+checks](#errors_Suppressing_exception_checks)).
+
+The separate overflow exception allows easy recognition of overflow
+situations. All overflow situations, where
+[`OVERFLOW_ERROR`]{.exception} is raised correspond to C situations,
+which have undefined behavior. The overflow concept of Seed7 has been
+designed to allow, that simple C code is generated, if the overflow
+checks are switched off.
+
+[Compiler] optimizations (e.g. with [**`-oc2`**] or
+[**`-oc3`**]) can reduce the potential of overflow. In an
+optimized program an expression might be rephrased, such that an
+overflow is avoided and the correct result is computed instead. Consider
+the expression:
+
+``` indent
+number + integer.last + integer.first
+```
+
+If `number` is between
+[`succ`]{.func}`(`[`integer`](#types_integer){.type}`.`[`first`]{.var}`)`
+and `0` the expression can be evaluated and no overflow will occur. For
+other values of `number` the exception [`OVERFLOW_ERROR`]{.exception} is
+raised. When the expression above is optimized it is rephrased to:
+
+``` indent
+pred(number)
+```
+
+This expression only triggers [`OVERFLOW_ERROR`]{.exception}, if number
+has the value [integer](#types_integer){.type}.[first]{.var}.
+
+With overflow checks it is guaranteed that an integer overflow always
+raises [`OVERFLOW_ERROR`]{.exception}. But you cannot rely on
+[`OVERFLOW_ERROR`]{.exception} being raised if there is an alternate way
+to return the correct result.
+
+[]{#errors_INDEX_ERROR}
+
+#### 17.3.4 INDEX_ERROR
+
+An [`INDEX_ERROR`]{.exception} occurs if an index is used to access an
+[`array`](#types_array){.type}, [`string`](#types_string){.type},
+[`bstring`]{.type} or [`ref_list`](#types_ref_list){.type} element
+beyond the elements that actually exist. E.g. An attempt to get an
+element of a [`string`](#types_string){.type}, [`bstring`]{.type} or
+[`ref_list`](#types_ref_list){.type} with a negative or zero index
+raises [`INDEX_ERROR`]{.exception}.
+
+It may be raised from the following [`array`](#types_array){.type} operations:
+:   [\[index\]]{.op}, [\[index ..\]]{.op}, [\[.. index\]]{.op}, [\[start
+    .. stop\]]{.op}, [\[index len length\]]{.op}, [insert]{.func},
+    [remove]{.func}.
+
+It may be raised from the following [`string`](#types_string){.type} operations:
+:   [\[index\]]{.op}, [\[index ..\]]{.op}, [\[.. index\]]{.op}, [\[start
+    .. stop\]]{.op}, [\[index len length\]]{.op}, [\[index fixLen
+    length\]]{.op}, [@:= \[index\] char]{.op}, [@:= \[index\]
+    string]{.op}.
+
+It may be raised from the following [`bstring`]{.type} operation:
+:   [\[index\]]{.op}.
+
+It may be raised from the following [`hash`](#types_hash){.type} operations:
+:   [\[]{.op}.
+
+It may be raised from the following [`ref_list`](#types_ref_list){.type} operations:
+:   [\[index\]]{.op}, [@:= \[index\] element]{.op}.
+
+The interpreter checks always if an index refers to an existing element.
+By default the [compiler] generates code to check if indices
+refer to an existing element. The option [**`-si`**] can be used
+to suppress the generation of index checks. If a nonexistent element is
+referred, although index checking has been switched off (with
+[**`-si`**]), the behavior is undefined (see chapter [17.6
+Suppressing exception
+checks](#errors_Suppressing_exception_checks)).
+
+[]{#errors_RANGE_ERROR}
+
+#### 17.3.5 RANGE_ERROR
+
+Many functions define a range of valid arguments and raise
+[`RANGE_ERROR`]{.exception} if this range is violated.
+
+It may be raised from the following [`boolean`](#types_boolean){.type} operations:
+:   [conv]{.op}, [parse]{.op}, [boolean]{.func}, [succ]{.func},
+    [pred]{.func}, [boolean]{.func}, [rand]{.func}.
+
+It may be raised from the following [`integer`](#types_integer){.type} operations:
+:   [parse]{.op}, [radix]{.op}, [RADIX]{.op}, [sci]{.op}, [rand]{.func},
+    [integer]{.func}, [bytes]{.func}, [bytes2Int]{.func}.
+
+It may be raised from the following [`bigInteger`](#types_bigInteger){.type} operations:
+:   [parse]{.op}, [radix]{.op}, [RADIX]{.op}, [sci]{.op}, [rand]{.func},
+    [integer]{.func}, [bytes]{.func}, [bytes2BigInt]{.func},
+    [ord]{.func}, [bigInteger]{.func}, [bitLength]{.func},
+    [modInverse]{.func}, [modPow]{.func}.
+
+It may be raised from the following [`rational`](#types_rational){.type} operations:
+:   [parse]{.op}, [digits]{.op}, [sci]{.op}, [rational]{.func}.
+
+It may be raised from the following [`bigRational`](#types_bigRational){.type} operations:
+:   [parse]{.op}, [digits]{.op}, [sci]{.op}, [bigRational]{.func}.
+
+It may be raised from the following [`float`](#types_float){.type} operations:
+:   [parse]{.op}, [digits]{.op}, [sci]{.op}, [float]{.func},
+    [round]{.func}, [trunc]{.func}, [rand]{.func}.
+
+It may be raised from the following [`complex`](#types_complex){.type} operations:
+:   [parse]{.op}, [digits]{.op}, [sci]{.op}, [complex]{.func}.
+
+It may be raised from the following [`char`](#types_char){.type} operations:
+:   [conv]{.op}, [parse]{.op}, [chr]{.func}, [char]{.func},
+    [rand]{.func}, [char]{.func}, [trimValue]{.func}.
+
+It may be raised from the following [`string`](#types_string){.type} operations:
+:   [mult]{.op}, [pos]{.func}, [rpos]{.func}.
+
+It may be raised from the following [`bitset`](#types_set){.type} operations:
+:   [conv]{.op}, [parse]{.op}, [rand]{.func}, [min]{.func},
+    [max]{.func}, [next]{.func}, [integer]{.func}, [bitset]{.func}.
+
+It may be raised from the following [`array`](#types_array){.type} operations:
+:   [times]{.op}, [rand]{.func}.
+
+It may be raised from the following [`bin32`]{.type} operations:
+:   [radix]{.op}, [RADIX]{.op}, [bytes]{.func}, [float2MbfBits]{.func}.
+
+It may be raised from the following [`bin64`]{.type} operations:
+:   [radix]{.op}, [RADIX]{.op}, [bin64]{.func}, [bytes]{.func},
+    [float2MbfBits]{.func}.
+
+It may be raised from the following [`category`](#types_category){.type} operations:
+:   [parse]{.op}, [category]{.func}.
+
+It may be raised from the following [`ref_list`](#types_ref_list){.type} operations:
+:   [pos]{.func}.
+
+It may be raised from the following [`file`](#types_file){.type} operations:
+:   [open]{.func}, [openUtf8]{.func}, [openUtf16le]{.func},
+    [openUtf16be]{.func}, [openUtf16]{.func}, [openInetSocket]{.func},
+    [write]{.func}, [writeln]{.func}, [gets]{.func}, [length]{.func},
+    [truncate]{.func}, [seek]{.func}, [tell]{.func}, [skip]{.func}.
+
+[]{#errors_FILE_ERROR}
+
+#### 17.3.6 FILE_ERROR
+
+A [`FILE_ERROR`]{.exception} occurs if an illegal operation with a file
+is done.
+
+It may be raised by the following functions:
+:   [fileType](#os_fileType){.func}, [fileTypeSL](#os_fileType){.func},
+    [fileSize](#os_fileSize){.func}, [bigFileSize](#os_fileSize){.func},
+    [getFileMode](#os_getFileMode){.func},
+    [setFileMode](#os_setFileMode){.func},
+    [getATime](#os_getATime){.func}, [setATime](#os_setATime){.func},
+    [getCTime](#os_getCTime){.func}, [getMTime](#os_getMTime){.func},
+    [setMTime](#os_setMTime){.func}, [getOwner](#os_getOwner){.func},
+    [setOwner](#os_setOwner){.func}, [getGroup](#os_getGroup){.func},
+    [setGroup](#os_setGroup){.func}, [readDir](#os_readDir){.func},
+    [removeFile](#os_removeFile){.func},
+    [removeTree](#os_removeTree){.func},
+    [moveFile](#os_moveFile){.func}, [cloneFile](#os_cloneFile){.func},
+    [copyFile](#os_copyFile){.func}, [readlink](#os_readlink){.func},
+    [symlink](#os_symlink){.func}, hasNext, seek, tell, bigTell, setbuf,
+    write, [inetSocketAddress]{.func}, [inetListenerAddress]{.func},
+    [openInetSocket]{.func}, [openInetListener]{.func}.
+
+[]{#errors_DATABASE_ERROR}
+
+#### 17.3.7 DATABASE_ERROR
+
+The exception [`DATABASE_ERROR`]{.exception} may be raised by database
+functions. If a [`DATABASE_ERROR`]{.exception} is caught it is possible
+to get some information about the cause of the error with:
+
+``` indent
+const func string: errMessage (DATABASE_ERROR)
+```
+
+There are messages coming from the database and from the Seed7 database
+driver. The database driver may have a message like:
+
+``` indent
+Searching for dynamic libraries failed: libclntsh.so
+```
+
+This indicates that the connector library could not be found. In this
+case the environment variable LD_LIBRARY_PATH could be used to specify
+the place of the connector library.
+
+[]{#errors_GRAPHIC_ERROR}
+
+#### 17.3.8 GRAPHIC_ERROR
+
+The exception [`GRAPHIC_ERROR`]{.exception} may be raised by graphic
+drivers. If an underlying graphic library function reports an error a
+[`GRAPHIC_ERROR`]{.exception} is raised.
+
+[]{#errors_ILLEGAL_ACTION}
+
+#### 17.3.9 ILLEGAL_ACTION
+
+The exception [`ILLEGAL_ACTION`]{.exception} may be raised by the
+interpreter kernel, if a primitive action does not point to any legal
+action. This check is only done if the s7 interpreter is compiled with
+`'#define WITH_ACTION_CHECK'`. The [`ILLEGAL_ACTION`]{.exception}
+exception is also raised if the primitive action ACT_ILLEGAL is
+executed.
+
+[]{#errors_Handlers}
+
+### 17.4 Handlers
+
+To catch an EXCEPTION the following handler construct can be used:
+
+``` indent
+block
+  number := 1 div 0;
+exception
+  catch NUMERIC_ERROR:
+    number := 1;
+end block;
+```
+
+It is also possible to catch several exceptions:
+
+``` indent
+block
+  doSomething(someValue);
+exception
+  catch MEMORY_ERROR:  writeln("MEMORY_ERROR");
+  catch NUMERIC_ERROR: writeln("NUMERIC_ERROR");
+end block;
+```
+
+An [`otherwise`]{.keywd} handler catches exceptions, that are not caught
+by the other handlers:
+
+``` indent
+block
+  doSomething(someValue);
+exception
+  catch RANGE_ERROR: writeln("RANGE_ERROR");
+  otherwise:         writeln("Any other exception");
+end block;
+```
+
+[]{#errors_Trace_exceptions}
+
+### 17.5 Trace exceptions
+
+The interpreter option [**`-t`**[`e`]{.keywd}] can be used to
+trace exceptions and handlers. If an exception occurs the following is
+written:
+
+``` indent
+*** Exception NUMERIC_ERROR raised at integer.s7i(118)
+{160000 div fuel_max } at lander.sd7(836)
+*** Action "INT_DIV"
+
+*** The following commands are possible:
+  RETURN  Continue
+  *       Terminate
+  #       Terminate with stack trace
+  /       Trigger SIGFPE
+  !n      Raise exception with number (e.g.: !1 raises MEMORY_ERROR)
+```
+
+In detail:
+
+- After pressing RETURN the program continues without any change.
+
+- Pressing `*` and RETURN terminates the program immediately.
+
+- Pressing `#` and RETURN writes a stack trace and terminates the
+  program. E.g.:
+
+  ``` indent
+  *** Program terminated after exception NUMERIC_ERROR raised with
+  {integer:  *NULL_ENTITY_OBJECT* div fuel_max }
+
+  Stack:
+  in (val integer: dividend) div (val integer: divisor) at integer.s7i(118)
+  in init_display at lander.sd7(836)
+  in setup at lander.sd7(906)
+  in main at lander.sd7(1536)
+  ```
+
+- Pressing `/` and RETURN triggers the signal SIGFPE. If the interpreter
+  has been started from a debugger, this triggers the debugger.
+
+[]{#errors_Stack_trace}
+
+### 17.6 Stack trace
+
+If an exception is not caught the program is terminated and the s7
+interpreter writes a stack trace:
+
+``` indent
+*** Uncaught exception NUMERIC_ERROR raised with
+{integer: <SYMBOLOBJECT> *NULL_ENTITY_OBJECT* div fuel_max }
+
+Stack:
+in (val integer: dividend) div (val integer: divisor) at integer.s7i(118)
+in init_display at lander.sd7(836)
+in setup at lander.sd7(906)
+in main at lander.sd7(1536)
+```
+
+The stack trace shows that a
+[`NUMERIC_ERROR`](#errors_NUMERIC_ERROR){.exception} was raised by the
+[`div`]{.keywd} operation. This operation is defined in line 118 of
+[`integer.s7i`]{.lib}. More interesting is that [`div`]{.keywd} was
+called from the function `'init_display'` in line 836 of
+[`lander.sd7`]{.prog}. A
+[`NUMERIC_ERROR`](#errors_NUMERIC_ERROR){.exception} with
+[`div`]{.keywd} is probably caused by a zero division. A short
+examination in [`lander.sd7`]{.prog} shows that an assignment to
+`'fuel_max'` was commented out to show how stack traces work.
+
+A compiled program creates a much shorter crash message:
+
+``` indent
+*** Uncaught exception NUMERIC_ERROR raised at sigutl.c(218)
+```
+
+To get more information there are two possibilities:
+
+- Start the program in the interpreter instead.
+- Compile the program with the options [**`-g`**]
+  [**`-e`**] and start it from a debugger.
+
+If [s7c] is called with the option [**`-g`**] it instructs
+the C compiler to generate debugging information. This way a debugger
+like gdb can run the program and provide information. The option
+[**`-e`**] tells the compiler to generate code which sends a
+signal, if an uncaught exception occurs. This option allows debuggers to
+handle uncaught Seed7 exceptions. Note that [**`-e`**] sends the
+signal SIGFPE. This is done even if the exception is not related to
+floating point operations.
+
+``` indent
+./s7 s7c -g -e lander
+gdb ./lander
+```
+
+Then the debugger should be able to run the program and to write a
+backtrace if a crash occurs:
+
+``` indent
+(gdb) run
+Starting program: /home/tm/seed7_5/prg/lander
+
+Program received signal SIGFPE, Arithmetic exception.
+0x000000000041b942 in o_3912_init_display () at lander.sd7:839
+839         fuel_gauge := 40 * rocket.fuel div fuel_max;
+(gdb) bt
+#0  0x000000000041b942 in o_3912_init_display () at lander.sd7:839
+#1  0x000000000041c2e5 in o_3917_setup () at lander.sd7:908
+#2  0x0000000000421fe1 in main (argc=1, argv=0x7fffffffdf28) at lander.sd7:1541
+```
+
+Sometimes it is helpful to debug the generated C program instead of the
+Seed7 source. The option [**`-g-debug_c`**] creates debug
+information, which refers to the C program generated by the Seed7
+compiler:
+
+``` indent
+./s7 s7c -g-debug_c -e lander
+gdb ./lander
+```
+
+Now the debugger refers to the temporary file [`tmp_lander.c`]{.stri}:
+
+``` indent
+(gdb) run
+Starting program: /home/tm/seed7_5/prg/lander
+
+Program received signal SIGFPE, Arithmetic exception.
+0x08068518 in o_2541_init_display () at tmp_lander.c:19727
+19727   o_2428_fuel_gauge=((40) * (((structType)(o_2338_rocket))->stru[10].value.intValue/*->o_2336_fuel*/)) / (o_2431_fuel_max);
+(gdb) bt
+#0  0x08068518 in o_2541_init_display () at tmp_lander.c:19727
+#1  0x08068c21 in o_2546_setup () at tmp_lander.c:19864
+#2  0x0806c304 in main (argc=1, argv=0xbffff324) at tmp_lander.c:21188
+```
+
+Some Seed7 exceptions do not send signals. This hinders the debugger to
+recognize that an uncaught exception occurred. The compiler option
+[**`-e`**] can help in this situation. It instructs the compiler
+to generate code which sends a signal if an uncaught exception occurs.
+This allows the debugger to show a backtrace for uncaught Seed7
+exceptions.
+
+[]{#errors_Suppressing_exception_checks}
+
+### 17.7 Suppressing exception checks
+
+A Seed7 program can be [compiled] with the option
+[**`-s`**[`x`]{.keywd}], to suppress the generation of checks for
+exceptions. The suppressed checks [x]{.keywd} are specified with letters
+from the following list:
+
+- **d** Suppress the generation of checks for [integer division by
+  zero](#errors_NUMERIC_ERROR).
+- **i** Suppress the generation of [index
+  checks](#errors_INDEX_ERROR) (e.g. string, array).
+- **o** Suppress the generation of [integer
+  overflow](#errors_OVERFLOW_ERROR) checks.
+- **r** Suppress the generation of [range](#errors_RANGE_ERROR)
+  checks.
+
+If an exception situation occurs, although exception checking has been
+switched off (with [**`-s`**]), the behavior is undefined. In
+this case the following things can happen:
+
+- The exception is still raised.
+- A different exception is raised.
+- The program hangs.
+- The program crashes.
+- The computation continues with some garbage value. This garbage value
+  can then trigger dangerous things: The X-ray dose computed by your
+  program might be totally wrong. Your program might compute the statics
+  of a bridge wrong.
+
+Undefined behavior is a term used in the language specification of C and
+in other programming languages. Undefined behavior usually means that
+the behavior of the program is unpredictable. Normally Seed7 has a well
+defined behavior in all situations. Even in situations where the
+language specification of C refers to undefined behavior.
+
+A [handler](#errors_Handlers) for an exception can only work
+reliable if the checks for the exception are done. The [compiler]
+warns if [**`-s`**] is used and there is a
+[handler](#errors_Handlers) for an exception. e.g.:
+
+``` indent
+*** example.sd7(123): Catch of OVERFLOW_ERROR although the checks are suppressed.
+```
+
+Only a program that never raises the specific exception and that does
+not have a [handler](#errors_Handlers) for this exception can be
+considered to be compiled without checks for that exception. Careful
+program analysis and testing (the exception should never be raised) is
+necessary to decide about the omission of exception checking.
+
+[]{#errors_Signals}
+
+### 17.8 Signals
+
+A signal is an asynchronous notification of an event. The event can come
+from outside such as a request to terminate the program. The event can
+also come from the program itself such as a memory access violation
+(segfault). Several signals are handled by the Seed7 run-time library.
+The interpreter respectively compiler option [**`-ts`**] can be
+used to influence the behavior, if a signal is sent to a Seed7 program
+(see below). The following signals are handled by Seed7:
+
+  Signal                         Special handler                                                Behavior without [**`-ts`**]   Behavior with [**`-ts`**]
+  ------------------------------ -------------------------------------------------------------- ------------------------------------- ----------------------------------
+  [SIGABRT]{#errors_SIGABRT}     raise [`OVERFLOW_ERROR`](#errors_OVERFLOW_ERROR){.exception}   Raises exception                      Dialog to decide
+  [SIGILL]{#errors_SIGILL}       raise [`OVERFLOW_ERROR`](#errors_OVERFLOW_ERROR){.exception}   Raises exception                      Dialog to decide
+  [SIGTRAP]{#errors_SIGTRAP}     raise [`OVERFLOW_ERROR`](#errors_OVERFLOW_ERROR){.exception}   Raises exception                      Dialog to decide
+  [SIGINT]{#errors_SIGINT}       \-                                                             Terminate with message                Dialog to decide
+  [SIGFPE]{#errors_SIGFPE}       raise [`NUMERIC_ERROR`](#errors_NUMERIC_ERROR){.exception}     Raises exception                      Dialog to decide
+  [SIGTERM]{#errors_SIGTERM}     \-                                                             Terminate with message                Terminate with message
+  [SIGSEGV]{#errors_SIGSEGV}     \-                                                             Terminate program                     Terminate with message
+  [SIGPIPE]{#errors_SIGPIPE}     \-                                                             Ignored                               Ignored
+  [SIGWINCH]{#errors_SIGWINCH}   Resize console                                                 \-                                    \-
+  [SIGALRM]{#errors_SIGALRM}     Wait for some time                                             \-                                    \-
+
+Depending on the actual C compiler and operating system the signals
+SIGABRT, SIGILL or SIGTRAP might be used to raise
+[`OVERFLOW_ERROR`](#errors_OVERFLOW_ERROR){.exception} and the signal
+SIGFPE might be used to raise
+[`NUMERIC_ERROR`](#errors_NUMERIC_ERROR){.exception}.
+
+If the interpreter respectively compiler option [**`-ts`**] has
+been used some signals (see table above) trigger a dialog at the
+console. E.g.:
+
+``` indent
+*** SIGNAL SIGINT RAISED
+
+*** The following commands are possible:
+  RETURN  Continue
+  *       Terminate
+  /       Trigger SIGFPE
+  !n      Raise exception with number (e.g.: !1 raises MEMORY_ERROR)
+```
+
+The user can enter a command and activate it with RETURN. If the program
+was waiting for an input at the console the input can be entered again:
+
+``` indent
+re-enter input>
+```
+
+Triggering SIGFPE is useful if the program runs in a debugger. In this
+case SIGFPE will activate the debugger prompt. Raising an exception
+(e.g.: MEMORY_ERROR) can be used to get a stack trace (this works only
+in the interpreter). A compiled program must be executed with a debugger
+to get a stack trace.
+
+### 17.9 Other errors and warnings
+
+No more memory. Parsing terminated.
+
+This error message is displayed after the parsing error 1 ([Out of heap
+space](#errors_OUT_OF_HEAP_SPACE)). The file name and line number
+of the analyzer source code where this happens is displayed together
+with internal heap information.
+
+System declaration for main missing
+
+Each program must contain a system declaration that describes which
+procedure to start as first one.
+
+Exception %s raised with
+
+If your trace level specifies exception tracing exceptions and handlers
+are displayed with this messages and the user must type the ENTER-key to
+accept.
+
+Action \$%s requires %s not %s
+
+This error can happen if an action tries to do something with the wrong
+primitive value. For example adding an integer to a string with INT_ADD.
+Since the analyze phase checks for the right types this error can only
+happen if the basic libraries are defined wrong.
+
+Action \$%s with empty value
+
+This error can happen if an action tries to do something with NULL and
+NULL is not allowed as value. If parsing works correct this should never
+happen.
+
+Action \$%s requires variable %s not constant
+
+This error can happen with actions which assign a value to a constant.
+Since the analyze phase checks for variable objects this error can only
+happen if the basic libraries are defined wrong. Principally this error
+is possible with the following operations: :=, incr, decr, wrd_rd,
+lin_rd
