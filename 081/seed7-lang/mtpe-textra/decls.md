@@ -459,7 +459,7 @@ $ system "main" is main;
 |  `$` `decls` | \- | 宣言をトレースします。 |
 |  `$` `names` | `unicode` / `ascii` | Unicode (または ASCII) 識別子を使用できます。 |
 
-未知のプラグマが[構文解析エラー](#errors_Parsing_errors){.link}:
+未知のプラグマが[構文解析エラー](#errors_Parsing_errors)になります。
 
 ``` bash
 *** pragma.sd7(1):8: Illegal pragma "unknownPragma"
@@ -467,14 +467,14 @@ $ unknownPragma
 ---------------^
 ```
 
-[プラグマ`メッセージ`メッセージを書くのに用いられる]{#decls_pragma_message}解析中に生成されます。
+[`message` プラグマはメッセージを書くのに用いられる]{#decls_pragma_message}解析中に生成されます。
 書くこと[`"hello world"`]{.stri}解析時には以下を使用します。
 
 ``` pascal
 $ message "hello world";
 ```
 
-[プラグマ`info`冗長レベルを変更するために使用できる]{#decls_pragma_info}解析フェーズの。
+[`info` プラグマは冗長レベルを変更するために使用できる]{#decls_pragma_info}解析フェーズの。
 これは[`-vn`]{.link}の[通訳]{.link}with
 
 ``` pascal
@@ -482,13 +482,12 @@ $ info on;
 ```
 
 パーサはライブラリ名と現在処理されている行番号に関する情報を書き込みます。
-有
 
 ``` pascal
 $ info off;
 ```
 
-そのような情報は書き込まれません。
+そのような情報は書かれていません。
 
 [プラグマ`形跡`インタプリタのトレースを実行するために使用できる]{#decls_pragma_trace}プログラムの解析中はonまたはoff。
 これは[`-dx`]{.link}の[通訳]{.link}その[`文字列`](#types_string){.type}パラメータを使用して[`形跡`]{.keywd}プラグマは、文字の連続を許す[`+`]{.keywd}[`-`]{.keywd}[`a`]{.keywd}[`c`]{.keywd}[`d`]{.keywd}[`e`]{.keywd}[`h`]{.keywd}[`m`]{.keywd}[`u`]{.keywd}[`s`]{.keywd}および[`*`]{.keywd}これらの文字は次の意味を持ちます。
@@ -505,7 +504,7 @@ $ info off;
 - **s**  トレースシグナル
 - **\*** すべてのフラグ
 
-[プラグマ`名前`Unicodeを可能にするために使用できる]{#decls_pragma_names}で[名前の識別子](#tokens_Name_identifiers){.link}:
+[プラグマ`名前`Unicodeを可能にするために使用できる](#decls_pragma_names)で[名前の識別子](#tokens_Name_identifiers){.link}:
 
 ``` pascal
 $ names unicode;
