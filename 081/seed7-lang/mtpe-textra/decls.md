@@ -5,8 +5,9 @@ Seed7では、使用する前にすべてを宣言する必要があります。
 すべての宣言は特定のキーワードで導入され、共通のパターンに従います。
 キーワードの後にタイプが続く(サンプルコード[赤]{.type}が使用される)・下表中[`aType`]{.type}は、任意ののプレースホルダです。[タイプ](#types_file_start){.link}
 
-| ------- | -------------- |
+
 | 宣言 | コメント |
+| ------- | -------------- |
 | [`var`](#decls_Variable_declarations) _**`aType`**_: `name` `is` ` ...` | [変数宣言](#decls_Variable_declarations) |
 | [`const`](#decls_Constant_declarations) _**`aType`**_: `name` `is` ` ...` | [定数宣言](#decls_Constant_declarations) |
 | [`val`](#params_val_parameter) _**`aType`**_: `name` | [値渡しパラメータ](#params_val_parameter)の宣言 |
