@@ -11,7 +11,7 @@
 
 心機一転、 Githubのペンネームを変えました。
 
-旧名である『thundervox, isVowel, GreenWing, めぐみ発動機』については今後一切使用しません。
+旧名である『thundervox, isVowel, GreenWing, PancakeVirus, めぐみ発動機』については今後一切使用しません。
 
 大したことではありませんがペンネームの裏話は[こちら](https://x.com/i/grok/share/a1b276d0b09b41689bfc66f198c29e03)。
 
