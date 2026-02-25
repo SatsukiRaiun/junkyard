@@ -5,7 +5,7 @@ Euphoriaのドキュメンテーションはテキストファイルごとに分
 
 まず、最初に**euphoria¥readme.doc** (**[euphoria/readme.md](readme.md)**)をお読みください。                               
 
-Euphoria のインストールでお困りならで、こちらをお読みください。
+Euphoria のインストールでお困りなら、こちらをお読みください。
 
 * [**install.doc**](install.md) - Euphoria のインストール手順                                                              
 
