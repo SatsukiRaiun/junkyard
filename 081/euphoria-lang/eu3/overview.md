@@ -16,7 +16,7 @@ Euphoriaでのプログラミングを学ぶために、まず最初にこちら
 * [**what2do.doc**](what2do.md) -  Euphoria 入門
 * [**platform.doc**](platform.htm) - Ehphoria の動作環境として***プラットホーム*** (例 : **DOS32** では **ex.exe**) **WIN32** では (**exw.exe**) **Linux** では (**exu**) **FreeBSD** (**exu**) の比較(差異)に関する議論や、EuphoriaプログラムからC言語のライブラリを使用するためのインタフェースについての議論です。
 
-残りのファイルは必要に応じてお読みください:                                                                                                                                                                                                                                                                                                     |
+残りのファイルは必要に応じてお読みください:                                                                                     
 
 * [**database.doc**](database.md) - Euphoriaデータベースシステム(EDS)
 * [**e2c.doc**](e2c.md) - Euphoria → C言語トランスレータ
