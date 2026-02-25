@@ -3,7 +3,7 @@
 Euphoriaのドキュメンテーションはテキストファイルごとに分かれており**euphoria¥doc**ディレクトリに格納されています。**.doc**形式のファイルは 
 **euphoria¥doc**ディレクトリに、それに対応する**.htm**形式のファイルは**euphoria¥html**ディレクトリに格納されています。**guru**を実行すると**¥euphoria**ディレクトリ配下から必要な関連情報をすばやく探せます。
 
-まず、最初に**euphoria¥readme.doc** (**[euphoria¥readme.htm](./readme.htm)**)をお読みください。                               
+まず、最初に**euphoria¥readme.doc** (**[euphoria/readme.md](readme.md)**)をお読みください。                               
 
 Euphoria のインストールでお困りならで、こちらをお読みください。
 
