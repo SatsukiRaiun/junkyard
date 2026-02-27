@@ -96,14 +96,14 @@ version 3.11
      * 2.16 [マルチタスク](library.md)
 
  * 3\. ルーチンリスト (アルファベット順)
-     * [A 〜 B](lib_a_b.htm)
-     * [C 〜 D](lib_c_d.htm)
-     * [E 〜 G](lib_e_g.htm)
-     * [H 〜 O](lib_h_o.htm)
-     * [P 〜 R](lib_p_r.htm)
-     * [S 〜 T](lib_s_t.htm)
-     * [U 〜 Z](lib_u_z.htm)
+     * [A 〜 B](lib_a_b.md)
+     * [C 〜 D](lib_c_d.md)
+     * [E 〜 G](lib_e_g.md)
+     * [H 〜 O](lib_h_o.md)
+     * [P 〜 R](lib_p_r.md)
+     * [S 〜 T](lib_s_t.md)
+     * [U 〜 Z](lib_u_z.md)
  
-→[第一部・基本言語機能](refman_1.htm)へ続きます...
+→ [第一部・基本言語機能](refman_1.md)へ続きます...
 
 ---
