@@ -16,8 +16,8 @@ guru declare global include
 4.	次のコマンドを挿入してプログラムを実行してみてください。
 
 ``` euphoria
-        with trace
-        trace(1)
+with trace
+trace(1)
 ```
 
 メインの.exファイルに挿入するとプログラムの流れを見ることができます。
@@ -31,9 +31,9 @@ guru declare global include
  * **S:**	コンソールウィンドウは必要なときに表示され、プログラム実行終了直後に閉じられます。これを防ぐには次のコードのようにします:
 
 ``` euphoria
-        puts(1, "\nPress Enter\n")
-        if getc(0) then
-        end if
+puts(1, "\nPress Enter\n")
+if getc(0) then
+end if
 ```
 
 これは、プログラム終了処理の最後に挿入してください。
@@ -42,9 +42,9 @@ guru declare global include
  * **S:**	プログラム終了直前に free_console() を呼び出します。
 
 ``` euphoria
-        include dll.e
-        
-        free_console()
+include dll.e
+
+free_console()
 ```
 
  * **P:**	コンソールウィンドウの設定を変更したいです。
@@ -54,15 +54,15 @@ guru declare global include
  * **S:**	これはex.exeを実行後、新規に小さなDOSウィンドウが生成されたとき初回のみ発生します。Alt-Enterを押すと再びウィンドウを小さくできます。その後は切り替わることはありません。プログラムを小さなDOSウィンドウのまま実行するには次のようにします:
 
 ``` euphoria
-        if graphics_mode(-1) then
-        end if
+if graphics_mode(-1) then
+end if
 ```
 
-これを実行開始直前の行に挿入してくださいこれは少々画面のちらつきが発生することがあります。プログラムはフルスクリーン実行時にテキストウィンドウを強制できます:
+これを実行開始直前の行に挿入してください。これは少々画面のちらつきが発生することがあります。プログラムはフルスクリーン実行時にテキストウィンドウを強制できます:
 
 ``` euphoria
-        if graphics_mode(3) then
-        end if
+if graphics_mode(3) then
+end if
 ```
 
  * **P:**	Euphoria CGIプログラムがハングアップまたは出力されません。
@@ -105,8 +105,8 @@ S3 Graphics(現VIA) http://www.s3graphics.com/en/index.aspx
  * **S:**	プログラム完了後に、 graphics_mode(-1) 関数を呼び出して DOSウィンドウの設定を行い通常の状態に復帰する必要があります。すなわち、
 
 ``` euphoria
-        if graphics_mode(-1) then
-        end if
+if graphics_mode(-1) then
+end if
 ```
 
  * **P:**	エディタからプログラムを実行した後にCtrl+Cを押すと、プログラムがオペレーティングシステムのエラーにより停止してしまいます。
@@ -125,7 +125,7 @@ S3 Graphics(現VIA) http://www.s3graphics.com/en/index.aspx
  * **S:**	library.doc で解説されているgets()を使用します。gets(0)は通常、標準入力から1行読み取るためにキーボードを使用します。常に行末には\nが付加されます。なお、\n文字を取り除くには:
  
  ``` euphoria
-        line = line[1..length(line)-1]
+ line = line[1..length(line)-1]
 ```
 
 その他にも get.e にある prompt_string() を参照してください。
@@ -140,7 +140,7 @@ S3 Graphics(現VIA) http://www.s3graphics.com/en/index.aspx
  * **S:**	sprintf() を使用します (library.doc 参照)。すなわち、
 
 ``` euphoria
-        string = sprintf("%d", number)
+string = sprintf("%d", number)
 ```
 
 例えば %x (16進数) または %f (浮動小数点数)など %d 以外の形式も使えます。
@@ -161,20 +161,20 @@ S3 Graphics(現VIA) http://www.s3graphics.com/en/index.aspx
  * **S:**	printf()の詳細はlibrary.docを参照してください。さて、このままでは単一の文字の値として扱われてしまうため、そのまま文字列を出力したいときはブレースブラケットで括る必要があります。すなわち、これを:
 
 ``` euphoria
-        printf(1, "Hello %s", mystring)
+printf(1, "Hello %s", mystring)
 ```
 
 こう記述する必要があります:
 
 ``` euphoria
-        printf(1, "Hello %s", {mystring})
+printf(1, "Hello %s", {mystring})
 ```
 
  * **P:**	print()または?で数値を表示するとき10の有効桁数だけしか表示されません。
  * **S:**	通常はEuphoriaでは約10桁のみ表示します。内部では、全計算は最低15の有効桁数を使用して実行します。printf()では桁数をより多く表示することができます。例えば、
 
 ``` euphoria
-        printf(1, "%.15f", 1/3)
+printf(1, "%.15f", 1/3)
 ```
 
 これで15桁表示になります。
@@ -183,14 +183,14 @@ S3 Graphics(現VIA) http://www.s3graphics.com/en/index.aspx
  * **S:**	サブルーチンの引数を宣言したとき、Euphoriaは引数ごとに明確な型を要求します。すなわち、
 
 ``` euphoria
-        procedure foo(integer x, y)         -- 誤
-        procedure foo(integer x, integer y) -- 正
+procedure foo(integer x, y)         -- 誤
+procedure foo(integer x, integer y) -- 正
 ```
 
 その他全ての文脈として、このようなリストも使えます。
 
 ``` euphoria
-        atom a, b, c, d, e
+atom a, b, c, d, e
 ```
 
  * **P:**	いくつかの変数をルーチン内の中間に宣言しましたが文法エラーになります。
