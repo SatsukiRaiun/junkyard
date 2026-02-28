@@ -23,7 +23,7 @@ Euphoriaでのプログラミングを学ぶために、まず最初にこちら
 * [**tasking.doc**](tasking.md) - Euphoriaにおけるマルチタスク
 * [**ed.doc**](ed.md) - Euphoria標準テキストエディタ - **ed**
 * [**trouble.doc**](trouble.md) - よくある一般的な問題と、それに対する解決方法の一覧
-* [**bind.doc**](bind.md) - **bind.bat** および **shroud.bat**の使用方法の解説。 **バインディング(binding)** および **シュラウディング (shrouding)** について。
+* [**bind.doc**](bind.md) - **bind.bat** および **shroud.bat** の用法解説。 **バインディング(binding)** および **シュラウディング (shrouding)** について。
 * [**perform.doc**](perform.md) - パフォーマンスについての小技
 * [**relnotes.doc**](relnotes.md) - このリリースにおける新機能と以前のリリースの概要の解説
 * [**cgi.doc**](cgi.md) - EuphoriaとCGIを使用したウェブプログラミング
