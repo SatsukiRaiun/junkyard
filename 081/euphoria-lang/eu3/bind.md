@@ -100,7 +100,7 @@ myprog.exe < file.in > file.out
 myprog.ex**\"を書いたとき、次の方法では出入力のリダイレクトができません:
 
 ``` cmd
-            myprog.bat < file.in > file.out     (DOSでは動作しません!)
+myprog.bat < file.in > file.out     (DOSでは動作しません!)
 ```
 
 しかし、**.bat**ファイル*内*では別々にリダイレクトを使用することが*できます。*
